@@ -1,0 +1,9 @@
+_strcpy: CODE, 1696 0 37
+_delay: CODE, 1598 0 20
+_lcd_cmd: CODE, 1733 0 46
+_main: CODE, 1836 0 99
+_RC: CODE, 1935 0 113
+_strcmp: CODE, 1779 0 57
+_TX: CODE, 1663 0 33
+_TX1: CODE, 1640 0 23
+Total: 428

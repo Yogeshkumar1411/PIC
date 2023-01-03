@@ -1,0 +1,1261 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Mon Mar 21 03:51:00 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNROOT	_main
+    43                           	global	main@F1600
+    44                           psect	idataBANK0,class=CODE,space=0,delta=2
+    45                           global __pidataBANK0
+    46  0664                     __pidataBANK0:
+    47                           	file	"D:\Embedded\pic\code\software\keypad\Keypad-led\keypad-led.c"
+    48                           	line	14
+    49                           
+    50                           ;initializer for main@F1600
+    51  0664  343F               	retlw	03Fh
+    52  0665  3406               	retlw	06h
+    53  0666  345B               	retlw	05Bh
+    54  0667  344F               	retlw	04Fh
+    55  0668  3466               	retlw	066h
+    56  0669  346D               	retlw	06Dh
+    57  066A  347D               	retlw	07Dh
+    58  066B  3407               	retlw	07h
+    59  066C  347F               	retlw	07Fh
+    60  066D  346F               	retlw	06Fh
+    61  066E  3400               	retlw	0
+    62  066F  3400               	retlw	0
+    63  0670  3400               	retlw	0
+    64  0671  3400               	retlw	0
+    65  0672  3400               	retlw	0
+    66  0673  3400               	retlw	0
+    67  0674  3400               	retlw	0
+    68  0675  3400               	retlw	0
+    69  0676  3400               	retlw	0
+    70  0677  3400               	retlw	0
+    71                           	global	_PORTA
+    72  0005                     _PORTA	set	5
+    73                           	global	_PORTC
+    74  0007                     _PORTC	set	7
+    75                           	global	_PORTD
+    76  0008                     _PORTD	set	8
+    77                           	global	_RC0
+    78  0038                     _RC0	set	56
+    79                           	global	_RC1
+    80  0039                     _RC1	set	57
+    81                           	global	_RC2
+    82  003A                     _RC2	set	58
+    83                           	global	_RD0
+    84  0040                     _RD0	set	64
+    85                           	global	_RD1
+    86  0041                     _RD1	set	65
+    87                           	global	_RD2
+    88  0042                     _RD2	set	66
+    89                           	global	_RD3
+    90  0043                     _RD3	set	67
+    91                           	global	_RD4
+    92  0044                     _RD4	set	68
+    93                           	global	_RD5
+    94  0045                     _RD5	set	69
+    95                           	global	_RD6
+    96  0046                     _RD6	set	70
+    97                           	global	_TRISA
+    98  0085                     _TRISA	set	133
+    99                           	global	_TRISC
+   100  0087                     _TRISC	set	135
+   101                           	global	_TRISD
+   102  0088                     _TRISD	set	136
+   103                           	global	_ANSEL
+   104  0188                     _ANSEL	set	392
+   105                           	global	_ANSELH
+   106  0189                     _ANSELH	set	393
+   107                           	file	"keypad-led.as"
+   108                           	line	#
+   109                           psect cinit,class=CODE,delta=2
+   110                           global start_initialization
+   111  0652                     start_initialization:
+   112                           
+   113                           psect	dataBANK0,class=BANK0,space=1
+   114                           global __pdataBANK0
+   115  0040                     __pdataBANK0:
+   116                           	file	"D:\Embedded\pic\code\software\keypad\Keypad-led\keypad-led.c"
+   117  0040                     main@F1600:
+   118  0040                            ds      20
+   119                           
+   120                           global btemp
+   121                           psect inittext,class=CODE,delta=2
+   122                           global init_fetch,btemp
+   123                           ;	Called with low address in FSR and high address in W
+   124  0641                     init_fetch:
+   125  0641  087E               	movf btemp,w
+   126  0642  008A               	movwf pclath
+   127  0643  087F               	movf btemp+1,w
+   128  0644  0082               	movwf pc
+   129                           global init_ram
+   130                           ;Called with:
+   131                           ;	high address of idata address in btemp 
+   132                           ;	low address of idata address in btemp+1 
+   133                           ;	low address of data in FSR
+   134                           ;	high address + 1 of data in btemp-1
+   135  0645                     init_ram:
+   136  0645  2641  120A  118A   	fcall init_fetch
+   137  0648  0080               	movwf indf,f
+   138  0649  0A84               	incf fsr,f
+   139  064A  0804               	movf fsr,w
+   140  064B  067D               	xorwf btemp-1,w
+   141  064C  1903               	btfsc status,2
+   142  064D  3400               	retlw 0
+   143  064E  0AFF               	incf btemp+1,f
+   144  064F  1903               	btfsc status,2
+   145  0650  0AFE               	incf btemp,f
+   146  0651  2E45               	goto init_ram
+   147                           ; Initialize objects allocated to BANK0
+   148                           psect cinit,class=CODE,delta=2
+   149                           global init_ram, __pidataBANK0
+   150  0652  1383               	bcf	status, 7	;select IRP bank0
+   151  0653  3054               	movlw low(__pdataBANK0+20)
+   152  0654  00FD               	movwf btemp-1,f
+   153  0655  3006               	movlw high(__pidataBANK0)
+   154  0656  00FE               	movwf btemp,f
+   155  0657  3064               	movlw low(__pidataBANK0)
+   156  0658  00FF               	movwf btemp+1,f
+   157  0659  3040               	movlw low(__pdataBANK0)
+   158  065A  0084               	movwf fsr,f
+   159  065B  120A  118A  2645   	fcall init_ram
+              120A  118A         
+   160                           psect cinit,class=CODE,delta=2
+   161                           global end_of_initialization
+   162                           
+   163                           ;End of C runtime variable initialization code
+   164                           
+   165  0660                     end_of_initialization:
+   166  0660  0183               clrf status
+   167  0661  120A  118A  2E78   ljmp _main	;jump to C main() function
+   168                           psect	cstackCOMMON,class=COMMON,space=1
+   169                           global __pcstackCOMMON
+   170  0070                     __pcstackCOMMON:
+   171                           	global	?_main
+   172  0070                     ?_main:	; 0 bytes @ 0x0
+   173                           	global	??_main
+   174  0070                     ??_main:	; 0 bytes @ 0x0
+   175  0070                     	ds	4
+   176                           psect	cstackBANK0,class=BANK0,space=1
+   177                           global __pcstackBANK0
+   178  0020                     __pcstackBANK0:
+   179                           	global	main@seg
+   180  0020                     main@seg:	; 20 bytes @ 0x0
+   181  0020                     	ds	20
+   182                           	global	main@a
+   183  0034                     main@a:	; 10 bytes @ 0x14
+   184  0034                     	ds	10
+   185                           	global	main@i
+   186  003E                     main@i:	; 2 bytes @ 0x1E
+   187  003E                     	ds	2
+   188 ;;Data sizes: Strings 0, constant 0, data 20, bss 0, persistent 0 stack 0
+   189 ;;Auto spaces:   Size  Autos    Used
+   190 ;; COMMON          14      4       4
+   191 ;; BANK0           80     32      52
+   192 ;; BANK1           80      0       0
+   193 ;; BANK3           96      0       0
+   194 ;; BANK2           96      0       0
+   195                           
+   196 ;;
+   197 ;; Pointer list with targets:
+   198                           
+   199                           
+   200                           
+   201 ;;
+   202 ;; Critical Paths under _main in COMMON
+   203 ;;
+   204 ;;   None.
+   205 ;;
+   206 ;; Critical Paths under _main in BANK0
+   207 ;;
+   208 ;;   None.
+   209 ;;
+   210 ;; Critical Paths under _main in BANK1
+   211 ;;
+   212 ;;   None.
+   213 ;;
+   214 ;; Critical Paths under _main in BANK3
+   215 ;;
+   216 ;;   None.
+   217 ;;
+   218 ;; Critical Paths under _main in BANK2
+   219 ;;
+   220 ;;   None.
+   221                           
+   222 ;;
+   223 ;;Main: autosize = 0, tempsize = 4, incstack = 0, save=0
+   224 ;;
+   225                           
+   226 ;;
+   227 ;;Call Graph Tables:
+   228 ;;
+   229 ;; ---------------------------------------------------------------------------------
+   230 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   231 ;; ---------------------------------------------------------------------------------
+   232 ;; (0) _main                                                36    36      0     859
+   233 ;;                                              0 COMMON     4     4      0
+   234 ;;                                              0 BANK0     32    32      0
+   235 ;; ---------------------------------------------------------------------------------
+   236 ;; Estimated maximum stack depth 0
+   237 ;; ---------------------------------------------------------------------------------
+   238                           
+   239 ;; Call Graph Graphs:
+   240                           
+   241 ;; _main (ROOT)
+   242 ;;
+   243                           
+   244 ;; Address spaces:
+   245                           
+   246 ;;Name               Size   Autos  Total    Cost      Usage
+   247 ;;BANK3               60      0       0       9        0.0%
+   248 ;;BITBANK3            60      0       0       8        0.0%
+   249 ;;SFR3                 0      0       0       4        0.0%
+   250 ;;BITSFR3              0      0       0       4        0.0%
+   251 ;;BANK2               60      0       0      11        0.0%
+   252 ;;BITBANK2            60      0       0      10        0.0%
+   253 ;;SFR2                 0      0       0       5        0.0%
+   254 ;;BITSFR2              0      0       0       5        0.0%
+   255 ;;SFR1                 0      0       0       2        0.0%
+   256 ;;BITSFR1              0      0       0       2        0.0%
+   257 ;;BANK1               50      0       0       7        0.0%
+   258 ;;BITBANK1            50      0       0       6        0.0%
+   259 ;;CODE                 0      0       0       0        0.0%
+   260 ;;DATA                 0      0      38      12        0.0%
+   261 ;;ABS                  0      0      38       3        0.0%
+   262 ;;NULL                 0      0       0       0        0.0%
+   263 ;;STACK                0      0       0       2        0.0%
+   264 ;;BANK0               50     20      34       5       65.0%
+   265 ;;BITBANK0            50      0       0       4        0.0%
+   266 ;;SFR0                 0      0       0       1        0.0%
+   267 ;;BITSFR0              0      0       0       1        0.0%
+   268 ;;COMMON               E      4       4       1       28.6%
+   269 ;;BITCOMMON            E      0       0       0        0.0%
+   270 ;;EEDATA             100      0       0       0        0.0%
+   271                           
+   272                           	global	_main
+   273                           psect	maintext,global,class=CODE,delta=2
+   274                           global __pmaintext
+   275  0678                     __pmaintext:
+   276                           
+   277 ;; *************** function _main *****************
+   278 ;; Defined at:
+   279 ;;		line 13 in file "D:\Embedded\pic\code\software\keypad\Keypad-led\keypad-led.c"
+   280 ;; Parameters:    Size  Location     Type
+   281 ;;		None
+   282 ;; Auto vars:     Size  Location     Type
+   283 ;;  seg            20    0[BANK0 ] unsigned char [20]
+   284 ;;  a              10   20[BANK0 ] unsigned char [10]
+   285 ;;  i               2   30[BANK0 ] int 
+   286 ;; Return value:  Size  Location     Type
+   287 ;;		None               void
+   288 ;; Registers used:
+   289 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   290 ;; Tracked objects:
+   291 ;;		On entry : 17F/0
+   292 ;;		On exit  : 0/0
+   293 ;;		Unchanged: 0/0
+   294 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   295 ;;      Params:         0       0       0       0       0
+   296 ;;      Locals:         0      32       0       0       0
+   297 ;;      Temps:          4       0       0       0       0
+   298 ;;      Totals:         4      32       0       0       0
+   299 ;;Total ram usage:       36 bytes
+   300 ;; This function calls:
+   301 ;;		Nothing
+   302 ;; This function is called by:
+   303 ;;		Startup code after reset
+   304 ;; This function uses a non-reentrant model
+   305 ;;
+   306                           psect	maintext
+   307                           	file	"D:\Embedded\pic\code\software\keypad\Keypad-led\keypad-led.c"
+   308                           	line	13
+   309                           	global	__size_of_main
+   310  0188                     	__size_of_main	equ	__end_of_main-_main
+   311                           	
+   312  0678                     _main:	
+   313                           	opt	stack 8
+   314                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0]
+   315                           	line	14
+   316                           	
+   317  0678                     l2326:	
+   318                           ;keypad-led.c: 14: char seg[20]={0X3F,0X06,0X5B,0X4F,0X66,0X6D,0X7D,0X07,0X7F,0X6F};
+   319  0678  3020               	movlw	(main@seg)&0ffh
+   320  0679  0084               	movwf	fsr0
+   321  067A  3040               	movlw	low(main@F1600)
+   322  067B  00F0               	movwf	(??_main+0)+0
+   323  067C  0804               	movf	fsr0,w
+   324  067D  00F1               	movwf	((??_main+0)+0+1)
+   325  067E  3014               	movlw	20
+   326  067F  00F2               	movwf	((??_main+0)+0+2)
+   327  0680                     u2460:
+   328  0680  0870               	movf	(??_main+0)+0,w
+   329  0681  0084               	movwf	fsr0
+   330  0682  1383               	bcf	status, 7	;select IRP bank0
+   331                           	
+   332  0683  0800               	movf	indf,w
+   333  0684  00F3               	movwf	((??_main+0)+0+3)
+   334  0685  0AF0               	incf	(??_main+0)+0,f
+   335  0686  0871               	movf	((??_main+0)+0+1),w
+   336  0687  0084               	movwf	fsr0
+   337                           	
+   338  0688  0873               	movf	((??_main+0)+0+3),w
+   339  0689  0080               	movwf	indf
+   340  068A  0AF1               	incf	((??_main+0)+0+1),f
+   341  068B  0BF2               	decfsz	((??_main+0)+0+2),f
+   342  068C  2E80               	goto	u2460
+   343                           	line	16
+   344                           	
+   345  068D                     l2328:	
+   346                           ;keypad-led.c: 15: char a[10];
+   347                           ;keypad-led.c: 16: PORTA=0X00;
+   348  068D  1283               	bcf	status, 5	;RP0=0, select bank0
+   349  068E  1303               	bcf	status, 6	;RP1=0, select bank0
+   350  068F  0185               	clrf	(5)	;volatile
+   351                           	line	17
+   352                           	
+   353  0690                     l2330:	
+   354                           ;keypad-led.c: 17: TRISA=0X00;
+   355  0690  1683               	bsf	status, 5	;RP0=1, select bank1
+   356  0691  1303               	bcf	status, 6	;RP1=0, select bank1
+   357  0692  0185               	clrf	(133)^080h	;volatile
+   358                           	line	18
+   359                           	
+   360  0693                     l2332:	
+   361                           ;keypad-led.c: 18: ANSEL=0X00;
+   362  0693  1683               	bsf	status, 5	;RP0=1, select bank3
+   363  0694  1703               	bsf	status, 6	;RP1=1, select bank3
+   364  0695  0188               	clrf	(392)^0180h	;volatile
+   365                           	line	19
+   366                           	
+   367  0696                     l2334:	
+   368                           ;keypad-led.c: 19: ANSELH=0X00;
+   369  0696  0189               	clrf	(393)^0180h	;volatile
+   370                           	line	20
+   371                           	
+   372  0697                     l2336:	
+   373                           ;keypad-led.c: 20: PORTC=0X00;
+   374  0697  1283               	bcf	status, 5	;RP0=0, select bank0
+   375  0698  1303               	bcf	status, 6	;RP1=0, select bank0
+   376  0699  0187               	clrf	(7)	;volatile
+   377                           	line	21
+   378                           	
+   379  069A                     l2338:	
+   380                           ;keypad-led.c: 21: TRISC=0X00;
+   381  069A  1683               	bsf	status, 5	;RP0=1, select bank1
+   382  069B  1303               	bcf	status, 6	;RP1=0, select bank1
+   383  069C  0187               	clrf	(135)^080h	;volatile
+   384                           	line	22
+   385                           	
+   386  069D                     l2340:	
+   387                           ;keypad-led.c: 22: PORTD=0X00;
+   388  069D  1283               	bcf	status, 5	;RP0=0, select bank0
+   389  069E  1303               	bcf	status, 6	;RP1=0, select bank0
+   390  069F  0188               	clrf	(8)	;volatile
+   391                           	line	23
+   392                           	
+   393  06A0                     l2342:	
+   394                           ;keypad-led.c: 23: TRISD=0X07;
+   395  06A0  3007               	movlw	(07h)
+   396  06A1  1683               	bsf	status, 5	;RP0=1, select bank1
+   397  06A2  1303               	bcf	status, 6	;RP1=0, select bank1
+   398  06A3  0088               	movwf	(136)^080h	;volatile
+   399                           	line	24
+   400                           	
+   401  06A4                     l2344:	
+   402                           ;keypad-led.c: 24: int i=0;
+   403  06A4  1283               	bcf	status, 5	;RP0=0, select bank0
+   404  06A5  1303               	bcf	status, 6	;RP1=0, select bank0
+   405  06A6  01BE               	clrf	(main@i)
+   406  06A7  01BF               	clrf	(main@i+1)
+   407  06A8  2EA9               	goto	l2346
+   408                           	line	25
+   409                           ;keypad-led.c: 25: while(1)
+   410                           	
+   411  06A9                     l1027:	
+   412                           	line	27
+   413                           	
+   414  06A9                     l2346:	
+   415                           ;keypad-led.c: 26: {
+   416                           ;keypad-led.c: 27: RD3=1;RD4=RD5=RD6=0;
+   417  06A9  1588               	bsf	(67/8),(67)&7
+   418                           	
+   419  06AA                     l2348:	
+   420  06AA  1308               	bcf	(70/8),(70)&7
+   421  06AB  1288               	bcf	(69/8),(69)&7
+   422  06AC  1208               	bcf	(68/8),(68)&7
+   423                           	line	28
+   424                           	
+   425  06AD                     l2350:	
+   426                           ;keypad-led.c: 28: if(RD0==1)
+   427  06AD  1C08               	btfss	(64/8),(64)&7
+   428  06AE  2EB0               	goto	u2471
+   429  06AF  2EB1               	goto	u2470
+   430  06B0                     u2471:
+   431  06B0  2EC6               	goto	l1028
+   432  06B1                     u2470:
+   433                           	line	30
+   434                           	
+   435  06B1                     l2352:	
+   436                           ;keypad-led.c: 29: {
+   437                           ;keypad-led.c: 30: PORTA=seg[1];
+   438  06B1  0821               	movf	0+(main@seg)+01h,w
+   439  06B2  0085               	movwf	(5)	;volatile
+   440                           	line	31
+   441                           	
+   442  06B3                     l2354:	
+   443                           ;keypad-led.c: 31: a[i]=1;
+   444  06B3  083E               	movf	(main@i),w
+   445  06B4  3E34               	addlw	main@a&0ffh
+   446  06B5  0084               	movwf	fsr0
+   447  06B6  1383               	bcf	status, 7	;select IRP bank0
+   448  06B7  0180               	clrf	indf
+   449  06B8  1403               	bsf	status,0
+   450  06B9  0D80               	rlf	indf,f
+   451                           	line	32
+   452                           	
+   453  06BA                     l2356:	
+   454                           ;keypad-led.c: 32: i++;
+   455  06BA  3001               	movlw	low(01h)
+   456  06BB  07BE               	addwf	(main@i),f
+   457  06BC  1803               	skipnc
+   458  06BD  0ABF               	incf	(main@i+1),f
+   459  06BE  3000               	movlw	high(01h)
+   460  06BF  07BF               	addwf	(main@i+1),f
+   461                           	line	33
+   462                           ;keypad-led.c: 33: while(RD0==1);
+   463  06C0  2EC1               	goto	l1029
+   464                           	
+   465  06C1                     l1030:	
+   466                           	
+   467  06C1                     l1029:	
+   468  06C1  1808               	btfsc	(64/8),(64)&7
+   469  06C2  2EC4               	goto	u2481
+   470  06C3  2EC5               	goto	u2480
+   471  06C4                     u2481:
+   472  06C4  2EC1               	goto	l1029
+   473  06C5                     u2480:
+   474  06C5  2EC6               	goto	l1028
+   475                           	
+   476  06C6                     l1031:	
+   477                           	line	34
+   478                           	
+   479  06C6                     l1028:	
+   480                           	line	35
+   481                           ;keypad-led.c: 34: }
+   482                           ;keypad-led.c: 35: if(RD1==1)
+   483  06C6  1C88               	btfss	(65/8),(65)&7
+   484  06C7  2EC9               	goto	u2491
+   485  06C8  2ECA               	goto	u2490
+   486  06C9                     u2491:
+   487  06C9  2EE0               	goto	l1032
+   488  06CA                     u2490:
+   489                           	line	37
+   490                           	
+   491  06CA                     l2358:	
+   492                           ;keypad-led.c: 36: {
+   493                           ;keypad-led.c: 37: PORTA=seg[2];
+   494  06CA  0822               	movf	0+(main@seg)+02h,w
+   495  06CB  0085               	movwf	(5)	;volatile
+   496                           	line	38
+   497                           	
+   498  06CC                     l2360:	
+   499                           ;keypad-led.c: 38: a[i]=2;
+   500  06CC  3002               	movlw	(02h)
+   501  06CD  00F0               	movwf	(??_main+0)+0
+   502  06CE  083E               	movf	(main@i),w
+   503  06CF  3E34               	addlw	main@a&0ffh
+   504  06D0  0084               	movwf	fsr0
+   505  06D1  0870               	movf	(??_main+0)+0,w
+   506  06D2  1383               	bcf	status, 7	;select IRP bank0
+   507  06D3  0080               	movwf	indf
+   508                           	line	39
+   509                           	
+   510  06D4                     l2362:	
+   511                           ;keypad-led.c: 39: i++;
+   512  06D4  3001               	movlw	low(01h)
+   513  06D5  07BE               	addwf	(main@i),f
+   514  06D6  1803               	skipnc
+   515  06D7  0ABF               	incf	(main@i+1),f
+   516  06D8  3000               	movlw	high(01h)
+   517  06D9  07BF               	addwf	(main@i+1),f
+   518                           	line	40
+   519                           ;keypad-led.c: 40: while(RD1==1);
+   520  06DA  2EDB               	goto	l1033
+   521                           	
+   522  06DB                     l1034:	
+   523                           	
+   524  06DB                     l1033:	
+   525  06DB  1888               	btfsc	(65/8),(65)&7
+   526  06DC  2EDE               	goto	u2501
+   527  06DD  2EDF               	goto	u2500
+   528  06DE                     u2501:
+   529  06DE  2EDB               	goto	l1033
+   530  06DF                     u2500:
+   531  06DF  2EE0               	goto	l1032
+   532                           	
+   533  06E0                     l1035:	
+   534                           	line	41
+   535                           	
+   536  06E0                     l1032:	
+   537                           	line	42
+   538                           ;keypad-led.c: 41: }
+   539                           ;keypad-led.c: 42: if(RD2==1)
+   540  06E0  1D08               	btfss	(66/8),(66)&7
+   541  06E1  2EE3               	goto	u2511
+   542  06E2  2EE4               	goto	u2510
+   543  06E3                     u2511:
+   544  06E3  2EFA               	goto	l1036
+   545  06E4                     u2510:
+   546                           	line	44
+   547                           	
+   548  06E4                     l2364:	
+   549                           ;keypad-led.c: 43: {
+   550                           ;keypad-led.c: 44: PORTA=seg[3];
+   551  06E4  0823               	movf	0+(main@seg)+03h,w
+   552  06E5  0085               	movwf	(5)	;volatile
+   553                           	line	45
+   554                           	
+   555  06E6                     l2366:	
+   556                           ;keypad-led.c: 45: a[i]=3;
+   557  06E6  3003               	movlw	(03h)
+   558  06E7  00F0               	movwf	(??_main+0)+0
+   559  06E8  083E               	movf	(main@i),w
+   560  06E9  3E34               	addlw	main@a&0ffh
+   561  06EA  0084               	movwf	fsr0
+   562  06EB  0870               	movf	(??_main+0)+0,w
+   563  06EC  1383               	bcf	status, 7	;select IRP bank0
+   564  06ED  0080               	movwf	indf
+   565                           	line	46
+   566                           	
+   567  06EE                     l2368:	
+   568                           ;keypad-led.c: 46: i++;
+   569  06EE  3001               	movlw	low(01h)
+   570  06EF  07BE               	addwf	(main@i),f
+   571  06F0  1803               	skipnc
+   572  06F1  0ABF               	incf	(main@i+1),f
+   573  06F2  3000               	movlw	high(01h)
+   574  06F3  07BF               	addwf	(main@i+1),f
+   575                           	line	47
+   576                           ;keypad-led.c: 47: while(RD2==1);
+   577  06F4  2EF5               	goto	l1037
+   578                           	
+   579  06F5                     l1038:	
+   580                           	
+   581  06F5                     l1037:	
+   582  06F5  1908               	btfsc	(66/8),(66)&7
+   583  06F6  2EF8               	goto	u2521
+   584  06F7  2EF9               	goto	u2520
+   585  06F8                     u2521:
+   586  06F8  2EF5               	goto	l1037
+   587  06F9                     u2520:
+   588  06F9  2EFA               	goto	l1036
+   589                           	
+   590  06FA                     l1039:	
+   591                           	line	48
+   592                           	
+   593  06FA                     l1036:	
+   594                           	line	51
+   595                           ;keypad-led.c: 48: }
+   596                           ;keypad-led.c: 51: RD4=1;RD3=RD5=RD6=0;
+   597  06FA  1608               	bsf	(68/8),(68)&7
+   598  06FB  1308               	bcf	(70/8),(70)&7
+   599  06FC  1288               	bcf	(69/8),(69)&7
+   600  06FD  1188               	bcf	(67/8),(67)&7
+   601                           	line	52
+   602                           ;keypad-led.c: 52: if(RD0==1)
+   603  06FE  1C08               	btfss	(64/8),(64)&7
+   604  06FF  2F01               	goto	u2531
+   605  0700  2F02               	goto	u2530
+   606  0701                     u2531:
+   607  0701  2F18               	goto	l1040
+   608  0702                     u2530:
+   609                           	line	54
+   610                           	
+   611  0702                     l2370:	
+   612                           ;keypad-led.c: 53: {
+   613                           ;keypad-led.c: 54: PORTA=seg[4];
+   614  0702  0824               	movf	0+(main@seg)+04h,w
+   615  0703  0085               	movwf	(5)	;volatile
+   616                           	line	55
+   617                           	
+   618  0704                     l2372:	
+   619                           ;keypad-led.c: 55: a[i]=4;
+   620  0704  3004               	movlw	(04h)
+   621  0705  00F0               	movwf	(??_main+0)+0
+   622  0706  083E               	movf	(main@i),w
+   623  0707  3E34               	addlw	main@a&0ffh
+   624  0708  0084               	movwf	fsr0
+   625  0709  0870               	movf	(??_main+0)+0,w
+   626  070A  1383               	bcf	status, 7	;select IRP bank0
+   627  070B  0080               	movwf	indf
+   628                           	line	56
+   629                           	
+   630  070C                     l2374:	
+   631                           ;keypad-led.c: 56: i++;
+   632  070C  3001               	movlw	low(01h)
+   633  070D  07BE               	addwf	(main@i),f
+   634  070E  1803               	skipnc
+   635  070F  0ABF               	incf	(main@i+1),f
+   636  0710  3000               	movlw	high(01h)
+   637  0711  07BF               	addwf	(main@i+1),f
+   638                           	line	57
+   639                           ;keypad-led.c: 57: while(RD0==1);
+   640  0712  2F13               	goto	l1041
+   641                           	
+   642  0713                     l1042:	
+   643                           	
+   644  0713                     l1041:	
+   645  0713  1808               	btfsc	(64/8),(64)&7
+   646  0714  2F16               	goto	u2541
+   647  0715  2F17               	goto	u2540
+   648  0716                     u2541:
+   649  0716  2F13               	goto	l1041
+   650  0717                     u2540:
+   651  0717  2F18               	goto	l1040
+   652                           	
+   653  0718                     l1043:	
+   654                           	line	58
+   655                           	
+   656  0718                     l1040:	
+   657                           	line	59
+   658                           ;keypad-led.c: 58: }
+   659                           ;keypad-led.c: 59: if(RD1==1)
+   660  0718  1C88               	btfss	(65/8),(65)&7
+   661  0719  2F1B               	goto	u2551
+   662  071A  2F1C               	goto	u2550
+   663  071B                     u2551:
+   664  071B  2F32               	goto	l1044
+   665  071C                     u2550:
+   666                           	line	61
+   667                           	
+   668  071C                     l2376:	
+   669                           ;keypad-led.c: 60: {
+   670                           ;keypad-led.c: 61: PORTA=seg[5];
+   671  071C  0825               	movf	0+(main@seg)+05h,w
+   672  071D  0085               	movwf	(5)	;volatile
+   673                           	line	62
+   674                           	
+   675  071E                     l2378:	
+   676                           ;keypad-led.c: 62: a[i]=5;
+   677  071E  3005               	movlw	(05h)
+   678  071F  00F0               	movwf	(??_main+0)+0
+   679  0720  083E               	movf	(main@i),w
+   680  0721  3E34               	addlw	main@a&0ffh
+   681  0722  0084               	movwf	fsr0
+   682  0723  0870               	movf	(??_main+0)+0,w
+   683  0724  1383               	bcf	status, 7	;select IRP bank0
+   684  0725  0080               	movwf	indf
+   685                           	line	63
+   686                           	
+   687  0726                     l2380:	
+   688                           ;keypad-led.c: 63: i++;
+   689  0726  3001               	movlw	low(01h)
+   690  0727  07BE               	addwf	(main@i),f
+   691  0728  1803               	skipnc
+   692  0729  0ABF               	incf	(main@i+1),f
+   693  072A  3000               	movlw	high(01h)
+   694  072B  07BF               	addwf	(main@i+1),f
+   695                           	line	64
+   696                           ;keypad-led.c: 64: while(RD1==1);
+   697  072C  2F2D               	goto	l1045
+   698                           	
+   699  072D                     l1046:	
+   700                           	
+   701  072D                     l1045:	
+   702  072D  1888               	btfsc	(65/8),(65)&7
+   703  072E  2F30               	goto	u2561
+   704  072F  2F31               	goto	u2560
+   705  0730                     u2561:
+   706  0730  2F2D               	goto	l1045
+   707  0731                     u2560:
+   708  0731  2F32               	goto	l1044
+   709                           	
+   710  0732                     l1047:	
+   711                           	line	65
+   712                           	
+   713  0732                     l1044:	
+   714                           	line	66
+   715                           ;keypad-led.c: 65: }
+   716                           ;keypad-led.c: 66: if(RD2==1)
+   717  0732  1D08               	btfss	(66/8),(66)&7
+   718  0733  2F35               	goto	u2571
+   719  0734  2F36               	goto	u2570
+   720  0735                     u2571:
+   721  0735  2F4C               	goto	l1048
+   722  0736                     u2570:
+   723                           	line	68
+   724                           	
+   725  0736                     l2382:	
+   726                           ;keypad-led.c: 67: {
+   727                           ;keypad-led.c: 68: PORTA=seg[6];
+   728  0736  0826               	movf	0+(main@seg)+06h,w
+   729  0737  0085               	movwf	(5)	;volatile
+   730                           	line	69
+   731                           	
+   732  0738                     l2384:	
+   733                           ;keypad-led.c: 69: a[i]=6;
+   734  0738  3006               	movlw	(06h)
+   735  0739  00F0               	movwf	(??_main+0)+0
+   736  073A  083E               	movf	(main@i),w
+   737  073B  3E34               	addlw	main@a&0ffh
+   738  073C  0084               	movwf	fsr0
+   739  073D  0870               	movf	(??_main+0)+0,w
+   740  073E  1383               	bcf	status, 7	;select IRP bank0
+   741  073F  0080               	movwf	indf
+   742                           	line	70
+   743                           	
+   744  0740                     l2386:	
+   745                           ;keypad-led.c: 70: i++;
+   746  0740  3001               	movlw	low(01h)
+   747  0741  07BE               	addwf	(main@i),f
+   748  0742  1803               	skipnc
+   749  0743  0ABF               	incf	(main@i+1),f
+   750  0744  3000               	movlw	high(01h)
+   751  0745  07BF               	addwf	(main@i+1),f
+   752                           	line	71
+   753                           ;keypad-led.c: 71: while(RD2==1);
+   754  0746  2F47               	goto	l1049
+   755                           	
+   756  0747                     l1050:	
+   757                           	
+   758  0747                     l1049:	
+   759  0747  1908               	btfsc	(66/8),(66)&7
+   760  0748  2F4A               	goto	u2581
+   761  0749  2F4B               	goto	u2580
+   762  074A                     u2581:
+   763  074A  2F47               	goto	l1049
+   764  074B                     u2580:
+   765  074B  2F4C               	goto	l1048
+   766                           	
+   767  074C                     l1051:	
+   768                           	line	72
+   769                           	
+   770  074C                     l1048:	
+   771                           	line	74
+   772                           ;keypad-led.c: 72: }
+   773                           ;keypad-led.c: 74: RD5=1;RD3=RD4=RD6=0;
+   774  074C  1688               	bsf	(69/8),(69)&7
+   775  074D  1308               	bcf	(70/8),(70)&7
+   776  074E  1208               	bcf	(68/8),(68)&7
+   777  074F  1188               	bcf	(67/8),(67)&7
+   778                           	line	75
+   779                           ;keypad-led.c: 75: if(RD0==1)
+   780  0750  1C08               	btfss	(64/8),(64)&7
+   781  0751  2F53               	goto	u2591
+   782  0752  2F54               	goto	u2590
+   783  0753                     u2591:
+   784  0753  2F6A               	goto	l1052
+   785  0754                     u2590:
+   786                           	line	77
+   787                           	
+   788  0754                     l2388:	
+   789                           ;keypad-led.c: 76: {
+   790                           ;keypad-led.c: 77: PORTA=seg[7];
+   791  0754  0827               	movf	0+(main@seg)+07h,w
+   792  0755  0085               	movwf	(5)	;volatile
+   793                           	line	78
+   794                           	
+   795  0756                     l2390:	
+   796                           ;keypad-led.c: 78: a[i]=7;
+   797  0756  3007               	movlw	(07h)
+   798  0757  00F0               	movwf	(??_main+0)+0
+   799  0758  083E               	movf	(main@i),w
+   800  0759  3E34               	addlw	main@a&0ffh
+   801  075A  0084               	movwf	fsr0
+   802  075B  0870               	movf	(??_main+0)+0,w
+   803  075C  1383               	bcf	status, 7	;select IRP bank0
+   804  075D  0080               	movwf	indf
+   805                           	line	79
+   806                           	
+   807  075E                     l2392:	
+   808                           ;keypad-led.c: 79: i++;
+   809  075E  3001               	movlw	low(01h)
+   810  075F  07BE               	addwf	(main@i),f
+   811  0760  1803               	skipnc
+   812  0761  0ABF               	incf	(main@i+1),f
+   813  0762  3000               	movlw	high(01h)
+   814  0763  07BF               	addwf	(main@i+1),f
+   815                           	line	80
+   816                           ;keypad-led.c: 80: while(RD0==1);
+   817  0764  2F65               	goto	l1053
+   818                           	
+   819  0765                     l1054:	
+   820                           	
+   821  0765                     l1053:	
+   822  0765  1808               	btfsc	(64/8),(64)&7
+   823  0766  2F68               	goto	u2601
+   824  0767  2F69               	goto	u2600
+   825  0768                     u2601:
+   826  0768  2F65               	goto	l1053
+   827  0769                     u2600:
+   828  0769  2F6A               	goto	l1052
+   829                           	
+   830  076A                     l1055:	
+   831                           	line	81
+   832                           	
+   833  076A                     l1052:	
+   834                           	line	82
+   835                           ;keypad-led.c: 81: }
+   836                           ;keypad-led.c: 82: if(RD1==1)
+   837  076A  1C88               	btfss	(65/8),(65)&7
+   838  076B  2F6D               	goto	u2611
+   839  076C  2F6E               	goto	u2610
+   840  076D                     u2611:
+   841  076D  2F84               	goto	l1056
+   842  076E                     u2610:
+   843                           	line	84
+   844                           	
+   845  076E                     l2394:	
+   846                           ;keypad-led.c: 83: {
+   847                           ;keypad-led.c: 84: PORTA=seg[8];
+   848  076E  0828               	movf	0+(main@seg)+08h,w
+   849  076F  0085               	movwf	(5)	;volatile
+   850                           	line	85
+   851                           	
+   852  0770                     l2396:	
+   853                           ;keypad-led.c: 85: a[i]=8;
+   854  0770  3008               	movlw	(08h)
+   855  0771  00F0               	movwf	(??_main+0)+0
+   856  0772  083E               	movf	(main@i),w
+   857  0773  3E34               	addlw	main@a&0ffh
+   858  0774  0084               	movwf	fsr0
+   859  0775  0870               	movf	(??_main+0)+0,w
+   860  0776  1383               	bcf	status, 7	;select IRP bank0
+   861  0777  0080               	movwf	indf
+   862                           	line	86
+   863                           	
+   864  0778                     l2398:	
+   865                           ;keypad-led.c: 86: i++;
+   866  0778  3001               	movlw	low(01h)
+   867  0779  07BE               	addwf	(main@i),f
+   868  077A  1803               	skipnc
+   869  077B  0ABF               	incf	(main@i+1),f
+   870  077C  3000               	movlw	high(01h)
+   871  077D  07BF               	addwf	(main@i+1),f
+   872                           	line	87
+   873                           ;keypad-led.c: 87: while(RD1==1);
+   874  077E  2F7F               	goto	l1057
+   875                           	
+   876  077F                     l1058:	
+   877                           	
+   878  077F                     l1057:	
+   879  077F  1888               	btfsc	(65/8),(65)&7
+   880  0780  2F82               	goto	u2621
+   881  0781  2F83               	goto	u2620
+   882  0782                     u2621:
+   883  0782  2F7F               	goto	l1057
+   884  0783                     u2620:
+   885  0783  2F84               	goto	l1056
+   886                           	
+   887  0784                     l1059:	
+   888                           	line	88
+   889                           	
+   890  0784                     l1056:	
+   891                           	line	89
+   892                           ;keypad-led.c: 88: }
+   893                           ;keypad-led.c: 89: if(RD2==1)
+   894  0784  1D08               	btfss	(66/8),(66)&7
+   895  0785  2F87               	goto	u2631
+   896  0786  2F88               	goto	u2630
+   897  0787                     u2631:
+   898  0787  2F9E               	goto	l1060
+   899  0788                     u2630:
+   900                           	line	91
+   901                           	
+   902  0788                     l2400:	
+   903                           ;keypad-led.c: 90: {
+   904                           ;keypad-led.c: 91: PORTA=seg[9];
+   905  0788  0829               	movf	0+(main@seg)+09h,w
+   906  0789  0085               	movwf	(5)	;volatile
+   907                           	line	92
+   908                           	
+   909  078A                     l2402:	
+   910                           ;keypad-led.c: 92: a[i]=9;
+   911  078A  3009               	movlw	(09h)
+   912  078B  00F0               	movwf	(??_main+0)+0
+   913  078C  083E               	movf	(main@i),w
+   914  078D  3E34               	addlw	main@a&0ffh
+   915  078E  0084               	movwf	fsr0
+   916  078F  0870               	movf	(??_main+0)+0,w
+   917  0790  1383               	bcf	status, 7	;select IRP bank0
+   918  0791  0080               	movwf	indf
+   919                           	line	93
+   920                           	
+   921  0792                     l2404:	
+   922                           ;keypad-led.c: 93: i++;
+   923  0792  3001               	movlw	low(01h)
+   924  0793  07BE               	addwf	(main@i),f
+   925  0794  1803               	skipnc
+   926  0795  0ABF               	incf	(main@i+1),f
+   927  0796  3000               	movlw	high(01h)
+   928  0797  07BF               	addwf	(main@i+1),f
+   929                           	line	94
+   930                           ;keypad-led.c: 94: while(RD2==1);
+   931  0798  2F99               	goto	l1061
+   932                           	
+   933  0799                     l1062:	
+   934                           	
+   935  0799                     l1061:	
+   936  0799  1908               	btfsc	(66/8),(66)&7
+   937  079A  2F9C               	goto	u2641
+   938  079B  2F9D               	goto	u2640
+   939  079C                     u2641:
+   940  079C  2F99               	goto	l1061
+   941  079D                     u2640:
+   942  079D  2F9E               	goto	l1060
+   943                           	
+   944  079E                     l1063:	
+   945                           	line	95
+   946                           	
+   947  079E                     l1060:	
+   948                           	line	96
+   949                           ;keypad-led.c: 95: }
+   950                           ;keypad-led.c: 96: RD6=1;RD3=RD4=RD5=0;
+   951  079E  1708               	bsf	(70/8),(70)&7
+   952  079F  1288               	bcf	(69/8),(69)&7
+   953  07A0  1208               	bcf	(68/8),(68)&7
+   954  07A1  1188               	bcf	(67/8),(67)&7
+   955                           	line	97
+   956                           ;keypad-led.c: 97: if(RD0==1)
+   957  07A2  1C08               	btfss	(64/8),(64)&7
+   958  07A3  2FA5               	goto	u2651
+   959  07A4  2FA6               	goto	u2650
+   960  07A5                     u2651:
+   961  07A5  2FEB               	goto	l1064
+   962  07A6                     u2650:
+   963                           	line	99
+   964                           	
+   965  07A6                     l2406:	
+   966                           ;keypad-led.c: 98: {
+   967                           ;keypad-led.c: 99: if(a[0]==1&&a[1]==2&&a[2]==3)
+   968  07A6  0834               	movf	(main@a),w
+   969  07A7  3A01               	xorlw	01h
+   970  07A8  1D03               	skipz
+   971  07A9  2FAB               	goto	u2661
+   972  07AA  2FAC               	goto	u2660
+   973  07AB                     u2661:
+   974  07AB  2FBB               	goto	l2416
+   975  07AC                     u2660:
+   976                           	
+   977  07AC                     l2408:	
+   978  07AC  0835               	movf	0+(main@a)+01h,w
+   979  07AD  3A02               	xorlw	02h
+   980  07AE  1D03               	skipz
+   981  07AF  2FB1               	goto	u2671
+   982  07B0  2FB2               	goto	u2670
+   983  07B1                     u2671:
+   984  07B1  2FBB               	goto	l2416
+   985  07B2                     u2670:
+   986                           	
+   987  07B2                     l2410:	
+   988  07B2  0836               	movf	0+(main@a)+02h,w
+   989  07B3  3A03               	xorlw	03h
+   990  07B4  1D03               	skipz
+   991  07B5  2FB7               	goto	u2681
+   992  07B6  2FB8               	goto	u2680
+   993  07B7                     u2681:
+   994  07B7  2FBB               	goto	l2416
+   995  07B8                     u2680:
+   996                           	line	101
+   997                           	
+   998  07B8                     l2412:	
+   999                           ;keypad-led.c: 100: {
+  1000                           ;keypad-led.c: 101: PORTC=0X00;
+  1001  07B8  0187               	clrf	(7)	;volatile
+  1002                           	line	102
+  1003                           	
+  1004  07B9                     l2414:	
+  1005                           ;keypad-led.c: 102: RC0=1;
+  1006  07B9  1407               	bsf	(56/8),(56)&7
+  1007  07BA  2FBB               	goto	l2416
+  1008                           	line	103
+  1009                           	
+  1010  07BB                     l1065:	
+  1011                           	line	104
+  1012                           	
+  1013  07BB                     l2416:	
+  1014                           ;keypad-led.c: 103: }
+  1015                           ;keypad-led.c: 104: if(a[0]==4&&a[1]==5&&a[2]==6)
+  1016  07BB  0834               	movf	(main@a),w
+  1017  07BC  3A04               	xorlw	04h
+  1018  07BD  1D03               	skipz
+  1019  07BE  2FC0               	goto	u2691
+  1020  07BF  2FC1               	goto	u2690
+  1021  07C0                     u2691:
+  1022  07C0  2FD0               	goto	l2426
+  1023  07C1                     u2690:
+  1024                           	
+  1025  07C1                     l2418:	
+  1026  07C1  0835               	movf	0+(main@a)+01h,w
+  1027  07C2  3A05               	xorlw	05h
+  1028  07C3  1D03               	skipz
+  1029  07C4  2FC6               	goto	u2701
+  1030  07C5  2FC7               	goto	u2700
+  1031  07C6                     u2701:
+  1032  07C6  2FD0               	goto	l2426
+  1033  07C7                     u2700:
+  1034                           	
+  1035  07C7                     l2420:	
+  1036  07C7  0836               	movf	0+(main@a)+02h,w
+  1037  07C8  3A06               	xorlw	06h
+  1038  07C9  1D03               	skipz
+  1039  07CA  2FCC               	goto	u2711
+  1040  07CB  2FCD               	goto	u2710
+  1041  07CC                     u2711:
+  1042  07CC  2FD0               	goto	l2426
+  1043  07CD                     u2710:
+  1044                           	line	106
+  1045                           	
+  1046  07CD                     l2422:	
+  1047                           ;keypad-led.c: 105: {
+  1048                           ;keypad-led.c: 106: PORTC=0X00;
+  1049  07CD  0187               	clrf	(7)	;volatile
+  1050                           	line	107
+  1051                           	
+  1052  07CE                     l2424:	
+  1053                           ;keypad-led.c: 107: RC1=1;
+  1054  07CE  1487               	bsf	(57/8),(57)&7
+  1055  07CF  2FD0               	goto	l2426
+  1056                           	line	108
+  1057                           	
+  1058  07D0                     l1066:	
+  1059                           	line	109
+  1060                           	
+  1061  07D0                     l2426:	
+  1062                           ;keypad-led.c: 108: }
+  1063                           ;keypad-led.c: 109: if(a[0]==7&&a[1]==8&&a[2]==9)
+  1064  07D0  0834               	movf	(main@a),w
+  1065  07D1  3A07               	xorlw	07h
+  1066  07D2  1D03               	skipz
+  1067  07D3  2FD5               	goto	u2721
+  1068  07D4  2FD6               	goto	u2720
+  1069  07D5                     u2721:
+  1070  07D5  2FE6               	goto	l1068
+  1071  07D6                     u2720:
+  1072                           	
+  1073  07D6                     l2428:	
+  1074  07D6  0835               	movf	0+(main@a)+01h,w
+  1075  07D7  3A08               	xorlw	08h
+  1076  07D8  1D03               	skipz
+  1077  07D9  2FDB               	goto	u2731
+  1078  07DA  2FDC               	goto	u2730
+  1079  07DB                     u2731:
+  1080  07DB  2FE6               	goto	l1068
+  1081  07DC                     u2730:
+  1082                           	
+  1083  07DC                     l2430:	
+  1084  07DC  0836               	movf	0+(main@a)+02h,w
+  1085  07DD  3A09               	xorlw	09h
+  1086  07DE  1D03               	skipz
+  1087  07DF  2FE1               	goto	u2741
+  1088  07E0  2FE2               	goto	u2740
+  1089  07E1                     u2741:
+  1090  07E1  2FE6               	goto	l1068
+  1091  07E2                     u2740:
+  1092                           	line	111
+  1093                           	
+  1094  07E2                     l2432:	
+  1095                           ;keypad-led.c: 110: {
+  1096                           ;keypad-led.c: 111: PORTC=0X00;
+  1097  07E2  0187               	clrf	(7)	;volatile
+  1098                           	line	112
+  1099                           	
+  1100  07E3                     l2434:	
+  1101                           ;keypad-led.c: 112: RC2=1;
+  1102  07E3  1507               	bsf	(58/8),(58)&7
+  1103  07E4  2FE6               	goto	l1068
+  1104                           	line	113
+  1105                           	
+  1106  07E5                     l1067:	
+  1107                           ;keypad-led.c: 113: }while(RD0==1);
+  1108  07E5  2FE6               	goto	l1068
+  1109                           	
+  1110  07E6                     l1069:	
+  1111                           	
+  1112  07E6                     l1068:	
+  1113  07E6  1808               	btfsc	(64/8),(64)&7
+  1114  07E7  2FE9               	goto	u2751
+  1115  07E8  2FEA               	goto	u2750
+  1116  07E9                     u2751:
+  1117  07E9  2FE6               	goto	l1068
+  1118  07EA                     u2750:
+  1119  07EA  2FEB               	goto	l1064
+  1120                           	
+  1121  07EB                     l1070:	
+  1122                           	line	114
+  1123                           	
+  1124  07EB                     l1064:	
+  1125                           	line	115
+  1126                           ;keypad-led.c: 114: }
+  1127                           ;keypad-led.c: 115: if(RD2==1)
+  1128  07EB  1D08               	btfss	(66/8),(66)&7
+  1129  07EC  2FEE               	goto	u2761
+  1130  07ED  2FEF               	goto	u2760
+  1131  07EE                     u2761:
+  1132  07EE  2EA9               	goto	l2346
+  1133  07EF                     u2760:
+  1134                           	line	117
+  1135                           	
+  1136  07EF                     l2436:	
+  1137                           ;keypad-led.c: 116: {
+  1138                           ;keypad-led.c: 117: i=0;
+  1139  07EF  01BE               	clrf	(main@i)
+  1140  07F0  01BF               	clrf	(main@i+1)
+  1141                           	line	118
+  1142                           ;keypad-led.c: 118: PORTC=0X00;
+  1143  07F1  0187               	clrf	(7)	;volatile
+  1144                           	line	119
+  1145                           	
+  1146  07F2                     l2438:	
+  1147                           ;keypad-led.c: 119: PORTA=seg[0];
+  1148  07F2  0820               	movf	(main@seg),w
+  1149  07F3  0085               	movwf	(5)	;volatile
+  1150                           	line	120
+  1151                           ;keypad-led.c: 120: while(RD2==1);
+  1152  07F4  2FF5               	goto	l1072
+  1153                           	
+  1154  07F5                     l1073:	
+  1155                           	
+  1156  07F5                     l1072:	
+  1157  07F5  1908               	btfsc	(66/8),(66)&7
+  1158  07F6  2FF8               	goto	u2771
+  1159  07F7  2FF9               	goto	u2770
+  1160  07F8                     u2771:
+  1161  07F8  2FF5               	goto	l1072
+  1162  07F9                     u2770:
+  1163  07F9  2EA9               	goto	l2346
+  1164                           	
+  1165  07FA                     l1074:	
+  1166  07FA  2EA9               	goto	l2346
+  1167                           	line	121
+  1168                           	
+  1169  07FB                     l1071:	
+  1170  07FB  2EA9               	goto	l2346
+  1171                           	line	122
+  1172                           	
+  1173  07FC                     l1075:	
+  1174                           	line	25
+  1175  07FC  2EA9               	goto	l2346
+  1176                           	
+  1177  07FD                     l1076:	
+  1178                           	line	123
+  1179                           	
+  1180  07FD                     l1077:	
+  1181                           	global	start
+  1182  07FD  120A  118A  2800   	ljmp	start
+  1183                           	opt stack 0
+  1184                           GLOBAL	__end_of_main
+  1185  0800                     	__end_of_main:
+  1186 ;; =============== function _main ends ============
+  1187                           
+  1188                           	signat	_main,88
+  1189                           psect	maintext
+  1190                           	global	btemp
+  1191  007E                     	btemp set 07Eh
+  1192                           
+  1193                           	DABS	1,126,2	;btemp
+  1194                           	global	wtemp0
+  1195  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Mon Mar 21 03:51:00 2022
+
+                   pc 0002                    fsr 0004                   _RC0 0038                   _RC1 0039  
+                 _RD0 0040                   _RC2 003A                   _RD1 0041                   _RD2 0042  
+                 _RD3 0043                   _RD4 0044                   _RD5 0045                   _RD6 0046  
+                 fsr0 0004                   indf 0000                  l1030 06C1                  l1031 06C6  
+                l1040 0718                  l1032 06E0                  l1041 0713                  l1033 06DB  
+                l1050 0747                  l1042 0713                  l1034 06DB                  l1051 074C  
+                l1043 0718                  l1035 06E0                  l1027 06A9                  l1060 079E  
+                l1052 076A                  l1044 0732                  l1036 06FA                  l1028 06C6  
+                l1061 0799                  l1053 0765                  l1045 072D                  l1037 06F5  
+                l1029 06C1                  l1070 07EB                  l1062 0799                  l1054 0765  
+                l1046 072D                  l1038 06F5                  l1071 07FB                  l1063 079E  
+                l1055 076A                  l1047 0732                  l1039 06FA                  l1072 07F5  
+                l1064 07EB                  l1056 0784                  l1048 074C                  l1073 07F5  
+                l1065 07BB                  l1057 077F                  l1049 0747                  l1074 07FA  
+                l1066 07D0                  l1058 077F                  l1075 07FC                  l1067 07E5  
+                l1059 0784                  l1076 07FD                  l1068 07E6                  l1077 07FD  
+                l1069 07E6                  l2400 0788                  l2410 07B2                  l2402 078A  
+                l2330 0690                  l2420 07C7                  l2412 07B8                  l2404 0792  
+                l2340 069D                  l2332 0693                  l2430 07DC                  l2422 07CD  
+                l2414 07B9                  l2406 07A6                  l2350 06AD                  l2342 06A0  
+                l2334 0696                  l2326 0678                  l2432 07E2                  l2424 07CE  
+                l2408 07AC                  l2416 07BB                  l2360 06CC                  l2352 06B1  
+                l2344 06A4                  l2336 0697                  l2328 068D                  l2434 07E3  
+                l2418 07C1                  l2426 07D0                  l2370 0702                  l2362 06D4  
+                l2354 06B3                  l2346 06A9                  l2338 069A                  l2436 07EF  
+                l2428 07D6                  l2380 0726                  l2372 0704                  l2364 06E4  
+                l2356 06BA                  l2348 06AA                  l2438 07F2                  l2390 0756  
+                l2382 0736                  l2374 070C                  l2366 06E6                  l2358 06CA  
+                l2392 075E                  l2384 0738                  l2376 071C                  l2368 06EE  
+                l2394 076E                  l2386 0740                  l2378 071E                  l2396 0770  
+                l2388 0754                  l2398 0778                  u2500 06DF                  u2501 06DE  
+                u2510 06E4                  u2511 06E3                  u2600 0769                  u2520 06F9  
+                u2601 0768                  u2521 06F8                  u2610 076E                  u2530 0702  
+                u2611 076D                  u2531 0701                  u2700 07C7                  u2620 0783  
+                u2540 0717                  u2460 0680                  u2701 07C6                  u2621 0782  
+                u2541 0716                  u2710 07CD                  u2630 0788                  u2550 071C  
+                u2470 06B1                  u2711 07CC                  u2631 0787                  u2551 071B  
+                u2471 06B0                  u2720 07D6                  u2640 079D                  u2560 0731  
+                u2480 06C5                  u2721 07D5                  u2641 079C                  u2561 0730  
+                u2481 06C4                  u2730 07DC                  u2650 07A6                  u2570 0736  
+                u2490 06CA                  u2731 07DB                  u2651 07A5                  u2571 0735  
+                u2491 06C9                  u2740 07E2                  u2660 07AC                  u2580 074B  
+                u2741 07E1                  u2661 07AB                  u2581 074A                  u2750 07EA  
+                u2670 07B2                  u2590 0754                  u2751 07E9                  u2671 07B1  
+                u2591 0753                  u2760 07EF                  u2680 07B8                  u2761 07EE  
+                u2681 07B7                  u2770 07F9                  u2690 07C1                  u2771 07F8  
+                u2691 07C0                  _main 0678                  btemp 007E                  start 0000  
+               ?_main 0070                 _ANSEL 0188                 _PORTA 0005                 _PORTC 0007  
+               _PORTD 0008                 _TRISA 0085                 _TRISC 0087                 _TRISD 0088  
+               main@a 0034                 main@i 003E                 pclath 000A                 status 0003  
+               wtemp0 007E          __end_of_main 0800                ??_main 0070                _ANSELH 0189  
+      __pcstackCOMMON 0070          __pidataBANK0 0664            __pmaintext 0678               main@seg 0020  
+end_of_initialization 0660               init_ram 0645   start_initialization 0652           __pdataBANK0 0040  
+       __pcstackBANK0 0020             main@F1600 0040             init_fetch 0641         __size_of_main 0188  

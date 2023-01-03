@@ -1,0 +1,93 @@
+
+# 1 "D:\Embedded\pic\code\software\protocal\RECEIVE\RECEIVE.c"
+
+# 12 "C:\Program Files\HI-TECH Software\PICC\9.81\include\stdio.h"
+typedef int ptrdiff_t;
+typedef unsigned size_t;
+typedef unsigned short wchar_t;
+
+# 31 "C:\Program Files\HI-TECH Software\PICC\9.81\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma inline(__va_start)
+extern void * __va_start(void);
+
+#pragma inline(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 27 "C:\Program Files\HI-TECH Software\PICC\9.81\include\stdio.h"
+extern int errno;
+
+# 58
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 17 "C:\Program Files\HI-TECH Software\PICC\9.81\include\conio.h"
+extern int errno;
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern bit kbhit(void);
+
+# 31
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 103 "C:\Program Files\HI-TECH Software\PICC\9.81\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+# 195
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...);
+extern int sscanf(const char *, const char *, ...);
+extern int vprintf(const char *, va_list);
+extern int vsprintf(char *, const char *, va_list);
+extern int vscanf(const char *, va_list ap);
+extern int vsscanf(const char *, const char *, va_list);
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
+# 5 "D:\Embedded\pic\code\software\protocal\RECEIVE\RECEIVE.c"
+void TX(char a)
+{
+TXREG=a;
+while(TXIF==0);
+TXIF=0;
+}
+void RC()
+{
+char data=RCREG;
+while(RCIF==0);
+RCIF=0;
+TX(data);
+}
+void main()
+{
+PORTC=0X00;
+TRISC=0X00;
+TXSTA=0X26;
+RCSTA=0X90;
+SPBRG=25;
+while(1)
+{
+RC();
+}
+}

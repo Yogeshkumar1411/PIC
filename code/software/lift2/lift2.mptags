@@ -1,0 +1,22 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+FFB::RB2	D:\Embedded\pic\code\software\lift2\lift2.c	12;"	d	line:12	file:
+FFS::RA1	D:\Embedded\pic\code\software\lift2\lift2.c	8;"	d	line:8	file:
+SFB::RB3	D:\Embedded\pic\code\software\lift2\lift2.c	13;"	d	line:13	file:
+SFS::RA2	D:\Embedded\pic\code\software\lift2\lift2.c	9;"	d	line:9	file:
+TFB::RB4	D:\Embedded\pic\code\software\lift2\lift2.c	14;"	d	line:14	file:
+TFS::RA3	D:\Embedded\pic\code\software\lift2\lift2.c	10;"	d	line:10	file:
+UGB::RB1	D:\Embedded\pic\code\software\lift2\lift2.c	11;"	d	line:11	file:
+UGS::RA0	D:\Embedded\pic\code\software\lift2\lift2.c	7;"	d	line:7	file:
+forward::RC0	D:\Embedded\pic\code\software\lift2\lift2.c	15;"	d	line:15	file:
+i	D:\Embedded\pic\code\software\lift2\lift2.c	6;"	v	line:6
+main	D:\Embedded\pic\code\software\lift2\lift2.c	47;"	f	line:47
+motor	D:\Embedded\pic\code\software\lift2\lift2.c	17;"	f	line:17	signature:(int a,int b,int c,int d,int e,int f,int g,int h)
+reverse::RC1	D:\Embedded\pic\code\software\lift2\lift2.c	16;"	d	line:16	file:
+seg	D:\Embedded\pic\code\software\lift2\lift2.c	5;"	v	line:5

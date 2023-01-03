@@ -1,0 +1,1067 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Mar 22 03:21:15 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_type
+    43                           	FNCALL	_main,_on
+    44                           	FNCALL	_main,_address
+    45                           	FNCALL	_main,_display
+    46                           	FNCALL	_display,_pulse
+    47                           	FNCALL	_address,_pulse
+    48                           	FNCALL	_on,_pulse
+    49                           	FNCALL	_type,_pulse
+    50                           	FNCALL	_pulse,_delay
+    51                           	FNROOT	_main
+    52                           	global	display@F1608
+    53                           psect	idataBANK0,class=CODE,space=0,delta=2
+    54                           global __pidataBANK0
+    55  076B                     __pidataBANK0:
+    56                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+    57                           	line	45
+    58                           
+    59                           ;initializer for display@F1608
+    60  076B  3459               	retlw	059h
+    61  076C  346F               	retlw	06Fh
+    62  076D  3467               	retlw	067h
+    63  076E  3465               	retlw	065h
+    64  076F  3473               	retlw	073h
+    65  0770  3468               	retlw	068h
+    66  0771  346B               	retlw	06Bh
+    67  0772  3475               	retlw	075h
+    68  0773  346D               	retlw	06Dh
+    69  0774  3461               	retlw	061h
+    70  0775  3472               	retlw	072h
+    71  0776  3400               	retlw	0
+    72  0777  3400               	retlw	0
+    73  0778  3400               	retlw	0
+    74  0779  3400               	retlw	0
+    75  077A  3400               	retlw	0
+    76  077B  3400               	retlw	0
+    77  077C  3400               	retlw	0
+    78  077D  3400               	retlw	0
+    79  077E  3400               	retlw	0
+    80                           	global	_PORTD
+    81  0008                     _PORTD	set	8
+    82                           	global	_PORTE
+    83  0009                     _PORTE	set	9
+    84                           	global	_RE0
+    85  0048                     _RE0	set	72
+    86                           	global	_RE1
+    87  0049                     _RE1	set	73
+    88                           	global	_RE2
+    89  004A                     _RE2	set	74
+    90                           	global	_TRISD
+    91  0088                     _TRISD	set	136
+    92                           	global	_TRISE
+    93  0089                     _TRISE	set	137
+    94                           	global	_ANSEL
+    95  0188                     _ANSEL	set	392
+    96                           	global	_ANSELH
+    97  0189                     _ANSELH	set	393
+    98                           	file	"lcd_basic.as"
+    99                           	line	#
+   100                           psect cinit,class=CODE,delta=2
+   101                           global start_initialization
+   102  0745                     start_initialization:
+   103                           
+   104                           psect	dataBANK0,class=BANK0,space=1
+   105                           global __pdataBANK0
+   106  0037                     __pdataBANK0:
+   107                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   108  0037                     display@F1608:
+   109  0037                            ds      20
+   110                           
+   111                           global btemp
+   112                           psect inittext,class=CODE,delta=2
+   113                           global init_fetch,btemp
+   114                           ;	Called with low address in FSR and high address in W
+   115  0734                     init_fetch:
+   116  0734  087E               	movf btemp,w
+   117  0735  008A               	movwf pclath
+   118  0736  087F               	movf btemp+1,w
+   119  0737  0082               	movwf pc
+   120                           global init_ram
+   121                           ;Called with:
+   122                           ;	high address of idata address in btemp 
+   123                           ;	low address of idata address in btemp+1 
+   124                           ;	low address of data in FSR
+   125                           ;	high address + 1 of data in btemp-1
+   126  0738                     init_ram:
+   127  0738  2734  120A  118A   	fcall init_fetch
+   128  073B  0080               	movwf indf,f
+   129  073C  0A84               	incf fsr,f
+   130  073D  0804               	movf fsr,w
+   131  073E  067D               	xorwf btemp-1,w
+   132  073F  1903               	btfsc status,2
+   133  0740  3400               	retlw 0
+   134  0741  0AFF               	incf btemp+1,f
+   135  0742  1903               	btfsc status,2
+   136  0743  0AFE               	incf btemp,f
+   137  0744  2F38               	goto init_ram
+   138                           ; Initialize objects allocated to BANK0
+   139                           psect cinit,class=CODE,delta=2
+   140                           global init_ram, __pidataBANK0
+   141  0745  1383               	bcf	status, 7	;select IRP bank0
+   142  0746  304B               	movlw low(__pdataBANK0+20)
+   143  0747  00FD               	movwf btemp-1,f
+   144  0748  3007               	movlw high(__pidataBANK0)
+   145  0749  00FE               	movwf btemp,f
+   146  074A  306B               	movlw low(__pidataBANK0)
+   147  074B  00FF               	movwf btemp+1,f
+   148  074C  3037               	movlw low(__pdataBANK0)
+   149  074D  0084               	movwf fsr,f
+   150  074E  120A  118A  2738   	fcall init_ram
+              120A  118A         
+   151                           psect cinit,class=CODE,delta=2
+   152                           global end_of_initialization
+   153                           
+   154                           ;End of C runtime variable initialization code
+   155                           
+   156  0753                     end_of_initialization:
+   157  0753  0183               clrf status
+   158  0754  120A  118A  2F98   ljmp _main	;jump to C main() function
+   159                           psect	cstackCOMMON,class=COMMON,space=1
+   160                           global __pcstackCOMMON
+   161  0070                     __pcstackCOMMON:
+   162                           	global	?_delay
+   163  0070                     ?_delay:	; 0 bytes @ 0x0
+   164                           	global	?_pulse
+   165  0070                     ?_pulse:	; 0 bytes @ 0x0
+   166                           	global	?_type
+   167  0070                     ?_type:	; 0 bytes @ 0x0
+   168                           	global	?_on
+   169  0070                     ?_on:	; 0 bytes @ 0x0
+   170                           	global	?_address
+   171  0070                     ?_address:	; 0 bytes @ 0x0
+   172                           	global	?_display
+   173  0070                     ?_display:	; 0 bytes @ 0x0
+   174                           	global	?_main
+   175  0070                     ?_main:	; 0 bytes @ 0x0
+   176                           	global	delay@a
+   177  0070                     delay@a:	; 2 bytes @ 0x0
+   178  0070                     	ds	2
+   179                           	global	??_delay
+   180  0072                     ??_delay:	; 0 bytes @ 0x2
+   181                           	global	??_pulse
+   182  0072                     ??_pulse:	; 0 bytes @ 0x2
+   183                           	global	??_type
+   184  0072                     ??_type:	; 0 bytes @ 0x2
+   185                           	global	??_on
+   186  0072                     ??_on:	; 0 bytes @ 0x2
+   187                           	global	??_address
+   188  0072                     ??_address:	; 0 bytes @ 0x2
+   189                           	global	??_display
+   190  0072                     ??_display:	; 0 bytes @ 0x2
+   191  0072                     	ds	4
+   192                           	global	??_main
+   193  0076                     ??_main:	; 0 bytes @ 0x6
+   194                           psect	cstackBANK0,class=BANK0,space=1
+   195                           global __pcstackBANK0
+   196  0020                     __pcstackBANK0:
+   197                           	global	display@a
+   198  0020                     display@a:	; 20 bytes @ 0x0
+   199  0020                     	ds	20
+   200                           	global	display@p
+   201  0034                     display@p:	; 1 bytes @ 0x14
+   202  0034                     	ds	1
+   203                           	global	display@i
+   204  0035                     display@i:	; 2 bytes @ 0x15
+   205  0035                     	ds	2
+   206 ;;Data sizes: Strings 0, constant 0, data 20, bss 0, persistent 0 stack 0
+   207 ;;Auto spaces:   Size  Autos    Used
+   208 ;; COMMON          14      6       6
+   209 ;; BANK0           80     23      43
+   210 ;; BANK1           80      0       0
+   211 ;; BANK3           96      0       0
+   212 ;; BANK2           96      0       0
+   213                           
+   214 ;;
+   215 ;; Pointer list with targets:
+   216                           
+   217                           
+   218                           
+   219 ;;
+   220 ;; Critical Paths under _main in COMMON
+   221 ;;
+   222 ;;   _main->_display
+   223 ;;   _pulse->_delay
+   224 ;;
+   225 ;; Critical Paths under _main in BANK0
+   226 ;;
+   227 ;;   _main->_display
+   228 ;;
+   229 ;; Critical Paths under _main in BANK1
+   230 ;;
+   231 ;;   None.
+   232 ;;
+   233 ;; Critical Paths under _main in BANK3
+   234 ;;
+   235 ;;   None.
+   236 ;;
+   237 ;; Critical Paths under _main in BANK2
+   238 ;;
+   239 ;;   None.
+   240                           
+   241 ;;
+   242 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   243 ;;
+   244                           
+   245 ;;
+   246 ;;Call Graph Tables:
+   247 ;;
+   248 ;; ---------------------------------------------------------------------------------
+   249 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   250 ;; ---------------------------------------------------------------------------------
+   251 ;; (0) _main                                                 0     0      0     170
+   252 ;;                               _type
+   253 ;;                                 _on
+   254 ;;                            _address
+   255 ;;                            _display
+   256 ;; ---------------------------------------------------------------------------------
+   257 ;; (1) _display                                             27    27      0     104
+   258 ;;                                              2 COMMON     4     4      0
+   259 ;;                                              0 BANK0     23    23      0
+   260 ;;                              _pulse
+   261 ;; ---------------------------------------------------------------------------------
+   262 ;; (1) _address                                              0     0      0      22
+   263 ;;                              _pulse
+   264 ;; ---------------------------------------------------------------------------------
+   265 ;; (1) _on                                                   0     0      0      22
+   266 ;;                              _pulse
+   267 ;; ---------------------------------------------------------------------------------
+   268 ;; (1) _type                                                 0     0      0      22
+   269 ;;                              _pulse
+   270 ;; ---------------------------------------------------------------------------------
+   271 ;; (2) _pulse                                                0     0      0      22
+   272 ;;                              _delay
+   273 ;; ---------------------------------------------------------------------------------
+   274 ;; (3) _delay                                                2     0      2      22
+   275 ;;                                              0 COMMON     2     0      2
+   276 ;; ---------------------------------------------------------------------------------
+   277 ;; Estimated maximum stack depth 3
+   278 ;; ---------------------------------------------------------------------------------
+   279                           
+   280 ;; Call Graph Graphs:
+   281                           
+   282 ;; _main (ROOT)
+   283 ;;   _type
+   284 ;;     _pulse
+   285 ;;       _delay
+   286 ;;   _on
+   287 ;;     _pulse
+   288 ;;       _delay
+   289 ;;   _address
+   290 ;;     _pulse
+   291 ;;       _delay
+   292 ;;   _display
+   293 ;;     _pulse
+   294 ;;       _delay
+   295 ;;
+   296                           
+   297 ;; Address spaces:
+   298                           
+   299 ;;Name               Size   Autos  Total    Cost      Usage
+   300 ;;BANK3               60      0       0       9        0.0%
+   301 ;;BITBANK3            60      0       0       8        0.0%
+   302 ;;SFR3                 0      0       0       4        0.0%
+   303 ;;BITSFR3              0      0       0       4        0.0%
+   304 ;;BANK2               60      0       0      11        0.0%
+   305 ;;BITBANK2            60      0       0      10        0.0%
+   306 ;;SFR2                 0      0       0       5        0.0%
+   307 ;;BITSFR2              0      0       0       5        0.0%
+   308 ;;SFR1                 0      0       0       2        0.0%
+   309 ;;BITSFR1              0      0       0       2        0.0%
+   310 ;;BANK1               50      0       0       7        0.0%
+   311 ;;BITBANK1            50      0       0       6        0.0%
+   312 ;;CODE                 0      0       0       0        0.0%
+   313 ;;DATA                 0      0      34      12        0.0%
+   314 ;;ABS                  0      0      31       3        0.0%
+   315 ;;NULL                 0      0       0       0        0.0%
+   316 ;;STACK                0      0       3       2        0.0%
+   317 ;;BANK0               50     17      2B       5       53.8%
+   318 ;;BITBANK0            50      0       0       4        0.0%
+   319 ;;SFR0                 0      0       0       1        0.0%
+   320 ;;BITSFR0              0      0       0       1        0.0%
+   321 ;;COMMON               E      6       6       1       42.9%
+   322 ;;BITCOMMON            E      0       0       0        0.0%
+   323 ;;EEDATA             100      0       0       0        0.0%
+   324                           
+   325                           	global	_main
+   326                           psect	maintext,global,class=CODE,delta=2
+   327                           global __pmaintext
+   328  0798                     __pmaintext:
+   329                           
+   330 ;; *************** function _main *****************
+   331 ;; Defined at:
+   332 ;;		line 57 in file "D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   333 ;; Parameters:    Size  Location     Type
+   334 ;;		None
+   335 ;; Auto vars:     Size  Location     Type
+   336 ;;		None
+   337 ;; Return value:  Size  Location     Type
+   338 ;;		None               void
+   339 ;; Registers used:
+   340 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   341 ;; Tracked objects:
+   342 ;;		On entry : 17F/0
+   343 ;;		On exit  : 0/0
+   344 ;;		Unchanged: 0/0
+   345 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   346 ;;      Params:         0       0       0       0       0
+   347 ;;      Locals:         0       0       0       0       0
+   348 ;;      Temps:          0       0       0       0       0
+   349 ;;      Totals:         0       0       0       0       0
+   350 ;;Total ram usage:        0 bytes
+   351 ;; Hardware stack levels required when called:    3
+   352 ;; This function calls:
+   353 ;;		_type
+   354 ;;		_on
+   355 ;;		_address
+   356 ;;		_display
+   357 ;; This function is called by:
+   358 ;;		Startup code after reset
+   359 ;; This function uses a non-reentrant model
+   360 ;;
+   361                           psect	maintext
+   362                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   363                           	line	57
+   364                           	global	__size_of_main
+   365  002A                     	__size_of_main	equ	__end_of_main-_main
+   366                           	
+   367  0798                     _main:	
+   368                           	opt	stack 5
+   369                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   370                           	line	58
+   371                           	
+   372  0798                     l2298:	
+   373                           ;lcd_basic.c: 58: PORTD=0X00;
+   374  0798  1283               	bcf	status, 5	;RP0=0, select bank0
+   375  0799  1303               	bcf	status, 6	;RP1=0, select bank0
+   376  079A  0188               	clrf	(8)	;volatile
+   377                           	line	59
+   378                           ;lcd_basic.c: 59: TRISD=0X00;
+   379  079B  1683               	bsf	status, 5	;RP0=1, select bank1
+   380  079C  1303               	bcf	status, 6	;RP1=0, select bank1
+   381  079D  0188               	clrf	(136)^080h	;volatile
+   382                           	line	60
+   383                           ;lcd_basic.c: 60: PORTE=0X00;
+   384  079E  1283               	bcf	status, 5	;RP0=0, select bank0
+   385  079F  1303               	bcf	status, 6	;RP1=0, select bank0
+   386  07A0  0189               	clrf	(9)	;volatile
+   387                           	line	61
+   388                           ;lcd_basic.c: 61: TRISE=0X00;
+   389  07A1  1683               	bsf	status, 5	;RP0=1, select bank1
+   390  07A2  1303               	bcf	status, 6	;RP1=0, select bank1
+   391  07A3  0189               	clrf	(137)^080h	;volatile
+   392                           	line	62
+   393                           ;lcd_basic.c: 62: ANSEL=0X00;
+   394  07A4  1683               	bsf	status, 5	;RP0=1, select bank3
+   395  07A5  1703               	bsf	status, 6	;RP1=1, select bank3
+   396  07A6  0188               	clrf	(392)^0180h	;volatile
+   397                           	line	63
+   398                           ;lcd_basic.c: 63: ANSELH=0X00;
+   399  07A7  0189               	clrf	(393)^0180h	;volatile
+   400                           	line	64
+   401                           	
+   402  07A8                     l2300:	
+   403                           ;lcd_basic.c: 64: type();
+   404  07A8  120A  118A  2710   	fcall	_type
+              120A  118A         
+   405                           	line	65
+   406                           	
+   407  07AD                     l2302:	
+   408                           ;lcd_basic.c: 65: on();
+   409  07AD  120A  118A  271C   	fcall	_on
+              120A  118A         
+   410  07B2  2FB3               	goto	l2304
+   411                           	line	66
+   412                           ;lcd_basic.c: 66: while(1)
+   413                           	
+   414  07B3                     l1050:	
+   415                           	line	68
+   416                           	
+   417  07B3                     l2304:	
+   418                           ;lcd_basic.c: 67: {
+   419                           ;lcd_basic.c: 68: address();
+   420  07B3  120A  118A  2728   	fcall	_address
+              120A  118A         
+   421                           	line	69
+   422                           	
+   423  07B8                     l2306:	
+   424                           ;lcd_basic.c: 69: display();
+   425  07B8  120A  118A  27C2   	fcall	_display
+              120A  118A         
+   426  07BD  2FB3               	goto	l2304
+   427                           	line	70
+   428                           	
+   429  07BE                     l1051:	
+   430                           	line	66
+   431  07BE  2FB3               	goto	l2304
+   432                           	
+   433  07BF                     l1052:	
+   434                           	line	71
+   435                           	
+   436  07BF                     l1053:	
+   437                           	global	start
+   438  07BF  120A  118A  2800   	ljmp	start
+   439                           	opt stack 0
+   440                           GLOBAL	__end_of_main
+   441  07C2                     	__end_of_main:
+   442 ;; =============== function _main ends ============
+   443                           
+   444                           	signat	_main,88
+   445                           	global	_display
+   446                           psect	text193,local,class=CODE,delta=2
+   447                           global __ptext193
+   448  07C2                     __ptext193:
+   449                           
+   450 ;; *************** function _display *****************
+   451 ;; Defined at:
+   452 ;;		line 42 in file "D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   453 ;; Parameters:    Size  Location     Type
+   454 ;;		None
+   455 ;; Auto vars:     Size  Location     Type
+   456 ;;  a              20    0[BANK0 ] unsigned char [20]
+   457 ;;  i               2   21[BANK0 ] int 
+   458 ;;  p               1   20[BANK0 ] PTR unsigned char 
+   459 ;; Return value:  Size  Location     Type
+   460 ;;		None               void
+   461 ;; Registers used:
+   462 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   463 ;; Tracked objects:
+   464 ;;		On entry : 0/0
+   465 ;;		On exit  : 0/0
+   466 ;;		Unchanged: 0/0
+   467 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   468 ;;      Params:         0       0       0       0       0
+   469 ;;      Locals:         0      23       0       0       0
+   470 ;;      Temps:          4       0       0       0       0
+   471 ;;      Totals:         4      23       0       0       0
+   472 ;;Total ram usage:       27 bytes
+   473 ;; Hardware stack levels used:    1
+   474 ;; Hardware stack levels required when called:    2
+   475 ;; This function calls:
+   476 ;;		_pulse
+   477 ;; This function is called by:
+   478 ;;		_main
+   479 ;; This function uses a non-reentrant model
+   480 ;;
+   481                           psect	text193
+   482                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   483                           	line	42
+   484                           	global	__size_of_display
+   485  003E                     	__size_of_display	equ	__end_of_display-_display
+   486                           	
+   487  07C2                     _display:	
+   488                           	opt	stack 5
+   489                           ; Regs used in _display: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   490                           	line	45
+   491                           	
+   492  07C2                     l2276:	
+   493                           ;lcd_basic.c: 43: int i;
+   494                           ;lcd_basic.c: 44: char *p;
+   495                           ;lcd_basic.c: 45: char a[20]="Yogeshkumar";
+   496  07C2  3020               	movlw	(display@a)&0ffh
+   497  07C3  0084               	movwf	fsr0
+   498  07C4  3037               	movlw	low(display@F1608)
+   499  07C5  00F2               	movwf	(??_display+0)+0
+   500  07C6  0804               	movf	fsr0,w
+   501  07C7  00F3               	movwf	((??_display+0)+0+1)
+   502  07C8  3014               	movlw	20
+   503  07C9  00F4               	movwf	((??_display+0)+0+2)
+   504  07CA                     u2190:
+   505  07CA  0872               	movf	(??_display+0)+0,w
+   506  07CB  0084               	movwf	fsr0
+   507  07CC  1383               	bcf	status, 7	;select IRP bank0
+   508                           	
+   509  07CD  0800               	movf	indf,w
+   510  07CE  00F5               	movwf	((??_display+0)+0+3)
+   511  07CF  0AF2               	incf	(??_display+0)+0,f
+   512  07D0  0873               	movf	((??_display+0)+0+1),w
+   513  07D1  0084               	movwf	fsr0
+   514                           	
+   515  07D2  0875               	movf	((??_display+0)+0+3),w
+   516  07D3  0080               	movwf	indf
+   517  07D4  0AF3               	incf	((??_display+0)+0+1),f
+   518  07D5  0BF4               	decfsz	((??_display+0)+0+2),f
+   519  07D6  2FCA               	goto	u2190
+   520                           	line	46
+   521                           	
+   522  07D7                     l2278:	
+   523                           ;lcd_basic.c: 46: RE0=1;
+   524  07D7  1283               	bcf	status, 5	;RP0=0, select bank0
+   525  07D8  1303               	bcf	status, 6	;RP1=0, select bank0
+   526  07D9  1409               	bsf	(72/8),(72)&7
+   527                           	line	47
+   528                           	
+   529  07DA                     l2280:	
+   530                           ;lcd_basic.c: 48: *p=&a[0];
+   531  07DA  1089               	bcf	(73/8),(73)&7
+   532                           	line	49
+   533                           	
+   534  07DB                     l2282:	
+   535                           ;lcd_basic.c: 49: for(i=0;i!='\0';i++)
+   536  07DB  01B5               	clrf	(display@i)
+   537  07DC  01B6               	clrf	(display@i+1)
+   538                           	
+   539  07DD                     l2284:	
+   540  07DD  0836               	movf	((display@i+1)),w
+   541  07DE  0435               	iorwf	((display@i)),w
+   542  07DF  1D03               	skipz
+   543  07E0  2FE2               	goto	u2201
+   544  07E1  2FE3               	goto	u2200
+   545  07E2                     u2201:
+   546  07E2  2FE5               	goto	l2288
+   547  07E3                     u2200:
+   548  07E3  2FFA               	goto	l2296
+   549                           	
+   550  07E4                     l2286:	
+   551  07E4  2FFA               	goto	l2296
+   552                           	line	50
+   553                           	
+   554  07E5                     l1045:	
+   555                           	line	51
+   556                           	
+   557  07E5                     l2288:	
+   558                           ;lcd_basic.c: 50: {
+   559                           ;lcd_basic.c: 51: PORTD=*p;
+   560  07E5  0834               	movf	(display@p),w
+   561  07E6  0084               	movwf	fsr0
+   562  07E7  0800               	movf	indf,w
+   563  07E8  0088               	movwf	(8)	;volatile
+   564                           	line	52
+   565                           	
+   566  07E9                     l2290:	
+   567                           ;lcd_basic.c: 52: *p++;
+   568  07E9  3001               	movlw	(01h)
+   569  07EA  00F2               	movwf	(??_display+0)+0
+   570  07EB  0872               	movf	(??_display+0)+0,w
+   571  07EC  07B4               	addwf	(display@p),f
+   572                           	line	49
+   573                           	
+   574  07ED                     l2292:	
+   575  07ED  3001               	movlw	low(01h)
+   576  07EE  07B5               	addwf	(display@i),f
+   577  07EF  1803               	skipnc
+   578  07F0  0AB6               	incf	(display@i+1),f
+   579  07F1  3000               	movlw	high(01h)
+   580  07F2  07B6               	addwf	(display@i+1),f
+   581                           	
+   582  07F3                     l2294:	
+   583  07F3  0836               	movf	((display@i+1)),w
+   584  07F4  0435               	iorwf	((display@i)),w
+   585  07F5  1D03               	skipz
+   586  07F6  2FF8               	goto	u2211
+   587  07F7  2FF9               	goto	u2210
+   588  07F8                     u2211:
+   589  07F8  2FE5               	goto	l2288
+   590  07F9                     u2210:
+   591  07F9  2FFA               	goto	l2296
+   592                           	
+   593  07FA                     l1046:	
+   594                           	line	54
+   595                           	
+   596  07FA                     l2296:	
+   597                           ;lcd_basic.c: 53: }
+   598                           ;lcd_basic.c: 54: pulse();
+   599  07FA  120A  118A  277F   	fcall	_pulse
+              120A  118A         
+   600                           	line	55
+   601                           	
+   602  07FF                     l1047:	
+   603  07FF  0008               	return
+   604                           	opt stack 0
+   605                           GLOBAL	__end_of_display
+   606  0800                     	__end_of_display:
+   607 ;; =============== function _display ends ============
+   608                           
+   609                           	signat	_display,88
+   610                           	global	_address
+   611                           psect	text194,local,class=CODE,delta=2
+   612                           global __ptext194
+   613  0728                     __ptext194:
+   614                           
+   615 ;; *************** function _address *****************
+   616 ;; Defined at:
+   617 ;;		line 35 in file "D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   618 ;; Parameters:    Size  Location     Type
+   619 ;;		None
+   620 ;; Auto vars:     Size  Location     Type
+   621 ;;		None
+   622 ;; Return value:  Size  Location     Type
+   623 ;;		None               void
+   624 ;; Registers used:
+   625 ;;		wreg, status,2, status,0, pclath, cstack
+   626 ;; Tracked objects:
+   627 ;;		On entry : 0/0
+   628 ;;		On exit  : 0/0
+   629 ;;		Unchanged: 0/0
+   630 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   631 ;;      Params:         0       0       0       0       0
+   632 ;;      Locals:         0       0       0       0       0
+   633 ;;      Temps:          0       0       0       0       0
+   634 ;;      Totals:         0       0       0       0       0
+   635 ;;Total ram usage:        0 bytes
+   636 ;; Hardware stack levels used:    1
+   637 ;; Hardware stack levels required when called:    2
+   638 ;; This function calls:
+   639 ;;		_pulse
+   640 ;; This function is called by:
+   641 ;;		_main
+   642 ;; This function uses a non-reentrant model
+   643 ;;
+   644                           psect	text194
+   645                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   646                           	line	35
+   647                           	global	__size_of_address
+   648  000C                     	__size_of_address	equ	__end_of_address-_address
+   649                           	
+   650  0728                     _address:	
+   651                           	opt	stack 5
+   652                           ; Regs used in _address: [wreg+status,2+status,0+pclath+cstack]
+   653                           	line	36
+   654                           	
+   655  0728                     l2270:	
+   656                           ;lcd_basic.c: 36: RE0=0;
+   657  0728  1283               	bcf	status, 5	;RP0=0, select bank0
+   658  0729  1303               	bcf	status, 6	;RP1=0, select bank0
+   659  072A  1009               	bcf	(72/8),(72)&7
+   660                           	line	37
+   661                           ;lcd_basic.c: 37: RE1=0;
+   662  072B  1089               	bcf	(73/8),(73)&7
+   663                           	line	38
+   664                           	
+   665  072C                     l2272:	
+   666                           ;lcd_basic.c: 38: PORTD=0X80;
+   667  072C  3080               	movlw	(080h)
+   668  072D  0088               	movwf	(8)	;volatile
+   669                           	line	39
+   670                           	
+   671  072E                     l2274:	
+   672                           ;lcd_basic.c: 39: pulse();
+   673  072E  120A  118A  277F   	fcall	_pulse
+              120A  118A         
+   674                           	line	40
+   675                           	
+   676  0733                     l1040:	
+   677  0733  0008               	return
+   678                           	opt stack 0
+   679                           GLOBAL	__end_of_address
+   680  0734                     	__end_of_address:
+   681 ;; =============== function _address ends ============
+   682                           
+   683                           	signat	_address,88
+   684                           	global	_on
+   685                           psect	text195,local,class=CODE,delta=2
+   686                           global __ptext195
+   687  071C                     __ptext195:
+   688                           
+   689 ;; *************** function _on *****************
+   690 ;; Defined at:
+   691 ;;		line 28 in file "D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   692 ;; Parameters:    Size  Location     Type
+   693 ;;		None
+   694 ;; Auto vars:     Size  Location     Type
+   695 ;;		None
+   696 ;; Return value:  Size  Location     Type
+   697 ;;		None               void
+   698 ;; Registers used:
+   699 ;;		wreg, status,2, status,0, pclath, cstack
+   700 ;; Tracked objects:
+   701 ;;		On entry : 0/0
+   702 ;;		On exit  : 0/0
+   703 ;;		Unchanged: 0/0
+   704 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   705 ;;      Params:         0       0       0       0       0
+   706 ;;      Locals:         0       0       0       0       0
+   707 ;;      Temps:          0       0       0       0       0
+   708 ;;      Totals:         0       0       0       0       0
+   709 ;;Total ram usage:        0 bytes
+   710 ;; Hardware stack levels used:    1
+   711 ;; Hardware stack levels required when called:    2
+   712 ;; This function calls:
+   713 ;;		_pulse
+   714 ;; This function is called by:
+   715 ;;		_main
+   716 ;; This function uses a non-reentrant model
+   717 ;;
+   718                           psect	text195
+   719                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   720                           	line	28
+   721                           	global	__size_of_on
+   722  000C                     	__size_of_on	equ	__end_of_on-_on
+   723                           	
+   724  071C                     _on:	
+   725                           	opt	stack 5
+   726                           ; Regs used in _on: [wreg+status,2+status,0+pclath+cstack]
+   727                           	line	29
+   728                           	
+   729  071C                     l2264:	
+   730                           ;lcd_basic.c: 29: RE0=0;
+   731  071C  1283               	bcf	status, 5	;RP0=0, select bank0
+   732  071D  1303               	bcf	status, 6	;RP1=0, select bank0
+   733  071E  1009               	bcf	(72/8),(72)&7
+   734                           	line	30
+   735                           ;lcd_basic.c: 30: RE1=0;
+   736  071F  1089               	bcf	(73/8),(73)&7
+   737                           	line	31
+   738                           	
+   739  0720                     l2266:	
+   740                           ;lcd_basic.c: 31: PORTD=0X0F;
+   741  0720  300F               	movlw	(0Fh)
+   742  0721  0088               	movwf	(8)	;volatile
+   743                           	line	32
+   744                           	
+   745  0722                     l2268:	
+   746                           ;lcd_basic.c: 32: pulse();
+   747  0722  120A  118A  277F   	fcall	_pulse
+              120A  118A         
+   748                           	line	33
+   749                           	
+   750  0727                     l1037:	
+   751  0727  0008               	return
+   752                           	opt stack 0
+   753                           GLOBAL	__end_of_on
+   754  0728                     	__end_of_on:
+   755 ;; =============== function _on ends ============
+   756                           
+   757                           	signat	_on,88
+   758                           	global	_type
+   759                           psect	text196,local,class=CODE,delta=2
+   760                           global __ptext196
+   761  0710                     __ptext196:
+   762                           
+   763 ;; *************** function _type *****************
+   764 ;; Defined at:
+   765 ;;		line 21 in file "D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   766 ;; Parameters:    Size  Location     Type
+   767 ;;		None
+   768 ;; Auto vars:     Size  Location     Type
+   769 ;;		None
+   770 ;; Return value:  Size  Location     Type
+   771 ;;		None               void
+   772 ;; Registers used:
+   773 ;;		wreg, status,2, status,0, pclath, cstack
+   774 ;; Tracked objects:
+   775 ;;		On entry : 0/0
+   776 ;;		On exit  : 0/0
+   777 ;;		Unchanged: 0/0
+   778 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   779 ;;      Params:         0       0       0       0       0
+   780 ;;      Locals:         0       0       0       0       0
+   781 ;;      Temps:          0       0       0       0       0
+   782 ;;      Totals:         0       0       0       0       0
+   783 ;;Total ram usage:        0 bytes
+   784 ;; Hardware stack levels used:    1
+   785 ;; Hardware stack levels required when called:    2
+   786 ;; This function calls:
+   787 ;;		_pulse
+   788 ;; This function is called by:
+   789 ;;		_main
+   790 ;; This function uses a non-reentrant model
+   791 ;;
+   792                           psect	text196
+   793                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   794                           	line	21
+   795                           	global	__size_of_type
+   796  000C                     	__size_of_type	equ	__end_of_type-_type
+   797                           	
+   798  0710                     _type:	
+   799                           	opt	stack 5
+   800                           ; Regs used in _type: [wreg+status,2+status,0+pclath+cstack]
+   801                           	line	22
+   802                           	
+   803  0710                     l2258:	
+   804                           ;lcd_basic.c: 22: RE0=0;
+   805  0710  1283               	bcf	status, 5	;RP0=0, select bank0
+   806  0711  1303               	bcf	status, 6	;RP1=0, select bank0
+   807  0712  1009               	bcf	(72/8),(72)&7
+   808                           	line	23
+   809                           ;lcd_basic.c: 23: RE1=0;
+   810  0713  1089               	bcf	(73/8),(73)&7
+   811                           	line	24
+   812                           	
+   813  0714                     l2260:	
+   814                           ;lcd_basic.c: 24: PORTD=0X38;
+   815  0714  3038               	movlw	(038h)
+   816  0715  0088               	movwf	(8)	;volatile
+   817                           	line	25
+   818                           	
+   819  0716                     l2262:	
+   820                           ;lcd_basic.c: 25: pulse();
+   821  0716  120A  118A  277F   	fcall	_pulse
+              120A  118A         
+   822                           	line	26
+   823                           	
+   824  071B                     l1034:	
+   825  071B  0008               	return
+   826                           	opt stack 0
+   827                           GLOBAL	__end_of_type
+   828  071C                     	__end_of_type:
+   829 ;; =============== function _type ends ============
+   830                           
+   831                           	signat	_type,88
+   832                           	global	_pulse
+   833                           psect	text197,local,class=CODE,delta=2
+   834                           global __ptext197
+   835  077F                     __ptext197:
+   836                           
+   837 ;; *************** function _pulse *****************
+   838 ;; Defined at:
+   839 ;;		line 14 in file "D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   840 ;; Parameters:    Size  Location     Type
+   841 ;;		None
+   842 ;; Auto vars:     Size  Location     Type
+   843 ;;		None
+   844 ;; Return value:  Size  Location     Type
+   845 ;;		None               void
+   846 ;; Registers used:
+   847 ;;		wreg, status,2, status,0, pclath, cstack
+   848 ;; Tracked objects:
+   849 ;;		On entry : 0/0
+   850 ;;		On exit  : 0/0
+   851 ;;		Unchanged: 0/0
+   852 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   853 ;;      Params:         0       0       0       0       0
+   854 ;;      Locals:         0       0       0       0       0
+   855 ;;      Temps:          0       0       0       0       0
+   856 ;;      Totals:         0       0       0       0       0
+   857 ;;Total ram usage:        0 bytes
+   858 ;; Hardware stack levels used:    1
+   859 ;; Hardware stack levels required when called:    1
+   860 ;; This function calls:
+   861 ;;		_delay
+   862 ;; This function is called by:
+   863 ;;		_type
+   864 ;;		_on
+   865 ;;		_address
+   866 ;;		_display
+   867 ;; This function uses a non-reentrant model
+   868 ;;
+   869                           psect	text197
+   870                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   871                           	line	14
+   872                           	global	__size_of_pulse
+   873  0019                     	__size_of_pulse	equ	__end_of_pulse-_pulse
+   874                           	
+   875  077F                     _pulse:	
+   876                           	opt	stack 5
+   877                           ; Regs used in _pulse: [wreg+status,2+status,0+pclath+cstack]
+   878                           	line	15
+   879                           	
+   880  077F                     l2252:	
+   881                           ;lcd_basic.c: 15: RE2=1;
+   882  077F  1283               	bcf	status, 5	;RP0=0, select bank0
+   883  0780  1303               	bcf	status, 6	;RP1=0, select bank0
+   884  0781  1509               	bsf	(74/8),(74)&7
+   885                           	line	16
+   886                           	
+   887  0782                     l2254:	
+   888                           ;lcd_basic.c: 16: delay(10000);
+   889  0782  3010               	movlw	low(02710h)
+   890  0783  00F0               	movwf	(?_delay)
+   891  0784  3027               	movlw	high(02710h)
+   892  0785  00F1               	movwf	((?_delay))+1
+   893  0786  120A  118A  2757   	fcall	_delay
+              120A  118A         
+   894                           	line	17
+   895                           	
+   896  078B                     l2256:	
+   897                           ;lcd_basic.c: 17: RE2=0;
+   898  078B  1283               	bcf	status, 5	;RP0=0, select bank0
+   899  078C  1303               	bcf	status, 6	;RP1=0, select bank0
+   900  078D  1109               	bcf	(74/8),(74)&7
+   901                           	line	18
+   902                           ;lcd_basic.c: 18: delay(10000);
+   903  078E  3010               	movlw	low(02710h)
+   904  078F  00F0               	movwf	(?_delay)
+   905  0790  3027               	movlw	high(02710h)
+   906  0791  00F1               	movwf	((?_delay))+1
+   907  0792  120A  118A  2757   	fcall	_delay
+              120A  118A         
+   908                           	line	19
+   909                           	
+   910  0797                     l1031:	
+   911  0797  0008               	return
+   912                           	opt stack 0
+   913                           GLOBAL	__end_of_pulse
+   914  0798                     	__end_of_pulse:
+   915 ;; =============== function _pulse ends ============
+   916                           
+   917                           	signat	_pulse,88
+   918                           	global	_delay
+   919                           psect	text198,local,class=CODE,delta=2
+   920                           global __ptext198
+   921  0757                     __ptext198:
+   922                           
+   923 ;; *************** function _delay *****************
+   924 ;; Defined at:
+   925 ;;		line 10 in file "D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   926 ;; Parameters:    Size  Location     Type
+   927 ;;  a               2    0[COMMON] unsigned int 
+   928 ;; Auto vars:     Size  Location     Type
+   929 ;;		None
+   930 ;; Return value:  Size  Location     Type
+   931 ;;		None               void
+   932 ;; Registers used:
+   933 ;;		wreg
+   934 ;; Tracked objects:
+   935 ;;		On entry : 0/0
+   936 ;;		On exit  : 0/0
+   937 ;;		Unchanged: 0/0
+   938 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   939 ;;      Params:         2       0       0       0       0
+   940 ;;      Locals:         0       0       0       0       0
+   941 ;;      Temps:          0       0       0       0       0
+   942 ;;      Totals:         2       0       0       0       0
+   943 ;;Total ram usage:        2 bytes
+   944 ;; Hardware stack levels used:    1
+   945 ;; This function calls:
+   946 ;;		Nothing
+   947 ;; This function is called by:
+   948 ;;		_pulse
+   949 ;; This function uses a non-reentrant model
+   950 ;;
+   951                           psect	text198
+   952                           	file	"D:\Embedded\pic\code\software\LCD\lcd_basic\lcd_basic.c"
+   953                           	line	10
+   954                           	global	__size_of_delay
+   955  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+   956                           	
+   957  0757                     _delay:	
+   958                           	opt	stack 5
+   959                           ; Regs used in _delay: [wreg]
+   960                           	line	11
+   961                           	
+   962  0757                     l2248:	
+   963                           ;lcd_basic.c: 11: while(a--);
+   964  0757  2F59               	goto	l2250
+   965                           	
+   966  0758                     l1026:	
+   967  0758  2F59               	goto	l2250
+   968                           	
+   969  0759                     l1025:	
+   970                           	
+   971  0759                     l2250:	
+   972  0759  3001               	movlw	low(01h)
+   973  075A  02F0               	subwf	(delay@a),f
+   974  075B  3000               	movlw	high(01h)
+   975  075C  1C03               	skipc
+   976  075D  03F1               	decf	(delay@a+1),f
+   977  075E  02F1               	subwf	(delay@a+1),f
+   978  075F  30FF               	movlw	high(0FFFFh)
+   979  0760  0671               	xorwf	((delay@a+1)),w
+   980  0761  1D03               	skipz
+   981  0762  2F65               	goto	u2185
+   982  0763  30FF               	movlw	low(0FFFFh)
+   983  0764  0670               	xorwf	((delay@a)),w
+   984  0765                     u2185:
+   985                           
+   986  0765  1D03               	skipz
+   987  0766  2F68               	goto	u2181
+   988  0767  2F69               	goto	u2180
+   989  0768                     u2181:
+   990  0768  2F59               	goto	l2250
+   991  0769                     u2180:
+   992  0769  2F6A               	goto	l1028
+   993                           	
+   994  076A                     l1027:	
+   995                           	line	12
+   996                           	
+   997  076A                     l1028:	
+   998  076A  0008               	return
+   999                           	opt stack 0
+  1000                           GLOBAL	__end_of_delay
+  1001  076B                     	__end_of_delay:
+  1002 ;; =============== function _delay ends ============
+  1003                           
+  1004                           	signat	_delay,4216
+  1005                           psect	text199,local,class=CODE,delta=2
+  1006                           global __ptext199
+  1007  0000                     __ptext199:
+  1008                           	global	btemp
+  1009  007E                     	btemp set 07Eh
+  1010                           
+  1011                           	DABS	1,126,2	;btemp
+  1012                           	global	wtemp0
+  1013  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Mar 22 03:21:15 2022
+
+                   pc 0002                    _on 071C                    fsr 0004                   ?_on 0070  
+                 _RE0 0048                   _RE1 0049                   _RE2 004A                   fsr0 0004  
+                 indf 0000                  ??_on 0072                  l1031 0797                  l1040 0733  
+                l1025 0759                  l1026 0758                  l1034 071B                  l1050 07B3  
+                l1027 076A                  l1051 07BE                  l1028 076A                  l1052 07BF  
+                l1037 0727                  l1045 07E5                  l1053 07BF                  l1046 07FA  
+                l1047 07FF                  l2300 07A8                  l2302 07AD                  l2304 07B3  
+                l2250 0759                  l2306 07B8                  l2252 077F                  l2260 0714  
+                l2254 0782                  l2262 0716                  l2270 0728                  l2248 0757  
+                l2256 078B                  l2264 071C                  l2272 072C                  l2280 07DA  
+                l2258 0710                  l2266 0720                  l2274 072E                  l2290 07E9  
+                l2282 07DB                  l2268 0722                  l2292 07ED                  l2284 07DD  
+                l2276 07C2                  l2294 07F3                  l2286 07E4                  l2278 07D7  
+                l2296 07FA                  l2288 07E5                  l2298 0798                  u2200 07E3  
+                u2201 07E2                  u2210 07F9                  u2211 07F8                  u2180 0769  
+                u2181 0768                  u2190 07CA                  u2185 0765                  _main 0798  
+                btemp 007E                  _type 0710                  start 0000          display@F1608 0037  
+               ?_main 0070                 _ANSEL 0188                 ?_type 0070       __end_of_address 0734  
+               _PORTD 0008                 _PORTE 0009                 _TRISD 0088                 _TRISE 0089  
+     __end_of_display 0800                 _delay 0757                 _pulse 077F                 pclath 000A  
+               status 0003                 wtemp0 007E          __end_of_main 07C2          __end_of_type 071C  
+              ??_main 0076                ??_type 0072                ?_delay 0070                ?_pulse 0070  
+              _ANSELH 0189             ??_address 0072                delay@a 0070             ??_display 0072  
+      __pcstackCOMMON 0070          __pidataBANK0 076B         __end_of_delay 076B         __end_of_pulse 0798  
+          __end_of_on 0728               ??_delay 0072               ??_pulse 0072            __pmaintext 0798  
+             _address 0728               _display 07C2  end_of_initialization 0753               init_ram 0738  
+ start_initialization 0745           __pdataBANK0 0037         __pcstackBANK0 0020             __ptext193 07C2  
+           __ptext194 0728             __ptext195 071C             __ptext196 0710             __ptext197 077F  
+           __ptext198 0757             __ptext199 0000              ?_address 0070              ?_display 0070  
+      __size_of_delay 0014        __size_of_pulse 0019           __size_of_on 000C             init_fetch 0734  
+    __size_of_address 000C      __size_of_display 003E         __size_of_main 002A         __size_of_type 000C  
+            display@a 0020              display@i 0035              display@p 0034  

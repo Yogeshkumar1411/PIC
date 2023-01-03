@@ -1,0 +1,1579 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Jun 21 11:17:41 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_lcd_cmd
+    43                           	FNCALL	_main,_i2c_start
+    44                           	FNCALL	_main,_i2c_slave
+    45                           	FNCALL	_main,_i2c_restart
+    46                           	FNCALL	_main,_i2c_read
+    47                           	FNCALL	_main,_i2c_stop
+    48                           	FNCALL	_main,_delay
+    49                           	FNCALL	_i2c_slave,_hold
+    50                           	FNCALL	_i2c_slave,_lcd_cmd
+    51                           	FNCALL	_i2c_restart,_hold
+    52                           	FNCALL	_i2c_stop,_hold
+    53                           	FNCALL	_i2c_start,_hold
+    54                           	FNCALL	_lcd_cmd,_delay
+    55                           	FNROOT	_main
+    56                           	global	_retain
+    57                           	global	_s
+    58                           	global	_PORTC
+    59                           psect	text240,local,class=CODE,delta=2
+    60                           global __ptext240
+    61  0000                     __ptext240:
+    62  0007                     _PORTC	set	7
+    63                           	global	_PORTD
+    64  0008                     _PORTD	set	8
+    65                           	global	_PORTE
+    66  0009                     _PORTE	set	9
+    67                           	global	_SSPBUF
+    68  0013                     _SSPBUF	set	19
+    69                           	global	_SSPCON
+    70  0014                     _SSPCON	set	20
+    71                           	global	_RC0
+    72  0038                     _RC0	set	56
+    73                           	global	_RE0
+    74  0048                     _RE0	set	72
+    75                           	global	_RE1
+    76  0049                     _RE1	set	73
+    77                           	global	_RE2
+    78  004A                     _RE2	set	74
+    79                           	global	_SSPIF
+    80  0063                     _SSPIF	set	99
+    81                           	global	_SSPOV
+    82  00A6                     _SSPOV	set	166
+    83                           	global	_TRISC
+    84  0087                     _TRISC	set	135
+    85                           	global	_TRISD
+    86  0088                     _TRISD	set	136
+    87                           	global	_TRISE
+    88  0089                     _TRISE	set	137
+    89                           	global	_ACKDT
+    90  048D                     _ACKDT	set	1165
+    91                           	global	_ACKEN
+    92  048C                     _ACKEN	set	1164
+    93                           	global	_ACKSTAT
+    94  048E                     _ACKSTAT	set	1166
+    95                           	global	_BF
+    96  04A0                     _BF	set	1184
+    97                           	global	_PEN
+    98  048A                     _PEN	set	1162
+    99                           	global	_RCEN
+   100  048B                     _RCEN	set	1163
+   101                           	global	_RSEN
+   102  0489                     _RSEN	set	1161
+   103                           	global	_SEN
+   104  0488                     _SEN	set	1160
+   105                           	global	_SMP
+   106  04A7                     _SMP	set	1191
+   107                           	global	_ANSEL
+   108  0188                     _ANSEL	set	392
+   109                           	global	_ANSELH
+   110  0189                     _ANSELH	set	393
+   111                           	file	"eeprom.as"
+   112                           	line	#
+   113                           psect cinit,class=CODE,delta=2
+   114                           global start_initialization
+   115  064F                     start_initialization:
+   116                           
+   117                           psect	bssCOMMON,class=COMMON,space=1
+   118                           global __pbssCOMMON
+   119  007B                     __pbssCOMMON:
+   120  007B                     _s:
+   121  007B                            ds      2
+   122                           
+   123                           psect	bssBANK0,class=BANK0,space=1
+   124                           global __pbssBANK0
+   125  0020                     __pbssBANK0:
+   126  0020                     _retain:
+   127  0020                            ds      2
+   128                           
+   129                           ; Clear objects allocated to COMMON
+   130                           psect cinit,class=CODE,delta=2
+   131  064F  01FB               	clrf	((__pbssCOMMON)+0)&07Fh
+   132  0650  01FC               	clrf	((__pbssCOMMON)+1)&07Fh
+   133                           ; Clear objects allocated to BANK0
+   134                           psect cinit,class=CODE,delta=2
+   135  0651  01A0               	clrf	((__pbssBANK0)+0)&07Fh
+   136  0652  01A1               	clrf	((__pbssBANK0)+1)&07Fh
+   137                           psect cinit,class=CODE,delta=2
+   138                           global end_of_initialization
+   139                           
+   140                           ;End of C runtime variable initialization code
+   141                           
+   142  0653                     end_of_initialization:
+   143  0653  0183               clrf status
+   144  0654  120A  118A  2F09   ljmp _main	;jump to C main() function
+   145                           psect	cstackCOMMON,class=COMMON,space=1
+   146                           global __pcstackCOMMON
+   147  0070                     __pcstackCOMMON:
+   148                           	global	?_delay
+   149  0070                     ?_delay:	; 0 bytes @ 0x0
+   150                           	global	?_hold
+   151  0070                     ?_hold:	; 0 bytes @ 0x0
+   152                           	global	??_hold
+   153  0070                     ??_hold:	; 0 bytes @ 0x0
+   154                           	global	?_i2c_start
+   155  0070                     ?_i2c_start:	; 0 bytes @ 0x0
+   156                           	global	??_i2c_start
+   157  0070                     ??_i2c_start:	; 0 bytes @ 0x0
+   158                           	global	?_i2c_stop
+   159  0070                     ?_i2c_stop:	; 0 bytes @ 0x0
+   160                           	global	??_i2c_stop
+   161  0070                     ??_i2c_stop:	; 0 bytes @ 0x0
+   162                           	global	?_i2c_restart
+   163  0070                     ?_i2c_restart:	; 0 bytes @ 0x0
+   164                           	global	??_i2c_restart
+   165  0070                     ??_i2c_restart:	; 0 bytes @ 0x0
+   166                           	global	?_main
+   167  0070                     ?_main:	; 0 bytes @ 0x0
+   168                           	global	?_i2c_read
+   169  0070                     ?_i2c_read:	; 1 bytes @ 0x0
+   170                           	global	delay@ms
+   171  0070                     delay@ms:	; 2 bytes @ 0x0
+   172                           	global	i2c_read@i
+   173  0070                     i2c_read@i:	; 2 bytes @ 0x0
+   174  0070                     	ds	2
+   175                           	global	??_delay
+   176  0072                     ??_delay:	; 0 bytes @ 0x2
+   177                           	global	?_lcd_cmd
+   178  0072                     ?_lcd_cmd:	; 0 bytes @ 0x2
+   179                           	global	??_i2c_read
+   180  0072                     ??_i2c_read:	; 0 bytes @ 0x2
+   181                           	global	lcd_cmd@b
+   182  0072                     lcd_cmd@b:	; 1 bytes @ 0x2
+   183  0072                     	ds	1
+   184                           	global	lcd_cmd@c
+   185  0073                     lcd_cmd@c:	; 1 bytes @ 0x3
+   186                           	global	i2c_read@read
+   187  0073                     i2c_read@read:	; 1 bytes @ 0x3
+   188  0073                     	ds	1
+   189                           	global	??_lcd_cmd
+   190  0074                     ??_lcd_cmd:	; 0 bytes @ 0x4
+   191                           	global	lcd_cmd@a
+   192  0074                     lcd_cmd@a:	; 1 bytes @ 0x4
+   193  0074                     	ds	1
+   194                           	global	?_i2c_slave
+   195  0075                     ?_i2c_slave:	; 0 bytes @ 0x5
+   196                           	global	i2c_slave@data
+   197  0075                     i2c_slave@data:	; 2 bytes @ 0x5
+   198  0075                     	ds	2
+   199                           	global	??_i2c_slave
+   200  0077                     ??_i2c_slave:	; 0 bytes @ 0x7
+   201  0077                     	ds	1
+   202                           	global	??_main
+   203  0078                     ??_main:	; 0 bytes @ 0x8
+   204  0078                     	ds	2
+   205                           	global	main@read
+   206  007A                     main@read:	; 1 bytes @ 0xA
+   207  007A                     	ds	1
+   208 ;;Data sizes: Strings 0, constant 0, data 0, bss 4, persistent 0 stack 0
+   209 ;;Auto spaces:   Size  Autos    Used
+   210 ;; COMMON          14     11      13
+   211 ;; BANK0           80      0       2
+   212 ;; BANK1           80      0       0
+   213 ;; BANK3           96      0       0
+   214 ;; BANK2           96      0       0
+   215                           
+   216 ;;
+   217 ;; Pointer list with targets:
+   218                           
+   219                           
+   220                           
+   221 ;;
+   222 ;; Critical Paths under _main in COMMON
+   223 ;;
+   224 ;;   _main->_i2c_slave
+   225 ;;   _i2c_slave->_lcd_cmd
+   226 ;;   _lcd_cmd->_delay
+   227 ;;
+   228 ;; Critical Paths under _main in BANK0
+   229 ;;
+   230 ;;   None.
+   231 ;;
+   232 ;; Critical Paths under _main in BANK1
+   233 ;;
+   234 ;;   None.
+   235 ;;
+   236 ;; Critical Paths under _main in BANK3
+   237 ;;
+   238 ;;   None.
+   239 ;;
+   240 ;; Critical Paths under _main in BANK2
+   241 ;;
+   242 ;;   None.
+   243                           
+   244 ;;
+   245 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   246 ;;
+   247                           
+   248 ;;
+   249 ;;Call Graph Tables:
+   250 ;;
+   251 ;; ---------------------------------------------------------------------------------
+   252 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   253 ;; ---------------------------------------------------------------------------------
+   254 ;; (0) _main                                                 3     3      0     332
+   255 ;;                                              8 COMMON     3     3      0
+   256 ;;                            _lcd_cmd
+   257 ;;                          _i2c_start
+   258 ;;                          _i2c_slave
+   259 ;;                        _i2c_restart
+   260 ;;                           _i2c_read
+   261 ;;                           _i2c_stop
+   262 ;;                              _delay
+   263 ;; ---------------------------------------------------------------------------------
+   264 ;; (1) _i2c_slave                                            3     1      2     132
+   265 ;;                                              5 COMMON     3     1      2
+   266 ;;                               _hold
+   267 ;;                            _lcd_cmd
+   268 ;; ---------------------------------------------------------------------------------
+   269 ;; (1) _i2c_restart                                          0     0      0       0
+   270 ;;                               _hold
+   271 ;; ---------------------------------------------------------------------------------
+   272 ;; (1) _i2c_stop                                             0     0      0       0
+   273 ;;                               _hold
+   274 ;; ---------------------------------------------------------------------------------
+   275 ;; (1) _i2c_start                                            0     0      0       0
+   276 ;;                               _hold
+   277 ;; ---------------------------------------------------------------------------------
+   278 ;; (2) _lcd_cmd                                              3     1      2      88
+   279 ;;                                              2 COMMON     3     1      2
+   280 ;;                              _delay
+   281 ;; ---------------------------------------------------------------------------------
+   282 ;; (1) _i2c_read                                             4     2      2      45
+   283 ;;                                              0 COMMON     4     2      2
+   284 ;; ---------------------------------------------------------------------------------
+   285 ;; (2) _hold                                                 0     0      0       0
+   286 ;; ---------------------------------------------------------------------------------
+   287 ;; (1) _delay                                                2     0      2      22
+   288 ;;                                              0 COMMON     2     0      2
+   289 ;; ---------------------------------------------------------------------------------
+   290 ;; Estimated maximum stack depth 2
+   291 ;; ---------------------------------------------------------------------------------
+   292                           
+   293 ;; Call Graph Graphs:
+   294                           
+   295 ;; _main (ROOT)
+   296 ;;   _lcd_cmd
+   297 ;;     _delay
+   298 ;;   _i2c_start
+   299 ;;     _hold
+   300 ;;   _i2c_slave
+   301 ;;     _hold
+   302 ;;     _lcd_cmd
+   303 ;;       _delay
+   304 ;;   _i2c_restart
+   305 ;;     _hold
+   306 ;;   _i2c_read
+   307 ;;   _i2c_stop
+   308 ;;     _hold
+   309 ;;   _delay
+   310 ;;
+   311                           
+   312 ;; Address spaces:
+   313                           
+   314 ;;Name               Size   Autos  Total    Cost      Usage
+   315 ;;BITCOMMON            E      0       0       0        0.0%
+   316 ;;EEDATA             100      0       0       0        0.0%
+   317 ;;NULL                 0      0       0       0        0.0%
+   318 ;;CODE                 0      0       0       0        0.0%
+   319 ;;COMMON               E      B       D       1       92.9%
+   320 ;;BITSFR0              0      0       0       1        0.0%
+   321 ;;SFR0                 0      0       0       1        0.0%
+   322 ;;BITSFR1              0      0       0       2        0.0%
+   323 ;;SFR1                 0      0       0       2        0.0%
+   324 ;;STACK                0      0       3       2        0.0%
+   325 ;;ABS                  0      0       F       3        0.0%
+   326 ;;BITBANK0            50      0       0       4        0.0%
+   327 ;;BITSFR3              0      0       0       4        0.0%
+   328 ;;SFR3                 0      0       0       4        0.0%
+   329 ;;BANK0               50      0       2       5        2.5%
+   330 ;;BITSFR2              0      0       0       5        0.0%
+   331 ;;SFR2                 0      0       0       5        0.0%
+   332 ;;BITBANK1            50      0       0       6        0.0%
+   333 ;;BANK1               50      0       0       7        0.0%
+   334 ;;BITBANK3            60      0       0       8        0.0%
+   335 ;;BANK3               60      0       0       9        0.0%
+   336 ;;BITBANK2            60      0       0      10        0.0%
+   337 ;;BANK2               60      0       0      11        0.0%
+   338 ;;DATA                 0      0      12      12        0.0%
+   339                           
+   340                           	global	_main
+   341                           psect	maintext,global,class=CODE,delta=2
+   342                           global __pmaintext
+   343  0709                     __pmaintext:
+   344                           
+   345 ;; *************** function _main *****************
+   346 ;; Defined at:
+   347 ;;		line 53 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   348 ;; Parameters:    Size  Location     Type
+   349 ;;		None
+   350 ;; Auto vars:     Size  Location     Type
+   351 ;;  read            1   10[COMMON] unsigned char 
+   352 ;; Return value:  Size  Location     Type
+   353 ;;		None               void
+   354 ;; Registers used:
+   355 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   356 ;; Tracked objects:
+   357 ;;		On entry : 17F/0
+   358 ;;		On exit  : 0/0
+   359 ;;		Unchanged: 0/0
+   360 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   361 ;;      Params:         0       0       0       0       0
+   362 ;;      Locals:         1       0       0       0       0
+   363 ;;      Temps:          2       0       0       0       0
+   364 ;;      Totals:         3       0       0       0       0
+   365 ;;Total ram usage:        3 bytes
+   366 ;; Hardware stack levels required when called:    3
+   367 ;; This function calls:
+   368 ;;		_lcd_cmd
+   369 ;;		_i2c_start
+   370 ;;		_i2c_slave
+   371 ;;		_i2c_restart
+   372 ;;		_i2c_read
+   373 ;;		_i2c_stop
+   374 ;;		_delay
+   375 ;; This function is called by:
+   376 ;;		Startup code after reset
+   377 ;; This function uses a non-reentrant model
+   378 ;;
+   379                           psect	maintext
+   380                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   381                           	line	53
+   382                           	global	__size_of_main
+   383  00F7                     	__size_of_main	equ	__end_of_main-_main
+   384                           	
+   385  0709                     _main:	
+   386                           	opt	stack 5
+   387                           ; Regs used in _main: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   388                           	line	55
+   389                           	
+   390  0709                     l2387:	
+   391                           ;eeprom.c: 54: char read;
+   392                           ;eeprom.c: 55: TRISC=0X19;
+   393  0709  3019               	movlw	(019h)
+   394  070A  1683               	bsf	status, 5	;RP0=1, select bank1
+   395  070B  1303               	bcf	status, 6	;RP1=0, select bank1
+   396  070C  0087               	movwf	(135)^080h	;volatile
+   397                           	line	56
+   398                           	
+   399  070D                     l2389:	
+   400                           ;eeprom.c: 56: PORTC=0X00;
+   401  070D  1283               	bcf	status, 5	;RP0=0, select bank0
+   402  070E  1303               	bcf	status, 6	;RP1=0, select bank0
+   403  070F  0187               	clrf	(7)	;volatile
+   404                           	line	57
+   405                           	
+   406  0710                     l2391:	
+   407                           ;eeprom.c: 57: TRISD=0X00;
+   408  0710  1683               	bsf	status, 5	;RP0=1, select bank1
+   409  0711  1303               	bcf	status, 6	;RP1=0, select bank1
+   410  0712  0188               	clrf	(136)^080h	;volatile
+   411                           	line	58
+   412                           	
+   413  0713                     l2393:	
+   414                           ;eeprom.c: 58: PORTD=0X00;
+   415  0713  1283               	bcf	status, 5	;RP0=0, select bank0
+   416  0714  1303               	bcf	status, 6	;RP1=0, select bank0
+   417  0715  0188               	clrf	(8)	;volatile
+   418                           	line	59
+   419                           	
+   420  0716                     l2395:	
+   421                           ;eeprom.c: 59: TRISE=0X00;
+   422  0716  1683               	bsf	status, 5	;RP0=1, select bank1
+   423  0717  1303               	bcf	status, 6	;RP1=0, select bank1
+   424  0718  0189               	clrf	(137)^080h	;volatile
+   425                           	line	60
+   426                           	
+   427  0719                     l2397:	
+   428                           ;eeprom.c: 60: PORTE=0X00;
+   429  0719  1283               	bcf	status, 5	;RP0=0, select bank0
+   430  071A  1303               	bcf	status, 6	;RP1=0, select bank0
+   431  071B  0189               	clrf	(9)	;volatile
+   432                           	line	61
+   433                           	
+   434  071C                     l2399:	
+   435                           ;eeprom.c: 61: ANSEL=0X00;
+   436  071C  1683               	bsf	status, 5	;RP0=1, select bank3
+   437  071D  1703               	bsf	status, 6	;RP1=1, select bank3
+   438  071E  0188               	clrf	(392)^0180h	;volatile
+   439                           	line	62
+   440                           	
+   441  071F                     l2401:	
+   442                           ;eeprom.c: 62: ANSELH=0X00;
+   443  071F  0189               	clrf	(393)^0180h	;volatile
+   444                           	line	63
+   445                           	
+   446  0720                     l2403:	
+   447                           ;eeprom.c: 63: SSPCON=0X28;
+   448  0720  3028               	movlw	(028h)
+   449  0721  1283               	bcf	status, 5	;RP0=0, select bank0
+   450  0722  1303               	bcf	status, 6	;RP1=0, select bank0
+   451  0723  0094               	movwf	(20)	;volatile
+   452                           	line	64
+   453                           	
+   454  0724                     l2405:	
+   455                           ;eeprom.c: 64: SMP=1;
+   456  0724  1683               	bsf	status, 5	;RP0=1, select bank1
+   457  0725  1303               	bcf	status, 6	;RP1=0, select bank1
+   458  0726  1794               	bsf	(1191/8)^080h,(1191)&7
+   459                           	line	65
+   460                           	
+   461  0727                     l2407:	
+   462                           ;eeprom.c: 65: lcd_cmd(0,0,0X38);
+   463  0727  01F2               	clrf	(?_lcd_cmd)
+   464  0728  3038               	movlw	(038h)
+   465  0729  00F8               	movwf	(??_main+0)+0
+   466  072A  0878               	movf	(??_main+0)+0,w
+   467  072B  00F3               	movwf	0+(?_lcd_cmd)+01h
+   468  072C  3000               	movlw	(0)
+   469  072D  120A  118A  26DB   	fcall	_lcd_cmd
+              120A  118A         
+   470                           	line	66
+   471                           	
+   472  0732                     l2409:	
+   473                           ;eeprom.c: 66: lcd_cmd(0,0,0X0E);
+   474  0732  01F2               	clrf	(?_lcd_cmd)
+   475  0733  300E               	movlw	(0Eh)
+   476  0734  00F8               	movwf	(??_main+0)+0
+   477  0735  0878               	movf	(??_main+0)+0,w
+   478  0736  00F3               	movwf	0+(?_lcd_cmd)+01h
+   479  0737  3000               	movlw	(0)
+   480  0738  120A  118A  26DB   	fcall	_lcd_cmd
+              120A  118A         
+   481                           	line	67
+   482                           	
+   483  073D                     l2411:	
+   484                           ;eeprom.c: 67: i2c_start();
+   485  073D  120A  118A  2660   	fcall	_i2c_start
+              120A  118A         
+   486                           	line	68
+   487                           	
+   488  0742                     l2413:	
+   489                           ;eeprom.c: 68: i2c_slave(0XA0);
+   490  0742  30A0               	movlw	low(0A0h)
+   491  0743  00F5               	movwf	(?_i2c_slave)
+   492  0744  3000               	movlw	high(0A0h)
+   493  0745  00F6               	movwf	((?_i2c_slave))+1
+   494  0746  120A  118A  26AF   	fcall	_i2c_slave
+              120A  118A         
+   495                           	line	69
+   496                           	
+   497  074B                     l2415:	
+   498                           ;eeprom.c: 69: i2c_slave(0X00);
+   499  074B  3000               	movlw	low(0)
+   500  074C  00F5               	movwf	(?_i2c_slave)
+   501  074D  3000               	movlw	high(0)
+   502  074E  00F6               	movwf	((?_i2c_slave))+1
+   503  074F  120A  118A  26AF   	fcall	_i2c_slave
+              120A  118A         
+   504                           	line	70
+   505                           	
+   506  0754                     l2417:	
+   507                           ;eeprom.c: 70: i2c_restart();
+   508  0754  120A  118A  2672   	fcall	_i2c_restart
+              120A  118A         
+   509                           	line	71
+   510                           	
+   511  0759                     l2419:	
+   512                           ;eeprom.c: 71: i2c_slave(0XA1);
+   513  0759  30A1               	movlw	low(0A1h)
+   514  075A  00F5               	movwf	(?_i2c_slave)
+   515  075B  3000               	movlw	high(0A1h)
+   516  075C  00F6               	movwf	((?_i2c_slave))+1
+   517  075D  120A  118A  26AF   	fcall	_i2c_slave
+              120A  118A         
+   518                           	line	72
+   519                           	
+   520  0762                     l2421:	
+   521                           ;eeprom.c: 72: RCEN=1;
+   522  0762  1683               	bsf	status, 5	;RP0=1, select bank1
+   523  0763  1303               	bcf	status, 6	;RP1=0, select bank1
+   524  0764  1591               	bsf	(1163/8)^080h,(1163)&7
+   525                           	line	73
+   526                           	
+   527  0765                     l2423:	
+   528                           ;eeprom.c: 73: read=i2c_read(0);
+   529  0765  3000               	movlw	low(0)
+   530  0766  00F0               	movwf	(?_i2c_read)
+   531  0767  3000               	movlw	high(0)
+   532  0768  00F1               	movwf	((?_i2c_read))+1
+   533  0769  120A  118A  268F   	fcall	_i2c_read
+              120A  118A         
+   534  076E  00F8               	movwf	(??_main+0)+0
+   535  076F  0878               	movf	(??_main+0)+0,w
+   536  0770  00FA               	movwf	(main@read)
+   537                           	line	74
+   538                           	
+   539  0771                     l2425:	
+   540                           ;eeprom.c: 74: lcd_cmd(0,0,0X80);
+   541  0771  01F2               	clrf	(?_lcd_cmd)
+   542  0772  3080               	movlw	(080h)
+   543  0773  00F8               	movwf	(??_main+0)+0
+   544  0774  0878               	movf	(??_main+0)+0,w
+   545  0775  00F3               	movwf	0+(?_lcd_cmd)+01h
+   546  0776  3000               	movlw	(0)
+   547  0777  120A  118A  26DB   	fcall	_lcd_cmd
+              120A  118A         
+   548                           	line	75
+   549                           	
+   550  077C                     l2427:	
+   551                           ;eeprom.c: 75: lcd_cmd(1,0,read+0X30);
+   552  077C  01F2               	clrf	(?_lcd_cmd)
+   553  077D  087A               	movf	(main@read),w
+   554  077E  3E30               	addlw	030h
+   555  077F  00F8               	movwf	(??_main+0)+0
+   556  0780  0878               	movf	(??_main+0)+0,w
+   557  0781  00F3               	movwf	0+(?_lcd_cmd)+01h
+   558  0782  3001               	movlw	(01h)
+   559  0783  120A  118A  26DB   	fcall	_lcd_cmd
+              120A  118A         
+   560                           	line	76
+   561                           	
+   562  0788                     l2429:	
+   563                           ;eeprom.c: 76: retain=read;
+   564  0788  087A               	movf	(main@read),w
+   565  0789  00F8               	movwf	(??_main+0)+0
+   566  078A  01F9               	clrf	(??_main+0)+0+1
+   567  078B  0878               	movf	0+(??_main+0)+0,w
+   568  078C  1283               	bcf	status, 5	;RP0=0, select bank0
+   569  078D  1303               	bcf	status, 6	;RP1=0, select bank0
+   570  078E  00A0               	movwf	(_retain)
+   571  078F  0879               	movf	1+(??_main+0)+0,w
+   572  0790  00A1               	movwf	(_retain+1)
+   573                           	line	77
+   574                           	
+   575  0791                     l2431:	
+   576                           ;eeprom.c: 77: s=s+retain;
+   577  0791  0820               	movf	(_retain),w
+   578  0792  077B               	addwf	(_s),w
+   579  0793  00FB               	movwf	(_s)
+   580  0794  0821               	movf	(_retain+1),w
+   581  0795  1803               	skipnc
+   582  0796  0A21               	incf	(_retain+1),w
+   583  0797  077C               	addwf	(_s+1),w
+   584  0798  00FC               	movwf	1+(_s)
+   585                           	line	78
+   586                           	
+   587  0799                     l2433:	
+   588                           ;eeprom.c: 78: i2c_stop();
+   589  0799  120A  118A  2669   	fcall	_i2c_stop
+              120A  118A         
+   590                           	line	79
+   591                           	
+   592  079E                     l2435:	
+   593                           ;eeprom.c: 79: delay(1000);
+   594  079E  30E8               	movlw	low(03E8h)
+   595  079F  00F0               	movwf	(?_delay)
+   596  07A0  3003               	movlw	high(03E8h)
+   597  07A1  00F1               	movwf	((?_delay))+1
+   598  07A2  120A  118A  267B   	fcall	_delay
+              120A  118A         
+   599  07A7  2FA8               	goto	l2437
+   600                           	line	80
+   601                           ;eeprom.c: 80: while(1)
+   602                           	
+   603  07A8                     l1066:	
+   604                           	line	83
+   605                           	
+   606  07A8                     l2437:	
+   607                           ;eeprom.c: 84: {
+   608                           ;eeprom.c: 85: s=s++;
+   609  07A8  1283               	bcf	status, 5	;RP0=0, select bank0
+   610  07A9  1303               	bcf	status, 6	;RP1=0, select bank0
+   611  07AA  1C07               	btfss	(56/8),(56)&7
+   612  07AB  2FAD               	goto	u2351
+   613  07AC  2FAE               	goto	u2350
+   614  07AD                     u2351:
+   615  07AD  2FBB               	goto	l2441
+   616  07AE                     u2350:
+   617                           	line	85
+   618                           	
+   619  07AE                     l2439:	
+   620  07AE  3001               	movlw	low(01h)
+   621  07AF  07FB               	addwf	(_s),f
+   622  07B0  1803               	skipnc
+   623  07B1  0AFC               	incf	(_s+1),f
+   624  07B2  3000               	movlw	high(01h)
+   625  07B3  07FC               	addwf	(_s+1),f
+   626                           	line	86
+   627                           ;eeprom.c: 86: while(RC0==1);
+   628  07B4  2FB5               	goto	l1068
+   629                           	
+   630  07B5                     l1069:	
+   631                           	
+   632  07B5                     l1068:	
+   633  07B5  1807               	btfsc	(56/8),(56)&7
+   634  07B6  2FB8               	goto	u2361
+   635  07B7  2FB9               	goto	u2360
+   636  07B8                     u2361:
+   637  07B8  2FB5               	goto	l1068
+   638  07B9                     u2360:
+   639  07B9  2FBB               	goto	l2441
+   640                           	
+   641  07BA                     l1070:	
+   642  07BA  2FBB               	goto	l2441
+   643                           	line	87
+   644                           	
+   645  07BB                     l1067:	
+   646                           	line	88
+   647                           	
+   648  07BB                     l2441:	
+   649                           ;eeprom.c: 87: }
+   650                           ;eeprom.c: 88: if(s>10)
+   651  07BB  087C               	movf	(_s+1),w
+   652  07BC  3A80               	xorlw	80h
+   653  07BD  00FF               	movwf	btemp+1
+   654  07BE  3080               	movlw	(high(0Bh))^80h
+   655  07BF  027F               	subwf	btemp+1,w
+   656  07C0  1D03               	skipz
+   657  07C1  2FC4               	goto	u2375
+   658  07C2  300B               	movlw	low(0Bh)
+   659  07C3  027B               	subwf	(_s),w
+   660  07C4                     u2375:
+   661                           
+   662  07C4  1C03               	skipc
+   663  07C5  2FC7               	goto	u2371
+   664  07C6  2FC8               	goto	u2370
+   665  07C7                     u2371:
+   666  07C7  2FCB               	goto	l2445
+   667  07C8                     u2370:
+   668                           	line	90
+   669                           	
+   670  07C8                     l2443:	
+   671                           ;eeprom.c: 89: {
+   672                           ;eeprom.c: 90: s=0;
+   673  07C8  01FB               	clrf	(_s)
+   674  07C9  01FC               	clrf	(_s+1)
+   675  07CA  2FCB               	goto	l2445
+   676                           	line	91
+   677                           	
+   678  07CB                     l1071:	
+   679                           	line	92
+   680                           	
+   681  07CB                     l2445:	
+   682                           ;eeprom.c: 91: }
+   683                           ;eeprom.c: 92: i2c_start();
+   684  07CB  120A  118A  2660   	fcall	_i2c_start
+              120A  118A         
+   685                           	line	93
+   686                           	
+   687  07D0                     l2447:	
+   688                           ;eeprom.c: 93: i2c_slave(0XA0);
+   689  07D0  30A0               	movlw	low(0A0h)
+   690  07D1  00F5               	movwf	(?_i2c_slave)
+   691  07D2  3000               	movlw	high(0A0h)
+   692  07D3  00F6               	movwf	((?_i2c_slave))+1
+   693  07D4  120A  118A  26AF   	fcall	_i2c_slave
+              120A  118A         
+   694                           	line	94
+   695                           	
+   696  07D9                     l2449:	
+   697                           ;eeprom.c: 94: i2c_slave(0X00);
+   698  07D9  3000               	movlw	low(0)
+   699  07DA  00F5               	movwf	(?_i2c_slave)
+   700  07DB  3000               	movlw	high(0)
+   701  07DC  00F6               	movwf	((?_i2c_slave))+1
+   702  07DD  120A  118A  26AF   	fcall	_i2c_slave
+              120A  118A         
+   703                           	line	95
+   704                           	
+   705  07E2                     l2451:	
+   706                           ;eeprom.c: 95: i2c_slave(s);
+   707  07E2  087C               	movf	(_s+1),w
+   708  07E3  01F6               	clrf	(?_i2c_slave+1)
+   709  07E4  07F6               	addwf	(?_i2c_slave+1)
+   710  07E5  087B               	movf	(_s),w
+   711  07E6  01F5               	clrf	(?_i2c_slave)
+   712  07E7  07F5               	addwf	(?_i2c_slave)
+   713                           
+   714  07E8  120A  118A  26AF   	fcall	_i2c_slave
+              120A  118A         
+   715                           	line	96
+   716                           	
+   717  07ED                     l2453:	
+   718                           ;eeprom.c: 96: i2c_stop();
+   719  07ED  120A  118A  2669   	fcall	_i2c_stop
+              120A  118A         
+   720                           	line	97
+   721                           	
+   722  07F2                     l2455:	
+   723                           ;eeprom.c: 97: delay(1000);
+   724  07F2  30E8               	movlw	low(03E8h)
+   725  07F3  00F0               	movwf	(?_delay)
+   726  07F4  3003               	movlw	high(03E8h)
+   727  07F5  00F1               	movwf	((?_delay))+1
+   728  07F6  120A  118A  267B   	fcall	_delay
+              120A  118A         
+   729  07FB  2FA8               	goto	l2437
+   730                           	line	99
+   731                           	
+   732  07FC                     l1072:	
+   733                           	line	80
+   734  07FC  2FA8               	goto	l2437
+   735                           	
+   736  07FD                     l1073:	
+   737                           	line	100
+   738                           	
+   739  07FD                     l1074:	
+   740                           	global	start
+   741  07FD  120A  118A  2800   	ljmp	start
+   742                           	opt stack 0
+   743                           GLOBAL	__end_of_main
+   744  0800                     	__end_of_main:
+   745 ;; =============== function _main ends ============
+   746                           
+   747                           	signat	_main,88
+   748                           	global	_i2c_slave
+   749                           psect	text241,local,class=CODE,delta=2
+   750                           global __ptext241
+   751  06AF                     __ptext241:
+   752                           
+   753 ;; *************** function _i2c_slave *****************
+   754 ;; Defined at:
+   755 ;;		line 29 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   756 ;; Parameters:    Size  Location     Type
+   757 ;;  data            2    5[COMMON] int 
+   758 ;; Auto vars:     Size  Location     Type
+   759 ;;		None
+   760 ;; Return value:  Size  Location     Type
+   761 ;;		None               void
+   762 ;; Registers used:
+   763 ;;		wreg, status,2, status,0, pclath, cstack
+   764 ;; Tracked objects:
+   765 ;;		On entry : 0/0
+   766 ;;		On exit  : 0/0
+   767 ;;		Unchanged: 0/0
+   768 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   769 ;;      Params:         2       0       0       0       0
+   770 ;;      Locals:         0       0       0       0       0
+   771 ;;      Temps:          1       0       0       0       0
+   772 ;;      Totals:         3       0       0       0       0
+   773 ;;Total ram usage:        3 bytes
+   774 ;; Hardware stack levels used:    1
+   775 ;; Hardware stack levels required when called:    2
+   776 ;; This function calls:
+   777 ;;		_hold
+   778 ;;		_lcd_cmd
+   779 ;; This function is called by:
+   780 ;;		_main
+   781 ;; This function uses a non-reentrant model
+   782 ;;
+   783                           psect	text241
+   784                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   785                           	line	29
+   786                           	global	__size_of_i2c_slave
+   787  002C                     	__size_of_i2c_slave	equ	__end_of_i2c_slave-_i2c_slave
+   788                           	
+   789  06AF                     _i2c_slave:	
+   790                           	opt	stack 5
+   791                           ; Regs used in _i2c_slave: [wreg+status,2+status,0+pclath+cstack]
+   792                           	line	30
+   793                           	
+   794  06AF                     l2377:	
+   795                           ;eeprom.c: 30: ACKSTAT=1;
+   796  06AF  1683               	bsf	status, 5	;RP0=1, select bank1
+   797  06B0  1303               	bcf	status, 6	;RP1=0, select bank1
+   798  06B1  1711               	bsf	(1166/8)^080h,(1166)&7
+   799                           	line	31
+   800                           	
+   801  06B2                     l2379:	
+   802                           ;eeprom.c: 31: SSPBUF=data;
+   803  06B2  0875               	movf	(i2c_slave@data),w
+   804  06B3  1283               	bcf	status, 5	;RP0=0, select bank0
+   805  06B4  1303               	bcf	status, 6	;RP1=0, select bank0
+   806  06B5  0093               	movwf	(19)	;volatile
+   807                           	line	32
+   808                           ;eeprom.c: 32: while(ACKSTAT==1);
+   809  06B6  2EB7               	goto	l1053
+   810                           	
+   811  06B7                     l1054:	
+   812                           	
+   813  06B7                     l1053:	
+   814  06B7  1683               	bsf	status, 5	;RP0=1, select bank1
+   815  06B8  1303               	bcf	status, 6	;RP1=0, select bank1
+   816  06B9  1B11               	btfsc	(1166/8)^080h,(1166)&7
+   817  06BA  2EBC               	goto	u2341
+   818  06BB  2EBD               	goto	u2340
+   819  06BC                     u2341:
+   820  06BC  2EB7               	goto	l1053
+   821  06BD                     u2340:
+   822  06BD  2EBE               	goto	l2381
+   823                           	
+   824  06BE                     l1055:	
+   825                           	line	33
+   826                           	
+   827  06BE                     l2381:	
+   828                           ;eeprom.c: 33: hold();
+   829  06BE  120A  118A  2657   	fcall	_hold
+              120A  118A         
+   830                           	line	34
+   831                           	
+   832  06C3                     l2383:	
+   833                           ;eeprom.c: 34: lcd_cmd(0,0,0XC0);
+   834  06C3  01F2               	clrf	(?_lcd_cmd)
+   835  06C4  30C0               	movlw	(0C0h)
+   836  06C5  00F7               	movwf	(??_i2c_slave+0)+0
+   837  06C6  0877               	movf	(??_i2c_slave+0)+0,w
+   838  06C7  00F3               	movwf	0+(?_lcd_cmd)+01h
+   839  06C8  3000               	movlw	(0)
+   840  06C9  120A  118A  26DB   	fcall	_lcd_cmd
+              120A  118A         
+   841                           	line	35
+   842                           	
+   843  06CE                     l2385:	
+   844                           ;eeprom.c: 35: lcd_cmd(1,0,data+0X30);
+   845  06CE  01F2               	clrf	(?_lcd_cmd)
+   846  06CF  0875               	movf	(i2c_slave@data),w
+   847  06D0  3E30               	addlw	030h
+   848  06D1  00F7               	movwf	(??_i2c_slave+0)+0
+   849  06D2  0877               	movf	(??_i2c_slave+0)+0,w
+   850  06D3  00F3               	movwf	0+(?_lcd_cmd)+01h
+   851  06D4  3001               	movlw	(01h)
+   852  06D5  120A  118A  26DB   	fcall	_lcd_cmd
+              120A  118A         
+   853                           	line	36
+   854                           	
+   855  06DA                     l1056:	
+   856  06DA  0008               	return
+   857                           	opt stack 0
+   858                           GLOBAL	__end_of_i2c_slave
+   859  06DB                     	__end_of_i2c_slave:
+   860 ;; =============== function _i2c_slave ends ============
+   861                           
+   862                           	signat	_i2c_slave,4216
+   863                           	global	_i2c_restart
+   864                           psect	text242,local,class=CODE,delta=2
+   865                           global __ptext242
+   866  0672                     __ptext242:
+   867                           
+   868 ;; *************** function _i2c_restart *****************
+   869 ;; Defined at:
+   870 ;;		line 24 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   871 ;; Parameters:    Size  Location     Type
+   872 ;;		None
+   873 ;; Auto vars:     Size  Location     Type
+   874 ;;		None
+   875 ;; Return value:  Size  Location     Type
+   876 ;;		None               void
+   877 ;; Registers used:
+   878 ;;		status,2, status,0, pclath, cstack
+   879 ;; Tracked objects:
+   880 ;;		On entry : 0/0
+   881 ;;		On exit  : 0/0
+   882 ;;		Unchanged: 0/0
+   883 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   884 ;;      Params:         0       0       0       0       0
+   885 ;;      Locals:         0       0       0       0       0
+   886 ;;      Temps:          0       0       0       0       0
+   887 ;;      Totals:         0       0       0       0       0
+   888 ;;Total ram usage:        0 bytes
+   889 ;; Hardware stack levels used:    1
+   890 ;; Hardware stack levels required when called:    1
+   891 ;; This function calls:
+   892 ;;		_hold
+   893 ;; This function is called by:
+   894 ;;		_main
+   895 ;; This function uses a non-reentrant model
+   896 ;;
+   897                           psect	text242
+   898                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   899                           	line	24
+   900                           	global	__size_of_i2c_restart
+   901  0009                     	__size_of_i2c_restart	equ	__end_of_i2c_restart-_i2c_restart
+   902                           	
+   903  0672                     _i2c_restart:	
+   904                           	opt	stack 6
+   905                           ; Regs used in _i2c_restart: [status,2+status,0+pclath+cstack]
+   906                           	line	25
+   907                           	
+   908  0672                     l2373:	
+   909                           ;eeprom.c: 25: RSEN=1;
+   910  0672  1683               	bsf	status, 5	;RP0=1, select bank1
+   911  0673  1303               	bcf	status, 6	;RP1=0, select bank1
+   912  0674  1491               	bsf	(1161/8)^080h,(1161)&7
+   913                           	line	26
+   914                           	
+   915  0675                     l2375:	
+   916                           ;eeprom.c: 26: hold();
+   917  0675  120A  118A  2657   	fcall	_hold
+              120A  118A         
+   918                           	line	27
+   919                           	
+   920  067A                     l1050:	
+   921  067A  0008               	return
+   922                           	opt stack 0
+   923                           GLOBAL	__end_of_i2c_restart
+   924  067B                     	__end_of_i2c_restart:
+   925 ;; =============== function _i2c_restart ends ============
+   926                           
+   927                           	signat	_i2c_restart,88
+   928                           	global	_i2c_stop
+   929                           psect	text243,local,class=CODE,delta=2
+   930                           global __ptext243
+   931  0669                     __ptext243:
+   932                           
+   933 ;; *************** function _i2c_stop *****************
+   934 ;; Defined at:
+   935 ;;		line 19 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   936 ;; Parameters:    Size  Location     Type
+   937 ;;		None
+   938 ;; Auto vars:     Size  Location     Type
+   939 ;;		None
+   940 ;; Return value:  Size  Location     Type
+   941 ;;		None               void
+   942 ;; Registers used:
+   943 ;;		status,2, status,0, pclath, cstack
+   944 ;; Tracked objects:
+   945 ;;		On entry : 0/0
+   946 ;;		On exit  : 0/0
+   947 ;;		Unchanged: 0/0
+   948 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   949 ;;      Params:         0       0       0       0       0
+   950 ;;      Locals:         0       0       0       0       0
+   951 ;;      Temps:          0       0       0       0       0
+   952 ;;      Totals:         0       0       0       0       0
+   953 ;;Total ram usage:        0 bytes
+   954 ;; Hardware stack levels used:    1
+   955 ;; Hardware stack levels required when called:    1
+   956 ;; This function calls:
+   957 ;;		_hold
+   958 ;; This function is called by:
+   959 ;;		_main
+   960 ;; This function uses a non-reentrant model
+   961 ;;
+   962                           psect	text243
+   963                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+   964                           	line	19
+   965                           	global	__size_of_i2c_stop
+   966  0009                     	__size_of_i2c_stop	equ	__end_of_i2c_stop-_i2c_stop
+   967                           	
+   968  0669                     _i2c_stop:	
+   969                           	opt	stack 6
+   970                           ; Regs used in _i2c_stop: [status,2+status,0+pclath+cstack]
+   971                           	line	20
+   972                           	
+   973  0669                     l2369:	
+   974                           ;eeprom.c: 20: PEN=1;
+   975  0669  1683               	bsf	status, 5	;RP0=1, select bank1
+   976  066A  1303               	bcf	status, 6	;RP1=0, select bank1
+   977  066B  1511               	bsf	(1162/8)^080h,(1162)&7
+   978                           	line	21
+   979                           	
+   980  066C                     l2371:	
+   981                           ;eeprom.c: 21: hold();
+   982  066C  120A  118A  2657   	fcall	_hold
+              120A  118A         
+   983                           	line	22
+   984                           	
+   985  0671                     l1047:	
+   986  0671  0008               	return
+   987                           	opt stack 0
+   988                           GLOBAL	__end_of_i2c_stop
+   989  0672                     	__end_of_i2c_stop:
+   990 ;; =============== function _i2c_stop ends ============
+   991                           
+   992                           	signat	_i2c_stop,88
+   993                           	global	_i2c_start
+   994                           psect	text244,local,class=CODE,delta=2
+   995                           global __ptext244
+   996  0660                     __ptext244:
+   997                           
+   998 ;; *************** function _i2c_start *****************
+   999 ;; Defined at:
+  1000 ;;		line 14 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+  1001 ;; Parameters:    Size  Location     Type
+  1002 ;;		None
+  1003 ;; Auto vars:     Size  Location     Type
+  1004 ;;		None
+  1005 ;; Return value:  Size  Location     Type
+  1006 ;;		None               void
+  1007 ;; Registers used:
+  1008 ;;		status,2, status,0, pclath, cstack
+  1009 ;; Tracked objects:
+  1010 ;;		On entry : 0/0
+  1011 ;;		On exit  : 0/0
+  1012 ;;		Unchanged: 0/0
+  1013 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1014 ;;      Params:         0       0       0       0       0
+  1015 ;;      Locals:         0       0       0       0       0
+  1016 ;;      Temps:          0       0       0       0       0
+  1017 ;;      Totals:         0       0       0       0       0
+  1018 ;;Total ram usage:        0 bytes
+  1019 ;; Hardware stack levels used:    1
+  1020 ;; Hardware stack levels required when called:    1
+  1021 ;; This function calls:
+  1022 ;;		_hold
+  1023 ;; This function is called by:
+  1024 ;;		_main
+  1025 ;; This function uses a non-reentrant model
+  1026 ;;
+  1027                           psect	text244
+  1028                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+  1029                           	line	14
+  1030                           	global	__size_of_i2c_start
+  1031  0009                     	__size_of_i2c_start	equ	__end_of_i2c_start-_i2c_start
+  1032                           	
+  1033  0660                     _i2c_start:	
+  1034                           	opt	stack 6
+  1035                           ; Regs used in _i2c_start: [status,2+status,0+pclath+cstack]
+  1036                           	line	15
+  1037                           	
+  1038  0660                     l2365:	
+  1039                           ;eeprom.c: 15: SEN=1;
+  1040  0660  1683               	bsf	status, 5	;RP0=1, select bank1
+  1041  0661  1303               	bcf	status, 6	;RP1=0, select bank1
+  1042  0662  1411               	bsf	(1160/8)^080h,(1160)&7
+  1043                           	line	16
+  1044                           	
+  1045  0663                     l2367:	
+  1046                           ;eeprom.c: 16: hold();
+  1047  0663  120A  118A  2657   	fcall	_hold
+              120A  118A         
+  1048                           	line	17
+  1049                           	
+  1050  0668                     l1044:	
+  1051  0668  0008               	return
+  1052                           	opt stack 0
+  1053                           GLOBAL	__end_of_i2c_start
+  1054  0669                     	__end_of_i2c_start:
+  1055 ;; =============== function _i2c_start ends ============
+  1056                           
+  1057                           	signat	_i2c_start,88
+  1058                           	global	_lcd_cmd
+  1059                           psect	text245,local,class=CODE,delta=2
+  1060                           global __ptext245
+  1061  06DB                     __ptext245:
+  1062                           
+  1063 ;; *************** function _lcd_cmd *****************
+  1064 ;; Defined at:
+  1065 ;;		line 10 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\lcd.h"
+  1066 ;; Parameters:    Size  Location     Type
+  1067 ;;  a               1    wreg     unsigned char 
+  1068 ;;  b               1    2[COMMON] unsigned char 
+  1069 ;;  c               1    3[COMMON] unsigned char 
+  1070 ;; Auto vars:     Size  Location     Type
+  1071 ;;  a               1    4[COMMON] unsigned char 
+  1072 ;; Return value:  Size  Location     Type
+  1073 ;;		None               void
+  1074 ;; Registers used:
+  1075 ;;		wreg, status,2, status,0, pclath, cstack
+  1076 ;; Tracked objects:
+  1077 ;;		On entry : 0/0
+  1078 ;;		On exit  : 0/0
+  1079 ;;		Unchanged: 0/0
+  1080 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1081 ;;      Params:         2       0       0       0       0
+  1082 ;;      Locals:         1       0       0       0       0
+  1083 ;;      Temps:          0       0       0       0       0
+  1084 ;;      Totals:         3       0       0       0       0
+  1085 ;;Total ram usage:        3 bytes
+  1086 ;; Hardware stack levels used:    1
+  1087 ;; Hardware stack levels required when called:    1
+  1088 ;; This function calls:
+  1089 ;;		_delay
+  1090 ;; This function is called by:
+  1091 ;;		_i2c_slave
+  1092 ;;		_main
+  1093 ;; This function uses a non-reentrant model
+  1094 ;;
+  1095                           psect	text245
+  1096                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\lcd.h"
+  1097                           	line	10
+  1098                           	global	__size_of_lcd_cmd
+  1099  002E                     	__size_of_lcd_cmd	equ	__end_of_lcd_cmd-_lcd_cmd
+  1100                           	
+  1101  06DB                     _lcd_cmd:	
+  1102                           	opt	stack 5
+  1103                           ; Regs used in _lcd_cmd: [wreg+status,2+status,0+pclath+cstack]
+  1104                           ;lcd_cmd@a stored from wreg
+  1105  06DB  00F4               	movwf	(lcd_cmd@a)
+  1106                           	line	11
+  1107                           	
+  1108  06DC                     l2353:	
+  1109                           ;lcd.h: 11: RE0=a;
+  1110  06DC  1874               	btfsc	(lcd_cmd@a),0
+  1111  06DD  2EDF               	goto	u2301
+  1112  06DE  2EE3               	goto	u2300
+  1113                           	
+  1114  06DF                     u2301:
+  1115  06DF  1283               	bcf	status, 5	;RP0=0, select bank0
+  1116  06E0  1303               	bcf	status, 6	;RP1=0, select bank0
+  1117  06E1  1409               	bsf	(72/8),(72)&7
+  1118  06E2  2EE6               	goto	u2314
+  1119  06E3                     u2300:
+  1120  06E3  1283               	bcf	status, 5	;RP0=0, select bank0
+  1121  06E4  1303               	bcf	status, 6	;RP1=0, select bank0
+  1122  06E5  1009               	bcf	(72/8),(72)&7
+  1123  06E6                     u2314:
+  1124                           	line	12
+  1125                           ;lcd.h: 12: RE1=b;
+  1126  06E6  1872               	btfsc	(lcd_cmd@b),0
+  1127  06E7  2EE9               	goto	u2321
+  1128  06E8  2EED               	goto	u2320
+  1129                           	
+  1130  06E9                     u2321:
+  1131  06E9  1283               	bcf	status, 5	;RP0=0, select bank0
+  1132  06EA  1303               	bcf	status, 6	;RP1=0, select bank0
+  1133  06EB  1489               	bsf	(73/8),(73)&7
+  1134  06EC  2EF0               	goto	u2334
+  1135  06ED                     u2320:
+  1136  06ED  1283               	bcf	status, 5	;RP0=0, select bank0
+  1137  06EE  1303               	bcf	status, 6	;RP1=0, select bank0
+  1138  06EF  1089               	bcf	(73/8),(73)&7
+  1139  06F0                     u2334:
+  1140                           	line	13
+  1141                           	
+  1142  06F0                     l2355:	
+  1143                           ;lcd.h: 13: PORTD=c;
+  1144  06F0  0873               	movf	(lcd_cmd@c),w
+  1145  06F1  0088               	movwf	(8)	;volatile
+  1146                           	line	14
+  1147                           	
+  1148  06F2                     l2357:	
+  1149                           ;lcd.h: 14: RE2=1;
+  1150  06F2  1509               	bsf	(74/8),(74)&7
+  1151                           	line	15
+  1152                           	
+  1153  06F3                     l2359:	
+  1154                           ;lcd.h: 15: delay(100);
+  1155  06F3  3064               	movlw	low(064h)
+  1156  06F4  00F0               	movwf	(?_delay)
+  1157  06F5  3000               	movlw	high(064h)
+  1158  06F6  00F1               	movwf	((?_delay))+1
+  1159  06F7  120A  118A  267B   	fcall	_delay
+              120A  118A         
+  1160                           	line	16
+  1161                           	
+  1162  06FC                     l2361:	
+  1163                           ;lcd.h: 16: RE2=0;
+  1164  06FC  1283               	bcf	status, 5	;RP0=0, select bank0
+  1165  06FD  1303               	bcf	status, 6	;RP1=0, select bank0
+  1166  06FE  1109               	bcf	(74/8),(74)&7
+  1167                           	line	17
+  1168                           	
+  1169  06FF                     l2363:	
+  1170                           ;lcd.h: 17: delay(100);
+  1171  06FF  3064               	movlw	low(064h)
+  1172  0700  00F0               	movwf	(?_delay)
+  1173  0701  3000               	movlw	high(064h)
+  1174  0702  00F1               	movwf	((?_delay))+1
+  1175  0703  120A  118A  267B   	fcall	_delay
+              120A  118A         
+  1176                           	line	18
+  1177                           	
+  1178  0708                     l1035:	
+  1179  0708  0008               	return
+  1180                           	opt stack 0
+  1181                           GLOBAL	__end_of_lcd_cmd
+  1182  0709                     	__end_of_lcd_cmd:
+  1183 ;; =============== function _lcd_cmd ends ============
+  1184                           
+  1185                           	signat	_lcd_cmd,12408
+  1186                           	global	_i2c_read
+  1187                           psect	text246,local,class=CODE,delta=2
+  1188                           global __ptext246
+  1189  068F                     __ptext246:
+  1190                           
+  1191 ;; *************** function _i2c_read *****************
+  1192 ;; Defined at:
+  1193 ;;		line 38 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+  1194 ;; Parameters:    Size  Location     Type
+  1195 ;;  i               2    0[COMMON] unsigned int 
+  1196 ;; Auto vars:     Size  Location     Type
+  1197 ;;  read            1    3[COMMON] unsigned char 
+  1198 ;; Return value:  Size  Location     Type
+  1199 ;;                  1    wreg      unsigned char 
+  1200 ;; Registers used:
+  1201 ;;		wreg, status,2, status,0
+  1202 ;; Tracked objects:
+  1203 ;;		On entry : 0/0
+  1204 ;;		On exit  : 0/0
+  1205 ;;		Unchanged: 0/0
+  1206 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1207 ;;      Params:         2       0       0       0       0
+  1208 ;;      Locals:         1       0       0       0       0
+  1209 ;;      Temps:          1       0       0       0       0
+  1210 ;;      Totals:         4       0       0       0       0
+  1211 ;;Total ram usage:        4 bytes
+  1212 ;; Hardware stack levels used:    1
+  1213 ;; This function calls:
+  1214 ;;		Nothing
+  1215 ;; This function is called by:
+  1216 ;;		_main
+  1217 ;; This function uses a non-reentrant model
+  1218 ;;
+  1219                           psect	text246
+  1220                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+  1221                           	line	38
+  1222                           	global	__size_of_i2c_read
+  1223  0020                     	__size_of_i2c_read	equ	__end_of_i2c_read-_i2c_read
+  1224                           	
+  1225  068F                     _i2c_read:	
+  1226                           	opt	stack 7
+  1227                           ; Regs used in _i2c_read: [wreg+status,2+status,0]
+  1228                           	line	40
+  1229                           	
+  1230  068F                     l2339:	
+  1231                           ;eeprom.c: 39: char read;
+  1232                           ;eeprom.c: 40: if(i==0)
+  1233  068F  0871               	movf	((i2c_read@i+1)),w
+  1234  0690  0470               	iorwf	((i2c_read@i)),w
+  1235  0691  1D03               	skipz
+  1236  0692  2E94               	goto	u2281
+  1237  0693  2E95               	goto	u2280
+  1238  0694                     u2281:
+  1239  0694  2E9A               	goto	l1060
+  1240  0695                     u2280:
+  1241                           	line	42
+  1242                           	
+  1243  0695                     l2341:	
+  1244                           ;eeprom.c: 41: {
+  1245                           ;eeprom.c: 42: ACKDT=1;
+  1246  0695  1683               	bsf	status, 5	;RP0=1, select bank1
+  1247  0696  1303               	bcf	status, 6	;RP1=0, select bank1
+  1248  0697  1691               	bsf	(1165/8)^080h,(1165)&7
+  1249  0698  2E9A               	goto	l1060
+  1250                           	line	43
+  1251                           	
+  1252  0699                     l1059:	
+  1253                           	line	44
+  1254                           ;eeprom.c: 43: }
+  1255                           ;eeprom.c: 44: while(BF==0);
+  1256  0699  2E9A               	goto	l1060
+  1257                           	
+  1258  069A                     l1061:	
+  1259                           	
+  1260  069A                     l1060:	
+  1261  069A  1683               	bsf	status, 5	;RP0=1, select bank1
+  1262  069B  1303               	bcf	status, 6	;RP1=0, select bank1
+  1263  069C  1C14               	btfss	(1184/8)^080h,(1184)&7
+  1264  069D  2E9F               	goto	u2291
+  1265  069E  2EA0               	goto	u2290
+  1266  069F                     u2291:
+  1267  069F  2E9A               	goto	l1060
+  1268  06A0                     u2290:
+  1269  06A0  2EA1               	goto	l2343
+  1270                           	
+  1271  06A1                     l1062:	
+  1272                           	line	45
+  1273                           	
+  1274  06A1                     l2343:	
+  1275                           ;eeprom.c: 45: read=SSPBUF;
+  1276  06A1  1283               	bcf	status, 5	;RP0=0, select bank0
+  1277  06A2  1303               	bcf	status, 6	;RP1=0, select bank0
+  1278  06A3  0813               	movf	(19),w	;volatile
+  1279  06A4  00F2               	movwf	(??_i2c_read+0)+0
+  1280  06A5  0872               	movf	(??_i2c_read+0)+0,w
+  1281  06A6  00F3               	movwf	(i2c_read@read)
+  1282                           	line	46
+  1283                           	
+  1284  06A7                     l2345:	
+  1285                           ;eeprom.c: 46: SSPOV=0;
+  1286  06A7  1314               	bcf	(166/8),(166)&7
+  1287                           	line	47
+  1288                           	
+  1289  06A8                     l2347:	
+  1290                           ;eeprom.c: 47: ACKEN=1;
+  1291  06A8  1683               	bsf	status, 5	;RP0=1, select bank1
+  1292  06A9  1303               	bcf	status, 6	;RP1=0, select bank1
+  1293  06AA  1611               	bsf	(1164/8)^080h,(1164)&7
+  1294                           	line	48
+  1295                           	
+  1296  06AB                     l2349:	
+  1297                           ;eeprom.c: 48: BF=0;
+  1298  06AB  1014               	bcf	(1184/8)^080h,(1184)&7
+  1299                           	line	49
+  1300                           ;eeprom.c: 49: return read;
+  1301  06AC  0873               	movf	(i2c_read@read),w
+  1302  06AD  2EAE               	goto	l1063
+  1303                           	
+  1304  06AE                     l2351:	
+  1305                           	line	50
+  1306                           	
+  1307  06AE                     l1063:	
+  1308  06AE  0008               	return
+  1309                           	opt stack 0
+  1310                           GLOBAL	__end_of_i2c_read
+  1311  06AF                     	__end_of_i2c_read:
+  1312 ;; =============== function _i2c_read ends ============
+  1313                           
+  1314                           	signat	_i2c_read,4217
+  1315                           	global	_hold
+  1316                           psect	text247,local,class=CODE,delta=2
+  1317                           global __ptext247
+  1318  0657                     __ptext247:
+  1319                           
+  1320 ;; *************** function _hold *****************
+  1321 ;; Defined at:
+  1322 ;;		line 9 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+  1323 ;; Parameters:    Size  Location     Type
+  1324 ;;		None
+  1325 ;; Auto vars:     Size  Location     Type
+  1326 ;;		None
+  1327 ;; Return value:  Size  Location     Type
+  1328 ;;		None               void
+  1329 ;; Registers used:
+  1330 ;;		None
+  1331 ;; Tracked objects:
+  1332 ;;		On entry : 0/0
+  1333 ;;		On exit  : 0/0
+  1334 ;;		Unchanged: 0/0
+  1335 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1336 ;;      Params:         0       0       0       0       0
+  1337 ;;      Locals:         0       0       0       0       0
+  1338 ;;      Temps:          0       0       0       0       0
+  1339 ;;      Totals:         0       0       0       0       0
+  1340 ;;Total ram usage:        0 bytes
+  1341 ;; Hardware stack levels used:    1
+  1342 ;; This function calls:
+  1343 ;;		Nothing
+  1344 ;; This function is called by:
+  1345 ;;		_i2c_start
+  1346 ;;		_i2c_stop
+  1347 ;;		_i2c_restart
+  1348 ;;		_i2c_slave
+  1349 ;; This function uses a non-reentrant model
+  1350 ;;
+  1351                           psect	text247
+  1352                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\eeprom.c"
+  1353                           	line	9
+  1354                           	global	__size_of_hold
+  1355  0009                     	__size_of_hold	equ	__end_of_hold-_hold
+  1356                           	
+  1357  0657                     _hold:	
+  1358                           	opt	stack 6
+  1359                           ; Regs used in _hold: []
+  1360                           	line	10
+  1361                           	
+  1362  0657                     l2337:	
+  1363                           ;eeprom.c: 10: while(SSPIF==0);
+  1364  0657  2E58               	goto	l1038
+  1365                           	
+  1366  0658                     l1039:	
+  1367                           	
+  1368  0658                     l1038:	
+  1369  0658  1283               	bcf	status, 5	;RP0=0, select bank0
+  1370  0659  1303               	bcf	status, 6	;RP1=0, select bank0
+  1371  065A  1D8C               	btfss	(99/8),(99)&7
+  1372  065B  2E5D               	goto	u2271
+  1373  065C  2E5E               	goto	u2270
+  1374  065D                     u2271:
+  1375  065D  2E58               	goto	l1038
+  1376  065E                     u2270:
+  1377                           	
+  1378  065E                     l1040:	
+  1379                           	line	11
+  1380                           ;eeprom.c: 11: SSPIF=0;
+  1381  065E  118C               	bcf	(99/8),(99)&7
+  1382                           	line	12
+  1383                           	
+  1384  065F                     l1041:	
+  1385  065F  0008               	return
+  1386                           	opt stack 0
+  1387                           GLOBAL	__end_of_hold
+  1388  0660                     	__end_of_hold:
+  1389 ;; =============== function _hold ends ============
+  1390                           
+  1391                           	signat	_hold,88
+  1392                           	global	_delay
+  1393                           psect	text248,local,class=CODE,delta=2
+  1394                           global __ptext248
+  1395  067B                     __ptext248:
+  1396                           
+  1397 ;; *************** function _delay *****************
+  1398 ;; Defined at:
+  1399 ;;		line 6 in file "D:\Embedded\pic\code\software\protocal\I2c\EEPROM\lcd.h"
+  1400 ;; Parameters:    Size  Location     Type
+  1401 ;;  ms              2    0[COMMON] unsigned int 
+  1402 ;; Auto vars:     Size  Location     Type
+  1403 ;;		None
+  1404 ;; Return value:  Size  Location     Type
+  1405 ;;		None               void
+  1406 ;; Registers used:
+  1407 ;;		wreg
+  1408 ;; Tracked objects:
+  1409 ;;		On entry : 0/0
+  1410 ;;		On exit  : 0/0
+  1411 ;;		Unchanged: 0/0
+  1412 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1413 ;;      Params:         2       0       0       0       0
+  1414 ;;      Locals:         0       0       0       0       0
+  1415 ;;      Temps:          0       0       0       0       0
+  1416 ;;      Totals:         2       0       0       0       0
+  1417 ;;Total ram usage:        2 bytes
+  1418 ;; Hardware stack levels used:    1
+  1419 ;; This function calls:
+  1420 ;;		Nothing
+  1421 ;; This function is called by:
+  1422 ;;		_lcd_cmd
+  1423 ;;		_main
+  1424 ;; This function uses a non-reentrant model
+  1425 ;;
+  1426                           psect	text248
+  1427                           	file	"D:\Embedded\pic\code\software\protocal\I2c\EEPROM\lcd.h"
+  1428                           	line	6
+  1429                           	global	__size_of_delay
+  1430  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+  1431                           	
+  1432  067B                     _delay:	
+  1433                           	opt	stack 7
+  1434                           ; Regs used in _delay: [wreg]
+  1435                           	line	7
+  1436                           	
+  1437  067B                     l2333:	
+  1438                           ;lcd.h: 7: while(ms--);
+  1439  067B  2E7D               	goto	l2335
+  1440                           	
+  1441  067C                     l1030:	
+  1442  067C  2E7D               	goto	l2335
+  1443                           	
+  1444  067D                     l1029:	
+  1445                           	
+  1446  067D                     l2335:	
+  1447  067D  3001               	movlw	low(01h)
+  1448  067E  02F0               	subwf	(delay@ms),f
+  1449  067F  3000               	movlw	high(01h)
+  1450  0680  1C03               	skipc
+  1451  0681  03F1               	decf	(delay@ms+1),f
+  1452  0682  02F1               	subwf	(delay@ms+1),f
+  1453  0683  30FF               	movlw	high(0FFFFh)
+  1454  0684  0671               	xorwf	((delay@ms+1)),w
+  1455  0685  1D03               	skipz
+  1456  0686  2E89               	goto	u2265
+  1457  0687  30FF               	movlw	low(0FFFFh)
+  1458  0688  0670               	xorwf	((delay@ms)),w
+  1459  0689                     u2265:
+  1460                           
+  1461  0689  1D03               	skipz
+  1462  068A  2E8C               	goto	u2261
+  1463  068B  2E8D               	goto	u2260
+  1464  068C                     u2261:
+  1465  068C  2E7D               	goto	l2335
+  1466  068D                     u2260:
+  1467  068D  2E8E               	goto	l1032
+  1468                           	
+  1469  068E                     l1031:	
+  1470                           	line	8
+  1471                           	
+  1472  068E                     l1032:	
+  1473  068E  0008               	return
+  1474                           	opt stack 0
+  1475                           GLOBAL	__end_of_delay
+  1476  068F                     	__end_of_delay:
+  1477 ;; =============== function _delay ends ============
+  1478                           
+  1479                           	signat	_delay,4216
+  1480                           psect	text249,local,class=CODE,delta=2
+  1481                           global __ptext249
+  1482  0000                     __ptext249:
+  1483                           	global	btemp
+  1484  007E                     	btemp set 07Eh
+  1485                           
+  1486                           	DABS	1,126,2	;btemp
+  1487                           	global	wtemp0
+  1488  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Jun 21 11:17:41 2022
+
+                   _s 007B                    _BF 04A0                   _RC0 0038                   _RE0 0048  
+                 _RE1 0049                   _RE2 004A                   _PEN 048A                   _SEN 0488  
+                 _SMP 04A7                  l1030 067C                  l1031 068E                  l1032 068E  
+                l1040 065E                  l1041 065F                  l1050 067A                  l1035 0708  
+                l1060 069A                  l1044 0668                  l1029 067D                  l1061 069A  
+                l1053 06B7                  l1038 0658                  l1062 06A1                  l1054 06B7  
+                l1070 07BA                  l1039 0658                  l1063 06AE                  l1047 0671  
+                l1055 06BE                  l1071 07CB                  l1056 06DA                  l1072 07FC  
+                l1073 07FD                  l1074 07FD                  l1066 07A8                  l1059 0699  
+                l1067 07BB                  l1068 07B5                  l1069 07B5                  l2401 071F  
+                l2411 073D                  l2403 0720                  l2333 067B                  l2341 0695  
+                l2421 0762                  l2413 0742                  l2405 0724                  l2335 067D  
+                l2351 06AE                  l2343 06A1                  l2431 0791                  l2423 0765  
+                l2415 074B                  l2407 0727                  l2337 0657                  l2345 06A7  
+                l2361 06FC                  l2353 06DC                  l2441 07BB                  l2433 0799  
+                l2425 0771                  l2417 0754                  l2409 0732                  l2347 06A8  
+                l2339 068F                  l2363 06FF                  l2355 06F0                  l2371 066C  
+                l2451 07E2                  l2443 07C8                  l2435 079E                  l2427 077C  
+                l2419 0759                  l2349 06AB                  l2357 06F2                  l2365 0660  
+                l2373 0672                  l2381 06BE                  l2453 07ED                  l2445 07CB  
+                l2437 07A8                  l2429 0788                  l2359 06F3                  l2367 0663  
+                l2375 0675                  l2383 06C3                  l2455 07F2                  l2447 07D0  
+                l2439 07AE                  l2391 0710                  l2369 0669                  l2385 06CE  
+                l2377 06AF                  l2449 07D9                  l2393 0713                  l2379 06B2  
+                l2395 0716                  l2387 0709                  l2397 0719                  l2389 070D  
+                l2399 071C                  u2300 06E3                  u2301 06DF                  u2320 06ED  
+                u2321 06E9                  u2314 06E6                  u2260 068D                  u2340 06BD  
+                u2261 068C                  u2341 06BC                  u2270 065E                  u2334 06F0  
+                u2350 07AE                  u2271 065D                  u2351 07AD                  u2280 0695  
+                u2360 07B9                  u2265 0689                  u2281 0694                  u2361 07B8  
+                u2290 06A0                  u2370 07C8                  u2291 069F                  u2371 07C7  
+                u2375 07C4                  _RCEN 048B                  _RSEN 0489                  _main 0709  
+                _hold 0657                  btemp 007E                  start 0000         ??_i2c_restart 0070  
+               ?_main 0070                 ?_hold 0070                 _ACKEN 048C                 _ACKDT 048D  
+               _ANSEL 0188                 _PORTC 0007                 _PORTD 0008                 _PORTE 0009  
+               _TRISC 0087                 _TRISD 0088                 _TRISE 0089                 _SSPIF 0063  
+               _SSPOV 00A6       __end_of_lcd_cmd 0709                 _delay 067B                 status 0003  
+               wtemp0 007E          __end_of_main 0800          __end_of_hold 0660      __end_of_i2c_read 06AF  
+    __end_of_i2c_stop 0672   __end_of_i2c_restart 067B                ??_main 0078                ??_hold 0070  
+              ?_delay 0070                _ANSELH 0189          i2c_read@read 0073    __size_of_i2c_slave 002C  
+              _SSPCON 0014                _SSPBUF 0013    __size_of_i2c_start 0009                _retain 0020  
+           ??_lcd_cmd 0074        __pcstackCOMMON 0070           _i2c_restart 0672         __end_of_delay 068F  
+   __end_of_i2c_slave 06DB     __end_of_i2c_start 0669               ??_delay 0072            __pbssBANK0 0020  
+           ?_i2c_read 0070             ?_i2c_stop 0070            __pmaintext 0709               _ACKSTAT 048E  
+          ??_i2c_read 0072            ??_i2c_stop 0070               _lcd_cmd 06DB         i2c_slave@data 0075  
+             delay@ms 0070  end_of_initialization 0653             i2c_read@i 0070          ?_i2c_restart 0070  
+ start_initialization 064F             _i2c_slave 06AF             _i2c_start 0660     __size_of_i2c_read 0020  
+   __size_of_i2c_stop 0009           __pbssCOMMON 007B            ?_i2c_slave 0075            ?_i2c_start 0070  
+           __ptext240 0000             __ptext241 06AF             __ptext242 0672             __ptext243 0669  
+           __ptext244 0660             __ptext245 06DB             __ptext246 068F             __ptext247 0657  
+           __ptext248 067B             __ptext249 0000              ?_lcd_cmd 0072        __size_of_delay 0014  
+__size_of_i2c_restart 0009           ??_i2c_slave 0077           ??_i2c_start 0070              _i2c_read 068F  
+            _i2c_stop 0669      __size_of_lcd_cmd 002E         __size_of_main 00F7         __size_of_hold 0009  
+            lcd_cmd@a 0074              lcd_cmd@b 0072              lcd_cmd@c 0073              main@read 007A  

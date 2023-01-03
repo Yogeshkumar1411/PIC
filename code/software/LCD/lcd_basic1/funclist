@@ -1,0 +1,5 @@
+_delay: CODE, 1886 0 20
+_lcd_cmd: CODE, 1931 0 29
+_main: CODE, 1960 0 88
+_pulse: CODE, 1906 0 25
+Total: 162

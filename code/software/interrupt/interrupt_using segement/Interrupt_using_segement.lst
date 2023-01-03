@@ -1,0 +1,1093 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Sat Apr 02 02:46:08 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_timer
+    43                           	FNROOT	_main
+    44                           	FNCALL	_ext,i1_timer
+    45                           	FNCALL	intlevel1,_ext
+    46                           	global	intlevel1
+    47                           	FNROOT	intlevel1
+    48                           	global	_seg
+    49                           psect	idataBANK0,class=CODE,space=0,delta=2
+    50                           global __pidataBANK0
+    51  013B                     __pidataBANK0:
+    52                           	file	"D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_
+                                 segement.c"
+    53                           	line	6
+    54                           
+    55                           ;initializer for _seg
+    56  013B  343F               	retlw	03Fh
+    57  013C  3406               	retlw	06h
+    58  013D  345B               	retlw	05Bh
+    59  013E  344F               	retlw	04Fh
+    60  013F  3466               	retlw	066h
+    61  0140  346D               	retlw	06Dh
+    62  0141  347D               	retlw	07Dh
+    63  0142  3407               	retlw	07h
+    64  0143  347F               	retlw	07Fh
+    65  0144  346F               	retlw	06Fh
+    66                           	global	_count
+    67                           	global	_j
+    68                           	global	_i
+    69                           psect	nvCOMMON,class=COMMON,space=1
+    70                           global __pnvCOMMON
+    71  007A                     __pnvCOMMON:
+    72  007A                     _i:
+    73  007A                            ds      2
+    74                           
+    75                           	global	_INTCON
+    76  000B                     _INTCON	set	11
+    77                           	global	_PORTB
+    78  0006                     _PORTB	set	6
+    79                           	global	_PORTC
+    80  0007                     _PORTC	set	7
+    81                           	global	_PORTD
+    82  0008                     _PORTD	set	8
+    83                           	global	_T1CON
+    84  0010                     _T1CON	set	16
+    85                           	global	_INTF
+    86  0059                     _INTF	set	89
+    87                           	global	_TMR1IF
+    88  0060                     _TMR1IF	set	96
+    89                           	global	_TRISB
+    90  0086                     _TRISB	set	134
+    91                           	global	_TRISC
+    92  0087                     _TRISC	set	135
+    93                           	global	_TRISD
+    94  0088                     _TRISD	set	136
+    95                           	global	_ANSEL
+    96  0188                     _ANSEL	set	392
+    97                           	global	_ANSELH
+    98  0189                     _ANSELH	set	393
+    99                           	file	"Interrupt_using_segement.as"
+   100                           	line	#
+   101                           psect cinit,class=CODE,delta=2
+   102                           global start_initialization
+   103  0114                     start_initialization:
+   104                           
+   105                           psect	bssCOMMON,class=COMMON,space=1
+   106                           global __pbssCOMMON
+   107  0076                     __pbssCOMMON:
+   108  0076                     _count:
+   109  0076                            ds      2
+   110                           
+   111  0078                     _j:
+   112  0078                            ds      2
+   113                           
+   114                           psect	dataBANK0,class=BANK0,space=1
+   115                           global __pdataBANK0
+   116  0020                     __pdataBANK0:
+   117                           	file	"D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_
+                                 segement.c"
+   118  0020                     _seg:
+   119  0020                            ds      10
+   120                           
+   121                           ; Clear objects allocated to COMMON
+   122                           psect cinit,class=CODE,delta=2
+   123  0114  01F6               	clrf	((__pbssCOMMON)+0)&07Fh
+   124  0115  01F7               	clrf	((__pbssCOMMON)+1)&07Fh
+   125  0116  01F8               	clrf	((__pbssCOMMON)+2)&07Fh
+   126  0117  01F9               	clrf	((__pbssCOMMON)+3)&07Fh
+   127                           global btemp
+   128                           psect inittext,class=CODE,delta=2
+   129                           global init_fetch,btemp
+   130                           ;	Called with low address in FSR and high address in W
+   131  012A                     init_fetch:
+   132  012A  087E               	movf btemp,w
+   133  012B  008A               	movwf pclath
+   134  012C  087F               	movf btemp+1,w
+   135  012D  0082               	movwf pc
+   136                           global init_ram
+   137                           ;Called with:
+   138                           ;	high address of idata address in btemp 
+   139                           ;	low address of idata address in btemp+1 
+   140                           ;	low address of data in FSR
+   141                           ;	high address + 1 of data in btemp-1
+   142  012E                     init_ram:
+   143  012E  212A  120A  118A   	fcall init_fetch
+   144  0131  0080               	movwf indf,f
+   145  0132  0A84               	incf fsr,f
+   146  0133  0804               	movf fsr,w
+   147  0134  067D               	xorwf btemp-1,w
+   148  0135  1903               	btfsc status,2
+   149  0136  3400               	retlw 0
+   150  0137  0AFF               	incf btemp+1,f
+   151  0138  1903               	btfsc status,2
+   152  0139  0AFE               	incf btemp,f
+   153  013A  292E               	goto init_ram
+   154                           ; Initialize objects allocated to BANK0
+   155                           psect cinit,class=CODE,delta=2
+   156                           global init_ram, __pidataBANK0
+   157  0118  1383               	bcf	status, 7	;select IRP bank0
+   158  0119  302A               	movlw low(__pdataBANK0+10)
+   159  011A  00FD               	movwf btemp-1,f
+   160  011B  3001               	movlw high(__pidataBANK0)
+   161  011C  00FE               	movwf btemp,f
+   162  011D  303B               	movlw low(__pidataBANK0)
+   163  011E  00FF               	movwf btemp+1,f
+   164  011F  3020               	movlw low(__pdataBANK0)
+   165  0120  0084               	movwf fsr,f
+   166  0121  120A  118A  212E   	fcall init_ram
+              120A  118A         
+   167                           psect cinit,class=CODE,delta=2
+   168                           global end_of_initialization
+   169                           
+   170                           ;End of C runtime variable initialization code
+   171                           
+   172  0126                     end_of_initialization:
+   173  0126  0183               clrf status
+   174  0127  120A  118A  2815   ljmp _main	;jump to C main() function
+   175                           psect	cstackCOMMON,class=COMMON,space=1
+   176                           global __pcstackCOMMON
+   177  0070                     __pcstackCOMMON:
+   178                           	global	?_main
+   179  0070                     ?_main:	; 0 bytes @ 0x0
+   180                           	global	?_ext
+   181  0070                     ?_ext:	; 0 bytes @ 0x0
+   182                           	global	?i1_timer
+   183  0070                     ?i1_timer:	; 0 bytes @ 0x0
+   184                           	global	i1timer@a
+   185  0070                     i1timer@a:	; 2 bytes @ 0x0
+   186  0070                     	ds	2
+   187                           	global	??_ext
+   188  0072                     ??_ext:	; 0 bytes @ 0x2
+   189                           	global	??i1_timer
+   190  0072                     ??i1_timer:	; 0 bytes @ 0x2
+   191  0072                     	ds	4
+   192                           psect	cstackBANK0,class=BANK0,space=1
+   193                           global __pcstackBANK0
+   194  002A                     __pcstackBANK0:
+   195                           	global	?_timer
+   196  002A                     ?_timer:	; 0 bytes @ 0x0
+   197                           	global	timer@a
+   198  002A                     timer@a:	; 2 bytes @ 0x0
+   199  002A                     	ds	2
+   200                           	global	??_timer
+   201  002C                     ??_timer:	; 0 bytes @ 0x2
+   202                           	global	??_main
+   203  002C                     ??_main:	; 0 bytes @ 0x2
+   204 ;;Data sizes: Strings 0, constant 0, data 10, bss 4, persistent 2 stack 0
+   205 ;;Auto spaces:   Size  Autos    Used
+   206 ;; COMMON          14      6      12
+   207 ;; BANK0           80      2      12
+   208 ;; BANK1           80      0       0
+   209 ;; BANK3           96      0       0
+   210 ;; BANK2           96      0       0
+   211                           
+   212 ;;
+   213 ;; Pointer list with targets:
+   214                           
+   215                           
+   216                           
+   217 ;;
+   218 ;; Critical Paths under _main in COMMON
+   219 ;;
+   220 ;;   None.
+   221 ;;
+   222 ;; Critical Paths under _ext in COMMON
+   223 ;;
+   224 ;;   _ext->i1_timer
+   225 ;;
+   226 ;; Critical Paths under _main in BANK0
+   227 ;;
+   228 ;;   _main->_timer
+   229 ;;
+   230 ;; Critical Paths under _ext in BANK0
+   231 ;;
+   232 ;;   None.
+   233 ;;
+   234 ;; Critical Paths under _main in BANK1
+   235 ;;
+   236 ;;   None.
+   237 ;;
+   238 ;; Critical Paths under _ext in BANK1
+   239 ;;
+   240 ;;   None.
+   241 ;;
+   242 ;; Critical Paths under _main in BANK3
+   243 ;;
+   244 ;;   None.
+   245 ;;
+   246 ;; Critical Paths under _ext in BANK3
+   247 ;;
+   248 ;;   None.
+   249 ;;
+   250 ;; Critical Paths under _main in BANK2
+   251 ;;
+   252 ;;   None.
+   253 ;;
+   254 ;; Critical Paths under _ext in BANK2
+   255 ;;
+   256 ;;   None.
+   257                           
+   258 ;;
+   259 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   260 ;;
+   261                           
+   262 ;;
+   263 ;;Call Graph Tables:
+   264 ;;
+   265 ;; ---------------------------------------------------------------------------------
+   266 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   267 ;; ---------------------------------------------------------------------------------
+   268 ;; (0) _main                                                 0     0      0      34
+   269 ;;                              _timer
+   270 ;; ---------------------------------------------------------------------------------
+   271 ;; (1) _timer                                                2     0      2      34
+   272 ;;                                              0 BANK0      2     0      2
+   273 ;; ---------------------------------------------------------------------------------
+   274 ;; Estimated maximum stack depth 1
+   275 ;; ---------------------------------------------------------------------------------
+   276 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   277 ;; ---------------------------------------------------------------------------------
+   278 ;; (2) _ext                                                  4     4      0      75
+   279 ;;                                              2 COMMON     4     4      0
+   280 ;;                            i1_timer
+   281 ;; ---------------------------------------------------------------------------------
+   282 ;; (3) i1_timer                                              2     0      2      75
+   283 ;;                                              0 COMMON     2     0      2
+   284 ;; ---------------------------------------------------------------------------------
+   285 ;; Estimated maximum stack depth 3
+   286 ;; ---------------------------------------------------------------------------------
+   287                           
+   288 ;; Call Graph Graphs:
+   289                           
+   290 ;; _main (ROOT)
+   291 ;;   _timer
+   292 ;;
+   293 ;; _ext (ROOT)
+   294 ;;   i1_timer
+   295 ;;
+   296                           
+   297 ;; Address spaces:
+   298                           
+   299 ;;Name               Size   Autos  Total    Cost      Usage
+   300 ;;BANK3               60      0       0       9        0.0%
+   301 ;;BITBANK3            60      0       0       8        0.0%
+   302 ;;SFR3                 0      0       0       4        0.0%
+   303 ;;BITSFR3              0      0       0       4        0.0%
+   304 ;;BANK2               60      0       0      11        0.0%
+   305 ;;BITBANK2            60      0       0      10        0.0%
+   306 ;;SFR2                 0      0       0       5        0.0%
+   307 ;;BITSFR2              0      0       0       5        0.0%
+   308 ;;SFR1                 0      0       0       2        0.0%
+   309 ;;BITSFR1              0      0       0       2        0.0%
+   310 ;;BANK1               50      0       0       7        0.0%
+   311 ;;BITBANK1            50      0       0       6        0.0%
+   312 ;;CODE                 0      0       0       0        0.0%
+   313 ;;DATA                 0      0      1D      12        0.0%
+   314 ;;ABS                  0      0      18       3        0.0%
+   315 ;;NULL                 0      0       0       0        0.0%
+   316 ;;STACK                0      0       5       2        0.0%
+   317 ;;BANK0               50      2       C       5       15.0%
+   318 ;;BITBANK0            50      0       0       4        0.0%
+   319 ;;SFR0                 0      0       0       1        0.0%
+   320 ;;BITSFR0              0      0       0       1        0.0%
+   321 ;;COMMON               E      6       C       1       85.7%
+   322 ;;BITCOMMON            E      0       0       0        0.0%
+   323 ;;EEDATA             100      0       0       0        0.0%
+   324                           
+   325                           	global	_main
+   326                           psect	maintext,global,class=CODE,delta=2
+   327                           global __pmaintext
+   328  0015                     __pmaintext:
+   329                           
+   330 ;; *************** function _main *****************
+   331 ;; Defined at:
+   332 ;;		line 25 in file "D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_segement.c"
+   333 ;; Parameters:    Size  Location     Type
+   334 ;;		None
+   335 ;; Auto vars:     Size  Location     Type
+   336 ;;		None
+   337 ;; Return value:  Size  Location     Type
+   338 ;;		None               void
+   339 ;; Registers used:
+   340 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   341 ;; Tracked objects:
+   342 ;;		On entry : 17F/0
+   343 ;;		On exit  : 0/0
+   344 ;;		Unchanged: 0/0
+   345 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   346 ;;      Params:         0       0       0       0       0
+   347 ;;      Locals:         0       0       0       0       0
+   348 ;;      Temps:          0       0       0       0       0
+   349 ;;      Totals:         0       0       0       0       0
+   350 ;;Total ram usage:        0 bytes
+   351 ;; Hardware stack levels required when called:    3
+   352 ;; This function calls:
+   353 ;;		_timer
+   354 ;; This function is called by:
+   355 ;;		Startup code after reset
+   356 ;; This function uses a non-reentrant model
+   357 ;;
+   358                           psect	maintext
+   359                           	file	"D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_
+                                 segement.c"
+   360                           	line	25
+   361                           	global	__size_of_main
+   362  0059                     	__size_of_main	equ	__end_of_main-_main
+   363                           	
+   364  0015                     _main:	
+   365                           	opt	stack 5
+   366                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   367                           	line	26
+   368                           	
+   369  0015                     l2343:	
+   370                           ;Interrupt_using_segement.c: 26: PORTC=0X00;
+   371  0015  1283               	bcf	status, 5	;RP0=0, select bank0
+   372  0016  1303               	bcf	status, 6	;RP1=0, select bank0
+   373  0017  0187               	clrf	(7)	;volatile
+   374                           	line	27
+   375                           ;Interrupt_using_segement.c: 27: TRISC=0X00;
+   376  0018  1683               	bsf	status, 5	;RP0=1, select bank1
+   377  0019  1303               	bcf	status, 6	;RP1=0, select bank1
+   378  001A  0187               	clrf	(135)^080h	;volatile
+   379                           	line	28
+   380                           ;Interrupt_using_segement.c: 28: PORTD=0X00;
+   381  001B  1283               	bcf	status, 5	;RP0=0, select bank0
+   382  001C  1303               	bcf	status, 6	;RP1=0, select bank0
+   383  001D  0188               	clrf	(8)	;volatile
+   384                           	line	29
+   385                           ;Interrupt_using_segement.c: 29: TRISD=0X00;
+   386  001E  1683               	bsf	status, 5	;RP0=1, select bank1
+   387  001F  1303               	bcf	status, 6	;RP1=0, select bank1
+   388  0020  0188               	clrf	(136)^080h	;volatile
+   389                           	line	30
+   390                           ;Interrupt_using_segement.c: 30: PORTB=0X00;
+   391  0021  1283               	bcf	status, 5	;RP0=0, select bank0
+   392  0022  1303               	bcf	status, 6	;RP1=0, select bank0
+   393  0023  0186               	clrf	(6)	;volatile
+   394                           	line	31
+   395                           	
+   396  0024                     l2345:	
+   397                           ;Interrupt_using_segement.c: 31: TRISB=0X01;
+   398  0024  3001               	movlw	(01h)
+   399  0025  1683               	bsf	status, 5	;RP0=1, select bank1
+   400  0026  1303               	bcf	status, 6	;RP1=0, select bank1
+   401  0027  0086               	movwf	(134)^080h	;volatile
+   402                           	line	32
+   403                           	
+   404  0028                     l2347:	
+   405                           ;Interrupt_using_segement.c: 32: ANSEL=0X00;
+   406  0028  1683               	bsf	status, 5	;RP0=1, select bank3
+   407  0029  1703               	bsf	status, 6	;RP1=1, select bank3
+   408  002A  0188               	clrf	(392)^0180h	;volatile
+   409                           	line	33
+   410                           	
+   411  002B                     l2349:	
+   412                           ;Interrupt_using_segement.c: 33: ANSELH=0X00;
+   413  002B  0189               	clrf	(393)^0180h	;volatile
+   414                           	line	34
+   415                           	
+   416  002C                     l2351:	
+   417                           ;Interrupt_using_segement.c: 34: T1CON=0X31;
+   418  002C  3031               	movlw	(031h)
+   419  002D  1283               	bcf	status, 5	;RP0=0, select bank0
+   420  002E  1303               	bcf	status, 6	;RP1=0, select bank0
+   421  002F  0090               	movwf	(16)	;volatile
+   422                           	line	35
+   423                           	
+   424  0030                     l2353:	
+   425                           ;Interrupt_using_segement.c: 35: INTCON=0XD0;
+   426  0030  30D0               	movlw	(0D0h)
+   427  0031  008B               	movwf	(11)	;volatile
+   428  0032  2833               	goto	l2355
+   429                           	line	36
+   430                           ;Interrupt_using_segement.c: 36: while(1)
+   431                           	
+   432  0033                     l1041:	
+   433                           	line	38
+   434                           	
+   435  0033                     l2355:	
+   436                           ;Interrupt_using_segement.c: 37: {
+   437                           ;Interrupt_using_segement.c: 38: for(i=0;i<10;i++)
+   438  0033  01FA               	clrf	(_i)
+   439  0034  01FB               	clrf	(_i+1)
+   440                           	
+   441  0035                     l2357:	
+   442  0035  087B               	movf	(_i+1),w
+   443  0036  3A80               	xorlw	80h
+   444  0037  00FF               	movwf	btemp+1
+   445  0038  3080               	movlw	(high(0Ah))^80h
+   446  0039  027F               	subwf	btemp+1,w
+   447  003A  1D03               	skipz
+   448  003B  283E               	goto	u2425
+   449  003C  300A               	movlw	low(0Ah)
+   450  003D  027A               	subwf	(_i),w
+   451  003E                     u2425:
+   452                           
+   453  003E  1C03               	skipc
+   454  003F  2841               	goto	u2421
+   455  0040  2842               	goto	u2420
+   456  0041                     u2421:
+   457  0041  2844               	goto	l2361
+   458  0042                     u2420:
+   459  0042  2833               	goto	l2355
+   460                           	
+   461  0043                     l2359:	
+   462  0043  2833               	goto	l2355
+   463                           	line	39
+   464                           	
+   465  0044                     l1042:	
+   466                           	line	40
+   467                           	
+   468  0044                     l2361:	
+   469                           ;Interrupt_using_segement.c: 39: {
+   470                           ;Interrupt_using_segement.c: 40: PORTC=seg[i];
+   471  0044  087A               	movf	(_i),w
+   472  0045  3E20               	addlw	_seg&0ffh
+   473  0046  0084               	movwf	fsr0
+   474  0047  1383               	bcf	status, 7	;select IRP bank0
+   475  0048  0800               	movf	indf,w
+   476  0049  1283               	bcf	status, 5	;RP0=0, select bank0
+   477  004A  1303               	bcf	status, 6	;RP1=0, select bank0
+   478  004B  0087               	movwf	(7)	;volatile
+   479                           	line	41
+   480                           	
+   481  004C                     l2363:	
+   482                           ;Interrupt_using_segement.c: 41: timer(1);
+   483  004C  3001               	movlw	low(01h)
+   484  004D  00AA               	movwf	(?_timer)
+   485  004E  3000               	movlw	high(01h)
+   486  004F  00AB               	movwf	((?_timer))+1
+   487  0050  120A  118A  20B6   	fcall	_timer
+              120A  118A         
+   488                           	line	38
+   489                           	
+   490  0055                     l2365:	
+   491  0055  3001               	movlw	low(01h)
+   492  0056  07FA               	addwf	(_i),f
+   493  0057  1803               	skipnc
+   494  0058  0AFB               	incf	(_i+1),f
+   495  0059  3000               	movlw	high(01h)
+   496  005A  07FB               	addwf	(_i+1),f
+   497                           	
+   498  005B                     l2367:	
+   499  005B  087B               	movf	(_i+1),w
+   500  005C  3A80               	xorlw	80h
+   501  005D  00FF               	movwf	btemp+1
+   502  005E  3080               	movlw	(high(0Ah))^80h
+   503  005F  027F               	subwf	btemp+1,w
+   504  0060  1D03               	skipz
+   505  0061  2864               	goto	u2435
+   506  0062  300A               	movlw	low(0Ah)
+   507  0063  027A               	subwf	(_i),w
+   508  0064                     u2435:
+   509                           
+   510  0064  1C03               	skipc
+   511  0065  2867               	goto	u2431
+   512  0066  2868               	goto	u2430
+   513  0067                     u2431:
+   514  0067  2844               	goto	l2361
+   515  0068                     u2430:
+   516  0068  2833               	goto	l2355
+   517                           	
+   518  0069                     l1043:	
+   519  0069  2833               	goto	l2355
+   520                           	line	43
+   521                           	
+   522  006A                     l1044:	
+   523                           	line	36
+   524  006A  2833               	goto	l2355
+   525                           	
+   526  006B                     l1045:	
+   527                           	line	44
+   528                           	
+   529  006B                     l1046:	
+   530                           	global	start
+   531  006B  120A  118A  2812   	ljmp	start
+   532                           	opt stack 0
+   533                           GLOBAL	__end_of_main
+   534  006E                     	__end_of_main:
+   535 ;; =============== function _main ends ============
+   536                           
+   537                           	signat	_main,88
+   538                           	global	_timer
+   539                           psect	text179,local,class=CODE,delta=2
+   540                           global __ptext179
+   541  00B6                     __ptext179:
+   542                           
+   543 ;; *************** function _timer *****************
+   544 ;; Defined at:
+   545 ;;		line 8 in file "D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_segement.c"
+   546 ;; Parameters:    Size  Location     Type
+   547 ;;  a               2    0[BANK0 ] int 
+   548 ;; Auto vars:     Size  Location     Type
+   549 ;;		None
+   550 ;; Return value:  Size  Location     Type
+   551 ;;		None               void
+   552 ;; Registers used:
+   553 ;;		wreg, status,2, btemp+1
+   554 ;; Tracked objects:
+   555 ;;		On entry : 0/0
+   556 ;;		On exit  : 0/0
+   557 ;;		Unchanged: 0/0
+   558 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   559 ;;      Params:         0       2       0       0       0
+   560 ;;      Locals:         0       0       0       0       0
+   561 ;;      Temps:          0       0       0       0       0
+   562 ;;      Totals:         0       2       0       0       0
+   563 ;;Total ram usage:        2 bytes
+   564 ;; Hardware stack levels used:    1
+   565 ;; Hardware stack levels required when called:    2
+   566 ;; This function calls:
+   567 ;;		Nothing
+   568 ;; This function is called by:
+   569 ;;		_main
+   570 ;; This function uses a non-reentrant model
+   571 ;;
+   572                           psect	text179
+   573                           	file	"D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_
+                                 segement.c"
+   574                           	line	8
+   575                           	global	__size_of_timer
+   576  0030                     	__size_of_timer	equ	__end_of_timer-_timer
+   577                           	
+   578  00B6                     _timer:	
+   579                           	opt	stack 5
+   580                           ; Regs used in _timer: [wreg+status,2+btemp+1]
+   581                           	line	9
+   582                           	
+   583  00B6                     l2331:	
+   584                           ;Interrupt_using_segement.c: 9: while(0<a)
+   585  00B6  28D5               	goto	l2341
+   586                           	
+   587  00B7                     l1034:	
+   588                           	line	11
+   589                           ;Interrupt_using_segement.c: 10: {
+   590                           ;Interrupt_using_segement.c: 11: if(TMR1IF==1)
+   591  00B7  1283               	bcf	status, 5	;RP0=0, select bank0
+   592  00B8  1303               	bcf	status, 6	;RP1=0, select bank0
+   593  00B9  1C0C               	btfss	(96/8),(96)&7
+   594  00BA  28BC               	goto	u2391
+   595  00BB  28BD               	goto	u2390
+   596  00BC                     u2391:
+   597  00BC  28C4               	goto	l1035
+   598  00BD                     u2390:
+   599                           	line	13
+   600                           	
+   601  00BD                     l2333:	
+   602                           ;Interrupt_using_segement.c: 12: {
+   603                           ;Interrupt_using_segement.c: 13: count++;
+   604  00BD  3001               	movlw	low(01h)
+   605  00BE  07F6               	addwf	(_count),f
+   606  00BF  1803               	skipnc
+   607  00C0  0AF7               	incf	(_count+1),f
+   608  00C1  3000               	movlw	high(01h)
+   609  00C2  07F7               	addwf	(_count+1),f
+   610                           	line	14
+   611                           	
+   612  00C3                     l2335:	
+   613                           ;Interrupt_using_segement.c: 14: TMR1IF=0;
+   614  00C3  100C               	bcf	(96/8),(96)&7
+   615                           	line	15
+   616                           	
+   617  00C4                     l1035:	
+   618                           	line	16
+   619                           ;Interrupt_using_segement.c: 15: }
+   620                           ;Interrupt_using_segement.c: 16: if(count==2)
+   621  00C4  3002               	movlw	02h
+   622  00C5  0676               	xorwf	(_count),w
+   623  00C6  0477               	iorwf	(_count+1),w
+   624  00C7  1D03               	skipz
+   625  00C8  28CA               	goto	u2401
+   626  00C9  28CB               	goto	u2400
+   627  00CA                     u2401:
+   628  00CA  28D5               	goto	l2341
+   629  00CB                     u2400:
+   630                           	line	18
+   631                           	
+   632  00CB                     l2337:	
+   633                           ;Interrupt_using_segement.c: 17: {
+   634                           ;Interrupt_using_segement.c: 18: count=0;
+   635  00CB  01F6               	clrf	(_count)
+   636  00CC  01F7               	clrf	(_count+1)
+   637                           	line	19
+   638                           	
+   639  00CD                     l2339:	
+   640                           ;Interrupt_using_segement.c: 19: a--;
+   641  00CD  30FF               	movlw	low(-1)
+   642  00CE  07AA               	addwf	(timer@a),f
+   643  00CF  1803               	skipnc
+   644  00D0  0AAB               	incf	(timer@a+1),f
+   645  00D1  30FF               	movlw	high(-1)
+   646  00D2  07AB               	addwf	(timer@a+1),f
+   647  00D3  28D5               	goto	l2341
+   648                           	line	20
+   649                           	
+   650  00D4                     l1036:	
+   651  00D4  28D5               	goto	l2341
+   652                           	line	21
+   653                           	
+   654  00D5                     l1033:	
+   655                           	line	9
+   656                           	
+   657  00D5                     l2341:	
+   658  00D5  1283               	bcf	status, 5	;RP0=0, select bank0
+   659  00D6  1303               	bcf	status, 6	;RP1=0, select bank0
+   660  00D7  082B               	movf	(timer@a+1),w
+   661  00D8  3A80               	xorlw	80h
+   662  00D9  00FF               	movwf	btemp+1
+   663  00DA  3080               	movlw	(high(01h))^80h
+   664  00DB  027F               	subwf	btemp+1,w
+   665  00DC  1D03               	skipz
+   666  00DD  28E0               	goto	u2415
+   667  00DE  3001               	movlw	low(01h)
+   668  00DF  022A               	subwf	(timer@a),w
+   669  00E0                     u2415:
+   670                           
+   671  00E0  1803               	skipnc
+   672  00E1  28E3               	goto	u2411
+   673  00E2  28E4               	goto	u2410
+   674  00E3                     u2411:
+   675  00E3  28B7               	goto	l1034
+   676  00E4                     u2410:
+   677  00E4  28E5               	goto	l1038
+   678                           	
+   679  00E5                     l1037:	
+   680                           	line	22
+   681                           	
+   682  00E5                     l1038:	
+   683  00E5  0008               	return
+   684                           	opt stack 0
+   685                           GLOBAL	__end_of_timer
+   686  00E6                     	__end_of_timer:
+   687 ;; =============== function _timer ends ============
+   688                           
+   689                           	signat	_timer,4216
+   690                           	global	_ext
+   691                           psect	text180,local,class=CODE,delta=2
+   692                           global __ptext180
+   693  006E                     __ptext180:
+   694                           
+   695 ;; *************** function _ext *****************
+   696 ;; Defined at:
+   697 ;;		line 46 in file "D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_segement.c"
+   698 ;; Parameters:    Size  Location     Type
+   699 ;;		None
+   700 ;; Auto vars:     Size  Location     Type
+   701 ;;		None
+   702 ;; Return value:  Size  Location     Type
+   703 ;;		None               void
+   704 ;; Registers used:
+   705 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   706 ;; Tracked objects:
+   707 ;;		On entry : 0/0
+   708 ;;		On exit  : 0/0
+   709 ;;		Unchanged: 0/0
+   710 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   711 ;;      Params:         0       0       0       0       0
+   712 ;;      Locals:         0       0       0       0       0
+   713 ;;      Temps:          4       0       0       0       0
+   714 ;;      Totals:         4       0       0       0       0
+   715 ;;Total ram usage:        4 bytes
+   716 ;; Hardware stack levels used:    1
+   717 ;; Hardware stack levels required when called:    1
+   718 ;; This function calls:
+   719 ;;		i1_timer
+   720 ;; This function is called by:
+   721 ;;		Interrupt level 1
+   722 ;; This function uses a non-reentrant model
+   723 ;;
+   724                           psect	text180
+   725                           	file	"D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_
+                                 segement.c"
+   726                           	line	46
+   727                           	global	__size_of_ext
+   728  0048                     	__size_of_ext	equ	__end_of_ext-_ext
+   729                           	
+   730  006E                     _ext:	
+   731                           	opt	stack 5
+   732                           ; Regs used in _ext: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   733                           psect	intentry,class=CODE,delta=2
+   734                           global __pintentry
+   735  0004                     __pintentry:
+   736                           global interrupt_function
+   737  0004                     interrupt_function:
+   738                           	global saved_w
+   739  007E                     	saved_w	set	btemp+0
+   740  0004  00FE               	movwf	saved_w
+   741  0005  0E03               	swapf	status,w
+   742  0006  00F2               	movwf	(??_ext+0)
+   743  0007  0804               	movf	fsr0,w
+   744  0008  00F3               	movwf	(??_ext+1)
+   745  0009  080A               	movf	pclath,w
+   746  000A  00F4               	movwf	(??_ext+2)
+   747  000B  1283               	bcf	status, 5	;RP0=0, select bank0
+   748  000C  1303               	bcf	status, 6	;RP1=0, select bank0
+   749  000D  087F               	movf	btemp+1,w
+   750  000E  00F5               	movwf	(??_ext+3)
+   751  000F  120A  118A  286E   	ljmp	_ext
+   752                           psect	text180
+   753                           	line	47
+   754                           	
+   755  006E                     i1l2277:	
+   756                           ;Interrupt_using_segement.c: 47: if(INTF==1)
+   757  006E  1C8B               	btfss	(89/8),(89)&7
+   758  006F  2871               	goto	u231_21
+   759  0070  2872               	goto	u231_20
+   760  0071                     u231_21:
+   761  0071  28A9               	goto	i1l1052
+   762  0072                     u231_20:
+   763                           	line	49
+   764                           	
+   765  0072                     i1l2279:	
+   766                           ;Interrupt_using_segement.c: 48: {
+   767                           ;Interrupt_using_segement.c: 49: for(j=0;j<10;j++)
+   768  0072  01F8               	clrf	(_j)
+   769  0073  01F9               	clrf	(_j+1)
+   770                           	
+   771  0074                     i1l2281:	
+   772  0074  0879               	movf	(_j+1),w
+   773  0075  3A80               	xorlw	80h
+   774  0076  00FF               	movwf	btemp+1
+   775  0077  3080               	movlw	(high(0Ah))^80h
+   776  0078  027F               	subwf	btemp+1,w
+   777  0079  1D03               	skipz
+   778  007A  287D               	goto	u232_25
+   779  007B  300A               	movlw	low(0Ah)
+   780  007C  0278               	subwf	(_j),w
+   781  007D                     u232_25:
+   782                           
+   783  007D  1C03               	skipc
+   784  007E  2880               	goto	u232_21
+   785  007F  2881               	goto	u232_20
+   786  0080                     u232_21:
+   787  0080  2883               	goto	i1l2285
+   788  0081                     u232_20:
+   789  0081  28A7               	goto	i1l1051
+   790                           	
+   791  0082                     i1l2283:	
+   792  0082  28A7               	goto	i1l1051
+   793                           	line	50
+   794                           	
+   795  0083                     i1l1050:	
+   796                           	line	51
+   797                           	
+   798  0083                     i1l2285:	
+   799                           ;Interrupt_using_segement.c: 50: {
+   800                           ;Interrupt_using_segement.c: 51: PORTD=seg[j];
+   801  0083  0878               	movf	(_j),w
+   802  0084  3E20               	addlw	_seg&0ffh
+   803  0085  0084               	movwf	fsr0
+   804  0086  1383               	bcf	status, 7	;select IRP bank0
+   805  0087  0800               	movf	indf,w
+   806  0088  1283               	bcf	status, 5	;RP0=0, select bank0
+   807  0089  1303               	bcf	status, 6	;RP1=0, select bank0
+   808  008A  0088               	movwf	(8)	;volatile
+   809                           	line	52
+   810                           	
+   811  008B                     i1l2287:	
+   812                           ;Interrupt_using_segement.c: 52: timer(1);
+   813  008B  3001               	movlw	low(01h)
+   814  008C  00F0               	movwf	(?i1_timer)
+   815  008D  3000               	movlw	high(01h)
+   816  008E  00F1               	movwf	((?i1_timer))+1
+   817  008F  120A  118A  20E6   	fcall	i1_timer
+              120A  118A         
+   818                           	line	49
+   819                           	
+   820  0094                     i1l2289:	
+   821  0094  3001               	movlw	low(01h)
+   822  0095  07F8               	addwf	(_j),f
+   823  0096  1803               	skipnc
+   824  0097  0AF9               	incf	(_j+1),f
+   825  0098  3000               	movlw	high(01h)
+   826  0099  07F9               	addwf	(_j+1),f
+   827                           	
+   828  009A                     i1l2291:	
+   829  009A  0879               	movf	(_j+1),w
+   830  009B  3A80               	xorlw	80h
+   831  009C  00FF               	movwf	btemp+1
+   832  009D  3080               	movlw	(high(0Ah))^80h
+   833  009E  027F               	subwf	btemp+1,w
+   834  009F  1D03               	skipz
+   835  00A0  28A3               	goto	u233_25
+   836  00A1  300A               	movlw	low(0Ah)
+   837  00A2  0278               	subwf	(_j),w
+   838  00A3                     u233_25:
+   839                           
+   840  00A3  1C03               	skipc
+   841  00A4  28A6               	goto	u233_21
+   842  00A5  28A7               	goto	u233_20
+   843  00A6                     u233_21:
+   844  00A6  2883               	goto	i1l2285
+   845  00A7                     u233_20:
+   846                           	
+   847  00A7                     i1l1051:	
+   848                           	line	54
+   849                           ;Interrupt_using_segement.c: 53: }
+   850                           ;Interrupt_using_segement.c: 54: INTF=0;
+   851  00A7  108B               	bcf	(89/8),(89)&7
+   852  00A8  28A9               	goto	i1l1052
+   853                           	line	55
+   854                           	
+   855  00A9                     i1l1049:	
+   856                           	line	56
+   857                           	
+   858  00A9                     i1l1052:	
+   859  00A9  0875               	movf	(??_ext+3),w
+   860  00AA  1283               	bcf	status, 5	;RP0=0, select bank0
+   861  00AB  1303               	bcf	status, 6	;RP1=0, select bank0
+   862  00AC  00FF               	movwf	btemp+1
+   863  00AD  0874               	movf	(??_ext+2),w
+   864  00AE  008A               	movwf	pclath
+   865  00AF  0873               	movf	(??_ext+1),w
+   866  00B0  0084               	movwf	fsr0
+   867  00B1  0E72               	swapf	(??_ext+0)^0FFFFFF80h,w
+   868  00B2  0083               	movwf	status
+   869  00B3  0EFE               	swapf	saved_w,f
+   870  00B4  0E7E               	swapf	saved_w,w
+   871  00B5  0009               	retfie
+   872                           	opt stack 0
+   873                           GLOBAL	__end_of_ext
+   874  00B6                     	__end_of_ext:
+   875 ;; =============== function _ext ends ============
+   876                           
+   877                           	signat	_ext,88
+   878                           	global	i1_timer
+   879                           psect	text181,local,class=CODE,delta=2
+   880                           global __ptext181
+   881  00E6                     __ptext181:
+   882                           
+   883 ;; *************** function i1_timer *****************
+   884 ;; Defined at:
+   885 ;;		line 8 in file "D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_segement.c"
+   886 ;; Parameters:    Size  Location     Type
+   887 ;;  timer           2    0[COMMON] int 
+   888 ;; Auto vars:     Size  Location     Type
+   889 ;;		None
+   890 ;; Return value:  Size  Location     Type
+   891 ;;		None               void
+   892 ;; Registers used:
+   893 ;;		wreg, status,2, btemp+1
+   894 ;; Tracked objects:
+   895 ;;		On entry : 0/0
+   896 ;;		On exit  : 0/0
+   897 ;;		Unchanged: 0/0
+   898 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   899 ;;      Params:         2       0       0       0       0
+   900 ;;      Locals:         0       0       0       0       0
+   901 ;;      Temps:          0       0       0       0       0
+   902 ;;      Totals:         2       0       0       0       0
+   903 ;;Total ram usage:        2 bytes
+   904 ;; Hardware stack levels used:    1
+   905 ;; This function calls:
+   906 ;;		Nothing
+   907 ;; This function is called by:
+   908 ;;		_ext
+   909 ;; This function uses a non-reentrant model
+   910 ;;
+   911                           psect	text181
+   912                           	file	"D:\Embedded\pic\code\software\interrupt\interrupt_using segement\Interrupt_using_
+                                 segement.c"
+   913                           	line	8
+   914                           	global	__size_ofi1_timer
+   915  002E                     	__size_ofi1_timer	equ	__end_ofi1_timer-i1_timer
+   916                           	
+   917  00E6                     i1_timer:	
+   918                           	opt	stack 5
+   919                           ; Regs used in i1_timer: [wreg+status,2+btemp+1]
+   920                           	line	9
+   921                           	
+   922  00E6                     i1l2293:	
+   923                           ;Interrupt_using_segement.c: 9: while(0<a)
+   924  00E6  2905               	goto	i1l2303
+   925                           	
+   926  00E7                     i1l1034:	
+   927                           	line	11
+   928                           ;Interrupt_using_segement.c: 10: {
+   929                           ;Interrupt_using_segement.c: 11: if(TMR1IF==1)
+   930  00E7  1283               	bcf	status, 5	;RP0=0, select bank0
+   931  00E8  1303               	bcf	status, 6	;RP1=0, select bank0
+   932  00E9  1C0C               	btfss	(96/8),(96)&7
+   933  00EA  28EC               	goto	u234_21
+   934  00EB  28ED               	goto	u234_20
+   935  00EC                     u234_21:
+   936  00EC  28F4               	goto	i1l1035
+   937  00ED                     u234_20:
+   938                           	line	13
+   939                           	
+   940  00ED                     i1l2295:	
+   941                           ;Interrupt_using_segement.c: 12: {
+   942                           ;Interrupt_using_segement.c: 13: count++;
+   943  00ED  3001               	movlw	low(01h)
+   944  00EE  07F6               	addwf	(_count),f
+   945  00EF  1803               	skipnc
+   946  00F0  0AF7               	incf	(_count+1),f
+   947  00F1  3000               	movlw	high(01h)
+   948  00F2  07F7               	addwf	(_count+1),f
+   949                           	line	14
+   950                           	
+   951  00F3                     i1l2297:	
+   952                           ;Interrupt_using_segement.c: 14: TMR1IF=0;
+   953  00F3  100C               	bcf	(96/8),(96)&7
+   954                           	line	15
+   955                           	
+   956  00F4                     i1l1035:	
+   957                           	line	16
+   958                           ;Interrupt_using_segement.c: 15: }
+   959                           ;Interrupt_using_segement.c: 16: if(count==2)
+   960  00F4  3002               	movlw	02h
+   961  00F5  0676               	xorwf	(_count),w
+   962  00F6  0477               	iorwf	(_count+1),w
+   963  00F7  1D03               	skipz
+   964  00F8  28FA               	goto	u235_21
+   965  00F9  28FB               	goto	u235_20
+   966  00FA                     u235_21:
+   967  00FA  2905               	goto	i1l2303
+   968  00FB                     u235_20:
+   969                           	line	18
+   970                           	
+   971  00FB                     i1l2299:	
+   972                           ;Interrupt_using_segement.c: 17: {
+   973                           ;Interrupt_using_segement.c: 18: count=0;
+   974  00FB  01F6               	clrf	(_count)
+   975  00FC  01F7               	clrf	(_count+1)
+   976                           	line	19
+   977                           	
+   978  00FD                     i1l2301:	
+   979                           ;Interrupt_using_segement.c: 19: a--;
+   980  00FD  30FF               	movlw	low(-1)
+   981  00FE  07F0               	addwf	(i1timer@a),f
+   982  00FF  1803               	skipnc
+   983  0100  0AF1               	incf	(i1timer@a+1),f
+   984  0101  30FF               	movlw	high(-1)
+   985  0102  07F1               	addwf	(i1timer@a+1),f
+   986  0103  2905               	goto	i1l2303
+   987                           	line	20
+   988                           	
+   989  0104                     i1l1036:	
+   990  0104  2905               	goto	i1l2303
+   991                           	line	21
+   992                           	
+   993  0105                     i1l1033:	
+   994                           	line	9
+   995                           	
+   996  0105                     i1l2303:	
+   997  0105  0871               	movf	(i1timer@a+1),w
+   998  0106  3A80               	xorlw	80h
+   999  0107  00FF               	movwf	btemp+1
+  1000  0108  3080               	movlw	(high(01h))^80h
+  1001  0109  027F               	subwf	btemp+1,w
+  1002  010A  1D03               	skipz
+  1003  010B  290E               	goto	u236_25
+  1004  010C  3001               	movlw	low(01h)
+  1005  010D  0270               	subwf	(i1timer@a),w
+  1006  010E                     u236_25:
+  1007                           
+  1008  010E  1803               	skipnc
+  1009  010F  2911               	goto	u236_21
+  1010  0110  2912               	goto	u236_20
+  1011  0111                     u236_21:
+  1012  0111  28E7               	goto	i1l1034
+  1013  0112                     u236_20:
+  1014  0112  2913               	goto	i1l1038
+  1015                           	
+  1016  0113                     i1l1037:	
+  1017                           	line	22
+  1018                           	
+  1019  0113                     i1l1038:	
+  1020  0113  0008               	return
+  1021                           	opt stack 0
+  1022                           GLOBAL	__end_ofi1_timer
+  1023  0114                     	__end_ofi1_timer:
+  1024 ;; =============== function i1_timer ends ============
+  1025                           
+  1026                           	signat	i1_timer,88
+  1027                           psect	text182,local,class=CODE,delta=2
+  1028                           global __ptext182
+  1029  0000                     __ptext182:
+  1030                           	global	btemp
+  1031  007E                     	btemp set 07Eh
+  1032                           
+  1033                           	DABS	1,126,2	;btemp
+  1034                           	global	wtemp0
+  1035  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Sat Apr 02 02:46:08 2022
+
+                   _i 007A                     _j 0078                     pc 0002                    fsr 0004  
+                 _ext 006E                   _seg 0020                   fsr0 0004                   indf 0000  
+                l1033 00D5                  l1041 0033                  l1034 00B7                  l1042 0044  
+                l1035 00C4                  l1043 0069                  l1036 00D4                  l1044 006A  
+                l1037 00E5                  l1045 006B                  l1038 00E5                  l1046 006B  
+                l2331 00B6                  l2333 00BD                  l2341 00D5                  l2335 00C3  
+                l2351 002C                  l2343 0015                  l2337 00CB                  l2361 0044  
+                l2353 0030                  l2345 0024                  l2339 00CD                  l2363 004C  
+                l2355 0033                  l2347 0028                  l2365 0055                  l2357 0035  
+                l2349 002B                  l2367 005B                  l2359 0043                  ?_ext 0070  
+                u2400 00CB                  u2401 00CA                  u2410 00E4                  u2411 00E3  
+                u2420 0042                  u2421 0041                  u2430 0068                  u2415 00E0  
+                u2431 0067                  u2425 003E                  u2435 0064                  u2390 00BD  
+                u2391 00BC                  _INTF 0059                  _main 0015                  btemp 007E  
+                start 0012       __end_ofi1_timer 0114                 ??_ext 0072                 ?_main 0070  
+               _ANSEL 0188                 _T1CON 0010                 _PORTB 0006                 _PORTC 0007  
+               _PORTD 0008                 _TRISB 0086                 _TRISC 0087                 _TRISD 0088  
+               _count 0076                 _timer 00B6                 pclath 000A                 status 0003  
+               wtemp0 007E          __end_of_main 006E                ??_main 002C                ?_timer 002A  
+              _ANSELH 0189                i1l1033 0105                i1l1034 00E7                i1l1050 0083  
+              i1l1035 00F4                i1l1051 00A7                i1l1036 0104                i1l1052 00A9  
+              i1l1037 0113                i1l1038 0113                i1l1049 00A9                i1l2301 00FD  
+              i1l2303 0105                i1l2281 0074                i1l2291 009A                i1l2283 0082  
+              i1l2293 00E6                i1l2285 0083                i1l2277 006E                i1l2295 00ED  
+              i1l2287 008B                i1l2279 0072                i1l2297 00F3                i1l2289 0094  
+              i1l2299 00FB                u231_20 0072                u231_21 0071                u232_20 0081  
+              u232_21 0080                u232_25 007D                u233_20 00A7                _INTCON 000B  
+              u233_21 00A6                u233_25 00A3                u234_20 00ED                u234_21 00EC  
+              u235_20 00FB                u235_21 00FA                u236_20 0112                u236_21 0111  
+              u236_25 010E             ??i1_timer 0072                _TMR1IF 0060                saved_w 007E  
+              timer@a 002A        __pcstackCOMMON 0070          __pidataBANK0 013B         __end_of_timer 00E6  
+             ??_timer 002C            __pnvCOMMON 007A            __pmaintext 0015            __pintentry 0004  
+             i1_timer 00E6          __size_of_ext 0048  end_of_initialization 0126               init_ram 012E  
+ start_initialization 0114           __end_of_ext 00B6           __pdataBANK0 0020           __pbssCOMMON 0076  
+       __pcstackBANK0 002A              ?i1_timer 0070             __ptext180 006E             __ptext181 00E6  
+           __ptext182 0000             __ptext179 00B6        __size_of_timer 0030     interrupt_function 0004  
+            i1timer@a 0070      __size_ofi1_timer 002E             init_fetch 012A         __size_of_main 0059  
+            intlevel1 0000  

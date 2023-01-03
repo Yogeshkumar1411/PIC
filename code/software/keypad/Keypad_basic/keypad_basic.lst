@@ -1,0 +1,785 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Fri Apr 15 02:42:14 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNROOT	_main
+    43                           	global	_seg
+    44                           psect	idataBANK0,class=CODE,space=0,delta=2
+    45                           global __pidataBANK0
+    46  074E                     __pidataBANK0:
+    47                           	file	"D:\Embedded\pic\code\software\keypad\Keypad_basic\keypad_basic.c"
+    48                           	line	10
+    49                           
+    50                           ;initializer for _seg
+    51  074E  343F               	retlw	03Fh
+    52  074F  3406               	retlw	06h
+    53  0750  345B               	retlw	05Bh
+    54  0751  344F               	retlw	04Fh
+    55  0752  3466               	retlw	066h
+    56  0753  346D               	retlw	06Dh
+    57  0754  347D               	retlw	07Dh
+    58  0755  3407               	retlw	07h
+    59  0756  347F               	retlw	07Fh
+    60  0757  346F               	retlw	06Fh
+    61  0758  3400               	retlw	0
+    62  0759  3400               	retlw	0
+    63  075A  3400               	retlw	0
+    64  075B  3400               	retlw	0
+    65  075C  3400               	retlw	0
+    66  075D  3400               	retlw	0
+    67  075E  3400               	retlw	0
+    68  075F  3400               	retlw	0
+    69  0760  3400               	retlw	0
+    70  0761  3400               	retlw	0
+    71                           	global	_PORTB
+    72  0006                     _PORTB	set	6
+    73                           	global	_PORTD
+    74  0008                     _PORTD	set	8
+    75                           	global	_RD0
+    76  0040                     _RD0	set	64
+    77                           	global	_RD1
+    78  0041                     _RD1	set	65
+    79                           	global	_RD2
+    80  0042                     _RD2	set	66
+    81                           	global	_RD3
+    82  0043                     _RD3	set	67
+    83                           	global	_RD4
+    84  0044                     _RD4	set	68
+    85                           	global	_RD5
+    86  0045                     _RD5	set	69
+    87                           	global	_RD6
+    88  0046                     _RD6	set	70
+    89                           	global	_RD7
+    90  0047                     _RD7	set	71
+    91                           	global	_TRISB
+    92  0086                     _TRISB	set	134
+    93                           	global	_TRISD
+    94  0088                     _TRISD	set	136
+    95                           	global	_ANSEL
+    96  0188                     _ANSEL	set	392
+    97                           	global	_ANSELH
+    98  0189                     _ANSELH	set	393
+    99                           	file	"keypad_basic.as"
+   100                           	line	#
+   101                           psect cinit,class=CODE,delta=2
+   102                           global start_initialization
+   103  073C                     start_initialization:
+   104                           
+   105                           psect	dataBANK0,class=BANK0,space=1
+   106                           global __pdataBANK0
+   107  0020                     __pdataBANK0:
+   108                           	file	"D:\Embedded\pic\code\software\keypad\Keypad_basic\keypad_basic.c"
+   109  0020                     _seg:
+   110  0020                            ds      20
+   111                           
+   112                           global btemp
+   113                           psect inittext,class=CODE,delta=2
+   114                           global init_fetch,btemp
+   115                           ;	Called with low address in FSR and high address in W
+   116  072B                     init_fetch:
+   117  072B  087E               	movf btemp,w
+   118  072C  008A               	movwf pclath
+   119  072D  087F               	movf btemp+1,w
+   120  072E  0082               	movwf pc
+   121                           global init_ram
+   122                           ;Called with:
+   123                           ;	high address of idata address in btemp 
+   124                           ;	low address of idata address in btemp+1 
+   125                           ;	low address of data in FSR
+   126                           ;	high address + 1 of data in btemp-1
+   127  072F                     init_ram:
+   128  072F  272B  120A  118A   	fcall init_fetch
+   129  0732  0080               	movwf indf,f
+   130  0733  0A84               	incf fsr,f
+   131  0734  0804               	movf fsr,w
+   132  0735  067D               	xorwf btemp-1,w
+   133  0736  1903               	btfsc status,2
+   134  0737  3400               	retlw 0
+   135  0738  0AFF               	incf btemp+1,f
+   136  0739  1903               	btfsc status,2
+   137  073A  0AFE               	incf btemp,f
+   138  073B  2F2F               	goto init_ram
+   139                           ; Initialize objects allocated to BANK0
+   140                           psect cinit,class=CODE,delta=2
+   141                           global init_ram, __pidataBANK0
+   142  073C  1383               	bcf	status, 7	;select IRP bank0
+   143  073D  3034               	movlw low(__pdataBANK0+20)
+   144  073E  00FD               	movwf btemp-1,f
+   145  073F  3007               	movlw high(__pidataBANK0)
+   146  0740  00FE               	movwf btemp,f
+   147  0741  304E               	movlw low(__pidataBANK0)
+   148  0742  00FF               	movwf btemp+1,f
+   149  0743  3020               	movlw low(__pdataBANK0)
+   150  0744  0084               	movwf fsr,f
+   151  0745  120A  118A  272F   	fcall init_ram
+              120A  118A         
+   152                           psect cinit,class=CODE,delta=2
+   153                           global end_of_initialization
+   154                           
+   155                           ;End of C runtime variable initialization code
+   156                           
+   157  074A                     end_of_initialization:
+   158  074A  0183               clrf status
+   159  074B  120A  118A  2F62   ljmp _main	;jump to C main() function
+   160                           psect	cstackCOMMON,class=COMMON,space=1
+   161                           global __pcstackCOMMON
+   162  0000                     __pcstackCOMMON:
+   163                           	global	?_main
+   164  0000                     ?_main:	; 0 bytes @ 0x0
+   165                           	global	??_main
+   166  0000                     ??_main:	; 0 bytes @ 0x0
+   167 ;;Data sizes: Strings 0, constant 0, data 20, bss 0, persistent 0 stack 0
+   168 ;;Auto spaces:   Size  Autos    Used
+   169 ;; COMMON          14      0       0
+   170 ;; BANK0           80      0      20
+   171 ;; BANK1           80      0       0
+   172 ;; BANK3           96      0       0
+   173 ;; BANK2           96      0       0
+   174                           
+   175 ;;
+   176 ;; Pointer list with targets:
+   177                           
+   178                           
+   179                           
+   180 ;;
+   181 ;; Critical Paths under _main in COMMON
+   182 ;;
+   183 ;;   None.
+   184 ;;
+   185 ;; Critical Paths under _main in BANK0
+   186 ;;
+   187 ;;   None.
+   188 ;;
+   189 ;; Critical Paths under _main in BANK1
+   190 ;;
+   191 ;;   None.
+   192 ;;
+   193 ;; Critical Paths under _main in BANK3
+   194 ;;
+   195 ;;   None.
+   196 ;;
+   197 ;; Critical Paths under _main in BANK2
+   198 ;;
+   199 ;;   None.
+   200                           
+   201 ;;
+   202 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   203 ;;
+   204                           
+   205 ;;
+   206 ;;Call Graph Tables:
+   207 ;;
+   208 ;; ---------------------------------------------------------------------------------
+   209 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   210 ;; ---------------------------------------------------------------------------------
+   211 ;; (0) _main                                                 0     0      0       0
+   212 ;; ---------------------------------------------------------------------------------
+   213 ;; Estimated maximum stack depth 0
+   214 ;; ---------------------------------------------------------------------------------
+   215                           
+   216 ;; Call Graph Graphs:
+   217                           
+   218 ;; _main (ROOT)
+   219 ;;
+   220                           
+   221 ;; Address spaces:
+   222                           
+   223 ;;Name               Size   Autos  Total    Cost      Usage
+   224 ;;BANK3               60      0       0       9        0.0%
+   225 ;;BITBANK3            60      0       0       8        0.0%
+   226 ;;SFR3                 0      0       0       4        0.0%
+   227 ;;BITSFR3              0      0       0       4        0.0%
+   228 ;;BANK2               60      0       0      11        0.0%
+   229 ;;BITBANK2            60      0       0      10        0.0%
+   230 ;;SFR2                 0      0       0       5        0.0%
+   231 ;;BITSFR2              0      0       0       5        0.0%
+   232 ;;SFR1                 0      0       0       2        0.0%
+   233 ;;BITSFR1              0      0       0       2        0.0%
+   234 ;;BANK1               50      0       0       7        0.0%
+   235 ;;BITBANK1            50      0       0       6        0.0%
+   236 ;;CODE                 0      0       0       0        0.0%
+   237 ;;DATA                 0      0      14      12        0.0%
+   238 ;;ABS                  0      0      14       3        0.0%
+   239 ;;NULL                 0      0       0       0        0.0%
+   240 ;;STACK                0      0       0       2        0.0%
+   241 ;;BANK0               50      0      14       5       25.0%
+   242 ;;BITBANK0            50      0       0       4        0.0%
+   243 ;;SFR0                 0      0       0       1        0.0%
+   244 ;;BITSFR0              0      0       0       1        0.0%
+   245 ;;COMMON               E      0       0       1        0.0%
+   246 ;;BITCOMMON            E      0       0       0        0.0%
+   247 ;;EEDATA             100      0       0       0        0.0%
+   248                           
+   249                           	global	_main
+   250                           psect	maintext,global,class=CODE,delta=2
+   251                           global __pmaintext
+   252  0762                     __pmaintext:
+   253                           
+   254 ;; *************** function _main *****************
+   255 ;; Defined at:
+   256 ;;		line 13 in file "D:\Embedded\pic\code\software\keypad\Keypad_basic\keypad_basic.c"
+   257 ;; Parameters:    Size  Location     Type
+   258 ;;		None
+   259 ;; Auto vars:     Size  Location     Type
+   260 ;;		None
+   261 ;; Return value:  Size  Location     Type
+   262 ;;		None               void
+   263 ;; Registers used:
+   264 ;;		wreg, status,2
+   265 ;; Tracked objects:
+   266 ;;		On entry : 17F/0
+   267 ;;		On exit  : 0/0
+   268 ;;		Unchanged: 0/0
+   269 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   270 ;;      Params:         0       0       0       0       0
+   271 ;;      Locals:         0       0       0       0       0
+   272 ;;      Temps:          0       0       0       0       0
+   273 ;;      Totals:         0       0       0       0       0
+   274 ;;Total ram usage:        0 bytes
+   275 ;; This function calls:
+   276 ;;		Nothing
+   277 ;; This function is called by:
+   278 ;;		Startup code after reset
+   279 ;; This function uses a non-reentrant model
+   280 ;;
+   281                           psect	maintext
+   282                           	file	"D:\Embedded\pic\code\software\keypad\Keypad_basic\keypad_basic.c"
+   283                           	line	13
+   284                           	global	__size_of_main
+   285  009E                     	__size_of_main	equ	__end_of_main-_main
+   286                           	
+   287  0762                     _main:	
+   288                           	opt	stack 8
+   289                           ; Regs used in _main: [wreg+status,2]
+   290                           	line	14
+   291                           	
+   292  0762                     l1439:	
+   293                           ;keypad_basic.c: 14: PORTD=0X00;
+   294  0762  1283               	bcf	status, 5	;RP0=0, select bank0
+   295  0763  1303               	bcf	status, 6	;RP1=0, select bank0
+   296  0764  0188               	clrf	(8)	;volatile
+   297                           	line	15
+   298                           	
+   299  0765                     l1441:	
+   300                           ;keypad_basic.c: 15: TRISD=0X0F;
+   301  0765  300F               	movlw	(0Fh)
+   302  0766  1683               	bsf	status, 5	;RP0=1, select bank1
+   303  0767  1303               	bcf	status, 6	;RP1=0, select bank1
+   304  0768  0088               	movwf	(136)^080h	;volatile
+   305                           	line	16
+   306                           	
+   307  0769                     l1443:	
+   308                           ;keypad_basic.c: 16: PORTB=0X00;
+   309  0769  1283               	bcf	status, 5	;RP0=0, select bank0
+   310  076A  1303               	bcf	status, 6	;RP1=0, select bank0
+   311  076B  0186               	clrf	(6)	;volatile
+   312                           	line	17
+   313                           	
+   314  076C                     l1445:	
+   315                           ;keypad_basic.c: 17: TRISB=0X00;
+   316  076C  1683               	bsf	status, 5	;RP0=1, select bank1
+   317  076D  1303               	bcf	status, 6	;RP1=0, select bank1
+   318  076E  0186               	clrf	(134)^080h	;volatile
+   319                           	line	18
+   320                           	
+   321  076F                     l1447:	
+   322                           ;keypad_basic.c: 18: ANSEL=0X00;
+   323  076F  1683               	bsf	status, 5	;RP0=1, select bank3
+   324  0770  1703               	bsf	status, 6	;RP1=1, select bank3
+   325  0771  0188               	clrf	(392)^0180h	;volatile
+   326                           	line	19
+   327                           	
+   328  0772                     l1449:	
+   329                           ;keypad_basic.c: 19: ANSELH=0X00;
+   330  0772  0189               	clrf	(393)^0180h	;volatile
+   331  0773  2F74               	goto	l1451
+   332                           	line	20
+   333                           ;keypad_basic.c: 20: while(1)
+   334                           	
+   335  0774                     l1027:	
+   336                           	line	22
+   337                           	
+   338  0774                     l1451:	
+   339                           ;keypad_basic.c: 21: {
+   340                           ;keypad_basic.c: 22: RD4=1;RD5=RD6=RD7=0;
+   341  0774  1283               	bcf	status, 5	;RP0=0, select bank0
+   342  0775  1303               	bcf	status, 6	;RP1=0, select bank0
+   343  0776  1608               	bsf	(68/8),(68)&7
+   344                           	
+   345  0777                     l1453:	
+   346  0777  1388               	bcf	(71/8),(71)&7
+   347  0778  1308               	bcf	(70/8),(70)&7
+   348  0779  1288               	bcf	(69/8),(69)&7
+   349                           	line	23
+   350                           	
+   351  077A                     l1455:	
+   352                           ;keypad_basic.c: 23: if(RD0==1)
+   353  077A  1C08               	btfss	(64/8),(64)&7
+   354  077B  2F7D               	goto	u11
+   355  077C  2F7E               	goto	u10
+   356  077D                     u11:
+   357  077D  2F86               	goto	l1028
+   358  077E                     u10:
+   359                           	line	25
+   360                           	
+   361  077E                     l1457:	
+   362                           ;keypad_basic.c: 24: {
+   363                           ;keypad_basic.c: 25: PORTB=seg[1];
+   364  077E  0821               	movf	0+(_seg)+01h,w
+   365  077F  0086               	movwf	(6)	;volatile
+   366                           	line	26
+   367                           ;keypad_basic.c: 26: while(RD0==1);
+   368  0780  2F81               	goto	l1029
+   369                           	
+   370  0781                     l1030:	
+   371                           	
+   372  0781                     l1029:	
+   373  0781  1808               	btfsc	(64/8),(64)&7
+   374  0782  2F84               	goto	u21
+   375  0783  2F85               	goto	u20
+   376  0784                     u21:
+   377  0784  2F81               	goto	l1029
+   378  0785                     u20:
+   379  0785  2F86               	goto	l1028
+   380                           	
+   381  0786                     l1031:	
+   382                           	line	27
+   383                           	
+   384  0786                     l1028:	
+   385                           	line	28
+   386                           ;keypad_basic.c: 27: }
+   387                           ;keypad_basic.c: 28: if(RD1==1)
+   388  0786  1C88               	btfss	(65/8),(65)&7
+   389  0787  2F89               	goto	u31
+   390  0788  2F8A               	goto	u30
+   391  0789                     u31:
+   392  0789  2F92               	goto	l1032
+   393  078A                     u30:
+   394                           	line	30
+   395                           	
+   396  078A                     l1459:	
+   397                           ;keypad_basic.c: 29: {
+   398                           ;keypad_basic.c: 30: PORTB=seg[2];
+   399  078A  0822               	movf	0+(_seg)+02h,w
+   400  078B  0086               	movwf	(6)	;volatile
+   401                           	line	31
+   402                           ;keypad_basic.c: 31: while(RD1==1);
+   403  078C  2F8D               	goto	l1033
+   404                           	
+   405  078D                     l1034:	
+   406                           	
+   407  078D                     l1033:	
+   408  078D  1888               	btfsc	(65/8),(65)&7
+   409  078E  2F90               	goto	u41
+   410  078F  2F91               	goto	u40
+   411  0790                     u41:
+   412  0790  2F8D               	goto	l1033
+   413  0791                     u40:
+   414  0791  2F92               	goto	l1032
+   415                           	
+   416  0792                     l1035:	
+   417                           	line	32
+   418                           	
+   419  0792                     l1032:	
+   420                           	line	33
+   421                           ;keypad_basic.c: 32: }
+   422                           ;keypad_basic.c: 33: if(RD2==1)
+   423  0792  1D08               	btfss	(66/8),(66)&7
+   424  0793  2F95               	goto	u51
+   425  0794  2F96               	goto	u50
+   426  0795                     u51:
+   427  0795  2F9E               	goto	l1036
+   428  0796                     u50:
+   429                           	line	35
+   430                           	
+   431  0796                     l1461:	
+   432                           ;keypad_basic.c: 34: {
+   433                           ;keypad_basic.c: 35: PORTB=seg[3];
+   434  0796  0823               	movf	0+(_seg)+03h,w
+   435  0797  0086               	movwf	(6)	;volatile
+   436                           	line	36
+   437                           ;keypad_basic.c: 36: while(RD2==1);
+   438  0798  2F99               	goto	l1037
+   439                           	
+   440  0799                     l1038:	
+   441                           	
+   442  0799                     l1037:	
+   443  0799  1908               	btfsc	(66/8),(66)&7
+   444  079A  2F9C               	goto	u61
+   445  079B  2F9D               	goto	u60
+   446  079C                     u61:
+   447  079C  2F99               	goto	l1037
+   448  079D                     u60:
+   449  079D  2F9E               	goto	l1036
+   450                           	
+   451  079E                     l1039:	
+   452                           	line	37
+   453                           	
+   454  079E                     l1036:	
+   455                           	line	38
+   456                           ;keypad_basic.c: 37: }
+   457                           ;keypad_basic.c: 38: if(RD3==1)
+   458  079E  1D88               	btfss	(67/8),(67)&7
+   459  079F  2FA1               	goto	u71
+   460  07A0  2FA2               	goto	u70
+   461  07A1                     u71:
+   462  07A1  2FAA               	goto	l1040
+   463  07A2                     u70:
+   464                           	line	40
+   465                           	
+   466  07A2                     l1463:	
+   467                           ;keypad_basic.c: 39: {
+   468                           ;keypad_basic.c: 40: PORTB=seg[4];
+   469  07A2  0824               	movf	0+(_seg)+04h,w
+   470  07A3  0086               	movwf	(6)	;volatile
+   471                           	line	41
+   472                           ;keypad_basic.c: 41: while(RD3==1);
+   473  07A4  2FA5               	goto	l1041
+   474                           	
+   475  07A5                     l1042:	
+   476                           	
+   477  07A5                     l1041:	
+   478  07A5  1988               	btfsc	(67/8),(67)&7
+   479  07A6  2FA8               	goto	u81
+   480  07A7  2FA9               	goto	u80
+   481  07A8                     u81:
+   482  07A8  2FA5               	goto	l1041
+   483  07A9                     u80:
+   484  07A9  2FAA               	goto	l1040
+   485                           	
+   486  07AA                     l1043:	
+   487                           	line	42
+   488                           	
+   489  07AA                     l1040:	
+   490                           	line	45
+   491                           ;keypad_basic.c: 42: }
+   492                           ;keypad_basic.c: 45: RD5=1;RD4=RD6=RD7=0;
+   493  07AA  1688               	bsf	(69/8),(69)&7
+   494  07AB  1388               	bcf	(71/8),(71)&7
+   495  07AC  1308               	bcf	(70/8),(70)&7
+   496  07AD  1208               	bcf	(68/8),(68)&7
+   497                           	line	46
+   498                           ;keypad_basic.c: 46: if(RD0==1)
+   499  07AE  1C08               	btfss	(64/8),(64)&7
+   500  07AF  2FB1               	goto	u91
+   501  07B0  2FB2               	goto	u90
+   502  07B1                     u91:
+   503  07B1  2FBA               	goto	l1044
+   504  07B2                     u90:
+   505                           	line	48
+   506                           	
+   507  07B2                     l1465:	
+   508                           ;keypad_basic.c: 47: {
+   509                           ;keypad_basic.c: 48: PORTB=seg[5];
+   510  07B2  0825               	movf	0+(_seg)+05h,w
+   511  07B3  0086               	movwf	(6)	;volatile
+   512                           	line	49
+   513                           ;keypad_basic.c: 49: while(RD0==1);
+   514  07B4  2FB5               	goto	l1045
+   515                           	
+   516  07B5                     l1046:	
+   517                           	
+   518  07B5                     l1045:	
+   519  07B5  1808               	btfsc	(64/8),(64)&7
+   520  07B6  2FB8               	goto	u101
+   521  07B7  2FB9               	goto	u100
+   522  07B8                     u101:
+   523  07B8  2FB5               	goto	l1045
+   524  07B9                     u100:
+   525  07B9  2FBA               	goto	l1044
+   526                           	
+   527  07BA                     l1047:	
+   528                           	line	50
+   529                           	
+   530  07BA                     l1044:	
+   531                           	line	51
+   532                           ;keypad_basic.c: 50: }
+   533                           ;keypad_basic.c: 51: if(RD1==1)
+   534  07BA  1C88               	btfss	(65/8),(65)&7
+   535  07BB  2FBD               	goto	u111
+   536  07BC  2FBE               	goto	u110
+   537  07BD                     u111:
+   538  07BD  2FC6               	goto	l1048
+   539  07BE                     u110:
+   540                           	line	53
+   541                           	
+   542  07BE                     l1467:	
+   543                           ;keypad_basic.c: 52: {
+   544                           ;keypad_basic.c: 53: PORTB=seg[6];
+   545  07BE  0826               	movf	0+(_seg)+06h,w
+   546  07BF  0086               	movwf	(6)	;volatile
+   547                           	line	54
+   548                           ;keypad_basic.c: 54: while(RD1==1);
+   549  07C0  2FC1               	goto	l1049
+   550                           	
+   551  07C1                     l1050:	
+   552                           	
+   553  07C1                     l1049:	
+   554  07C1  1888               	btfsc	(65/8),(65)&7
+   555  07C2  2FC4               	goto	u121
+   556  07C3  2FC5               	goto	u120
+   557  07C4                     u121:
+   558  07C4  2FC1               	goto	l1049
+   559  07C5                     u120:
+   560  07C5  2FC6               	goto	l1048
+   561                           	
+   562  07C6                     l1051:	
+   563                           	line	55
+   564                           	
+   565  07C6                     l1048:	
+   566                           	line	56
+   567                           ;keypad_basic.c: 55: }
+   568                           ;keypad_basic.c: 56: if(RD2==1)
+   569  07C6  1D08               	btfss	(66/8),(66)&7
+   570  07C7  2FC9               	goto	u131
+   571  07C8  2FCA               	goto	u130
+   572  07C9                     u131:
+   573  07C9  2FD2               	goto	l1052
+   574  07CA                     u130:
+   575                           	line	58
+   576                           	
+   577  07CA                     l1469:	
+   578                           ;keypad_basic.c: 57: {
+   579                           ;keypad_basic.c: 58: PORTB=seg[7];
+   580  07CA  0827               	movf	0+(_seg)+07h,w
+   581  07CB  0086               	movwf	(6)	;volatile
+   582                           	line	59
+   583                           ;keypad_basic.c: 59: while(RD2==1);
+   584  07CC  2FCD               	goto	l1053
+   585                           	
+   586  07CD                     l1054:	
+   587                           	
+   588  07CD                     l1053:	
+   589  07CD  1908               	btfsc	(66/8),(66)&7
+   590  07CE  2FD0               	goto	u141
+   591  07CF  2FD1               	goto	u140
+   592  07D0                     u141:
+   593  07D0  2FCD               	goto	l1053
+   594  07D1                     u140:
+   595  07D1  2FD2               	goto	l1052
+   596                           	
+   597  07D2                     l1055:	
+   598                           	line	60
+   599                           	
+   600  07D2                     l1052:	
+   601                           	line	61
+   602                           ;keypad_basic.c: 60: }
+   603                           ;keypad_basic.c: 61: if(RD3==1)
+   604  07D2  1D88               	btfss	(67/8),(67)&7
+   605  07D3  2FD5               	goto	u151
+   606  07D4  2FD6               	goto	u150
+   607  07D5                     u151:
+   608  07D5  2FDE               	goto	l1056
+   609  07D6                     u150:
+   610                           	line	63
+   611                           	
+   612  07D6                     l1471:	
+   613                           ;keypad_basic.c: 62: {
+   614                           ;keypad_basic.c: 63: PORTB=seg[8];
+   615  07D6  0828               	movf	0+(_seg)+08h,w
+   616  07D7  0086               	movwf	(6)	;volatile
+   617                           	line	64
+   618                           ;keypad_basic.c: 64: while(RD3==1);
+   619  07D8  2FD9               	goto	l1057
+   620                           	
+   621  07D9                     l1058:	
+   622                           	
+   623  07D9                     l1057:	
+   624  07D9  1988               	btfsc	(67/8),(67)&7
+   625  07DA  2FDC               	goto	u161
+   626  07DB  2FDD               	goto	u160
+   627  07DC                     u161:
+   628  07DC  2FD9               	goto	l1057
+   629  07DD                     u160:
+   630  07DD  2FDE               	goto	l1056
+   631                           	
+   632  07DE                     l1059:	
+   633                           	line	65
+   634                           	
+   635  07DE                     l1056:	
+   636                           	line	68
+   637                           ;keypad_basic.c: 65: }
+   638                           ;keypad_basic.c: 68: RD6=1;RD4=RD5=RD7=0;
+   639  07DE  1708               	bsf	(70/8),(70)&7
+   640  07DF  1388               	bcf	(71/8),(71)&7
+   641  07E0  1288               	bcf	(69/8),(69)&7
+   642  07E1  1208               	bcf	(68/8),(68)&7
+   643                           	line	69
+   644                           ;keypad_basic.c: 69: if(RD0==1)
+   645  07E2  1C08               	btfss	(64/8),(64)&7
+   646  07E3  2FE5               	goto	u171
+   647  07E4  2FE6               	goto	u170
+   648  07E5                     u171:
+   649  07E5  2FEE               	goto	l1060
+   650  07E6                     u170:
+   651                           	line	71
+   652                           	
+   653  07E6                     l1473:	
+   654                           ;keypad_basic.c: 70: {
+   655                           ;keypad_basic.c: 71: PORTB=seg[9];
+   656  07E6  0829               	movf	0+(_seg)+09h,w
+   657  07E7  0086               	movwf	(6)	;volatile
+   658                           	line	72
+   659                           ;keypad_basic.c: 72: while(RD0==1);
+   660  07E8  2FE9               	goto	l1061
+   661                           	
+   662  07E9                     l1062:	
+   663                           	
+   664  07E9                     l1061:	
+   665  07E9  1808               	btfsc	(64/8),(64)&7
+   666  07EA  2FEC               	goto	u181
+   667  07EB  2FED               	goto	u180
+   668  07EC                     u181:
+   669  07EC  2FE9               	goto	l1061
+   670  07ED                     u180:
+   671  07ED  2FEE               	goto	l1060
+   672                           	
+   673  07EE                     l1063:	
+   674                           	line	73
+   675                           	
+   676  07EE                     l1060:	
+   677                           	line	74
+   678                           ;keypad_basic.c: 73: }
+   679                           ;keypad_basic.c: 74: if(RD1==1)
+   680  07EE  1C88               	btfss	(65/8),(65)&7
+   681  07EF  2FF1               	goto	u191
+   682  07F0  2FF2               	goto	u190
+   683  07F1                     u191:
+   684  07F1  2F74               	goto	l1451
+   685  07F2                     u190:
+   686                           	line	76
+   687                           	
+   688  07F2                     l1475:	
+   689                           ;keypad_basic.c: 75: {
+   690                           ;keypad_basic.c: 76: PORTB=seg[0];
+   691  07F2  0820               	movf	(_seg),w
+   692  07F3  0086               	movwf	(6)	;volatile
+   693                           	line	77
+   694                           ;keypad_basic.c: 77: while(RD1==1);
+   695  07F4  2FF5               	goto	l1065
+   696                           	
+   697  07F5                     l1066:	
+   698                           	
+   699  07F5                     l1065:	
+   700  07F5  1888               	btfsc	(65/8),(65)&7
+   701  07F6  2FF8               	goto	u201
+   702  07F7  2FF9               	goto	u200
+   703  07F8                     u201:
+   704  07F8  2FF5               	goto	l1065
+   705  07F9                     u200:
+   706  07F9  2F74               	goto	l1451
+   707                           	
+   708  07FA                     l1067:	
+   709  07FA  2F74               	goto	l1451
+   710                           	line	78
+   711                           	
+   712  07FB                     l1064:	
+   713  07FB  2F74               	goto	l1451
+   714                           	line	92
+   715                           	
+   716  07FC                     l1068:	
+   717                           	line	20
+   718  07FC  2F74               	goto	l1451
+   719                           	
+   720  07FD                     l1069:	
+   721                           	line	93
+   722                           	
+   723  07FD                     l1070:	
+   724                           	global	start
+   725  07FD  120A  118A  2800   	ljmp	start
+   726                           	opt stack 0
+   727                           GLOBAL	__end_of_main
+   728  0800                     	__end_of_main:
+   729 ;; =============== function _main ends ============
+   730                           
+   731                           	signat	_main,88
+   732                           psect	maintext
+   733                           	global	btemp
+   734  007E                     	btemp set 07Eh
+   735                           
+   736                           	DABS	1,126,2	;btemp
+   737                           	global	wtemp0
+   738  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Fri Apr 15 02:42:14 2022
+
+                   pc 0002                    u10 077E                    u11 077D                    u20 0785  
+                  u21 0784                    u30 078A                    u31 0789                    u40 0791  
+                  u41 0790                    u50 0796                    u51 0795                    u60 079D  
+                  u61 079C                    u70 07A2                    u71 07A1                    u80 07A9  
+                  u81 07A8                    u90 07B2                    u91 07B1                    fsr 0004  
+                 _RD0 0040                   _RD1 0041                   _RD2 0042                   _RD3 0043  
+                 u100 07B9                   _RD4 0044                   u101 07B8                   _RD5 0045  
+                 u110 07BE                   _RD6 0046                   u111 07BD                   _RD7 0047  
+                 u200 07F9                   u120 07C5                   u201 07F8                   u121 07C4  
+                 u130 07CA                   u131 07C9                   u140 07D1                   u141 07D0  
+                 u150 07D6                   u151 07D5                   u160 07DD                   u161 07DC  
+                 u170 07E6                   u171 07E5                   u180 07ED                   u181 07EC  
+                 u190 07F2                   u191 07F1                   _seg 0020                   indf 0000  
+                l1030 0781                  l1031 0786                  l1040 07AA                  l1032 0792  
+                l1041 07A5                  l1033 078D                  l1050 07C1                  l1042 07A5  
+                l1034 078D                  l1051 07C6                  l1043 07AA                  l1035 0792  
+                l1027 0774                  l1060 07EE                  l1052 07D2                  l1044 07BA  
+                l1036 079E                  l1028 0786                  l1061 07E9                  l1053 07CD  
+                l1045 07B5                  l1037 0799                  l1029 0781                  l1070 07FD  
+                l1062 07E9                  l1054 07CD                  l1046 07B5                  l1038 0799  
+                l1063 07EE                  l1055 07D2                  l1047 07BA                  l1039 079E  
+                l1064 07FB                  l1056 07DE                  l1048 07C6                  l1065 07F5  
+                l1057 07D9                  l1049 07C1                  l1066 07F5                  l1058 07D9  
+                l1067 07FA                  l1059 07DE                  l1068 07FC                  l1069 07FD  
+                l1441 0765                  l1451 0774                  l1443 0769                  l1461 0796  
+                l1453 0777                  l1445 076C                  l1471 07D6                  l1463 07A2  
+                l1455 077A                  l1447 076F                  l1439 0762                  l1473 07E6  
+                l1465 07B2                  l1457 077E                  l1449 0772                  l1475 07F2  
+                l1467 07BE                  l1459 078A                  l1469 07CA                  _main 0762  
+                btemp 007E                  start 0000                 ?_main 0000                 _ANSEL 0188  
+               _PORTB 0006                 _PORTD 0008                 _TRISB 0086                 _TRISD 0088  
+               pclath 000A                 status 0003                 wtemp0 007E          __end_of_main 0800  
+              ??_main 0000                _ANSELH 0189        __pcstackCOMMON 0000          __pidataBANK0 074E  
+          __pmaintext 0762  end_of_initialization 074A               init_ram 072F   start_initialization 073C  
+         __pdataBANK0 0020             init_fetch 072B         __size_of_main 009E  

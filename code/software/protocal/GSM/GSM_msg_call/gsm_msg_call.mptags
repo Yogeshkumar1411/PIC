@@ -1,0 +1,15 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+count	D:\Embedded\pic\code\software\protocal\GSM\GSM_msg_call\gsm_msg_call.c	5;"	v	line:5
+delay	D:\Embedded\pic\code\software\protocal\GSM\GSM_msg_call\gsm_msg_call.c	6;"	f	line:6	signature:(unsigned int ms)
+main	D:\Embedded\pic\code\software\protocal\GSM\GSM_msg_call\gsm_msg_call.c	49;"	f	line:49
+new	D:\Embedded\pic\code\software\protocal\GSM\GSM_msg_call\gsm_msg_call.c	44;"	f	line:44
+timer	D:\Embedded\pic\code\software\protocal\GSM\GSM_msg_call\gsm_msg_call.c	10;"	f	line:10	signature:(int sec)
+tran	D:\Embedded\pic\code\software\protocal\GSM\GSM_msg_call\gsm_msg_call.c	27;"	f	line:27	signature:(char data)
+trans	D:\Embedded\pic\code\software\protocal\GSM\GSM_msg_call\gsm_msg_call.c	34;"	f	line:34	signature:(char *data1)

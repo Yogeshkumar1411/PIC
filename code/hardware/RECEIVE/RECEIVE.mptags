@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+EN::RE2	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	8;"	d	line:8	file:
+LCD::PORTB	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	9;"	d	line:9	file:
+RC	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	52;"	f	line:52
+RS::RE0	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	6;"	d	line:6	file:
+RW::RE1	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	7;"	d	line:7	file:
+data	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	12;"	v	line:12
+delay	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	15;"	f	line:15	signature:(unsigned int ms)
+display	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	26;"	f	line:26	signature:(char a,char b, char c)
+display1	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	36;"	f	line:36	signature:(char *data1)
+fir	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	13;"	v	line:13
+i	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	10;"	v	line:10
+j	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	11;"	v	line:11
+k	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	11;"	v	line:11
+main	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	75;"	f	line:75
+pulse	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	19;"	f	line:19
+sec	D:\Embedded\pic\code\hardware\RECEIVE\RECEIVE.c	14;"	v	line:14

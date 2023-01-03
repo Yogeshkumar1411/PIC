@@ -1,0 +1,1156 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Mon May 23 02:49:50 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_operation
+    43                           	FNROOT	_main
+    44                           	global	_seg
+    45                           psect	idataBANK0,class=CODE,space=0,delta=2
+    46                           global __pidataBANK0
+    47  0654                     __pidataBANK0:
+    48                           	file	"D:\Embedded\pic\code\software\lift\lift.c"
+    49                           	line	10
+    50                           
+    51                           ;initializer for _seg
+    52  0654  343F               	retlw	03Fh
+    53  0655  3406               	retlw	06h
+    54  0656  345B               	retlw	05Bh
+    55  0657  344F               	retlw	04Fh
+    56  0658  3466               	retlw	066h
+    57  0659  346D               	retlw	06Dh
+    58  065A  347D               	retlw	07Dh
+    59  065B  3407               	retlw	07h
+    60  065C  347F               	retlw	07Fh
+    61  065D  346F               	retlw	06Fh
+    62  065E  3400               	retlw	0
+    63  065F  3400               	retlw	0
+    64  0660  3400               	retlw	0
+    65  0661  3400               	retlw	0
+    66  0662  3400               	retlw	0
+    67  0663  3400               	retlw	0
+    68  0664  3400               	retlw	0
+    69  0665  3400               	retlw	0
+    70  0666  3400               	retlw	0
+    71  0667  3400               	retlw	0
+    72                           	global	_button
+    73                           	global	_floor
+    74                           	global	_PORTA
+    75  0005                     _PORTA	set	5
+    76                           	global	_PORTB
+    77  0006                     _PORTB	set	6
+    78                           	global	_PORTC
+    79  0007                     _PORTC	set	7
+    80                           	global	_PORTD
+    81  0008                     _PORTD	set	8
+    82                           	global	_RA0
+    83  0028                     _RA0	set	40
+    84                           	global	_RA1
+    85  0029                     _RA1	set	41
+    86                           	global	_RA2
+    87  002A                     _RA2	set	42
+    88                           	global	_RA3
+    89  002B                     _RA3	set	43
+    90                           	global	_RB0
+    91  0030                     _RB0	set	48
+    92                           	global	_RB1
+    93  0031                     _RB1	set	49
+    94                           	global	_RC4
+    95  003C                     _RC4	set	60
+    96                           	global	_RC5
+    97  003D                     _RC5	set	61
+    98                           	global	_RC6
+    99  003E                     _RC6	set	62
+   100                           	global	_RC7
+   101  003F                     _RC7	set	63
+   102                           	global	_TRISA
+   103  0085                     _TRISA	set	133
+   104                           	global	_TRISB
+   105  0086                     _TRISB	set	134
+   106                           	global	_TRISC
+   107  0087                     _TRISC	set	135
+   108                           	global	_TRISD
+   109  0088                     _TRISD	set	136
+   110                           	global	_ANSEL
+   111  0188                     _ANSEL	set	392
+   112                           	global	_ANSELH
+   113  0189                     _ANSELH	set	393
+   114                           	file	"lift.as"
+   115                           	line	#
+   116                           psect cinit,class=CODE,delta=2
+   117                           global start_initialization
+   118  0668                     start_initialization:
+   119                           
+   120                           psect	bssBANK0,class=BANK0,space=1
+   121                           global __pbssBANK0
+   122  0044                     __pbssBANK0:
+   123  0044                     _button:
+   124  0044                            ds      2
+   125                           
+   126  0046                     _floor:
+   127  0046                            ds      2
+   128                           
+   129                           psect	dataBANK0,class=BANK0,space=1
+   130                           global __pdataBANK0
+   131  0020                     __pdataBANK0:
+   132                           	file	"D:\Embedded\pic\code\software\lift\lift.c"
+   133  0020                     _seg:
+   134  0020                            ds      20
+   135                           
+   136                           ; Clear objects allocated to BANK0
+   137                           psect cinit,class=CODE,delta=2
+   138  0668  01C4               	clrf	((__pbssBANK0)+0)&07Fh
+   139  0669  01C5               	clrf	((__pbssBANK0)+1)&07Fh
+   140  066A  01C6               	clrf	((__pbssBANK0)+2)&07Fh
+   141  066B  01C7               	clrf	((__pbssBANK0)+3)&07Fh
+   142                           global btemp
+   143                           psect inittext,class=CODE,delta=2
+   144                           global init_fetch,btemp
+   145                           ;	Called with low address in FSR and high address in W
+   146  0643                     init_fetch:
+   147  0643  087E               	movf btemp,w
+   148  0644  008A               	movwf pclath
+   149  0645  087F               	movf btemp+1,w
+   150  0646  0082               	movwf pc
+   151                           global init_ram
+   152                           ;Called with:
+   153                           ;	high address of idata address in btemp 
+   154                           ;	low address of idata address in btemp+1 
+   155                           ;	low address of data in FSR
+   156                           ;	high address + 1 of data in btemp-1
+   157  0647                     init_ram:
+   158  0647  2643  120A  118A   	fcall init_fetch
+   159  064A  0080               	movwf indf,f
+   160  064B  0A84               	incf fsr,f
+   161  064C  0804               	movf fsr,w
+   162  064D  067D               	xorwf btemp-1,w
+   163  064E  1903               	btfsc status,2
+   164  064F  3400               	retlw 0
+   165  0650  0AFF               	incf btemp+1,f
+   166  0651  1903               	btfsc status,2
+   167  0652  0AFE               	incf btemp,f
+   168  0653  2E47               	goto init_ram
+   169                           ; Initialize objects allocated to BANK0
+   170                           psect cinit,class=CODE,delta=2
+   171                           global init_ram, __pidataBANK0
+   172  066C  1383               	bcf	status, 7	;select IRP bank0
+   173  066D  3034               	movlw low(__pdataBANK0+20)
+   174  066E  00FD               	movwf btemp-1,f
+   175  066F  3006               	movlw high(__pidataBANK0)
+   176  0670  00FE               	movwf btemp,f
+   177  0671  3054               	movlw low(__pidataBANK0)
+   178  0672  00FF               	movwf btemp+1,f
+   179  0673  3020               	movlw low(__pdataBANK0)
+   180  0674  0084               	movwf fsr,f
+   181  0675  120A  118A  2647   	fcall init_ram
+              120A  118A         
+   182                           psect cinit,class=CODE,delta=2
+   183                           global end_of_initialization
+   184                           
+   185                           ;End of C runtime variable initialization code
+   186                           
+   187  067A                     end_of_initialization:
+   188  067A  0183               clrf status
+   189  067B  120A  118A  2EFD   ljmp _main	;jump to C main() function
+   190                           psect	cstackCOMMON,class=COMMON,space=1
+   191                           global __pcstackCOMMON
+   192  0000                     __pcstackCOMMON:
+   193                           	global	??_operation
+   194  0000                     ??_operation:	; 0 bytes @ 0x0
+   195                           	global	?_main
+   196  0000                     ?_main:	; 0 bytes @ 0x0
+   197                           	global	??_main
+   198  0000                     ??_main:	; 0 bytes @ 0x0
+   199                           psect	cstackBANK0,class=BANK0,space=1
+   200                           global __pcstackBANK0
+   201  0034                     __pcstackBANK0:
+   202                           	global	?_operation
+   203  0034                     ?_operation:	; 2 bytes @ 0x0
+   204                           	global	operation@GFF
+   205  0034                     operation@GFF:	; 2 bytes @ 0x0
+   206  0034                     	ds	2
+   207                           	global	operation@GFR
+   208  0036                     operation@GFR:	; 2 bytes @ 0x2
+   209  0036                     	ds	2
+   210                           	global	operation@FFF
+   211  0038                     operation@FFF:	; 2 bytes @ 0x4
+   212  0038                     	ds	2
+   213                           	global	operation@FFR
+   214  003A                     operation@FFR:	; 2 bytes @ 0x6
+   215  003A                     	ds	2
+   216                           	global	operation@SFF
+   217  003C                     operation@SFF:	; 2 bytes @ 0x8
+   218  003C                     	ds	2
+   219                           	global	operation@SFR
+   220  003E                     operation@SFR:	; 2 bytes @ 0xA
+   221  003E                     	ds	2
+   222                           	global	operation@TFF
+   223  0040                     operation@TFF:	; 2 bytes @ 0xC
+   224  0040                     	ds	2
+   225                           	global	operation@TFR
+   226  0042                     operation@TFR:	; 2 bytes @ 0xE
+   227  0042                     	ds	2
+   228 ;;Data sizes: Strings 0, constant 0, data 20, bss 4, persistent 0 stack 0
+   229 ;;Auto spaces:   Size  Autos    Used
+   230 ;; COMMON          14      0       0
+   231 ;; BANK0           80     16      40
+   232 ;; BANK1           80      0       0
+   233 ;; BANK3           96      0       0
+   234 ;; BANK2           96      0       0
+   235                           
+   236 ;;
+   237 ;; Pointer list with targets:
+   238                           
+   239                           
+   240                           
+   241 ;;
+   242 ;; Critical Paths under _main in COMMON
+   243 ;;
+   244 ;;   None.
+   245 ;;
+   246 ;; Critical Paths under _main in BANK0
+   247 ;;
+   248 ;;   _main->_operation
+   249 ;;
+   250 ;; Critical Paths under _main in BANK1
+   251 ;;
+   252 ;;   None.
+   253 ;;
+   254 ;; Critical Paths under _main in BANK3
+   255 ;;
+   256 ;;   None.
+   257 ;;
+   258 ;; Critical Paths under _main in BANK2
+   259 ;;
+   260 ;;   None.
+   261                           
+   262 ;;
+   263 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   264 ;;
+   265                           
+   266 ;;
+   267 ;;Call Graph Tables:
+   268 ;;
+   269 ;; ---------------------------------------------------------------------------------
+   270 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   271 ;; ---------------------------------------------------------------------------------
+   272 ;; (0) _main                                                 0     0      0     176
+   273 ;;                          _operation
+   274 ;; ---------------------------------------------------------------------------------
+   275 ;; (1) _operation                                           16     0     16     176
+   276 ;;                                              0 BANK0     16     0     16
+   277 ;; ---------------------------------------------------------------------------------
+   278 ;; Estimated maximum stack depth 1
+   279 ;; ---------------------------------------------------------------------------------
+   280                           
+   281 ;; Call Graph Graphs:
+   282                           
+   283 ;; _main (ROOT)
+   284 ;;   _operation
+   285 ;;
+   286                           
+   287 ;; Address spaces:
+   288                           
+   289 ;;Name               Size   Autos  Total    Cost      Usage
+   290 ;;BANK3               60      0       0       9        0.0%
+   291 ;;BITBANK3            60      0       0       8        0.0%
+   292 ;;SFR3                 0      0       0       4        0.0%
+   293 ;;BITSFR3              0      0       0       4        0.0%
+   294 ;;BANK2               60      0       0      11        0.0%
+   295 ;;BITBANK2            60      0       0      10        0.0%
+   296 ;;SFR2                 0      0       0       5        0.0%
+   297 ;;BITSFR2              0      0       0       5        0.0%
+   298 ;;SFR1                 0      0       0       2        0.0%
+   299 ;;BITSFR1              0      0       0       2        0.0%
+   300 ;;BANK1               50      0       0       7        0.0%
+   301 ;;BITBANK1            50      0       0       6        0.0%
+   302 ;;CODE                 0      0       0       0        0.0%
+   303 ;;DATA                 0      0      29      12        0.0%
+   304 ;;ABS                  0      0      28       3        0.0%
+   305 ;;NULL                 0      0       0       0        0.0%
+   306 ;;STACK                0      0       1       2        0.0%
+   307 ;;BANK0               50     10      28       5       50.0%
+   308 ;;BITBANK0            50      0       0       4        0.0%
+   309 ;;SFR0                 0      0       0       1        0.0%
+   310 ;;BITSFR0              0      0       0       1        0.0%
+   311 ;;COMMON               E      0       0       1        0.0%
+   312 ;;BITCOMMON            E      0       0       0        0.0%
+   313 ;;EEDATA             100      0       0       0        0.0%
+   314                           
+   315                           	global	_main
+   316                           psect	maintext,global,class=CODE,delta=2
+   317                           global __pmaintext
+   318  06FD                     __pmaintext:
+   319                           
+   320 ;; *************** function _main *****************
+   321 ;; Defined at:
+   322 ;;		line 88 in file "D:\Embedded\pic\code\software\lift\lift.c"
+   323 ;; Parameters:    Size  Location     Type
+   324 ;;		None
+   325 ;; Auto vars:     Size  Location     Type
+   326 ;;		None
+   327 ;; Return value:  Size  Location     Type
+   328 ;;		None               void
+   329 ;; Registers used:
+   330 ;;		wreg, status,2, status,0, pclath, cstack
+   331 ;; Tracked objects:
+   332 ;;		On entry : 17F/0
+   333 ;;		On exit  : 0/0
+   334 ;;		Unchanged: 0/0
+   335 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   336 ;;      Params:         0       0       0       0       0
+   337 ;;      Locals:         0       0       0       0       0
+   338 ;;      Temps:          0       0       0       0       0
+   339 ;;      Totals:         0       0       0       0       0
+   340 ;;Total ram usage:        0 bytes
+   341 ;; Hardware stack levels required when called:    1
+   342 ;; This function calls:
+   343 ;;		_operation
+   344 ;; This function is called by:
+   345 ;;		Startup code after reset
+   346 ;; This function uses a non-reentrant model
+   347 ;;
+   348                           psect	maintext
+   349                           	file	"D:\Embedded\pic\code\software\lift\lift.c"
+   350                           	line	88
+   351                           	global	__size_of_main
+   352  0103                     	__size_of_main	equ	__end_of_main-_main
+   353                           	
+   354  06FD                     _main:	
+   355                           	opt	stack 7
+   356                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   357                           	line	89
+   358                           	
+   359  06FD                     l2311:	
+   360                           ;lift.c: 89: PORTA=0X00;
+   361  06FD  1283               	bcf	status, 5	;RP0=0, select bank0
+   362  06FE  1303               	bcf	status, 6	;RP1=0, select bank0
+   363  06FF  0185               	clrf	(5)	;volatile
+   364                           	line	90
+   365                           	
+   366  0700                     l2313:	
+   367                           ;lift.c: 90: TRISA=0X0F;
+   368  0700  300F               	movlw	(0Fh)
+   369  0701  1683               	bsf	status, 5	;RP0=1, select bank1
+   370  0702  1303               	bcf	status, 6	;RP1=0, select bank1
+   371  0703  0085               	movwf	(133)^080h	;volatile
+   372                           	line	91
+   373                           	
+   374  0704                     l2315:	
+   375                           ;lift.c: 91: PORTC=0X00;
+   376  0704  1283               	bcf	status, 5	;RP0=0, select bank0
+   377  0705  1303               	bcf	status, 6	;RP1=0, select bank0
+   378  0706  0187               	clrf	(7)	;volatile
+   379                           	line	92
+   380                           ;lift.c: 92: TRISC=0XF0;
+   381  0707  30F0               	movlw	(0F0h)
+   382  0708  1683               	bsf	status, 5	;RP0=1, select bank1
+   383  0709  1303               	bcf	status, 6	;RP1=0, select bank1
+   384  070A  0087               	movwf	(135)^080h	;volatile
+   385                           	line	93
+   386                           	
+   387  070B                     l2317:	
+   388                           ;lift.c: 93: PORTD=0X00;
+   389  070B  1283               	bcf	status, 5	;RP0=0, select bank0
+   390  070C  1303               	bcf	status, 6	;RP1=0, select bank0
+   391  070D  0188               	clrf	(8)	;volatile
+   392                           	line	94
+   393                           	
+   394  070E                     l2319:	
+   395                           ;lift.c: 94: TRISD=0X00;
+   396  070E  1683               	bsf	status, 5	;RP0=1, select bank1
+   397  070F  1303               	bcf	status, 6	;RP1=0, select bank1
+   398  0710  0188               	clrf	(136)^080h	;volatile
+   399                           	line	95
+   400                           	
+   401  0711                     l2321:	
+   402                           ;lift.c: 95: PORTB=0X00;
+   403  0711  1283               	bcf	status, 5	;RP0=0, select bank0
+   404  0712  1303               	bcf	status, 6	;RP1=0, select bank0
+   405  0713  0186               	clrf	(6)	;volatile
+   406                           	line	96
+   407                           	
+   408  0714                     l2323:	
+   409                           ;lift.c: 96: TRISB=0X00;
+   410  0714  1683               	bsf	status, 5	;RP0=1, select bank1
+   411  0715  1303               	bcf	status, 6	;RP1=0, select bank1
+   412  0716  0186               	clrf	(134)^080h	;volatile
+   413                           	line	97
+   414                           	
+   415  0717                     l2325:	
+   416                           ;lift.c: 97: ANSEL=0X00;
+   417  0717  1683               	bsf	status, 5	;RP0=1, select bank3
+   418  0718  1703               	bsf	status, 6	;RP1=1, select bank3
+   419  0719  0188               	clrf	(392)^0180h	;volatile
+   420                           	line	98
+   421                           	
+   422  071A                     l2327:	
+   423                           ;lift.c: 98: ANSELH=0X00;
+   424  071A  0189               	clrf	(393)^0180h	;volatile
+   425  071B  2F1C               	goto	l2329
+   426                           	line	102
+   427                           ;lift.c: 102: while(1)
+   428                           	
+   429  071C                     l1047:	
+   430                           	line	105
+   431                           	
+   432  071C                     l2329:	
+   433                           ;lift.c: 103: {
+   434                           ;lift.c: 105: if(RA0==1)
+   435  071C  1283               	bcf	status, 5	;RP0=0, select bank0
+   436  071D  1303               	bcf	status, 6	;RP1=0, select bank0
+   437  071E  1C05               	btfss	(40/8),(40)&7
+   438  071F  2F21               	goto	u2631
+   439  0720  2F22               	goto	u2630
+   440  0721                     u2631:
+   441  0721  2F27               	goto	l2333
+   442  0722                     u2630:
+   443                           	line	107
+   444                           	
+   445  0722                     l2331:	
+   446                           ;lift.c: 106: {
+   447                           ;lift.c: 107: button=1;
+   448  0722  3001               	movlw	low(01h)
+   449  0723  00C4               	movwf	(_button)
+   450  0724  3000               	movlw	high(01h)
+   451  0725  00C5               	movwf	((_button))+1
+   452  0726  2F27               	goto	l2333
+   453                           	line	108
+   454                           	
+   455  0727                     l1048:	
+   456                           	line	109
+   457                           	
+   458  0727                     l2333:	
+   459                           ;lift.c: 108: }
+   460                           ;lift.c: 109: if(RA1==1)
+   461  0727  1C85               	btfss	(41/8),(41)&7
+   462  0728  2F2A               	goto	u2641
+   463  0729  2F2B               	goto	u2640
+   464  072A                     u2641:
+   465  072A  2F30               	goto	l2337
+   466  072B                     u2640:
+   467                           	line	111
+   468                           	
+   469  072B                     l2335:	
+   470                           ;lift.c: 110: {
+   471                           ;lift.c: 111: button=2;
+   472  072B  3002               	movlw	low(02h)
+   473  072C  00C4               	movwf	(_button)
+   474  072D  3000               	movlw	high(02h)
+   475  072E  00C5               	movwf	((_button))+1
+   476  072F  2F30               	goto	l2337
+   477                           	line	112
+   478                           	
+   479  0730                     l1049:	
+   480                           	line	113
+   481                           	
+   482  0730                     l2337:	
+   483                           ;lift.c: 112: }
+   484                           ;lift.c: 113: if(RA2==1)
+   485  0730  1D05               	btfss	(42/8),(42)&7
+   486  0731  2F33               	goto	u2651
+   487  0732  2F34               	goto	u2650
+   488  0733                     u2651:
+   489  0733  2F39               	goto	l2341
+   490  0734                     u2650:
+   491                           	line	115
+   492                           	
+   493  0734                     l2339:	
+   494                           ;lift.c: 114: {
+   495                           ;lift.c: 115: button=3;
+   496  0734  3003               	movlw	low(03h)
+   497  0735  00C4               	movwf	(_button)
+   498  0736  3000               	movlw	high(03h)
+   499  0737  00C5               	movwf	((_button))+1
+   500  0738  2F39               	goto	l2341
+   501                           	line	116
+   502                           	
+   503  0739                     l1050:	
+   504                           	line	117
+   505                           	
+   506  0739                     l2341:	
+   507                           ;lift.c: 116: }
+   508                           ;lift.c: 117: if(RA3==1)
+   509  0739  1D85               	btfss	(43/8),(43)&7
+   510  073A  2F3C               	goto	u2661
+   511  073B  2F3D               	goto	u2660
+   512  073C                     u2661:
+   513  073C  2F41               	goto	l1051
+   514  073D                     u2660:
+   515                           	line	119
+   516                           	
+   517  073D                     l2343:	
+   518                           ;lift.c: 118: {
+   519                           ;lift.c: 119: button=4;
+   520  073D  3004               	movlw	low(04h)
+   521  073E  00C4               	movwf	(_button)
+   522  073F  3000               	movlw	high(04h)
+   523  0740  00C5               	movwf	((_button))+1
+   524                           	line	120
+   525                           	
+   526  0741                     l1051:	
+   527                           	line	121
+   528                           ;lift.c: 120: }
+   529                           ;lift.c: 121: if(button==1)
+   530  0741  3001               	movlw	01h
+   531  0742  0644               	xorwf	(_button),w
+   532  0743  0445               	iorwf	(_button+1),w
+   533  0744  1D03               	skipz
+   534  0745  2F47               	goto	u2671
+   535  0746  2F48               	goto	u2670
+   536  0747                     u2671:
+   537  0747  2F6E               	goto	l2347
+   538  0748                     u2670:
+   539                           	line	123
+   540                           	
+   541  0748                     l2345:	
+   542                           ;lift.c: 122: {
+   543                           ;lift.c: 123: operation(0,0,0,1,0,1,0,1);
+   544  0748  3000               	movlw	low(0)
+   545  0749  00B4               	movwf	(?_operation)
+   546  074A  3000               	movlw	high(0)
+   547  074B  00B5               	movwf	((?_operation))+1
+   548  074C  3000               	movlw	low(0)
+   549  074D  00B6               	movwf	0+(?_operation)+02h
+   550  074E  3000               	movlw	high(0)
+   551  074F  00B7               	movwf	(0+(?_operation)+02h)+1
+   552  0750  3000               	movlw	low(0)
+   553  0751  00B8               	movwf	0+(?_operation)+04h
+   554  0752  3000               	movlw	high(0)
+   555  0753  00B9               	movwf	(0+(?_operation)+04h)+1
+   556  0754  3001               	movlw	low(01h)
+   557  0755  00BA               	movwf	0+(?_operation)+06h
+   558  0756  3000               	movlw	high(01h)
+   559  0757  00BB               	movwf	(0+(?_operation)+06h)+1
+   560  0758  3000               	movlw	low(0)
+   561  0759  00BC               	movwf	0+(?_operation)+08h
+   562  075A  3000               	movlw	high(0)
+   563  075B  00BD               	movwf	(0+(?_operation)+08h)+1
+   564  075C  3001               	movlw	low(01h)
+   565  075D  00BE               	movwf	0+(?_operation)+0Ah
+   566  075E  3000               	movlw	high(01h)
+   567  075F  00BF               	movwf	(0+(?_operation)+0Ah)+1
+   568  0760  3000               	movlw	low(0)
+   569  0761  00C0               	movwf	0+(?_operation)+0Ch
+   570  0762  3000               	movlw	high(0)
+   571  0763  00C1               	movwf	(0+(?_operation)+0Ch)+1
+   572  0764  3001               	movlw	low(01h)
+   573  0765  00C2               	movwf	0+(?_operation)+0Eh
+   574  0766  3000               	movlw	high(01h)
+   575  0767  00C3               	movwf	(0+(?_operation)+0Eh)+1
+   576  0768  120A  118A  267E   	fcall	_operation
+              120A  118A         
+   577  076D  2F6E               	goto	l2347
+   578                           	line	124
+   579                           	
+   580  076E                     l1052:	
+   581                           	line	125
+   582                           	
+   583  076E                     l2347:	
+   584                           ;lift.c: 124: }
+   585                           ;lift.c: 125: if(button==2)
+   586  076E  3002               	movlw	02h
+   587  076F  1283               	bcf	status, 5	;RP0=0, select bank0
+   588  0770  1303               	bcf	status, 6	;RP1=0, select bank0
+   589  0771  0644               	xorwf	(_button),w
+   590  0772  0445               	iorwf	(_button+1),w
+   591  0773  1D03               	skipz
+   592  0774  2F76               	goto	u2681
+   593  0775  2F77               	goto	u2680
+   594  0776                     u2681:
+   595  0776  2F9D               	goto	l2351
+   596  0777                     u2680:
+   597                           	line	127
+   598                           	
+   599  0777                     l2349:	
+   600                           ;lift.c: 126: {
+   601                           ;lift.c: 127: operation(1,0,0,0,0,1,0,1);
+   602  0777  3001               	movlw	low(01h)
+   603  0778  00B4               	movwf	(?_operation)
+   604  0779  3000               	movlw	high(01h)
+   605  077A  00B5               	movwf	((?_operation))+1
+   606  077B  3000               	movlw	low(0)
+   607  077C  00B6               	movwf	0+(?_operation)+02h
+   608  077D  3000               	movlw	high(0)
+   609  077E  00B7               	movwf	(0+(?_operation)+02h)+1
+   610  077F  3000               	movlw	low(0)
+   611  0780  00B8               	movwf	0+(?_operation)+04h
+   612  0781  3000               	movlw	high(0)
+   613  0782  00B9               	movwf	(0+(?_operation)+04h)+1
+   614  0783  3000               	movlw	low(0)
+   615  0784  00BA               	movwf	0+(?_operation)+06h
+   616  0785  3000               	movlw	high(0)
+   617  0786  00BB               	movwf	(0+(?_operation)+06h)+1
+   618  0787  3000               	movlw	low(0)
+   619  0788  00BC               	movwf	0+(?_operation)+08h
+   620  0789  3000               	movlw	high(0)
+   621  078A  00BD               	movwf	(0+(?_operation)+08h)+1
+   622  078B  3001               	movlw	low(01h)
+   623  078C  00BE               	movwf	0+(?_operation)+0Ah
+   624  078D  3000               	movlw	high(01h)
+   625  078E  00BF               	movwf	(0+(?_operation)+0Ah)+1
+   626  078F  3000               	movlw	low(0)
+   627  0790  00C0               	movwf	0+(?_operation)+0Ch
+   628  0791  3000               	movlw	high(0)
+   629  0792  00C1               	movwf	(0+(?_operation)+0Ch)+1
+   630  0793  3001               	movlw	low(01h)
+   631  0794  00C2               	movwf	0+(?_operation)+0Eh
+   632  0795  3000               	movlw	high(01h)
+   633  0796  00C3               	movwf	(0+(?_operation)+0Eh)+1
+   634  0797  120A  118A  267E   	fcall	_operation
+              120A  118A         
+   635  079C  2F9D               	goto	l2351
+   636                           	line	128
+   637                           	
+   638  079D                     l1053:	
+   639                           	line	129
+   640                           	
+   641  079D                     l2351:	
+   642                           ;lift.c: 128: }
+   643                           ;lift.c: 129: if(button==3)
+   644  079D  3003               	movlw	03h
+   645  079E  1283               	bcf	status, 5	;RP0=0, select bank0
+   646  079F  1303               	bcf	status, 6	;RP1=0, select bank0
+   647  07A0  0644               	xorwf	(_button),w
+   648  07A1  0445               	iorwf	(_button+1),w
+   649  07A2  1D03               	skipz
+   650  07A3  2FA5               	goto	u2691
+   651  07A4  2FA6               	goto	u2690
+   652  07A5                     u2691:
+   653  07A5  2FCC               	goto	l2355
+   654  07A6                     u2690:
+   655                           	line	131
+   656                           	
+   657  07A6                     l2353:	
+   658                           ;lift.c: 130: {
+   659                           ;lift.c: 131: operation(1,0,1,0,0,0,0,1);
+   660  07A6  3001               	movlw	low(01h)
+   661  07A7  00B4               	movwf	(?_operation)
+   662  07A8  3000               	movlw	high(01h)
+   663  07A9  00B5               	movwf	((?_operation))+1
+   664  07AA  3000               	movlw	low(0)
+   665  07AB  00B6               	movwf	0+(?_operation)+02h
+   666  07AC  3000               	movlw	high(0)
+   667  07AD  00B7               	movwf	(0+(?_operation)+02h)+1
+   668  07AE  3001               	movlw	low(01h)
+   669  07AF  00B8               	movwf	0+(?_operation)+04h
+   670  07B0  3000               	movlw	high(01h)
+   671  07B1  00B9               	movwf	(0+(?_operation)+04h)+1
+   672  07B2  3000               	movlw	low(0)
+   673  07B3  00BA               	movwf	0+(?_operation)+06h
+   674  07B4  3000               	movlw	high(0)
+   675  07B5  00BB               	movwf	(0+(?_operation)+06h)+1
+   676  07B6  3000               	movlw	low(0)
+   677  07B7  00BC               	movwf	0+(?_operation)+08h
+   678  07B8  3000               	movlw	high(0)
+   679  07B9  00BD               	movwf	(0+(?_operation)+08h)+1
+   680  07BA  3000               	movlw	low(0)
+   681  07BB  00BE               	movwf	0+(?_operation)+0Ah
+   682  07BC  3000               	movlw	high(0)
+   683  07BD  00BF               	movwf	(0+(?_operation)+0Ah)+1
+   684  07BE  3000               	movlw	low(0)
+   685  07BF  00C0               	movwf	0+(?_operation)+0Ch
+   686  07C0  3000               	movlw	high(0)
+   687  07C1  00C1               	movwf	(0+(?_operation)+0Ch)+1
+   688  07C2  3001               	movlw	low(01h)
+   689  07C3  00C2               	movwf	0+(?_operation)+0Eh
+   690  07C4  3000               	movlw	high(01h)
+   691  07C5  00C3               	movwf	(0+(?_operation)+0Eh)+1
+   692  07C6  120A  118A  267E   	fcall	_operation
+              120A  118A         
+   693  07CB  2FCC               	goto	l2355
+   694                           	line	132
+   695                           	
+   696  07CC                     l1054:	
+   697                           	line	133
+   698                           	
+   699  07CC                     l2355:	
+   700                           ;lift.c: 132: }
+   701                           ;lift.c: 133: if(button==4)
+   702  07CC  3004               	movlw	04h
+   703  07CD  1283               	bcf	status, 5	;RP0=0, select bank0
+   704  07CE  1303               	bcf	status, 6	;RP1=0, select bank0
+   705  07CF  0644               	xorwf	(_button),w
+   706  07D0  0445               	iorwf	(_button+1),w
+   707  07D1  1D03               	skipz
+   708  07D2  2FD4               	goto	u2701
+   709  07D3  2FD5               	goto	u2700
+   710  07D4                     u2701:
+   711  07D4  2F1C               	goto	l2329
+   712  07D5                     u2700:
+   713                           	line	135
+   714                           	
+   715  07D5                     l2357:	
+   716                           ;lift.c: 134: {
+   717                           ;lift.c: 135: operation(1,0,1,0,1,0,0,0);
+   718  07D5  3001               	movlw	low(01h)
+   719  07D6  00B4               	movwf	(?_operation)
+   720  07D7  3000               	movlw	high(01h)
+   721  07D8  00B5               	movwf	((?_operation))+1
+   722  07D9  3000               	movlw	low(0)
+   723  07DA  00B6               	movwf	0+(?_operation)+02h
+   724  07DB  3000               	movlw	high(0)
+   725  07DC  00B7               	movwf	(0+(?_operation)+02h)+1
+   726  07DD  3001               	movlw	low(01h)
+   727  07DE  00B8               	movwf	0+(?_operation)+04h
+   728  07DF  3000               	movlw	high(01h)
+   729  07E0  00B9               	movwf	(0+(?_operation)+04h)+1
+   730  07E1  3000               	movlw	low(0)
+   731  07E2  00BA               	movwf	0+(?_operation)+06h
+   732  07E3  3000               	movlw	high(0)
+   733  07E4  00BB               	movwf	(0+(?_operation)+06h)+1
+   734  07E5  3001               	movlw	low(01h)
+   735  07E6  00BC               	movwf	0+(?_operation)+08h
+   736  07E7  3000               	movlw	high(01h)
+   737  07E8  00BD               	movwf	(0+(?_operation)+08h)+1
+   738  07E9  3000               	movlw	low(0)
+   739  07EA  00BE               	movwf	0+(?_operation)+0Ah
+   740  07EB  3000               	movlw	high(0)
+   741  07EC  00BF               	movwf	(0+(?_operation)+0Ah)+1
+   742  07ED  3000               	movlw	low(0)
+   743  07EE  00C0               	movwf	0+(?_operation)+0Ch
+   744  07EF  3000               	movlw	high(0)
+   745  07F0  00C1               	movwf	(0+(?_operation)+0Ch)+1
+   746  07F1  3000               	movlw	low(0)
+   747  07F2  00C2               	movwf	0+(?_operation)+0Eh
+   748  07F3  3000               	movlw	high(0)
+   749  07F4  00C3               	movwf	(0+(?_operation)+0Eh)+1
+   750  07F5  120A  118A  267E   	fcall	_operation
+              120A  118A         
+   751  07FA  2F1C               	goto	l2329
+   752                           	line	136
+   753                           	
+   754  07FB                     l1055:	
+   755  07FB  2F1C               	goto	l2329
+   756                           	line	137
+   757                           	
+   758  07FC                     l1056:	
+   759                           	line	102
+   760  07FC  2F1C               	goto	l2329
+   761                           	
+   762  07FD                     l1057:	
+   763                           	line	138
+   764                           	
+   765  07FD                     l1058:	
+   766                           	global	start
+   767  07FD  120A  118A  2800   	ljmp	start
+   768                           	opt stack 0
+   769                           GLOBAL	__end_of_main
+   770  0800                     	__end_of_main:
+   771 ;; =============== function _main ends ============
+   772                           
+   773                           	signat	_main,88
+   774                           	global	_operation
+   775                           psect	text88,local,class=CODE,delta=2
+   776                           global __ptext88
+   777  067E                     __ptext88:
+   778                           
+   779 ;; *************** function _operation *****************
+   780 ;; Defined at:
+   781 ;;		line 35 in file "D:\Embedded\pic\code\software\lift\lift.c"
+   782 ;; Parameters:    Size  Location     Type
+   783 ;;  GFF             2    0[BANK0 ] int 
+   784 ;;  GFR             2    2[BANK0 ] int 
+   785 ;;  FFF             2    4[BANK0 ] int 
+   786 ;;  FFR             2    6[BANK0 ] int 
+   787 ;;  SFF             2    8[BANK0 ] int 
+   788 ;;  SFR             2   10[BANK0 ] int 
+   789 ;;  TFF             2   12[BANK0 ] int 
+   790 ;;  TFR             2   14[BANK0 ] int 
+   791 ;; Auto vars:     Size  Location     Type
+   792 ;;		None
+   793 ;; Return value:  Size  Location     Type
+   794 ;;                  2    0[BANK0 ] int 
+   795 ;; Registers used:
+   796 ;;		wreg
+   797 ;; Tracked objects:
+   798 ;;		On entry : 0/0
+   799 ;;		On exit  : 0/0
+   800 ;;		Unchanged: 0/0
+   801 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   802 ;;      Params:         0      16       0       0       0
+   803 ;;      Locals:         0       0       0       0       0
+   804 ;;      Temps:          0       0       0       0       0
+   805 ;;      Totals:         0      16       0       0       0
+   806 ;;Total ram usage:       16 bytes
+   807 ;; Hardware stack levels used:    1
+   808 ;; This function calls:
+   809 ;;		Nothing
+   810 ;; This function is called by:
+   811 ;;		_main
+   812 ;; This function uses a non-reentrant model
+   813 ;;
+   814                           psect	text88
+   815                           	file	"D:\Embedded\pic\code\software\lift\lift.c"
+   816                           	line	35
+   817                           	global	__size_of_operation
+   818  007F                     	__size_of_operation	equ	__end_of_operation-_operation
+   819                           	
+   820  067E                     _operation:	
+   821                           	opt	stack 7
+   822                           ; Regs used in _operation: [wreg]
+   823                           	line	52
+   824                           	
+   825  067E                     l2279:	
+   826                           ;lift.c: 52: if(RC4==1)
+   827  067E  1283               	bcf	status, 5	;RP0=0, select bank0
+   828  067F  1303               	bcf	status, 6	;RP1=0, select bank0
+   829  0680  1E07               	btfss	(60/8),(60)&7
+   830  0681  2E83               	goto	u2431
+   831  0682  2E84               	goto	u2430
+   832  0683                     u2431:
+   833  0683  2E9F               	goto	l2287
+   834  0684                     u2430:
+   835                           	line	54
+   836                           	
+   837  0684                     l2281:	
+   838                           ;lift.c: 53: {
+   839                           ;lift.c: 54: PORTD=seg[0];
+   840  0684  0820               	movf	(_seg),w
+   841  0685  0088               	movwf	(8)	;volatile
+   842                           	line	55
+   843                           	
+   844  0686                     l2283:	
+   845                           ;lift.c: 55: RB0=GFF;
+   846  0686  1834               	btfsc	(operation@GFF),0
+   847  0687  2E89               	goto	u2441
+   848  0688  2E8D               	goto	u2440
+   849                           	
+   850  0689                     u2441:
+   851  0689  1283               	bcf	status, 5	;RP0=0, select bank0
+   852  068A  1303               	bcf	status, 6	;RP1=0, select bank0
+   853  068B  1406               	bsf	(48/8),(48)&7
+   854  068C  2E90               	goto	u2454
+   855  068D                     u2440:
+   856  068D  1283               	bcf	status, 5	;RP0=0, select bank0
+   857  068E  1303               	bcf	status, 6	;RP1=0, select bank0
+   858  068F  1006               	bcf	(48/8),(48)&7
+   859  0690                     u2454:
+   860                           	line	56
+   861                           	
+   862  0690                     l2285:	
+   863                           ;lift.c: 56: RB1=GFR;
+   864  0690  1836               	btfsc	(operation@GFR),0
+   865  0691  2E93               	goto	u2461
+   866  0692  2E97               	goto	u2460
+   867                           	
+   868  0693                     u2461:
+   869  0693  1283               	bcf	status, 5	;RP0=0, select bank0
+   870  0694  1303               	bcf	status, 6	;RP1=0, select bank0
+   871  0695  1486               	bsf	(49/8),(49)&7
+   872  0696  2E9A               	goto	u2474
+   873  0697                     u2460:
+   874  0697  1283               	bcf	status, 5	;RP0=0, select bank0
+   875  0698  1303               	bcf	status, 6	;RP1=0, select bank0
+   876  0699  1086               	bcf	(49/8),(49)&7
+   877  069A                     u2474:
+   878                           	line	57
+   879                           ;lift.c: 57: floor=1;
+   880  069A  3001               	movlw	low(01h)
+   881  069B  00C6               	movwf	(_floor)
+   882  069C  3000               	movlw	high(01h)
+   883  069D  00C7               	movwf	((_floor))+1
+   884  069E  2E9F               	goto	l2287
+   885                           	line	58
+   886                           	
+   887  069F                     l1037:	
+   888                           	line	59
+   889                           	
+   890  069F                     l2287:	
+   891                           ;lift.c: 58: }
+   892                           ;lift.c: 59: if(RC5==1)
+   893  069F  1E87               	btfss	(61/8),(61)&7
+   894  06A0  2EA2               	goto	u2481
+   895  06A1  2EA3               	goto	u2480
+   896  06A2                     u2481:
+   897  06A2  2EBE               	goto	l2295
+   898  06A3                     u2480:
+   899                           	line	61
+   900                           	
+   901  06A3                     l2289:	
+   902                           ;lift.c: 60: {
+   903                           ;lift.c: 61: PORTD=seg[1];
+   904  06A3  0821               	movf	0+(_seg)+01h,w
+   905  06A4  0088               	movwf	(8)	;volatile
+   906                           	line	62
+   907                           	
+   908  06A5                     l2291:	
+   909                           ;lift.c: 62: RB0=FFF;
+   910  06A5  1838               	btfsc	(operation@FFF),0
+   911  06A6  2EA8               	goto	u2491
+   912  06A7  2EAC               	goto	u2490
+   913                           	
+   914  06A8                     u2491:
+   915  06A8  1283               	bcf	status, 5	;RP0=0, select bank0
+   916  06A9  1303               	bcf	status, 6	;RP1=0, select bank0
+   917  06AA  1406               	bsf	(48/8),(48)&7
+   918  06AB  2EAF               	goto	u2504
+   919  06AC                     u2490:
+   920  06AC  1283               	bcf	status, 5	;RP0=0, select bank0
+   921  06AD  1303               	bcf	status, 6	;RP1=0, select bank0
+   922  06AE  1006               	bcf	(48/8),(48)&7
+   923  06AF                     u2504:
+   924                           	line	63
+   925                           	
+   926  06AF                     l2293:	
+   927                           ;lift.c: 63: RB1=FFR;
+   928  06AF  183A               	btfsc	(operation@FFR),0
+   929  06B0  2EB2               	goto	u2511
+   930  06B1  2EB6               	goto	u2510
+   931                           	
+   932  06B2                     u2511:
+   933  06B2  1283               	bcf	status, 5	;RP0=0, select bank0
+   934  06B3  1303               	bcf	status, 6	;RP1=0, select bank0
+   935  06B4  1486               	bsf	(49/8),(49)&7
+   936  06B5  2EB9               	goto	u2524
+   937  06B6                     u2510:
+   938  06B6  1283               	bcf	status, 5	;RP0=0, select bank0
+   939  06B7  1303               	bcf	status, 6	;RP1=0, select bank0
+   940  06B8  1086               	bcf	(49/8),(49)&7
+   941  06B9                     u2524:
+   942                           	line	64
+   943                           ;lift.c: 64: floor=2;
+   944  06B9  3002               	movlw	low(02h)
+   945  06BA  00C6               	movwf	(_floor)
+   946  06BB  3000               	movlw	high(02h)
+   947  06BC  00C7               	movwf	((_floor))+1
+   948  06BD  2EBE               	goto	l2295
+   949                           	line	65
+   950                           	
+   951  06BE                     l1038:	
+   952                           	line	66
+   953                           	
+   954  06BE                     l2295:	
+   955                           ;lift.c: 65: }
+   956                           ;lift.c: 66: if(RC6==1)
+   957  06BE  1F07               	btfss	(62/8),(62)&7
+   958  06BF  2EC1               	goto	u2531
+   959  06C0  2EC2               	goto	u2530
+   960  06C1                     u2531:
+   961  06C1  2EDD               	goto	l2303
+   962  06C2                     u2530:
+   963                           	line	68
+   964                           	
+   965  06C2                     l2297:	
+   966                           ;lift.c: 67: {
+   967                           ;lift.c: 68: PORTD=seg[2];
+   968  06C2  0822               	movf	0+(_seg)+02h,w
+   969  06C3  0088               	movwf	(8)	;volatile
+   970                           	line	69
+   971                           	
+   972  06C4                     l2299:	
+   973                           ;lift.c: 69: RB0=SFF;
+   974  06C4  183C               	btfsc	(operation@SFF),0
+   975  06C5  2EC7               	goto	u2541
+   976  06C6  2ECB               	goto	u2540
+   977                           	
+   978  06C7                     u2541:
+   979  06C7  1283               	bcf	status, 5	;RP0=0, select bank0
+   980  06C8  1303               	bcf	status, 6	;RP1=0, select bank0
+   981  06C9  1406               	bsf	(48/8),(48)&7
+   982  06CA  2ECE               	goto	u2554
+   983  06CB                     u2540:
+   984  06CB  1283               	bcf	status, 5	;RP0=0, select bank0
+   985  06CC  1303               	bcf	status, 6	;RP1=0, select bank0
+   986  06CD  1006               	bcf	(48/8),(48)&7
+   987  06CE                     u2554:
+   988                           	line	70
+   989                           	
+   990  06CE                     l2301:	
+   991                           ;lift.c: 70: RB1=SFR;
+   992  06CE  183E               	btfsc	(operation@SFR),0
+   993  06CF  2ED1               	goto	u2561
+   994  06D0  2ED5               	goto	u2560
+   995                           	
+   996  06D1                     u2561:
+   997  06D1  1283               	bcf	status, 5	;RP0=0, select bank0
+   998  06D2  1303               	bcf	status, 6	;RP1=0, select bank0
+   999  06D3  1486               	bsf	(49/8),(49)&7
+  1000  06D4  2ED8               	goto	u2574
+  1001  06D5                     u2560:
+  1002  06D5  1283               	bcf	status, 5	;RP0=0, select bank0
+  1003  06D6  1303               	bcf	status, 6	;RP1=0, select bank0
+  1004  06D7  1086               	bcf	(49/8),(49)&7
+  1005  06D8                     u2574:
+  1006                           	line	71
+  1007                           ;lift.c: 71: floor=3;
+  1008  06D8  3003               	movlw	low(03h)
+  1009  06D9  00C6               	movwf	(_floor)
+  1010  06DA  3000               	movlw	high(03h)
+  1011  06DB  00C7               	movwf	((_floor))+1
+  1012  06DC  2EDD               	goto	l2303
+  1013                           	line	72
+  1014                           	
+  1015  06DD                     l1039:	
+  1016                           	line	73
+  1017                           	
+  1018  06DD                     l2303:	
+  1019                           ;lift.c: 72: }
+  1020                           ;lift.c: 73: if(RC7==1)
+  1021  06DD  1F87               	btfss	(63/8),(63)&7
+  1022  06DE  2EE0               	goto	u2581
+  1023  06DF  2EE1               	goto	u2580
+  1024  06E0                     u2581:
+  1025  06E0  2EFC               	goto	l1041
+  1026  06E1                     u2580:
+  1027                           	line	75
+  1028                           	
+  1029  06E1                     l2305:	
+  1030                           ;lift.c: 74: {
+  1031                           ;lift.c: 75: PORTD=seg[3];
+  1032  06E1  0823               	movf	0+(_seg)+03h,w
+  1033  06E2  0088               	movwf	(8)	;volatile
+  1034                           	line	76
+  1035                           	
+  1036  06E3                     l2307:	
+  1037                           ;lift.c: 76: RB0=TFF;
+  1038  06E3  1840               	btfsc	(operation@TFF),0
+  1039  06E4  2EE6               	goto	u2591
+  1040  06E5  2EEA               	goto	u2590
+  1041                           	
+  1042  06E6                     u2591:
+  1043  06E6  1283               	bcf	status, 5	;RP0=0, select bank0
+  1044  06E7  1303               	bcf	status, 6	;RP1=0, select bank0
+  1045  06E8  1406               	bsf	(48/8),(48)&7
+  1046  06E9  2EED               	goto	u2604
+  1047  06EA                     u2590:
+  1048  06EA  1283               	bcf	status, 5	;RP0=0, select bank0
+  1049  06EB  1303               	bcf	status, 6	;RP1=0, select bank0
+  1050  06EC  1006               	bcf	(48/8),(48)&7
+  1051  06ED                     u2604:
+  1052                           	line	77
+  1053                           	
+  1054  06ED                     l2309:	
+  1055                           ;lift.c: 77: RB1=TFR;
+  1056  06ED  1842               	btfsc	(operation@TFR),0
+  1057  06EE  2EF0               	goto	u2611
+  1058  06EF  2EF4               	goto	u2610
+  1059                           	
+  1060  06F0                     u2611:
+  1061  06F0  1283               	bcf	status, 5	;RP0=0, select bank0
+  1062  06F1  1303               	bcf	status, 6	;RP1=0, select bank0
+  1063  06F2  1486               	bsf	(49/8),(49)&7
+  1064  06F3  2EF7               	goto	u2624
+  1065  06F4                     u2610:
+  1066  06F4  1283               	bcf	status, 5	;RP0=0, select bank0
+  1067  06F5  1303               	bcf	status, 6	;RP1=0, select bank0
+  1068  06F6  1086               	bcf	(49/8),(49)&7
+  1069  06F7                     u2624:
+  1070                           	line	78
+  1071                           ;lift.c: 78: floor=4;
+  1072  06F7  3004               	movlw	low(04h)
+  1073  06F8  00C6               	movwf	(_floor)
+  1074  06F9  3000               	movlw	high(04h)
+  1075  06FA  00C7               	movwf	((_floor))+1
+  1076  06FB  2EFC               	goto	l1041
+  1077                           	line	79
+  1078                           	
+  1079  06FC                     l1040:	
+  1080                           	line	80
+  1081                           	
+  1082  06FC                     l1041:	
+  1083  06FC  0008               	return
+  1084                           	opt stack 0
+  1085                           GLOBAL	__end_of_operation
+  1086  06FD                     	__end_of_operation:
+  1087 ;; =============== function _operation ends ============
+  1088                           
+  1089                           	signat	_operation,32890
+  1090                           psect	text89,local,class=CODE,delta=2
+  1091                           global __ptext89
+  1092  0000                     __ptext89:
+  1093                           	global	btemp
+  1094  007E                     	btemp set 07Eh
+  1095                           
+  1096                           	DABS	1,126,2	;btemp
+  1097                           	global	wtemp0
+  1098  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Mon May 23 02:49:50 2022
+
+                   pc 0002                    fsr 0004                   _RA0 0028                   _RA1 0029  
+                 _RB0 0030                   _RA2 002A                   _RB1 0031                   _RA3 002B  
+                 _RC4 003C                   _RC5 003D                   _RC6 003E                   _RC7 003F  
+                 _seg 0020                   indf 0000                  l1040 06FC                  l1041 06FC  
+                l1050 0739                  l1051 0741                  l1052 076E                  l1037 069F  
+                l1053 079D                  l1038 06BE                  l1054 07CC                  l1039 06DD  
+                l1055 07FB                  l1047 071C                  l1056 07FC                  l1048 0727  
+                l1057 07FD                  l1049 0730                  l1058 07FD                  l2301 06CE  
+                l2303 06DD                  l2311 06FD                  l2305 06E1                  l2321 0711  
+                l2313 0700                  l2307 06E3                  l2331 0722                  l2323 0714  
+                l2315 0704                  l2309 06ED                  l2341 0739                  l2333 0727  
+                l2325 0717                  l2317 070B                  l2351 079D                  l2343 073D  
+                l2335 072B                  l2327 071A                  l2319 070E                  l2281 0684  
+                l2353 07A6                  l2345 0748                  l2337 0730                  l2329 071C  
+                l2291 06A5                  l2283 0686                  l2355 07CC                  l2347 076E  
+                l2339 0734                  l2293 06AF                  l2285 0690                  l2357 07D5  
+                l2349 0777                  l2295 06BE                  l2287 069F                  l2279 067E  
+                l2297 06C2                  l2289 06A3                  l2299 06C4                  u2510 06B6  
+                u2430 0684                  u2511 06B2                  u2431 0683                  u2504 06AF  
+                u2440 068D                  u2441 0689                  u2610 06F4                  u2530 06C2  
+                u2611 06F0                  u2531 06C1                  u2604 06ED                  u2540 06CB  
+                u2524 06B9                  u2460 0697                  u2700 07D5                  u2541 06C7  
+                u2461 0693                  u2701 07D4                  u2454 0690                  u2630 0722  
+                u2631 0721                  u2624 06F7                  u2560 06D5                  u2480 06A3  
+                u2640 072B                  u2561 06D1                  u2481 06A2                  u2641 072A  
+                u2554 06CE                  u2490 06AC                  u2474 069A                  u2650 0734  
+                u2491 06A8                  u2651 0733                  u2580 06E1                  u2660 073D  
+                u2581 06E0                  u2661 073C                  u2590 06EA                  u2574 06D8  
+                u2670 0748                  u2591 06E6                  u2671 0747                  u2680 0777  
+                u2681 0776                  u2690 07A6                  u2691 07A5                  _main 06FD  
+                btemp 007E                  start 0000                 ?_main 0000                 _ANSEL 0188  
+               _PORTA 0005                 _PORTB 0006                 _PORTC 0007                 _PORTD 0008  
+               _TRISA 0085                 _TRISB 0086                 _TRISC 0087                 _TRISD 0088  
+               _floor 0046                 pclath 000A                 status 0003                 wtemp0 007E  
+        __end_of_main 0800                ??_main 0000                _ANSELH 0189                _button 0044  
+      __pcstackCOMMON 0000          __pidataBANK0 0654            __pbssBANK0 0044            __pmaintext 06FD  
+  __size_of_operation 007F  end_of_initialization 067A               init_ram 0647     __end_of_operation 06FD  
+ start_initialization 0668           __pdataBANK0 0020         __pcstackBANK0 0034             _operation 067E  
+          ?_operation 0034             init_fetch 0643              __ptext88 067E              __ptext89 0000  
+       __size_of_main 0103          operation@FFF 0038          operation@GFF 0034          operation@FFR 003A  
+        operation@GFR 0036          operation@SFF 003C          operation@TFF 0040          operation@SFR 003E  
+        operation@TFR 0042           ??_operation 0000  

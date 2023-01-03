@@ -1,0 +1,12 @@
+___ftneg: CODE, 190 0 12
+_delay: CODE, 228 0 20
+_lcd_cmd: CODE, 271 0 46
+___ftpack: CODE, 317 0 123
+_main: CODE, 1370 0 678
+___lwtoft: CODE, 248 0 23
+___ftadd: CODE, 1044 0 326
+_timer: CODE, 202 0 13
+___ftmul: CODE, 806 0 238
+___fttol: CODE, 440 0 166
+___ftdiv: CODE, 606 0 200
+Total: 1845

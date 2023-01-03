@@ -1,0 +1,606 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Mar 08 20:43:50 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_delay
+    43                           	FNROOT	_main
+    44                           	global	_PORTA
+    45                           psect	maintext,global,class=CODE,delta=2
+    46                           global __pmaintext
+    47  0766                     __pmaintext:
+    48  0005                     _PORTA	set	5
+    49                           	global	_TRISA
+    50  0085                     _TRISA	set	133
+    51                           	global	_ANSEL
+    52  0188                     _ANSEL	set	392
+    53                           	global	_ANSELH
+    54  0189                     _ANSELH	set	393
+    55                           	file	"butterfly.as"
+    56                           	line	#
+    57                           psect cinit,class=CODE,delta=2
+    58                           global start_initialization
+    59  074E                     start_initialization:
+    60                           
+    61                           psect cinit,class=CODE,delta=2
+    62                           global end_of_initialization
+    63                           
+    64                           ;End of C runtime variable initialization code
+    65                           
+    66  074E                     end_of_initialization:
+    67  074E  0183               clrf status
+    68  074F  120A  118A  2F66   ljmp _main	;jump to C main() function
+    69                           psect	cstackCOMMON,class=COMMON,space=1
+    70                           global __pcstackCOMMON
+    71  0070                     __pcstackCOMMON:
+    72                           	global	?_delay
+    73  0070                     ?_delay:	; 0 bytes @ 0x0
+    74                           	global	?_main
+    75  0070                     ?_main:	; 0 bytes @ 0x0
+    76                           	global	delay@a
+    77  0070                     delay@a:	; 2 bytes @ 0x0
+    78  0070                     	ds	2
+    79                           	global	??_delay
+    80  0072                     ??_delay:	; 0 bytes @ 0x2
+    81                           	global	??_main
+    82  0072                     ??_main:	; 0 bytes @ 0x2
+    83  0072                     	ds	3
+    84                           	global	main@i
+    85  0075                     main@i:	; 2 bytes @ 0x5
+    86  0075                     	ds	2
+    87                           	global	main@k
+    88  0077                     main@k:	; 2 bytes @ 0x7
+    89  0077                     	ds	2
+    90                           	global	main@j
+    91  0079                     main@j:	; 2 bytes @ 0x9
+    92  0079                     	ds	2
+    93                           	global	main@l
+    94  007B                     main@l:	; 2 bytes @ 0xB
+    95  007B                     	ds	2
+    96 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+    97 ;;Auto spaces:   Size  Autos    Used
+    98 ;; COMMON          14     13      13
+    99 ;; BANK0           80      0       0
+   100 ;; BANK1           80      0       0
+   101 ;; BANK3           96      0       0
+   102 ;; BANK2           96      0       0
+   103                           
+   104 ;;
+   105 ;; Pointer list with targets:
+   106                           
+   107                           
+   108                           
+   109 ;;
+   110 ;; Critical Paths under _main in COMMON
+   111 ;;
+   112 ;;   _main->_delay
+   113 ;;
+   114 ;; Critical Paths under _main in BANK0
+   115 ;;
+   116 ;;   None.
+   117 ;;
+   118 ;; Critical Paths under _main in BANK1
+   119 ;;
+   120 ;;   None.
+   121 ;;
+   122 ;; Critical Paths under _main in BANK3
+   123 ;;
+   124 ;;   None.
+   125 ;;
+   126 ;; Critical Paths under _main in BANK2
+   127 ;;
+   128 ;;   None.
+   129                           
+   130 ;;
+   131 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   132 ;;
+   133                           
+   134 ;;
+   135 ;;Call Graph Tables:
+   136 ;;
+   137 ;; ---------------------------------------------------------------------------------
+   138 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   139 ;; ---------------------------------------------------------------------------------
+   140 ;; (0) _main                                                11    11      0     105
+   141 ;;                                              2 COMMON    11    11      0
+   142 ;;                              _delay
+   143 ;; ---------------------------------------------------------------------------------
+   144 ;; (1) _delay                                                2     0      2      15
+   145 ;;                                              0 COMMON     2     0      2
+   146 ;; ---------------------------------------------------------------------------------
+   147 ;; Estimated maximum stack depth 1
+   148 ;; ---------------------------------------------------------------------------------
+   149                           
+   150 ;; Call Graph Graphs:
+   151                           
+   152 ;; _main (ROOT)
+   153 ;;   _delay
+   154 ;;
+   155                           
+   156 ;; Address spaces:
+   157                           
+   158 ;;Name               Size   Autos  Total    Cost      Usage
+   159 ;;BITCOMMON            E      0       0       0        0.0%
+   160 ;;EEDATA             100      0       0       0        0.0%
+   161 ;;NULL                 0      0       0       0        0.0%
+   162 ;;CODE                 0      0       0       0        0.0%
+   163 ;;COMMON               E      D       D       1       92.9%
+   164 ;;BITSFR0              0      0       0       1        0.0%
+   165 ;;SFR0                 0      0       0       1        0.0%
+   166 ;;BITSFR1              0      0       0       2        0.0%
+   167 ;;SFR1                 0      0       0       2        0.0%
+   168 ;;STACK                0      0       1       2        0.0%
+   169 ;;ABS                  0      0       0       3        0.0%
+   170 ;;BITBANK0            50      0       0       4        0.0%
+   171 ;;BITSFR3              0      0       0       4        0.0%
+   172 ;;SFR3                 0      0       0       4        0.0%
+   173 ;;BANK0               50      0       0       5        0.0%
+   174 ;;BITSFR2              0      0       0       5        0.0%
+   175 ;;SFR2                 0      0       0       5        0.0%
+   176 ;;BITBANK1            50      0       0       6        0.0%
+   177 ;;BANK1               50      0       0       7        0.0%
+   178 ;;BITBANK3            60      0       0       8        0.0%
+   179 ;;BANK3               60      0       0       9        0.0%
+   180 ;;BITBANK2            60      0       0      10        0.0%
+   181 ;;BANK2               60      0       0      11        0.0%
+   182 ;;DATA                 0      0       0      12        0.0%
+   183                           
+   184                           	global	_main
+   185                           psect	maintext
+   186                           
+   187 ;; *************** function _main *****************
+   188 ;; Defined at:
+   189 ;;		line 7 in file "D:\Embedded\pic\code\software\led\butterfly\butterfly.c"
+   190 ;; Parameters:    Size  Location     Type
+   191 ;;		None
+   192 ;; Auto vars:     Size  Location     Type
+   193 ;;  l               2   11[COMMON] int 
+   194 ;;  j               2    9[COMMON] int 
+   195 ;;  k               2    7[COMMON] int 
+   196 ;;  i               2    5[COMMON] int 
+   197 ;; Return value:  Size  Location     Type
+   198 ;;		None               void
+   199 ;; Registers used:
+   200 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   201 ;; Tracked objects:
+   202 ;;		On entry : 17F/0
+   203 ;;		On exit  : 0/0
+   204 ;;		Unchanged: 0/0
+   205 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   206 ;;      Params:         0       0       0       0       0
+   207 ;;      Locals:         8       0       0       0       0
+   208 ;;      Temps:          3       0       0       0       0
+   209 ;;      Totals:        11       0       0       0       0
+   210 ;;Total ram usage:       11 bytes
+   211 ;; Hardware stack levels required when called:    1
+   212 ;; This function calls:
+   213 ;;		_delay
+   214 ;; This function is called by:
+   215 ;;		Startup code after reset
+   216 ;; This function uses a non-reentrant model
+   217 ;;
+   218                           psect	maintext
+   219                           	file	"D:\Embedded\pic\code\software\led\butterfly\butterfly.c"
+   220                           	line	7
+   221                           	global	__size_of_main
+   222  009A                     	__size_of_main	equ	__end_of_main-_main
+   223                           	
+   224  0766                     _main:	
+   225                           	opt	stack 7
+   226                           ; Regs used in _main: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   227                           	line	9
+   228                           	
+   229  0766                     l2179:	
+   230                           ;butterfly.c: 8: int i,j,k,l;
+   231                           ;butterfly.c: 9: PORTA=0X00;
+   232  0766  1283               	bcf	status, 5	;RP0=0, select bank0
+   233  0767  1303               	bcf	status, 6	;RP1=0, select bank0
+   234  0768  0185               	clrf	(5)	;volatile
+   235                           	line	10
+   236                           ;butterfly.c: 10: TRISA=0X00;
+   237  0769  1683               	bsf	status, 5	;RP0=1, select bank1
+   238  076A  1303               	bcf	status, 6	;RP1=0, select bank1
+   239  076B  0185               	clrf	(133)^080h	;volatile
+   240                           	line	11
+   241                           ;butterfly.c: 11: ANSEL=0X00;
+   242  076C  1683               	bsf	status, 5	;RP0=1, select bank3
+   243  076D  1703               	bsf	status, 6	;RP1=1, select bank3
+   244  076E  0188               	clrf	(392)^0180h	;volatile
+   245                           	line	12
+   246                           ;butterfly.c: 12: ANSELH=0X00;
+   247  076F  0189               	clrf	(393)^0180h	;volatile
+   248  0770  2F71               	goto	l2181
+   249                           	line	13
+   250                           ;butterfly.c: 13: while(1)
+   251                           	
+   252  0771                     l1031:	
+   253                           	line	15
+   254                           	
+   255  0771                     l2181:	
+   256                           ;butterfly.c: 14: {
+   257                           ;butterfly.c: 15: for(i=3,j=4;i>=0,j<=7;i--,j++)
+   258  0771  3003               	movlw	low(03h)
+   259  0772  00F5               	movwf	(main@i)
+   260  0773  3000               	movlw	high(03h)
+   261  0774  00F6               	movwf	((main@i))+1
+   262                           	
+   263  0775                     l2183:	
+   264  0775  3004               	movlw	low(04h)
+   265  0776  00F9               	movwf	(main@j)
+   266  0777  3000               	movlw	high(04h)
+   267  0778  00FA               	movwf	((main@j))+1
+   268  0779  2FA9               	goto	l2193
+   269                           	line	16
+   270                           	
+   271  077A                     l1033:	
+   272                           	line	17
+   273                           	
+   274  077A                     l2185:	
+   275                           ;butterfly.c: 16: {
+   276                           ;butterfly.c: 17: PORTA|=(1<<i|1<<j);
+   277  077A  3001               	movlw	(01h)
+   278  077B  00F2               	movwf	(??_main+0)+0
+   279  077C  0A79               	incf	(main@j),w
+   280  077D  2F80               	goto	u2154
+   281  077E                     u2155:
+   282  077E  1003               	clrc
+   283  077F  0DF2               	rlf	(??_main+0)+0,f
+   284  0780                     u2154:
+   285  0780  3EFF               	addlw	-1
+   286  0781  1D03               	skipz
+   287  0782  2F7E               	goto	u2155
+   288  0783  3001               	movlw	(01h)
+   289  0784  00F3               	movwf	(??_main+1)+0
+   290  0785  0A75               	incf	(main@i),w
+   291  0786  2F89               	goto	u2164
+   292  0787                     u2165:
+   293  0787  1003               	clrc
+   294  0788  0DF3               	rlf	(??_main+1)+0,f
+   295  0789                     u2164:
+   296  0789  3EFF               	addlw	-1
+   297  078A  1D03               	skipz
+   298  078B  2F87               	goto	u2165
+   299  078C  0873               	movf	0+(??_main+1)+0,w
+   300  078D  0472               	iorwf	0+(??_main+0)+0,w
+   301  078E  00F4               	movwf	(??_main+2)+0
+   302  078F  0874               	movf	(??_main+2)+0,w
+   303  0790  1283               	bcf	status, 5	;RP0=0, select bank0
+   304  0791  1303               	bcf	status, 6	;RP1=0, select bank0
+   305  0792  0485               	iorwf	(5),f	;volatile
+   306                           	line	18
+   307                           	
+   308  0793                     l2187:	
+   309                           ;butterfly.c: 18: delay(60000);
+   310  0793  3060               	movlw	low(0EA60h)
+   311  0794  00F0               	movwf	(?_delay)
+   312  0795  30EA               	movlw	high(0EA60h)
+   313  0796  00F1               	movwf	((?_delay))+1
+   314  0797  120A  118A  2752   	fcall	_delay
+              120A  118A         
+   315                           	line	15
+   316                           	
+   317  079C                     l2189:	
+   318  079C  30FF               	movlw	low(-1)
+   319  079D  07F5               	addwf	(main@i),f
+   320  079E  1803               	skipnc
+   321  079F  0AF6               	incf	(main@i+1),f
+   322  07A0  30FF               	movlw	high(-1)
+   323  07A1  07F6               	addwf	(main@i+1),f
+   324                           	
+   325  07A2                     l2191:	
+   326  07A2  3001               	movlw	low(01h)
+   327  07A3  07F9               	addwf	(main@j),f
+   328  07A4  1803               	skipnc
+   329  07A5  0AFA               	incf	(main@j+1),f
+   330  07A6  3000               	movlw	high(01h)
+   331  07A7  07FA               	addwf	(main@j+1),f
+   332  07A8  2FA9               	goto	l2193
+   333                           	
+   334  07A9                     l1032:	
+   335                           	
+   336  07A9                     l2193:	
+   337  07A9  087A               	movf	(main@j+1),w
+   338  07AA  3A80               	xorlw	80h
+   339  07AB  00FF               	movwf	btemp+1
+   340  07AC  3080               	movlw	(high(08h))^80h
+   341  07AD  027F               	subwf	btemp+1,w
+   342  07AE  1D03               	skipz
+   343  07AF  2FB2               	goto	u2175
+   344  07B0  3008               	movlw	low(08h)
+   345  07B1  0279               	subwf	(main@j),w
+   346  07B2                     u2175:
+   347                           
+   348  07B2  1C03               	skipc
+   349  07B3  2FB5               	goto	u2171
+   350  07B4  2FB6               	goto	u2170
+   351  07B5                     u2171:
+   352  07B5  2F7A               	goto	l2185
+   353  07B6                     u2170:
+   354  07B6  2FB7               	goto	l2195
+   355                           	
+   356  07B7                     l1034:	
+   357                           	line	20
+   358                           	
+   359  07B7                     l2195:	
+   360                           ;butterfly.c: 19: }
+   361                           ;butterfly.c: 20: for(k=0,l=7;k<=3,l>=4;k++,l--)
+   362  07B7  01F7               	clrf	(main@k)
+   363  07B8  01F8               	clrf	(main@k+1)
+   364                           	
+   365  07B9                     l2197:	
+   366  07B9  3007               	movlw	low(07h)
+   367  07BA  00FB               	movwf	(main@l)
+   368  07BB  3000               	movlw	high(07h)
+   369  07BC  00FC               	movwf	((main@l))+1
+   370  07BD  2FED               	goto	l2207
+   371                           	line	21
+   372                           	
+   373  07BE                     l1036:	
+   374                           	line	22
+   375                           	
+   376  07BE                     l2199:	
+   377                           ;butterfly.c: 21: {
+   378                           ;butterfly.c: 22: PORTA^=(1<<l|1<<k);
+   379  07BE  3001               	movlw	(01h)
+   380  07BF  00F2               	movwf	(??_main+0)+0
+   381  07C0  0A77               	incf	(main@k),w
+   382  07C1  2FC4               	goto	u2184
+   383  07C2                     u2185:
+   384  07C2  1003               	clrc
+   385  07C3  0DF2               	rlf	(??_main+0)+0,f
+   386  07C4                     u2184:
+   387  07C4  3EFF               	addlw	-1
+   388  07C5  1D03               	skipz
+   389  07C6  2FC2               	goto	u2185
+   390  07C7  3001               	movlw	(01h)
+   391  07C8  00F3               	movwf	(??_main+1)+0
+   392  07C9  0A7B               	incf	(main@l),w
+   393  07CA  2FCD               	goto	u2194
+   394  07CB                     u2195:
+   395  07CB  1003               	clrc
+   396  07CC  0DF3               	rlf	(??_main+1)+0,f
+   397  07CD                     u2194:
+   398  07CD  3EFF               	addlw	-1
+   399  07CE  1D03               	skipz
+   400  07CF  2FCB               	goto	u2195
+   401  07D0  0873               	movf	0+(??_main+1)+0,w
+   402  07D1  0472               	iorwf	0+(??_main+0)+0,w
+   403  07D2  00F4               	movwf	(??_main+2)+0
+   404  07D3  0874               	movf	(??_main+2)+0,w
+   405  07D4  1283               	bcf	status, 5	;RP0=0, select bank0
+   406  07D5  1303               	bcf	status, 6	;RP1=0, select bank0
+   407  07D6  0685               	xorwf	(5),f	;volatile
+   408                           	line	23
+   409                           	
+   410  07D7                     l2201:	
+   411                           ;butterfly.c: 23: delay(60000);
+   412  07D7  3060               	movlw	low(0EA60h)
+   413  07D8  00F0               	movwf	(?_delay)
+   414  07D9  30EA               	movlw	high(0EA60h)
+   415  07DA  00F1               	movwf	((?_delay))+1
+   416  07DB  120A  118A  2752   	fcall	_delay
+              120A  118A         
+   417                           	line	20
+   418                           	
+   419  07E0                     l2203:	
+   420  07E0  3001               	movlw	low(01h)
+   421  07E1  07F7               	addwf	(main@k),f
+   422  07E2  1803               	skipnc
+   423  07E3  0AF8               	incf	(main@k+1),f
+   424  07E4  3000               	movlw	high(01h)
+   425  07E5  07F8               	addwf	(main@k+1),f
+   426                           	
+   427  07E6                     l2205:	
+   428  07E6  30FF               	movlw	low(-1)
+   429  07E7  07FB               	addwf	(main@l),f
+   430  07E8  1803               	skipnc
+   431  07E9  0AFC               	incf	(main@l+1),f
+   432  07EA  30FF               	movlw	high(-1)
+   433  07EB  07FC               	addwf	(main@l+1),f
+   434  07EC  2FED               	goto	l2207
+   435                           	
+   436  07ED                     l1035:	
+   437                           	
+   438  07ED                     l2207:	
+   439  07ED  087C               	movf	(main@l+1),w
+   440  07EE  3A80               	xorlw	80h
+   441  07EF  00FF               	movwf	btemp+1
+   442  07F0  3080               	movlw	(high(04h))^80h
+   443  07F1  027F               	subwf	btemp+1,w
+   444  07F2  1D03               	skipz
+   445  07F3  2FF6               	goto	u2205
+   446  07F4  3004               	movlw	low(04h)
+   447  07F5  027B               	subwf	(main@l),w
+   448  07F6                     u2205:
+   449                           
+   450  07F6  1803               	skipnc
+   451  07F7  2FF9               	goto	u2201
+   452  07F8  2FFA               	goto	u2200
+   453  07F9                     u2201:
+   454  07F9  2FBE               	goto	l2199
+   455  07FA                     u2200:
+   456  07FA  2F71               	goto	l2181
+   457                           	
+   458  07FB                     l1037:	
+   459  07FB  2F71               	goto	l2181
+   460                           	line	25
+   461                           	
+   462  07FC                     l1038:	
+   463                           	line	13
+   464  07FC  2F71               	goto	l2181
+   465                           	
+   466  07FD                     l1039:	
+   467                           	line	26
+   468                           	
+   469  07FD                     l1040:	
+   470                           	global	start
+   471  07FD  120A  118A  2800   	ljmp	start
+   472                           	opt stack 0
+   473                           GLOBAL	__end_of_main
+   474  0800                     	__end_of_main:
+   475 ;; =============== function _main ends ============
+   476                           
+   477                           	signat	_main,88
+   478                           	global	_delay
+   479                           psect	text55,local,class=CODE,delta=2
+   480                           global __ptext55
+   481  0752                     __ptext55:
+   482                           
+   483 ;; *************** function _delay *****************
+   484 ;; Defined at:
+   485 ;;		line 3 in file "D:\Embedded\pic\code\software\led\butterfly\butterfly.c"
+   486 ;; Parameters:    Size  Location     Type
+   487 ;;  a               2    0[COMMON] unsigned int 
+   488 ;; Auto vars:     Size  Location     Type
+   489 ;;		None
+   490 ;; Return value:  Size  Location     Type
+   491 ;;		None               void
+   492 ;; Registers used:
+   493 ;;		wreg
+   494 ;; Tracked objects:
+   495 ;;		On entry : 0/0
+   496 ;;		On exit  : 0/0
+   497 ;;		Unchanged: 0/0
+   498 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   499 ;;      Params:         2       0       0       0       0
+   500 ;;      Locals:         0       0       0       0       0
+   501 ;;      Temps:          0       0       0       0       0
+   502 ;;      Totals:         2       0       0       0       0
+   503 ;;Total ram usage:        2 bytes
+   504 ;; Hardware stack levels used:    1
+   505 ;; This function calls:
+   506 ;;		Nothing
+   507 ;; This function is called by:
+   508 ;;		_main
+   509 ;; This function uses a non-reentrant model
+   510 ;;
+   511                           psect	text55
+   512                           	file	"D:\Embedded\pic\code\software\led\butterfly\butterfly.c"
+   513                           	line	3
+   514                           	global	__size_of_delay
+   515  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+   516                           	
+   517  0752                     _delay:	
+   518                           	opt	stack 7
+   519                           ; Regs used in _delay: [wreg]
+   520                           	line	4
+   521                           	
+   522  0752                     l1409:	
+   523                           ;butterfly.c: 4: while(a--);
+   524  0752  2F54               	goto	l1411
+   525                           	
+   526  0753                     l1026:	
+   527  0753  2F54               	goto	l1411
+   528                           	
+   529  0754                     l1025:	
+   530                           	
+   531  0754                     l1411:	
+   532  0754  3001               	movlw	low(01h)
+   533  0755  02F0               	subwf	(delay@a),f
+   534  0756  3000               	movlw	high(01h)
+   535  0757  1C03               	skipc
+   536  0758  03F1               	decf	(delay@a+1),f
+   537  0759  02F1               	subwf	(delay@a+1),f
+   538  075A  30FF               	movlw	high(0FFFFh)
+   539  075B  0671               	xorwf	((delay@a+1)),w
+   540  075C  1D03               	skipz
+   541  075D  2F60               	goto	u15
+   542  075E  30FF               	movlw	low(0FFFFh)
+   543  075F  0670               	xorwf	((delay@a)),w
+   544  0760                     u15:
+   545                           
+   546  0760  1D03               	skipz
+   547  0761  2F63               	goto	u11
+   548  0762  2F64               	goto	u10
+   549  0763                     u11:
+   550  0763  2F54               	goto	l1411
+   551  0764                     u10:
+   552  0764  2F65               	goto	l1028
+   553                           	
+   554  0765                     l1027:	
+   555                           	line	5
+   556                           	
+   557  0765                     l1028:	
+   558  0765  0008               	return
+   559                           	opt stack 0
+   560                           GLOBAL	__end_of_delay
+   561  0766                     	__end_of_delay:
+   562 ;; =============== function _delay ends ============
+   563                           
+   564                           	signat	_delay,4216
+   565                           psect	text56,local,class=CODE,delta=2
+   566                           global __ptext56
+   567  0000                     __ptext56:
+   568                           	global	btemp
+   569  007E                     	btemp set 07Eh
+   570                           
+   571                           	DABS	1,126,2	;btemp
+   572                           	global	wtemp0
+   573  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Mar 08 20:43:50 2022
+
+                  u10 0764                    u11 0763                    u15 0760                  l1031 0771  
+                l1040 07FD                  l1032 07A9                  l1025 0754                  l1033 077A  
+                l1026 0753                  l1034 07B7                  l1027 0765                  l1035 07ED  
+                l1028 0765                  l1036 07BE                  l1037 07FB                  l1038 07FC  
+                l1039 07FD                  l2201 07D7                  l1411 0754                  l2203 07E0  
+                l2205 07E6                  l2207 07ED                  l1409 0752                  l2181 0771  
+                l2191 07A2                  l2183 0775                  l2185 077A                  l2193 07A9  
+                l2195 07B7                  l2187 0793                  l2179 0766                  l2197 07B9  
+                l2189 079C                  l2199 07BE                  u2200 07FA                  u2201 07F9  
+                u2205 07F6                  u2170 07B6                  u2154 0780                  u2171 07B5  
+                u2155 077E                  u2164 0789                  u2165 0787                  u2175 07B2  
+                u2184 07C4                  u2185 07C2                  u2194 07CD                  u2195 07CB  
+                _main 0766                  btemp 007E                  start 0000                 ?_main 0070  
+               _ANSEL 0188                 _PORTA 0005                 _TRISA 0085                 _delay 0752  
+               main@i 0075                 main@j 0079                 main@k 0077                 main@l 007B  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0072  
+              ?_delay 0070                _ANSELH 0189                delay@a 0070        __pcstackCOMMON 0070  
+       __end_of_delay 0766               ??_delay 0072            __pmaintext 0766  end_of_initialization 074E  
+ start_initialization 074E        __size_of_delay 0014              __ptext55 0752              __ptext56 0000  
+       __size_of_main 009A  

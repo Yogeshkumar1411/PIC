@@ -1,0 +1,28 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+EN::RE2	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	8;"	d	line:8	file:
+LCD::PORTD	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	9;"	d	line:9	file:
+RC	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	46;"	f	line:46
+RS::RE0	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	6;"	d	line:6	file:
+RW::RE1	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	7;"	d	line:7	file:
+TX	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	38;"	f	line:38	signature:(char *a)
+cmp	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	13;"	v	line:13
+cmp1	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	13;"	v	line:13
+data	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	14;"	v	line:14
+delay	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	18;"	f	line:18	signature:(unsigned int ms)
+display	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	22;"	f	line:22	signature:(char a,char b, char c)
+e	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	11;"	v	line:11
+i	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	12;"	v	line:12
+m	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	15;"	v	line:15
+main	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	79;"	f	line:79
+n	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	16;"	v	line:16
+o	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	17;"	v	line:17
+p	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	10;"	v	line:10
+q	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	11;"	v	line:11
+tx1	D:\Embedded\pic\code\software\protocal\receive_led_string\receive.c	32;"	f	line:32	signature:(char b)

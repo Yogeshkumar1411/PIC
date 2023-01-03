@@ -1,0 +1,469 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Apr 12 23:24:03 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNROOT	_main
+    43                           	global	_PORTB
+    44                           psect	maintext,global,class=CODE,delta=2
+    45                           global __pmaintext
+    46  07A3                     __pmaintext:
+    47  0006                     _PORTB	set	6
+    48                           	global	_PORTC
+    49  0007                     _PORTC	set	7
+    50                           	global	_RB0
+    51  0030                     _RB0	set	48
+    52                           	global	_RC0
+    53  0038                     _RC0	set	56
+    54                           	global	_RC1
+    55  0039                     _RC1	set	57
+    56                           	global	_RC2
+    57  003A                     _RC2	set	58
+    58                           	global	_TRISB
+    59  0086                     _TRISB	set	134
+    60                           	global	_TRISC
+    61  0087                     _TRISC	set	135
+    62                           	global	_ANSEL
+    63  0188                     _ANSEL	set	392
+    64                           	global	_ANSELH
+    65  0189                     _ANSELH	set	393
+    66                           	file	"onoffinterchange.as"
+    67                           	line	#
+    68                           psect cinit,class=CODE,delta=2
+    69                           global start_initialization
+    70  079F                     start_initialization:
+    71                           
+    72                           psect cinit,class=CODE,delta=2
+    73                           global end_of_initialization
+    74                           
+    75                           ;End of C runtime variable initialization code
+    76                           
+    77  079F                     end_of_initialization:
+    78  079F  0183               clrf status
+    79  07A0  120A  118A  2FA3   ljmp _main	;jump to C main() function
+    80                           psect	cstackCOMMON,class=COMMON,space=1
+    81                           global __pcstackCOMMON
+    82  0070                     __pcstackCOMMON:
+    83                           	global	?_main
+    84  0070                     ?_main:	; 0 bytes @ 0x0
+    85                           	global	??_main
+    86  0070                     ??_main:	; 0 bytes @ 0x0
+    87                           	global	main@c
+    88  0070                     main@c:	; 2 bytes @ 0x0
+    89  0070                     	ds	2
+    90                           	global	main@a
+    91  0072                     main@a:	; 2 bytes @ 0x2
+    92  0072                     	ds	2
+    93                           	global	main@b
+    94  0074                     main@b:	; 2 bytes @ 0x4
+    95  0074                     	ds	2
+    96 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+    97 ;;Auto spaces:   Size  Autos    Used
+    98 ;; COMMON          14      6       6
+    99 ;; BANK0           80      0       0
+   100 ;; BANK1           80      0       0
+   101 ;; BANK3           96      0       0
+   102 ;; BANK2           96      0       0
+   103                           
+   104 ;;
+   105 ;; Pointer list with targets:
+   106                           
+   107                           
+   108                           
+   109 ;;
+   110 ;; Critical Paths under _main in COMMON
+   111 ;;
+   112 ;;   None.
+   113 ;;
+   114 ;; Critical Paths under _main in BANK0
+   115 ;;
+   116 ;;   None.
+   117 ;;
+   118 ;; Critical Paths under _main in BANK1
+   119 ;;
+   120 ;;   None.
+   121 ;;
+   122 ;; Critical Paths under _main in BANK3
+   123 ;;
+   124 ;;   None.
+   125 ;;
+   126 ;; Critical Paths under _main in BANK2
+   127 ;;
+   128 ;;   None.
+   129                           
+   130 ;;
+   131 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   132 ;;
+   133                           
+   134 ;;
+   135 ;;Call Graph Tables:
+   136 ;;
+   137 ;; ---------------------------------------------------------------------------------
+   138 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   139 ;; ---------------------------------------------------------------------------------
+   140 ;; (0) _main                                                 6     6      0      75
+   141 ;;                                              0 COMMON     6     6      0
+   142 ;; ---------------------------------------------------------------------------------
+   143 ;; Estimated maximum stack depth 0
+   144 ;; ---------------------------------------------------------------------------------
+   145                           
+   146 ;; Call Graph Graphs:
+   147                           
+   148 ;; _main (ROOT)
+   149 ;;
+   150                           
+   151 ;; Address spaces:
+   152                           
+   153 ;;Name               Size   Autos  Total    Cost      Usage
+   154 ;;BITCOMMON            E      0       0       0        0.0%
+   155 ;;EEDATA             100      0       0       0        0.0%
+   156 ;;NULL                 0      0       0       0        0.0%
+   157 ;;CODE                 0      0       0       0        0.0%
+   158 ;;COMMON               E      6       6       1       42.9%
+   159 ;;BITSFR0              0      0       0       1        0.0%
+   160 ;;SFR0                 0      0       0       1        0.0%
+   161 ;;BITSFR1              0      0       0       2        0.0%
+   162 ;;SFR1                 0      0       0       2        0.0%
+   163 ;;STACK                0      0       0       2        0.0%
+   164 ;;ABS                  0      0       0       3        0.0%
+   165 ;;BITBANK0            50      0       0       4        0.0%
+   166 ;;BITSFR3              0      0       0       4        0.0%
+   167 ;;SFR3                 0      0       0       4        0.0%
+   168 ;;BANK0               50      0       0       5        0.0%
+   169 ;;BITSFR2              0      0       0       5        0.0%
+   170 ;;SFR2                 0      0       0       5        0.0%
+   171 ;;BITBANK1            50      0       0       6        0.0%
+   172 ;;BANK1               50      0       0       7        0.0%
+   173 ;;BITBANK3            60      0       0       8        0.0%
+   174 ;;BANK3               60      0       0       9        0.0%
+   175 ;;BITBANK2            60      0       0      10        0.0%
+   176 ;;BANK2               60      0       0      11        0.0%
+   177 ;;DATA                 0      0       0      12        0.0%
+   178                           
+   179                           	global	_main
+   180                           psect	maintext
+   181                           
+   182 ;; *************** function _main *****************
+   183 ;; Defined at:
+   184 ;;		line 6 in file "D:\Embedded\pic\code\software\led\onoffinerchange\onoffinterchange.c"
+   185 ;; Parameters:    Size  Location     Type
+   186 ;;		None
+   187 ;; Auto vars:     Size  Location     Type
+   188 ;;  b               2    4[COMMON] int 
+   189 ;;  a               2    2[COMMON] int 
+   190 ;;  c               2    0[COMMON] int 
+   191 ;; Return value:  Size  Location     Type
+   192 ;;		None               void
+   193 ;; Registers used:
+   194 ;;		wreg, status,2, status,0
+   195 ;; Tracked objects:
+   196 ;;		On entry : 17F/0
+   197 ;;		On exit  : 0/0
+   198 ;;		Unchanged: 0/0
+   199 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   200 ;;      Params:         0       0       0       0       0
+   201 ;;      Locals:         6       0       0       0       0
+   202 ;;      Temps:          0       0       0       0       0
+   203 ;;      Totals:         6       0       0       0       0
+   204 ;;Total ram usage:        6 bytes
+   205 ;; This function calls:
+   206 ;;		Nothing
+   207 ;; This function is called by:
+   208 ;;		Startup code after reset
+   209 ;; This function uses a non-reentrant model
+   210 ;;
+   211                           psect	maintext
+   212                           	file	"D:\Embedded\pic\code\software\led\onoffinerchange\onoffinterchange.c"
+   213                           	line	6
+   214                           	global	__size_of_main
+   215  005D                     	__size_of_main	equ	__end_of_main-_main
+   216                           	
+   217  07A3                     _main:	
+   218                           	opt	stack 8
+   219                           ; Regs used in _main: [wreg+status,2+status,0]
+   220                           	line	7
+   221                           	
+   222  07A3                     l1406:	
+   223                           ;onoffinterchange.c: 7: int a=1,b=0,c;
+   224  07A3  3001               	movlw	low(01h)
+   225  07A4  00F2               	movwf	(main@a)
+   226  07A5  3000               	movlw	high(01h)
+   227  07A6  00F3               	movwf	((main@a))+1
+   228                           	
+   229  07A7                     l1408:	
+   230  07A7  01F4               	clrf	(main@b)
+   231  07A8  01F5               	clrf	(main@b+1)
+   232                           	line	8
+   233                           	
+   234  07A9                     l1410:	
+   235                           ;onoffinterchange.c: 8: PORTB=0X00;
+   236  07A9  1283               	bcf	status, 5	;RP0=0, select bank0
+   237  07AA  1303               	bcf	status, 6	;RP1=0, select bank0
+   238  07AB  0186               	clrf	(6)	;volatile
+   239                           	line	9
+   240                           	
+   241  07AC                     l1412:	
+   242                           ;onoffinterchange.c: 9: TRISB=0X00;
+   243  07AC  1683               	bsf	status, 5	;RP0=1, select bank1
+   244  07AD  1303               	bcf	status, 6	;RP1=0, select bank1
+   245  07AE  0186               	clrf	(134)^080h	;volatile
+   246                           	line	10
+   247                           	
+   248  07AF                     l1414:	
+   249                           ;onoffinterchange.c: 10: ANSEL=0X00;
+   250  07AF  1683               	bsf	status, 5	;RP0=1, select bank3
+   251  07B0  1703               	bsf	status, 6	;RP1=1, select bank3
+   252  07B1  0188               	clrf	(392)^0180h	;volatile
+   253                           	line	11
+   254                           	
+   255  07B2                     l1416:	
+   256                           ;onoffinterchange.c: 11: ANSELH=0X00;
+   257  07B2  0189               	clrf	(393)^0180h	;volatile
+   258                           	line	12
+   259                           	
+   260  07B3                     l1418:	
+   261                           ;onoffinterchange.c: 12: PORTC=0X00;
+   262  07B3  1283               	bcf	status, 5	;RP0=0, select bank0
+   263  07B4  1303               	bcf	status, 6	;RP1=0, select bank0
+   264  07B5  0187               	clrf	(7)	;volatile
+   265                           	line	13
+   266                           ;onoffinterchange.c: 13: TRISC=0X07;
+   267  07B6  3007               	movlw	(07h)
+   268  07B7  1683               	bsf	status, 5	;RP0=1, select bank1
+   269  07B8  1303               	bcf	status, 6	;RP1=0, select bank1
+   270  07B9  0087               	movwf	(135)^080h	;volatile
+   271  07BA  2FBB               	goto	l1420
+   272                           	line	14
+   273                           ;onoffinterchange.c: 14: while(1)
+   274                           	
+   275  07BB                     l1025:	
+   276                           	line	16
+   277                           	
+   278  07BB                     l1420:	
+   279                           ;onoffinterchange.c: 15: {
+   280                           ;onoffinterchange.c: 16: if(RC0==1)
+   281  07BB  1283               	bcf	status, 5	;RP0=0, select bank0
+   282  07BC  1C07               	btfss	(56/8),(56)&7
+   283  07BD  2FBF               	goto	u11
+   284  07BE  2FC0               	goto	u10
+   285  07BF                     u11:
+   286  07BF  2FD0               	goto	l1026
+   287  07C0                     u10:
+   288                           	line	18
+   289                           	
+   290  07C0                     l1422:	
+   291                           ;onoffinterchange.c: 17: {
+   292                           ;onoffinterchange.c: 18: RB0=a;
+   293  07C0  1872               	btfsc	(main@a),0
+   294  07C1  2FC3               	goto	u21
+   295  07C2  2FC7               	goto	u20
+   296                           	
+   297  07C3                     u21:
+   298  07C3  1283               	bcf	status, 5	;RP0=0, select bank0
+   299  07C4  1303               	bcf	status, 6	;RP1=0, select bank0
+   300  07C5  1406               	bsf	(48/8),(48)&7
+   301  07C6  2FCA               	goto	u34
+   302  07C7                     u20:
+   303  07C7  1283               	bcf	status, 5	;RP0=0, select bank0
+   304  07C8  1303               	bcf	status, 6	;RP1=0, select bank0
+   305  07C9  1006               	bcf	(48/8),(48)&7
+   306  07CA                     u34:
+   307                           	line	19
+   308                           ;onoffinterchange.c: 19: while(RC0==1);
+   309  07CA  2FCB               	goto	l1027
+   310                           	
+   311  07CB                     l1028:	
+   312                           	
+   313  07CB                     l1027:	
+   314  07CB  1807               	btfsc	(56/8),(56)&7
+   315  07CC  2FCE               	goto	u41
+   316  07CD  2FCF               	goto	u40
+   317  07CE                     u41:
+   318  07CE  2FCB               	goto	l1027
+   319  07CF                     u40:
+   320  07CF  2FD0               	goto	l1026
+   321                           	
+   322  07D0                     l1029:	
+   323                           	line	20
+   324                           	
+   325  07D0                     l1026:	
+   326                           	line	21
+   327                           ;onoffinterchange.c: 20: }
+   328                           ;onoffinterchange.c: 21: if(RC1==1)
+   329  07D0  1C87               	btfss	(57/8),(57)&7
+   330  07D1  2FD3               	goto	u51
+   331  07D2  2FD4               	goto	u50
+   332  07D3                     u51:
+   333  07D3  2FE4               	goto	l1030
+   334  07D4                     u50:
+   335                           	line	23
+   336                           	
+   337  07D4                     l1424:	
+   338                           ;onoffinterchange.c: 22: {
+   339                           ;onoffinterchange.c: 23: RB0=b;
+   340  07D4  1874               	btfsc	(main@b),0
+   341  07D5  2FD7               	goto	u61
+   342  07D6  2FDB               	goto	u60
+   343                           	
+   344  07D7                     u61:
+   345  07D7  1283               	bcf	status, 5	;RP0=0, select bank0
+   346  07D8  1303               	bcf	status, 6	;RP1=0, select bank0
+   347  07D9  1406               	bsf	(48/8),(48)&7
+   348  07DA  2FDE               	goto	u74
+   349  07DB                     u60:
+   350  07DB  1283               	bcf	status, 5	;RP0=0, select bank0
+   351  07DC  1303               	bcf	status, 6	;RP1=0, select bank0
+   352  07DD  1006               	bcf	(48/8),(48)&7
+   353  07DE                     u74:
+   354                           	line	24
+   355                           ;onoffinterchange.c: 24: while(RC1==1);
+   356  07DE  2FDF               	goto	l1031
+   357                           	
+   358  07DF                     l1032:	
+   359                           	
+   360  07DF                     l1031:	
+   361  07DF  1887               	btfsc	(57/8),(57)&7
+   362  07E0  2FE2               	goto	u81
+   363  07E1  2FE3               	goto	u80
+   364  07E2                     u81:
+   365  07E2  2FDF               	goto	l1031
+   366  07E3                     u80:
+   367  07E3  2FE4               	goto	l1030
+   368                           	
+   369  07E4                     l1033:	
+   370                           	line	25
+   371                           	
+   372  07E4                     l1030:	
+   373                           	line	26
+   374                           ;onoffinterchange.c: 25: }
+   375                           ;onoffinterchange.c: 26: if(RC2==1)
+   376  07E4  1D07               	btfss	(58/8),(58)&7
+   377  07E5  2FE7               	goto	u91
+   378  07E6  2FE8               	goto	u90
+   379  07E7                     u91:
+   380  07E7  2FBB               	goto	l1420
+   381  07E8                     u90:
+   382                           	line	29
+   383                           	
+   384  07E8                     l1426:	
+   385                           ;onoffinterchange.c: 27: {
+   386                           ;onoffinterchange.c: 29: c=a;
+   387  07E8  0873               	movf	(main@a+1),w
+   388  07E9  01F1               	clrf	(main@c+1)
+   389  07EA  07F1               	addwf	(main@c+1)
+   390  07EB  0872               	movf	(main@a),w
+   391  07EC  01F0               	clrf	(main@c)
+   392  07ED  07F0               	addwf	(main@c)
+   393                           
+   394                           	line	30
+   395                           ;onoffinterchange.c: 30: a=b;
+   396  07EE  0875               	movf	(main@b+1),w
+   397  07EF  01F3               	clrf	(main@a+1)
+   398  07F0  07F3               	addwf	(main@a+1)
+   399  07F1  0874               	movf	(main@b),w
+   400  07F2  01F2               	clrf	(main@a)
+   401  07F3  07F2               	addwf	(main@a)
+   402                           
+   403                           	line	31
+   404                           ;onoffinterchange.c: 31: b=c;
+   405  07F4  0871               	movf	(main@c+1),w
+   406  07F5  01F5               	clrf	(main@b+1)
+   407  07F6  07F5               	addwf	(main@b+1)
+   408  07F7  0870               	movf	(main@c),w
+   409  07F8  01F4               	clrf	(main@b)
+   410  07F9  07F4               	addwf	(main@b)
+   411                           
+   412  07FA  2FBB               	goto	l1420
+   413                           	line	32
+   414                           	
+   415  07FB                     l1034:	
+   416  07FB  2FBB               	goto	l1420
+   417                           	line	33
+   418                           	
+   419  07FC                     l1035:	
+   420                           	line	14
+   421  07FC  2FBB               	goto	l1420
+   422                           	
+   423  07FD                     l1036:	
+   424                           	line	34
+   425                           	
+   426  07FD                     l1037:	
+   427                           	global	start
+   428  07FD  120A  118A  2800   	ljmp	start
+   429                           	opt stack 0
+   430                           GLOBAL	__end_of_main
+   431  0800                     	__end_of_main:
+   432 ;; =============== function _main ends ============
+   433                           
+   434                           	signat	_main,88
+   435                           psect	maintext
+   436                           	global	btemp
+   437  007E                     	btemp set 07Eh
+   438                           
+   439                           	DABS	1,126,2	;btemp
+   440                           	global	wtemp0
+   441  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Apr 12 23:24:03 2022
+
+                  u10 07C0                    u11 07BF                    u20 07C7                    u21 07C3  
+                  u40 07CF                    u41 07CE                    u50 07D4                    u34 07CA  
+                  u51 07D3                    u60 07DB                    u61 07D7                    u80 07E3  
+                  u81 07E2                    u90 07E8                    u74 07DE                    u91 07E7  
+                 _RB0 0030                   _RC0 0038                   _RC1 0039                   _RC2 003A  
+                l1030 07E4                  l1031 07DF                  l1032 07DF                  l1033 07E4  
+                l1025 07BB                  l1034 07FB                  l1026 07D0                  l1035 07FC  
+                l1027 07CB                  l1036 07FD                  l1028 07CB                  l1037 07FD  
+                l1029 07D0                  l1410 07A9                  l1420 07BB                  l1412 07AC  
+                l1422 07C0                  l1414 07AF                  l1406 07A3                  l1424 07D4  
+                l1416 07B2                  l1408 07A7                  l1426 07E8                  l1418 07B3  
+                _main 07A3                  btemp 007E                  start 0000                 ?_main 0070  
+               _ANSEL 0188                 _PORTB 0006                 _PORTC 0007                 _TRISB 0086  
+               _TRISC 0087                 main@a 0072                 main@b 0074                 main@c 0070  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0070  
+              _ANSELH 0189        __pcstackCOMMON 0070            __pmaintext 07A3  end_of_initialization 079F  
+ start_initialization 079F         __size_of_main 005D  

@@ -1,0 +1,863 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Mon Jun 27 15:33:34 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_lcd_cmd
+    43                           	FNCALL	_main,_slave
+    44                           	FNCALL	_slave,_lcd_cmd
+    45                           	FNCALL	_lcd_cmd,_delay
+    46                           	FNROOT	_main
+    47                           	global	_name
+    48                           	global	_PORTA
+    49                           psect	text78,local,class=CODE,delta=2
+    50                           global __ptext78
+    51  0000                     __ptext78:
+    52  0005                     _PORTA	set	5
+    53                           	global	_PORTB
+    54  0006                     _PORTB	set	6
+    55                           	global	_PORTC
+    56  0007                     _PORTC	set	7
+    57                           	global	_PORTE
+    58  0009                     _PORTE	set	9
+    59                           	global	_SSPBUF
+    60  0013                     _SSPBUF	set	19
+    61                           	global	_SSPCON
+    62  0014                     _SSPCON	set	20
+    63                           	global	_RE0
+    64  0048                     _RE0	set	72
+    65                           	global	_RE1
+    66  0049                     _RE1	set	73
+    67                           	global	_RE2
+    68  004A                     _RE2	set	74
+    69                           	global	_SSPIF
+    70  0063                     _SSPIF	set	99
+    71                           	global	_SSPSTAT
+    72  0094                     _SSPSTAT	set	148
+    73                           	global	_TRISA
+    74  0085                     _TRISA	set	133
+    75                           	global	_TRISB
+    76  0086                     _TRISB	set	134
+    77                           	global	_TRISC
+    78  0087                     _TRISC	set	135
+    79                           	global	_TRISE
+    80  0089                     _TRISE	set	137
+    81                           	global	_ANSEL
+    82  0188                     _ANSEL	set	392
+    83                           	global	_ANSELH
+    84  0189                     _ANSELH	set	393
+    85                           	file	"Serial_interrupt_SPI_slave.as"
+    86                           	line	#
+    87                           psect cinit,class=CODE,delta=2
+    88                           global start_initialization
+    89  0720                     start_initialization:
+    90                           
+    91                           psect	bssCOMMON,class=COMMON,space=1
+    92                           global __pbssCOMMON
+    93  0078                     __pbssCOMMON:
+    94  0078                     _name:
+    95  0078                            ds      1
+    96                           
+    97                           ; Clear objects allocated to COMMON
+    98                           psect cinit,class=CODE,delta=2
+    99  0720  01F8               	clrf	((__pbssCOMMON)+0)&07Fh
+   100                           psect cinit,class=CODE,delta=2
+   101                           global end_of_initialization
+   102                           
+   103                           ;End of C runtime variable initialization code
+   104                           
+   105  0721                     end_of_initialization:
+   106  0721  0183               clrf status
+   107  0722  120A  118A  2FA4   ljmp _main	;jump to C main() function
+   108                           psect	cstackCOMMON,class=COMMON,space=1
+   109                           global __pcstackCOMMON
+   110  0070                     __pcstackCOMMON:
+   111                           	global	?_delay
+   112  0070                     ?_delay:	; 0 bytes @ 0x0
+   113                           	global	?_slave
+   114  0070                     ?_slave:	; 0 bytes @ 0x0
+   115                           	global	?_main
+   116  0070                     ?_main:	; 0 bytes @ 0x0
+   117                           	global	delay@ms
+   118  0070                     delay@ms:	; 2 bytes @ 0x0
+   119  0070                     	ds	2
+   120                           	global	??_delay
+   121  0072                     ??_delay:	; 0 bytes @ 0x2
+   122                           	global	?_lcd_cmd
+   123  0072                     ?_lcd_cmd:	; 0 bytes @ 0x2
+   124                           	global	lcd_cmd@b
+   125  0072                     lcd_cmd@b:	; 1 bytes @ 0x2
+   126  0072                     	ds	1
+   127                           	global	lcd_cmd@c
+   128  0073                     lcd_cmd@c:	; 1 bytes @ 0x3
+   129  0073                     	ds	1
+   130                           	global	??_lcd_cmd
+   131  0074                     ??_lcd_cmd:	; 0 bytes @ 0x4
+   132  0074                     	ds	1
+   133                           	global	lcd_cmd@a
+   134  0075                     lcd_cmd@a:	; 1 bytes @ 0x5
+   135  0075                     	ds	1
+   136                           	global	??_slave
+   137  0076                     ??_slave:	; 0 bytes @ 0x6
+   138  0076                     	ds	1
+   139                           	global	??_main
+   140  0077                     ??_main:	; 0 bytes @ 0x7
+   141  0077                     	ds	1
+   142 ;;Data sizes: Strings 0, constant 0, data 0, bss 1, persistent 0 stack 0
+   143 ;;Auto spaces:   Size  Autos    Used
+   144 ;; COMMON          14      8       9
+   145 ;; BANK0           80      0       0
+   146 ;; BANK1           80      0       0
+   147 ;; BANK3           96      0       0
+   148 ;; BANK2           96      0       0
+   149                           
+   150 ;;
+   151 ;; Pointer list with targets:
+   152                           
+   153                           
+   154                           
+   155 ;;
+   156 ;; Critical Paths under _main in COMMON
+   157 ;;
+   158 ;;   _main->_slave
+   159 ;;   _slave->_lcd_cmd
+   160 ;;   _lcd_cmd->_delay
+   161 ;;
+   162 ;; Critical Paths under _main in BANK0
+   163 ;;
+   164 ;;   None.
+   165 ;;
+   166 ;; Critical Paths under _main in BANK1
+   167 ;;
+   168 ;;   None.
+   169 ;;
+   170 ;; Critical Paths under _main in BANK3
+   171 ;;
+   172 ;;   None.
+   173 ;;
+   174 ;; Critical Paths under _main in BANK2
+   175 ;;
+   176 ;;   None.
+   177                           
+   178 ;;
+   179 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   180 ;;
+   181                           
+   182 ;;
+   183 ;;Call Graph Tables:
+   184 ;;
+   185 ;; ---------------------------------------------------------------------------------
+   186 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   187 ;; ---------------------------------------------------------------------------------
+   188 ;; (0) _main                                                 1     1      0     150
+   189 ;;                                              7 COMMON     1     1      0
+   190 ;;                            _lcd_cmd
+   191 ;;                              _slave
+   192 ;; ---------------------------------------------------------------------------------
+   193 ;; (1) _slave                                                1     1      0      75
+   194 ;;                                              6 COMMON     1     1      0
+   195 ;;                            _lcd_cmd
+   196 ;; ---------------------------------------------------------------------------------
+   197 ;; (2) _lcd_cmd                                              4     2      2      75
+   198 ;;                                              2 COMMON     4     2      2
+   199 ;;                              _delay
+   200 ;; ---------------------------------------------------------------------------------
+   201 ;; (3) _delay                                                2     0      2      15
+   202 ;;                                              0 COMMON     2     0      2
+   203 ;; ---------------------------------------------------------------------------------
+   204 ;; Estimated maximum stack depth 3
+   205 ;; ---------------------------------------------------------------------------------
+   206                           
+   207 ;; Call Graph Graphs:
+   208                           
+   209 ;; _main (ROOT)
+   210 ;;   _lcd_cmd
+   211 ;;     _delay
+   212 ;;   _slave
+   213 ;;     _lcd_cmd
+   214 ;;       _delay
+   215 ;;
+   216                           
+   217 ;; Address spaces:
+   218                           
+   219 ;;Name               Size   Autos  Total    Cost      Usage
+   220 ;;BITCOMMON            E      0       0       0        0.0%
+   221 ;;EEDATA             100      0       0       0        0.0%
+   222 ;;NULL                 0      0       0       0        0.0%
+   223 ;;CODE                 0      0       0       0        0.0%
+   224 ;;COMMON               E      8       9       1       64.3%
+   225 ;;BITSFR0              0      0       0       1        0.0%
+   226 ;;SFR0                 0      0       0       1        0.0%
+   227 ;;BITSFR1              0      0       0       2        0.0%
+   228 ;;SFR1                 0      0       0       2        0.0%
+   229 ;;STACK                0      0       3       2        0.0%
+   230 ;;ABS                  0      0       9       3        0.0%
+   231 ;;BITBANK0            50      0       0       4        0.0%
+   232 ;;BITSFR3              0      0       0       4        0.0%
+   233 ;;SFR3                 0      0       0       4        0.0%
+   234 ;;BANK0               50      0       0       5        0.0%
+   235 ;;BITSFR2              0      0       0       5        0.0%
+   236 ;;SFR2                 0      0       0       5        0.0%
+   237 ;;BITBANK1            50      0       0       6        0.0%
+   238 ;;BANK1               50      0       0       7        0.0%
+   239 ;;BITBANK3            60      0       0       8        0.0%
+   240 ;;BANK3               60      0       0       9        0.0%
+   241 ;;BITBANK2            60      0       0      10        0.0%
+   242 ;;BANK2               60      0       0      11        0.0%
+   243 ;;DATA                 0      0       C      12        0.0%
+   244                           
+   245                           	global	_main
+   246                           psect	maintext,global,class=CODE,delta=2
+   247                           global __pmaintext
+   248  07A4                     __pmaintext:
+   249                           
+   250 ;; *************** function _main *****************
+   251 ;; Defined at:
+   252 ;;		line 39 in file "D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interrupt_SPI_slave.c"
+   253 ;; Parameters:    Size  Location     Type
+   254 ;;		None
+   255 ;; Auto vars:     Size  Location     Type
+   256 ;;		None
+   257 ;; Return value:  Size  Location     Type
+   258 ;;		None               void
+   259 ;; Registers used:
+   260 ;;		wreg, status,2, status,0, pclath, cstack
+   261 ;; Tracked objects:
+   262 ;;		On entry : 17F/0
+   263 ;;		On exit  : 0/0
+   264 ;;		Unchanged: 0/0
+   265 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   266 ;;      Params:         0       0       0       0       0
+   267 ;;      Locals:         0       0       0       0       0
+   268 ;;      Temps:          1       0       0       0       0
+   269 ;;      Totals:         1       0       0       0       0
+   270 ;;Total ram usage:        1 bytes
+   271 ;; Hardware stack levels required when called:    3
+   272 ;; This function calls:
+   273 ;;		_lcd_cmd
+   274 ;;		_slave
+   275 ;; This function is called by:
+   276 ;;		Startup code after reset
+   277 ;; This function uses a non-reentrant model
+   278 ;;
+   279                           psect	maintext
+   280                           	file	"D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interru
+                                 pt_SPI_slave.c"
+   281                           	line	39
+   282                           	global	__size_of_main
+   283  005C                     	__size_of_main	equ	__end_of_main-_main
+   284                           	
+   285  07A4                     _main:	
+   286                           	opt	stack 5
+   287                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   288                           	line	40
+   289                           	
+   290  07A4                     l2214:	
+   291                           ;Serial_interrupt_SPI_slave.c: 40: TRISC=0X18;
+   292  07A4  3018               	movlw	(018h)
+   293  07A5  1683               	bsf	status, 5	;RP0=1, select bank1
+   294  07A6  1303               	bcf	status, 6	;RP1=0, select bank1
+   295  07A7  0087               	movwf	(135)^080h	;volatile
+   296                           	line	41
+   297                           	
+   298  07A8                     l2216:	
+   299                           ;Serial_interrupt_SPI_slave.c: 41: PORTC=0X00;
+   300  07A8  1283               	bcf	status, 5	;RP0=0, select bank0
+   301  07A9  1303               	bcf	status, 6	;RP1=0, select bank0
+   302  07AA  0187               	clrf	(7)	;volatile
+   303                           	line	42
+   304                           	
+   305  07AB                     l2218:	
+   306                           ;Serial_interrupt_SPI_slave.c: 42: TRISB=0X00;
+   307  07AB  1683               	bsf	status, 5	;RP0=1, select bank1
+   308  07AC  1303               	bcf	status, 6	;RP1=0, select bank1
+   309  07AD  0186               	clrf	(134)^080h	;volatile
+   310                           	line	43
+   311                           	
+   312  07AE                     l2220:	
+   313                           ;Serial_interrupt_SPI_slave.c: 43: PORTB=0X00;
+   314  07AE  1283               	bcf	status, 5	;RP0=0, select bank0
+   315  07AF  1303               	bcf	status, 6	;RP1=0, select bank0
+   316  07B0  0186               	clrf	(6)	;volatile
+   317                           	line	44
+   318                           	
+   319  07B1                     l2222:	
+   320                           ;Serial_interrupt_SPI_slave.c: 44: TRISE=0X00;
+   321  07B1  1683               	bsf	status, 5	;RP0=1, select bank1
+   322  07B2  1303               	bcf	status, 6	;RP1=0, select bank1
+   323  07B3  0189               	clrf	(137)^080h	;volatile
+   324                           	line	45
+   325                           	
+   326  07B4                     l2224:	
+   327                           ;Serial_interrupt_SPI_slave.c: 45: PORTE=0X00;
+   328  07B4  1283               	bcf	status, 5	;RP0=0, select bank0
+   329  07B5  1303               	bcf	status, 6	;RP1=0, select bank0
+   330  07B6  0189               	clrf	(9)	;volatile
+   331                           	line	46
+   332                           	
+   333  07B7                     l2226:	
+   334                           ;Serial_interrupt_SPI_slave.c: 46: TRISA=0X20;
+   335  07B7  3020               	movlw	(020h)
+   336  07B8  1683               	bsf	status, 5	;RP0=1, select bank1
+   337  07B9  1303               	bcf	status, 6	;RP1=0, select bank1
+   338  07BA  0085               	movwf	(133)^080h	;volatile
+   339                           	line	47
+   340                           ;Serial_interrupt_SPI_slave.c: 47: PORTA=0X00;
+   341  07BB  1283               	bcf	status, 5	;RP0=0, select bank0
+   342  07BC  1303               	bcf	status, 6	;RP1=0, select bank0
+   343  07BD  0185               	clrf	(5)	;volatile
+   344                           	line	48
+   345                           ;Serial_interrupt_SPI_slave.c: 48: ANSEL=0X00;
+   346  07BE  1683               	bsf	status, 5	;RP0=1, select bank3
+   347  07BF  1703               	bsf	status, 6	;RP1=1, select bank3
+   348  07C0  0188               	clrf	(392)^0180h	;volatile
+   349                           	line	49
+   350                           ;Serial_interrupt_SPI_slave.c: 49: ANSELH=0X00;
+   351  07C1  0189               	clrf	(393)^0180h	;volatile
+   352                           	line	50
+   353                           	
+   354  07C2                     l2228:	
+   355                           ;Serial_interrupt_SPI_slave.c: 50: SSPCON=0X34;
+   356  07C2  3034               	movlw	(034h)
+   357  07C3  1283               	bcf	status, 5	;RP0=0, select bank0
+   358  07C4  1303               	bcf	status, 6	;RP1=0, select bank0
+   359  07C5  0094               	movwf	(20)	;volatile
+   360                           	line	51
+   361                           	
+   362  07C6                     l2230:	
+   363                           ;Serial_interrupt_SPI_slave.c: 51: SSPSTAT=0X00;
+   364  07C6  1683               	bsf	status, 5	;RP0=1, select bank1
+   365  07C7  1303               	bcf	status, 6	;RP1=0, select bank1
+   366  07C8  0194               	clrf	(148)^080h	;volatile
+   367                           	line	52
+   368                           	
+   369  07C9                     l2232:	
+   370                           ;Serial_interrupt_SPI_slave.c: 52: lcd_cmd(0,0,0X02);
+   371  07C9  01F2               	clrf	(?_lcd_cmd)
+   372  07CA  3002               	movlw	(02h)
+   373  07CB  00F7               	movwf	(??_main+0)+0
+   374  07CC  0877               	movf	(??_main+0)+0,w
+   375  07CD  00F3               	movwf	0+(?_lcd_cmd)+01h
+   376  07CE  3000               	movlw	(0)
+   377  07CF  120A  118A  2753   	fcall	_lcd_cmd
+              120A  118A         
+   378                           	line	53
+   379                           	
+   380  07D4                     l2234:	
+   381                           ;Serial_interrupt_SPI_slave.c: 53: lcd_cmd(0,0,0X28);
+   382  07D4  01F2               	clrf	(?_lcd_cmd)
+   383  07D5  3028               	movlw	(028h)
+   384  07D6  00F7               	movwf	(??_main+0)+0
+   385  07D7  0877               	movf	(??_main+0)+0,w
+   386  07D8  00F3               	movwf	0+(?_lcd_cmd)+01h
+   387  07D9  3000               	movlw	(0)
+   388  07DA  120A  118A  2753   	fcall	_lcd_cmd
+              120A  118A         
+   389                           	line	54
+   390                           	
+   391  07DF                     l2236:	
+   392                           ;Serial_interrupt_SPI_slave.c: 54: lcd_cmd(0,0,0X0F);
+   393  07DF  01F2               	clrf	(?_lcd_cmd)
+   394  07E0  300F               	movlw	(0Fh)
+   395  07E1  00F7               	movwf	(??_main+0)+0
+   396  07E2  0877               	movf	(??_main+0)+0,w
+   397  07E3  00F3               	movwf	0+(?_lcd_cmd)+01h
+   398  07E4  3000               	movlw	(0)
+   399  07E5  120A  118A  2753   	fcall	_lcd_cmd
+              120A  118A         
+   400                           	line	55
+   401                           	
+   402  07EA                     l2238:	
+   403                           ;Serial_interrupt_SPI_slave.c: 55: lcd_cmd(0,0,0X80);
+   404  07EA  01F2               	clrf	(?_lcd_cmd)
+   405  07EB  3080               	movlw	(080h)
+   406  07EC  00F7               	movwf	(??_main+0)+0
+   407  07ED  0877               	movf	(??_main+0)+0,w
+   408  07EE  00F3               	movwf	0+(?_lcd_cmd)+01h
+   409  07EF  3000               	movlw	(0)
+   410  07F0  120A  118A  2753   	fcall	_lcd_cmd
+              120A  118A         
+   411  07F5  2FF6               	goto	l2240
+   412                           	line	56
+   413                           ;Serial_interrupt_SPI_slave.c: 56: while(1)
+   414                           	
+   415  07F6                     l1042:	
+   416                           	line	58
+   417                           	
+   418  07F6                     l2240:	
+   419                           ;Serial_interrupt_SPI_slave.c: 57: {
+   420                           ;Serial_interrupt_SPI_slave.c: 58: slave();
+   421  07F6  120A  118A  2739   	fcall	_slave
+              120A  118A         
+   422  07FB  2FF6               	goto	l2240
+   423                           	line	60
+   424                           	
+   425  07FC                     l1043:	
+   426                           	line	56
+   427  07FC  2FF6               	goto	l2240
+   428                           	
+   429  07FD                     l1044:	
+   430                           	line	61
+   431                           	
+   432  07FD                     l1045:	
+   433                           	global	start
+   434  07FD  120A  118A  2800   	ljmp	start
+   435                           	opt stack 0
+   436                           GLOBAL	__end_of_main
+   437  0800                     	__end_of_main:
+   438 ;; =============== function _main ends ============
+   439                           
+   440                           	signat	_main,88
+   441                           	global	_slave
+   442                           psect	text79,local,class=CODE,delta=2
+   443                           global __ptext79
+   444  0739                     __ptext79:
+   445                           
+   446 ;; *************** function _slave *****************
+   447 ;; Defined at:
+   448 ;;		line 31 in file "D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interrupt_SPI_slave.c"
+   449 ;; Parameters:    Size  Location     Type
+   450 ;;		None
+   451 ;; Auto vars:     Size  Location     Type
+   452 ;;		None
+   453 ;; Return value:  Size  Location     Type
+   454 ;;		None               void
+   455 ;; Registers used:
+   456 ;;		wreg, status,2, status,0, pclath, cstack
+   457 ;; Tracked objects:
+   458 ;;		On entry : 0/0
+   459 ;;		On exit  : 0/0
+   460 ;;		Unchanged: 0/0
+   461 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   462 ;;      Params:         0       0       0       0       0
+   463 ;;      Locals:         0       0       0       0       0
+   464 ;;      Temps:          1       0       0       0       0
+   465 ;;      Totals:         1       0       0       0       0
+   466 ;;Total ram usage:        1 bytes
+   467 ;; Hardware stack levels used:    1
+   468 ;; Hardware stack levels required when called:    2
+   469 ;; This function calls:
+   470 ;;		_lcd_cmd
+   471 ;; This function is called by:
+   472 ;;		_main
+   473 ;; This function uses a non-reentrant model
+   474 ;;
+   475                           psect	text79
+   476                           	file	"D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interru
+                                 pt_SPI_slave.c"
+   477                           	line	31
+   478                           	global	__size_of_slave
+   479  001A                     	__size_of_slave	equ	__end_of_slave-_slave
+   480                           	
+   481  0739                     _slave:	
+   482                           	opt	stack 5
+   483                           ; Regs used in _slave: [wreg+status,2+status,0+pclath+cstack]
+   484                           	line	33
+   485                           	
+   486  0739                     l2206:	
+   487                           ;Serial_interrupt_SPI_slave.c: 33: while(SSPIF=0);
+   488  0739  2F3A               	goto	l1036
+   489                           	
+   490  073A                     l1037:	
+   491                           	
+   492  073A                     l1036:	
+   493  073A  1283               	bcf	status, 5	;RP0=0, select bank0
+   494  073B  1303               	bcf	status, 6	;RP1=0, select bank0
+   495  073C  118C               	bcf	(99/8),(99)&7
+   496  073D  198C               	btfsc	(99/8),(99)&7
+   497  073E  2F40               	goto	u2201
+   498  073F  2F41               	goto	u2200
+   499  0740                     u2201:
+   500  0740  2F3A               	goto	l1036
+   501  0741                     u2200:
+   502  0741  2F42               	goto	l2208
+   503                           	
+   504  0742                     l1038:	
+   505                           	line	34
+   506                           	
+   507  0742                     l2208:	
+   508                           ;Serial_interrupt_SPI_slave.c: 34: name=SSPBUF;
+   509  0742  0813               	movf	(19),w	;volatile
+   510  0743  00F6               	movwf	(??_slave+0)+0
+   511  0744  0876               	movf	(??_slave+0)+0,w
+   512  0745  00F8               	movwf	(_name)
+   513                           	line	35
+   514                           	
+   515  0746                     l2210:	
+   516                           ;Serial_interrupt_SPI_slave.c: 35: SSPIF=0;
+   517  0746  118C               	bcf	(99/8),(99)&7
+   518                           	line	36
+   519                           	
+   520  0747                     l2212:	
+   521                           ;Serial_interrupt_SPI_slave.c: 36: lcd_cmd(1,0,name);
+   522  0747  01F2               	clrf	(?_lcd_cmd)
+   523  0748  0878               	movf	(_name),w
+   524  0749  00F6               	movwf	(??_slave+0)+0
+   525  074A  0876               	movf	(??_slave+0)+0,w
+   526  074B  00F3               	movwf	0+(?_lcd_cmd)+01h
+   527  074C  3001               	movlw	(01h)
+   528  074D  120A  118A  2753   	fcall	_lcd_cmd
+              120A  118A         
+   529                           	line	37
+   530                           	
+   531  0752                     l1039:	
+   532  0752  0008               	return
+   533                           	opt stack 0
+   534                           GLOBAL	__end_of_slave
+   535  0753                     	__end_of_slave:
+   536 ;; =============== function _slave ends ============
+   537                           
+   538                           	signat	_slave,88
+   539                           	global	_lcd_cmd
+   540                           psect	text80,local,class=CODE,delta=2
+   541                           global __ptext80
+   542  0753                     __ptext80:
+   543                           
+   544 ;; *************** function _lcd_cmd *****************
+   545 ;; Defined at:
+   546 ;;		line 15 in file "D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interrupt_SPI_slave.c"
+   547 ;; Parameters:    Size  Location     Type
+   548 ;;  a               1    wreg     unsigned char 
+   549 ;;  b               1    2[COMMON] unsigned char 
+   550 ;;  c               1    3[COMMON] unsigned char 
+   551 ;; Auto vars:     Size  Location     Type
+   552 ;;  a               1    5[COMMON] unsigned char 
+   553 ;; Return value:  Size  Location     Type
+   554 ;;		None               void
+   555 ;; Registers used:
+   556 ;;		wreg, status,2, status,0, pclath, cstack
+   557 ;; Tracked objects:
+   558 ;;		On entry : 0/0
+   559 ;;		On exit  : 0/0
+   560 ;;		Unchanged: 0/0
+   561 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   562 ;;      Params:         2       0       0       0       0
+   563 ;;      Locals:         1       0       0       0       0
+   564 ;;      Temps:          1       0       0       0       0
+   565 ;;      Totals:         4       0       0       0       0
+   566 ;;Total ram usage:        4 bytes
+   567 ;; Hardware stack levels used:    1
+   568 ;; Hardware stack levels required when called:    1
+   569 ;; This function calls:
+   570 ;;		_delay
+   571 ;; This function is called by:
+   572 ;;		_slave
+   573 ;;		_main
+   574 ;; This function uses a non-reentrant model
+   575 ;;
+   576                           psect	text80
+   577                           	file	"D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interru
+                                 pt_SPI_slave.c"
+   578                           	line	15
+   579                           	global	__size_of_lcd_cmd
+   580  0051                     	__size_of_lcd_cmd	equ	__end_of_lcd_cmd-_lcd_cmd
+   581                           	
+   582  0753                     _lcd_cmd:	
+   583                           	opt	stack 5
+   584                           ; Regs used in _lcd_cmd: [wreg+status,2+status,0+pclath+cstack]
+   585                           ;lcd_cmd@a stored from wreg
+   586  0753  00F5               	movwf	(lcd_cmd@a)
+   587                           	line	16
+   588                           	
+   589  0754                     l2184:	
+   590                           ;Serial_interrupt_SPI_slave.c: 16: RE0=a;
+   591  0754  1875               	btfsc	(lcd_cmd@a),0
+   592  0755  2F57               	goto	u2151
+   593  0756  2F5B               	goto	u2150
+   594                           	
+   595  0757                     u2151:
+   596  0757  1283               	bcf	status, 5	;RP0=0, select bank0
+   597  0758  1303               	bcf	status, 6	;RP1=0, select bank0
+   598  0759  1409               	bsf	(72/8),(72)&7
+   599  075A  2F5E               	goto	u2164
+   600  075B                     u2150:
+   601  075B  1283               	bcf	status, 5	;RP0=0, select bank0
+   602  075C  1303               	bcf	status, 6	;RP1=0, select bank0
+   603  075D  1009               	bcf	(72/8),(72)&7
+   604  075E                     u2164:
+   605                           	line	17
+   606                           ;Serial_interrupt_SPI_slave.c: 17: RE1=b;
+   607  075E  1872               	btfsc	(lcd_cmd@b),0
+   608  075F  2F61               	goto	u2171
+   609  0760  2F65               	goto	u2170
+   610                           	
+   611  0761                     u2171:
+   612  0761  1283               	bcf	status, 5	;RP0=0, select bank0
+   613  0762  1303               	bcf	status, 6	;RP1=0, select bank0
+   614  0763  1489               	bsf	(73/8),(73)&7
+   615  0764  2F68               	goto	u2184
+   616  0765                     u2170:
+   617  0765  1283               	bcf	status, 5	;RP0=0, select bank0
+   618  0766  1303               	bcf	status, 6	;RP1=0, select bank0
+   619  0767  1089               	bcf	(73/8),(73)&7
+   620  0768                     u2184:
+   621                           	line	18
+   622                           	
+   623  0768                     l2186:	
+   624                           ;Serial_interrupt_SPI_slave.c: 18: PORTB=c;
+   625  0768  0873               	movf	(lcd_cmd@c),w
+   626  0769  0086               	movwf	(6)	;volatile
+   627                           	line	19
+   628                           	
+   629  076A                     l2188:	
+   630                           ;Serial_interrupt_SPI_slave.c: 19: RE2=1;
+   631  076A  1509               	bsf	(74/8),(74)&7
+   632                           	line	20
+   633                           	
+   634  076B                     l2190:	
+   635                           ;Serial_interrupt_SPI_slave.c: 20: delay(1000);
+   636  076B  30E8               	movlw	low(03E8h)
+   637  076C  00F0               	movwf	(?_delay)
+   638  076D  3003               	movlw	high(03E8h)
+   639  076E  00F1               	movwf	((?_delay))+1
+   640  076F  120A  118A  2725   	fcall	_delay
+              120A  118A         
+   641                           	line	21
+   642                           	
+   643  0774                     l2192:	
+   644                           ;Serial_interrupt_SPI_slave.c: 21: RE2=0;
+   645  0774  1283               	bcf	status, 5	;RP0=0, select bank0
+   646  0775  1303               	bcf	status, 6	;RP1=0, select bank0
+   647  0776  1109               	bcf	(74/8),(74)&7
+   648                           	line	22
+   649                           	
+   650  0777                     l2194:	
+   651                           ;Serial_interrupt_SPI_slave.c: 22: delay(1000);
+   652  0777  30E8               	movlw	low(03E8h)
+   653  0778  00F0               	movwf	(?_delay)
+   654  0779  3003               	movlw	high(03E8h)
+   655  077A  00F1               	movwf	((?_delay))+1
+   656  077B  120A  118A  2725   	fcall	_delay
+              120A  118A         
+   657                           	line	24
+   658                           	
+   659  0780                     l2196:	
+   660                           ;Serial_interrupt_SPI_slave.c: 24: PORTB=c<<4;
+   661  0780  0873               	movf	(lcd_cmd@c),w
+   662  0781  00F4               	movwf	(??_lcd_cmd+0)+0
+   663  0782  3003               	movlw	(04h)-1
+   664  0783                     u2195:
+   665  0783  1003               	clrc
+   666  0784  0DF4               	rlf	(??_lcd_cmd+0)+0,f
+   667  0785  3EFF               	addlw	-1
+   668  0786  1D03               	skipz
+   669  0787  2F83               	goto	u2195
+   670  0788  1003               	clrc
+   671  0789  0D74               	rlf	(??_lcd_cmd+0)+0,w
+   672  078A  1283               	bcf	status, 5	;RP0=0, select bank0
+   673  078B  1303               	bcf	status, 6	;RP1=0, select bank0
+   674  078C  0086               	movwf	(6)	;volatile
+   675                           	line	25
+   676                           	
+   677  078D                     l2198:	
+   678                           ;Serial_interrupt_SPI_slave.c: 25: RE2=1;
+   679  078D  1509               	bsf	(74/8),(74)&7
+   680                           	line	26
+   681                           	
+   682  078E                     l2200:	
+   683                           ;Serial_interrupt_SPI_slave.c: 26: delay(1000);
+   684  078E  30E8               	movlw	low(03E8h)
+   685  078F  00F0               	movwf	(?_delay)
+   686  0790  3003               	movlw	high(03E8h)
+   687  0791  00F1               	movwf	((?_delay))+1
+   688  0792  120A  118A  2725   	fcall	_delay
+              120A  118A         
+   689                           	line	27
+   690                           	
+   691  0797                     l2202:	
+   692                           ;Serial_interrupt_SPI_slave.c: 27: RE2=0;
+   693  0797  1283               	bcf	status, 5	;RP0=0, select bank0
+   694  0798  1303               	bcf	status, 6	;RP1=0, select bank0
+   695  0799  1109               	bcf	(74/8),(74)&7
+   696                           	line	28
+   697                           	
+   698  079A                     l2204:	
+   699                           ;Serial_interrupt_SPI_slave.c: 28: delay(1000);
+   700  079A  30E8               	movlw	low(03E8h)
+   701  079B  00F0               	movwf	(?_delay)
+   702  079C  3003               	movlw	high(03E8h)
+   703  079D  00F1               	movwf	((?_delay))+1
+   704  079E  120A  118A  2725   	fcall	_delay
+              120A  118A         
+   705                           	line	29
+   706                           	
+   707  07A3                     l1033:	
+   708  07A3  0008               	return
+   709                           	opt stack 0
+   710                           GLOBAL	__end_of_lcd_cmd
+   711  07A4                     	__end_of_lcd_cmd:
+   712 ;; =============== function _lcd_cmd ends ============
+   713                           
+   714                           	signat	_lcd_cmd,12408
+   715                           	global	_delay
+   716                           psect	text81,local,class=CODE,delta=2
+   717                           global __ptext81
+   718  0725                     __ptext81:
+   719                           
+   720 ;; *************** function _delay *****************
+   721 ;; Defined at:
+   722 ;;		line 11 in file "D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interrupt_SPI_slave.c"
+   723 ;; Parameters:    Size  Location     Type
+   724 ;;  ms              2    0[COMMON] unsigned int 
+   725 ;; Auto vars:     Size  Location     Type
+   726 ;;		None
+   727 ;; Return value:  Size  Location     Type
+   728 ;;		None               void
+   729 ;; Registers used:
+   730 ;;		wreg
+   731 ;; Tracked objects:
+   732 ;;		On entry : 0/0
+   733 ;;		On exit  : 0/0
+   734 ;;		Unchanged: 0/0
+   735 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   736 ;;      Params:         2       0       0       0       0
+   737 ;;      Locals:         0       0       0       0       0
+   738 ;;      Temps:          0       0       0       0       0
+   739 ;;      Totals:         2       0       0       0       0
+   740 ;;Total ram usage:        2 bytes
+   741 ;; Hardware stack levels used:    1
+   742 ;; This function calls:
+   743 ;;		Nothing
+   744 ;; This function is called by:
+   745 ;;		_lcd_cmd
+   746 ;; This function uses a non-reentrant model
+   747 ;;
+   748                           psect	text81
+   749                           	file	"D:\Embedded\pic\code\software\interrupt\Serial_interrupt_SPI\slave\Serial_interru
+                                 pt_SPI_slave.c"
+   750                           	line	11
+   751                           	global	__size_of_delay
+   752  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+   753                           	
+   754  0725                     _delay:	
+   755                           	opt	stack 5
+   756                           ; Regs used in _delay: [wreg]
+   757                           	line	12
+   758                           	
+   759  0725                     l1414:	
+   760                           ;Serial_interrupt_SPI_slave.c: 12: while(ms--);
+   761  0725  2F27               	goto	l1416
+   762                           	
+   763  0726                     l1028:	
+   764  0726  2F27               	goto	l1416
+   765                           	
+   766  0727                     l1027:	
+   767                           	
+   768  0727                     l1416:	
+   769  0727  3001               	movlw	low(01h)
+   770  0728  02F0               	subwf	(delay@ms),f
+   771  0729  3000               	movlw	high(01h)
+   772  072A  1C03               	skipc
+   773  072B  03F1               	decf	(delay@ms+1),f
+   774  072C  02F1               	subwf	(delay@ms+1),f
+   775  072D  30FF               	movlw	high(0FFFFh)
+   776  072E  0671               	xorwf	((delay@ms+1)),w
+   777  072F  1D03               	skipz
+   778  0730  2F33               	goto	u15
+   779  0731  30FF               	movlw	low(0FFFFh)
+   780  0732  0670               	xorwf	((delay@ms)),w
+   781  0733                     u15:
+   782                           
+   783  0733  1D03               	skipz
+   784  0734  2F36               	goto	u11
+   785  0735  2F37               	goto	u10
+   786  0736                     u11:
+   787  0736  2F27               	goto	l1416
+   788  0737                     u10:
+   789  0737  2F38               	goto	l1030
+   790                           	
+   791  0738                     l1029:	
+   792                           	line	13
+   793                           	
+   794  0738                     l1030:	
+   795  0738  0008               	return
+   796                           	opt stack 0
+   797                           GLOBAL	__end_of_delay
+   798  0739                     	__end_of_delay:
+   799 ;; =============== function _delay ends ============
+   800                           
+   801                           	signat	_delay,4216
+   802                           psect	text82,local,class=CODE,delta=2
+   803                           global __ptext82
+   804  0000                     __ptext82:
+   805                           	global	btemp
+   806  007E                     	btemp set 07Eh
+   807                           
+   808                           	DABS	1,126,2	;btemp
+   809                           	global	wtemp0
+   810  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Mon Jun 27 15:33:34 2022
+
+                  u10 0737                    u11 0736                    u15 0733                   _RE0 0048  
+                 _RE1 0049                   _RE2 004A                  l1030 0738                  l1033 07A3  
+                l1042 07F6                  l1027 0727                  l1043 07FC                  l1028 0726  
+                l1036 073A                  l1044 07FD                  l1029 0738                  l1037 073A  
+                l1045 07FD                  l1038 0742                  l1039 0752                  l2200 078E  
+                l2202 0797                  l2210 0746                  l2204 079A                  l2212 0747  
+                l2220 07AE                  l1414 0725                  l2206 0739                  l2230 07C6  
+                l2222 07B1                  l2214 07A4                  l1416 0727                  l2208 0742  
+                l2240 07F6                  l2232 07C9                  l2224 07B4                  l2216 07A8  
+                l2234 07D4                  l2226 07B7                  l2218 07AB                  l2236 07DF  
+                l2228 07C2                  l2190 076B                  l2238 07EA                  l2192 0774  
+                l2184 0754                  l2194 0777                  l2186 0768                  l2196 0780  
+                l2188 076A                  l2198 078D                  u2200 0741                  u2201 0740  
+                u2150 075B                  u2151 0757                  u2170 0765                  u2171 0761  
+                u2164 075E                  u2184 0768                  u2195 0783                  _main 07A4  
+                _name 0078                  btemp 007E                  start 0000                 ?_main 0070  
+               _ANSEL 0188                 _PORTA 0005                 _PORTB 0006                 _PORTC 0007  
+               _PORTE 0009                 _TRISA 0085                 _TRISB 0086                 _TRISC 0087  
+               _TRISE 0089                 _SSPIF 0063       __end_of_lcd_cmd 07A4                 _delay 0725  
+               _slave 0739                 status 0003                 wtemp0 007E          __end_of_main 0800  
+              ??_main 0077                ?_delay 0070                ?_slave 0070                _ANSELH 0189  
+              _SSPCON 0014                _SSPBUF 0013             ??_lcd_cmd 0074        __pcstackCOMMON 0070  
+       __end_of_delay 0739         __end_of_slave 0753               ??_delay 0072               ??_slave 0076  
+          __pmaintext 07A4               _SSPSTAT 0094               _lcd_cmd 0753               delay@ms 0070  
+end_of_initialization 0721   start_initialization 0720           __pbssCOMMON 0078              ?_lcd_cmd 0072  
+      __size_of_delay 0014        __size_of_slave 001A      __size_of_lcd_cmd 0051              __ptext80 0753  
+            __ptext81 0725              __ptext82 0000              __ptext78 0000              __ptext79 0739  
+       __size_of_main 005C              lcd_cmd@a 0075              lcd_cmd@b 0072              lcd_cmd@c 0073  

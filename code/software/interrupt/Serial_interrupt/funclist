@@ -1,0 +1,7 @@
+_delay: CODE, 304 0 22
+_lcd_cmd: CODE, 176 0 48
+_main: CODE, 21 0 155
+_ext: CODE, 270 0 34
+i1_lcd_cmd: CODE, 224 0 46
+i1_delay: CODE, 326 0 20
+Total: 325

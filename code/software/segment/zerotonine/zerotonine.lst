@@ -1,0 +1,592 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Apr 12 23:58:10 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_delay
+    43                           	FNROOT	_main
+    44                           	global	main@F1603
+    45                           psect	idataBANK0,class=CODE,space=0,delta=2
+    46                           global __pidataBANK0
+    47  078D                     __pidataBANK0:
+    48                           	file	"D:\Embedded\pic\code\software\segment\zerotonine\zerotonine.c"
+    49                           	line	9
+    50                           
+    51                           ;initializer for main@F1603
+    52  078D  343F               	retlw	03Fh
+    53  078E  3406               	retlw	06h
+    54  078F  345B               	retlw	05Bh
+    55  0790  344F               	retlw	04Fh
+    56  0791  3466               	retlw	066h
+    57  0792  346D               	retlw	06Dh
+    58  0793  347D               	retlw	07Dh
+    59  0794  3407               	retlw	07h
+    60  0795  347F               	retlw	07Fh
+    61  0796  346F               	retlw	06Fh
+    62  0797  3400               	retlw	0
+    63  0798  3400               	retlw	0
+    64  0799  3400               	retlw	0
+    65  079A  3400               	retlw	0
+    66  079B  3400               	retlw	0
+    67  079C  3400               	retlw	0
+    68  079D  3400               	retlw	0
+    69  079E  3400               	retlw	0
+    70  079F  3400               	retlw	0
+    71  07A0  3400               	retlw	0
+    72                           	global	_PORTB
+    73  0006                     _PORTB	set	6
+    74                           	global	_TRISB
+    75  0086                     _TRISB	set	134
+    76                           	global	_ANSEL
+    77  0188                     _ANSEL	set	392
+    78                           	global	_ANSELH
+    79  0189                     _ANSELH	set	393
+    80                           	file	"zerotonine.as"
+    81                           	line	#
+    82                           psect cinit,class=CODE,delta=2
+    83                           global start_initialization
+    84  0767                     start_initialization:
+    85                           
+    86                           psect	dataBANK0,class=BANK0,space=1
+    87                           global __pdataBANK0
+    88  0036                     __pdataBANK0:
+    89                           	file	"D:\Embedded\pic\code\software\segment\zerotonine\zerotonine.c"
+    90  0036                     main@F1603:
+    91  0036                            ds      20
+    92                           
+    93                           global btemp
+    94                           psect inittext,class=CODE,delta=2
+    95                           global init_fetch,btemp
+    96                           ;	Called with low address in FSR and high address in W
+    97  0756                     init_fetch:
+    98  0756  087E               	movf btemp,w
+    99  0757  008A               	movwf pclath
+   100  0758  087F               	movf btemp+1,w
+   101  0759  0082               	movwf pc
+   102                           global init_ram
+   103                           ;Called with:
+   104                           ;	high address of idata address in btemp 
+   105                           ;	low address of idata address in btemp+1 
+   106                           ;	low address of data in FSR
+   107                           ;	high address + 1 of data in btemp-1
+   108  075A                     init_ram:
+   109  075A  2756  120A  118A   	fcall init_fetch
+   110  075D  0080               	movwf indf,f
+   111  075E  0A84               	incf fsr,f
+   112  075F  0804               	movf fsr,w
+   113  0760  067D               	xorwf btemp-1,w
+   114  0761  1903               	btfsc status,2
+   115  0762  3400               	retlw 0
+   116  0763  0AFF               	incf btemp+1,f
+   117  0764  1903               	btfsc status,2
+   118  0765  0AFE               	incf btemp,f
+   119  0766  2F5A               	goto init_ram
+   120                           ; Initialize objects allocated to BANK0
+   121                           psect cinit,class=CODE,delta=2
+   122                           global init_ram, __pidataBANK0
+   123  0767  1383               	bcf	status, 7	;select IRP bank0
+   124  0768  304A               	movlw low(__pdataBANK0+20)
+   125  0769  00FD               	movwf btemp-1,f
+   126  076A  3007               	movlw high(__pidataBANK0)
+   127  076B  00FE               	movwf btemp,f
+   128  076C  308D               	movlw low(__pidataBANK0)
+   129  076D  00FF               	movwf btemp+1,f
+   130  076E  3036               	movlw low(__pdataBANK0)
+   131  076F  0084               	movwf fsr,f
+   132  0770  120A  118A  275A   	fcall init_ram
+              120A  118A         
+   133                           psect cinit,class=CODE,delta=2
+   134                           global end_of_initialization
+   135                           
+   136                           ;End of C runtime variable initialization code
+   137                           
+   138  0775                     end_of_initialization:
+   139  0775  0183               clrf status
+   140  0776  120A  118A  2FA1   ljmp _main	;jump to C main() function
+   141                           psect	cstackCOMMON,class=COMMON,space=1
+   142                           global __pcstackCOMMON
+   143  0070                     __pcstackCOMMON:
+   144                           	global	?_delay
+   145  0070                     ?_delay:	; 0 bytes @ 0x0
+   146                           	global	?_main
+   147  0070                     ?_main:	; 0 bytes @ 0x0
+   148                           	global	delay@a
+   149  0070                     delay@a:	; 2 bytes @ 0x0
+   150  0070                     	ds	2
+   151                           	global	??_delay
+   152  0072                     ??_delay:	; 0 bytes @ 0x2
+   153                           	global	??_main
+   154  0072                     ??_main:	; 0 bytes @ 0x2
+   155  0072                     	ds	4
+   156                           psect	cstackBANK0,class=BANK0,space=1
+   157                           global __pcstackBANK0
+   158  0020                     __pcstackBANK0:
+   159                           	global	main@seg
+   160  0020                     main@seg:	; 20 bytes @ 0x0
+   161  0020                     	ds	20
+   162                           	global	main@i
+   163  0034                     main@i:	; 2 bytes @ 0x14
+   164  0034                     	ds	2
+   165 ;;Data sizes: Strings 0, constant 0, data 20, bss 0, persistent 0 stack 0
+   166 ;;Auto spaces:   Size  Autos    Used
+   167 ;; COMMON          14      6       6
+   168 ;; BANK0           80     22      42
+   169 ;; BANK1           80      0       0
+   170 ;; BANK3           96      0       0
+   171 ;; BANK2           96      0       0
+   172                           
+   173 ;;
+   174 ;; Pointer list with targets:
+   175                           
+   176                           
+   177                           
+   178 ;;
+   179 ;; Critical Paths under _main in COMMON
+   180 ;;
+   181 ;;   _main->_delay
+   182 ;;
+   183 ;; Critical Paths under _main in BANK0
+   184 ;;
+   185 ;;   None.
+   186 ;;
+   187 ;; Critical Paths under _main in BANK1
+   188 ;;
+   189 ;;   None.
+   190 ;;
+   191 ;; Critical Paths under _main in BANK3
+   192 ;;
+   193 ;;   None.
+   194 ;;
+   195 ;; Critical Paths under _main in BANK2
+   196 ;;
+   197 ;;   None.
+   198                           
+   199 ;;
+   200 ;;Main: autosize = 0, tempsize = 4, incstack = 0, save=0
+   201 ;;
+   202                           
+   203 ;;
+   204 ;;Call Graph Tables:
+   205 ;;
+   206 ;; ---------------------------------------------------------------------------------
+   207 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   208 ;; ---------------------------------------------------------------------------------
+   209 ;; (0) _main                                                26    26      0     114
+   210 ;;                                              2 COMMON     4     4      0
+   211 ;;                                              0 BANK0     22    22      0
+   212 ;;                              _delay
+   213 ;; ---------------------------------------------------------------------------------
+   214 ;; (1) _delay                                                2     0      2      22
+   215 ;;                                              0 COMMON     2     0      2
+   216 ;; ---------------------------------------------------------------------------------
+   217 ;; Estimated maximum stack depth 1
+   218 ;; ---------------------------------------------------------------------------------
+   219                           
+   220 ;; Call Graph Graphs:
+   221                           
+   222 ;; _main (ROOT)
+   223 ;;   _delay
+   224 ;;
+   225                           
+   226 ;; Address spaces:
+   227                           
+   228 ;;Name               Size   Autos  Total    Cost      Usage
+   229 ;;BANK3               60      0       0       9        0.0%
+   230 ;;BITBANK3            60      0       0       8        0.0%
+   231 ;;SFR3                 0      0       0       4        0.0%
+   232 ;;BITSFR3              0      0       0       4        0.0%
+   233 ;;BANK2               60      0       0      11        0.0%
+   234 ;;BITBANK2            60      0       0      10        0.0%
+   235 ;;SFR2                 0      0       0       5        0.0%
+   236 ;;BITSFR2              0      0       0       5        0.0%
+   237 ;;SFR1                 0      0       0       2        0.0%
+   238 ;;BITSFR1              0      0       0       2        0.0%
+   239 ;;BANK1               50      0       0       7        0.0%
+   240 ;;BITBANK1            50      0       0       6        0.0%
+   241 ;;CODE                 0      0       0       0        0.0%
+   242 ;;DATA                 0      0      31      12        0.0%
+   243 ;;ABS                  0      0      30       3        0.0%
+   244 ;;NULL                 0      0       0       0        0.0%
+   245 ;;STACK                0      0       1       2        0.0%
+   246 ;;BANK0               50     16      2A       5       52.5%
+   247 ;;BITBANK0            50      0       0       4        0.0%
+   248 ;;SFR0                 0      0       0       1        0.0%
+   249 ;;BITSFR0              0      0       0       1        0.0%
+   250 ;;COMMON               E      6       6       1       42.9%
+   251 ;;BITCOMMON            E      0       0       0        0.0%
+   252 ;;EEDATA             100      0       0       0        0.0%
+   253                           
+   254                           	global	_main
+   255                           psect	maintext,global,class=CODE,delta=2
+   256                           global __pmaintext
+   257  07A1                     __pmaintext:
+   258                           
+   259 ;; *************** function _main *****************
+   260 ;; Defined at:
+   261 ;;		line 7 in file "D:\Embedded\pic\code\software\segment\zerotonine\zerotonine.c"
+   262 ;; Parameters:    Size  Location     Type
+   263 ;;		None
+   264 ;; Auto vars:     Size  Location     Type
+   265 ;;  seg            20    0[BANK0 ] unsigned char [20]
+   266 ;;  i               2   20[BANK0 ] int 
+   267 ;; Return value:  Size  Location     Type
+   268 ;;		None               void
+   269 ;; Registers used:
+   270 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   271 ;; Tracked objects:
+   272 ;;		On entry : 17F/0
+   273 ;;		On exit  : 0/0
+   274 ;;		Unchanged: 0/0
+   275 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   276 ;;      Params:         0       0       0       0       0
+   277 ;;      Locals:         0      22       0       0       0
+   278 ;;      Temps:          4       0       0       0       0
+   279 ;;      Totals:         4      22       0       0       0
+   280 ;;Total ram usage:       26 bytes
+   281 ;; Hardware stack levels required when called:    1
+   282 ;; This function calls:
+   283 ;;		_delay
+   284 ;; This function is called by:
+   285 ;;		Startup code after reset
+   286 ;; This function uses a non-reentrant model
+   287 ;;
+   288                           psect	maintext
+   289                           	file	"D:\Embedded\pic\code\software\segment\zerotonine\zerotonine.c"
+   290                           	line	7
+   291                           	global	__size_of_main
+   292  005F                     	__size_of_main	equ	__end_of_main-_main
+   293                           	
+   294  07A1                     _main:	
+   295                           	opt	stack 7
+   296                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   297                           	line	9
+   298                           	
+   299  07A1                     l2205:	
+   300                           ;zerotonine.c: 8: int i;
+   301                           ;zerotonine.c: 9: char seg[20]={0X3F,0X06,0X5B,0X4F,0X66,0X6D,0X7D,0X07,0X7F,0X6F};
+   302  07A1  3020               	movlw	(main@seg)&0ffh
+   303  07A2  0084               	movwf	fsr0
+   304  07A3  3036               	movlw	low(main@F1603)
+   305  07A4  00F2               	movwf	(??_main+0)+0
+   306  07A5  0804               	movf	fsr0,w
+   307  07A6  00F3               	movwf	((??_main+0)+0+1)
+   308  07A7  3014               	movlw	20
+   309  07A8  00F4               	movwf	((??_main+0)+0+2)
+   310  07A9                     u2190:
+   311  07A9  0872               	movf	(??_main+0)+0,w
+   312  07AA  0084               	movwf	fsr0
+   313  07AB  1383               	bcf	status, 7	;select IRP bank0
+   314                           	
+   315  07AC  0800               	movf	indf,w
+   316  07AD  00F5               	movwf	((??_main+0)+0+3)
+   317  07AE  0AF2               	incf	(??_main+0)+0,f
+   318  07AF  0873               	movf	((??_main+0)+0+1),w
+   319  07B0  0084               	movwf	fsr0
+   320                           	
+   321  07B1  0875               	movf	((??_main+0)+0+3),w
+   322  07B2  0080               	movwf	indf
+   323  07B3  0AF3               	incf	((??_main+0)+0+1),f
+   324  07B4  0BF4               	decfsz	((??_main+0)+0+2),f
+   325  07B5  2FA9               	goto	u2190
+   326                           	line	10
+   327                           	
+   328  07B6                     l2207:	
+   329                           ;zerotonine.c: 10: PORTB=0X00;
+   330  07B6  1283               	bcf	status, 5	;RP0=0, select bank0
+   331  07B7  1303               	bcf	status, 6	;RP1=0, select bank0
+   332  07B8  0186               	clrf	(6)	;volatile
+   333                           	line	11
+   334                           	
+   335  07B9                     l2209:	
+   336                           ;zerotonine.c: 11: TRISB=0X00;
+   337  07B9  1683               	bsf	status, 5	;RP0=1, select bank1
+   338  07BA  1303               	bcf	status, 6	;RP1=0, select bank1
+   339  07BB  0186               	clrf	(134)^080h	;volatile
+   340                           	line	12
+   341                           	
+   342  07BC                     l2211:	
+   343                           ;zerotonine.c: 12: ANSEL=0X00;
+   344  07BC  1683               	bsf	status, 5	;RP0=1, select bank3
+   345  07BD  1703               	bsf	status, 6	;RP1=1, select bank3
+   346  07BE  0188               	clrf	(392)^0180h	;volatile
+   347                           	line	13
+   348                           	
+   349  07BF                     l2213:	
+   350                           ;zerotonine.c: 13: ANSELH=0X00;
+   351  07BF  0189               	clrf	(393)^0180h	;volatile
+   352  07C0  2FC1               	goto	l2215
+   353                           	line	14
+   354                           ;zerotonine.c: 14: while(1)
+   355                           	
+   356  07C1                     l1033:	
+   357                           	line	16
+   358                           	
+   359  07C1                     l2215:	
+   360                           ;zerotonine.c: 15: {
+   361                           ;zerotonine.c: 16: for(i=0;i<10;i++)
+   362  07C1  1283               	bcf	status, 5	;RP0=0, select bank0
+   363  07C2  1303               	bcf	status, 6	;RP1=0, select bank0
+   364  07C3  01B4               	clrf	(main@i)
+   365  07C4  01B5               	clrf	(main@i+1)
+   366                           	
+   367  07C5                     l2217:	
+   368  07C5  0835               	movf	(main@i+1),w
+   369  07C6  3A80               	xorlw	80h
+   370  07C7  00FF               	movwf	btemp+1
+   371  07C8  3080               	movlw	(high(0Ah))^80h
+   372  07C9  027F               	subwf	btemp+1,w
+   373  07CA  1D03               	skipz
+   374  07CB  2FCE               	goto	u2205
+   375  07CC  300A               	movlw	low(0Ah)
+   376  07CD  0234               	subwf	(main@i),w
+   377  07CE                     u2205:
+   378                           
+   379  07CE  1C03               	skipc
+   380  07CF  2FD1               	goto	u2201
+   381  07D0  2FD2               	goto	u2200
+   382  07D1                     u2201:
+   383  07D1  2FD4               	goto	l2221
+   384  07D2                     u2200:
+   385  07D2  2FC1               	goto	l2215
+   386                           	
+   387  07D3                     l2219:	
+   388  07D3  2FC1               	goto	l2215
+   389                           	line	17
+   390                           	
+   391  07D4                     l1034:	
+   392                           	line	18
+   393                           	
+   394  07D4                     l2221:	
+   395                           ;zerotonine.c: 17: {
+   396                           ;zerotonine.c: 18: PORTB=seg[i];
+   397  07D4  1283               	bcf	status, 5	;RP0=0, select bank0
+   398  07D5  1303               	bcf	status, 6	;RP1=0, select bank0
+   399  07D6  0834               	movf	(main@i),w
+   400  07D7  3E20               	addlw	main@seg&0ffh
+   401  07D8  0084               	movwf	fsr0
+   402  07D9  1383               	bcf	status, 7	;select IRP bank0
+   403  07DA  0800               	movf	indf,w
+   404  07DB  0086               	movwf	(6)	;volatile
+   405                           	line	19
+   406                           	
+   407  07DC                     l2223:	
+   408                           ;zerotonine.c: 19: delay(60000);
+   409  07DC  3060               	movlw	low(0EA60h)
+   410  07DD  00F0               	movwf	(?_delay)
+   411  07DE  30EA               	movlw	high(0EA60h)
+   412  07DF  00F1               	movwf	((?_delay))+1
+   413  07E0  120A  118A  2779   	fcall	_delay
+              120A  118A         
+   414                           	line	16
+   415                           	
+   416  07E5                     l2225:	
+   417  07E5  3001               	movlw	low(01h)
+   418  07E6  1283               	bcf	status, 5	;RP0=0, select bank0
+   419  07E7  1303               	bcf	status, 6	;RP1=0, select bank0
+   420  07E8  07B4               	addwf	(main@i),f
+   421  07E9  1803               	skipnc
+   422  07EA  0AB5               	incf	(main@i+1),f
+   423  07EB  3000               	movlw	high(01h)
+   424  07EC  07B5               	addwf	(main@i+1),f
+   425                           	
+   426  07ED                     l2227:	
+   427  07ED  0835               	movf	(main@i+1),w
+   428  07EE  3A80               	xorlw	80h
+   429  07EF  00FF               	movwf	btemp+1
+   430  07F0  3080               	movlw	(high(0Ah))^80h
+   431  07F1  027F               	subwf	btemp+1,w
+   432  07F2  1D03               	skipz
+   433  07F3  2FF6               	goto	u2215
+   434  07F4  300A               	movlw	low(0Ah)
+   435  07F5  0234               	subwf	(main@i),w
+   436  07F6                     u2215:
+   437                           
+   438  07F6  1C03               	skipc
+   439  07F7  2FF9               	goto	u2211
+   440  07F8  2FFA               	goto	u2210
+   441  07F9                     u2211:
+   442  07F9  2FD4               	goto	l2221
+   443  07FA                     u2210:
+   444  07FA  2FC1               	goto	l2215
+   445                           	
+   446  07FB                     l1035:	
+   447  07FB  2FC1               	goto	l2215
+   448                           	line	21
+   449                           	
+   450  07FC                     l1036:	
+   451                           	line	14
+   452  07FC  2FC1               	goto	l2215
+   453                           	
+   454  07FD                     l1037:	
+   455                           	line	22
+   456                           	
+   457  07FD                     l1038:	
+   458                           	global	start
+   459  07FD  120A  118A  2800   	ljmp	start
+   460                           	opt stack 0
+   461                           GLOBAL	__end_of_main
+   462  0800                     	__end_of_main:
+   463 ;; =============== function _main ends ============
+   464                           
+   465                           	signat	_main,88
+   466                           	global	_delay
+   467                           psect	text73,local,class=CODE,delta=2
+   468                           global __ptext73
+   469  0779                     __ptext73:
+   470                           
+   471 ;; *************** function _delay *****************
+   472 ;; Defined at:
+   473 ;;		line 3 in file "D:\Embedded\pic\code\software\segment\zerotonine\zerotonine.c"
+   474 ;; Parameters:    Size  Location     Type
+   475 ;;  a               2    0[COMMON] unsigned int 
+   476 ;; Auto vars:     Size  Location     Type
+   477 ;;		None
+   478 ;; Return value:  Size  Location     Type
+   479 ;;		None               void
+   480 ;; Registers used:
+   481 ;;		wreg
+   482 ;; Tracked objects:
+   483 ;;		On entry : 0/0
+   484 ;;		On exit  : 0/0
+   485 ;;		Unchanged: 0/0
+   486 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   487 ;;      Params:         2       0       0       0       0
+   488 ;;      Locals:         0       0       0       0       0
+   489 ;;      Temps:          0       0       0       0       0
+   490 ;;      Totals:         2       0       0       0       0
+   491 ;;Total ram usage:        2 bytes
+   492 ;; Hardware stack levels used:    1
+   493 ;; This function calls:
+   494 ;;		Nothing
+   495 ;; This function is called by:
+   496 ;;		_main
+   497 ;; This function uses a non-reentrant model
+   498 ;;
+   499                           psect	text73
+   500                           	file	"D:\Embedded\pic\code\software\segment\zerotonine\zerotonine.c"
+   501                           	line	3
+   502                           	global	__size_of_delay
+   503  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+   504                           	
+   505  0779                     _delay:	
+   506                           	opt	stack 7
+   507                           ; Regs used in _delay: [wreg]
+   508                           	line	4
+   509                           	
+   510  0779                     l2201:	
+   511                           ;zerotonine.c: 4: while(a--);
+   512  0779  2F7B               	goto	l2203
+   513                           	
+   514  077A                     l1026:	
+   515  077A  2F7B               	goto	l2203
+   516                           	
+   517  077B                     l1025:	
+   518                           	
+   519  077B                     l2203:	
+   520  077B  3001               	movlw	low(01h)
+   521  077C  02F0               	subwf	(delay@a),f
+   522  077D  3000               	movlw	high(01h)
+   523  077E  1C03               	skipc
+   524  077F  03F1               	decf	(delay@a+1),f
+   525  0780  02F1               	subwf	(delay@a+1),f
+   526  0781  30FF               	movlw	high(0FFFFh)
+   527  0782  0671               	xorwf	((delay@a+1)),w
+   528  0783  1D03               	skipz
+   529  0784  2F87               	goto	u2185
+   530  0785  30FF               	movlw	low(0FFFFh)
+   531  0786  0670               	xorwf	((delay@a)),w
+   532  0787                     u2185:
+   533                           
+   534  0787  1D03               	skipz
+   535  0788  2F8A               	goto	u2181
+   536  0789  2F8B               	goto	u2180
+   537  078A                     u2181:
+   538  078A  2F7B               	goto	l2203
+   539  078B                     u2180:
+   540  078B  2F8C               	goto	l1028
+   541                           	
+   542  078C                     l1027:	
+   543                           	line	5
+   544                           	
+   545  078C                     l1028:	
+   546  078C  0008               	return
+   547                           	opt stack 0
+   548                           GLOBAL	__end_of_delay
+   549  078D                     	__end_of_delay:
+   550 ;; =============== function _delay ends ============
+   551                           
+   552                           	signat	_delay,4216
+   553                           psect	text74,local,class=CODE,delta=2
+   554                           global __ptext74
+   555  0000                     __ptext74:
+   556                           	global	btemp
+   557  007E                     	btemp set 07Eh
+   558                           
+   559                           	DABS	1,126,2	;btemp
+   560                           	global	wtemp0
+   561  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Apr 12 23:58:10 2022
+
+                   pc 0002                    fsr 0004                   fsr0 0004                   indf 0000  
+                l1025 077B                  l1033 07C1                  l1026 077A                  l1034 07D4  
+                l1027 078C                  l1035 07FB                  l1028 078C                  l1036 07FC  
+                l1037 07FD                  l1038 07FD                  l2201 0779                  l2203 077B  
+                l2211 07BC                  l2221 07D4                  l2213 07BF                  l2205 07A1  
+                l2223 07DC                  l2215 07C1                  l2207 07B6                  l2225 07E5  
+                l2217 07C5                  l2209 07B9                  l2227 07ED                  l2219 07D3  
+                u2200 07D2                  u2201 07D1                  u2210 07FA                  u2211 07F9  
+                u2205 07CE                  u2215 07F6                  u2180 078B                  u2181 078A  
+                u2190 07A9                  u2185 0787                  _main 07A1                  btemp 007E  
+                start 0000                 ?_main 0070                 _ANSEL 0188                 _PORTB 0006  
+               _TRISB 0086                 _delay 0779                 main@i 0034                 pclath 000A  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0072  
+              ?_delay 0070                _ANSELH 0189                delay@a 0070        __pcstackCOMMON 0070  
+        __pidataBANK0 078D         __end_of_delay 078D               ??_delay 0072            __pmaintext 07A1  
+             main@seg 0020  end_of_initialization 0775               init_ram 075A   start_initialization 0767  
+         __pdataBANK0 0036         __pcstackBANK0 0020        __size_of_delay 0014             main@F1603 0036  
+           init_fetch 0756              __ptext73 0779              __ptext74 0000         __size_of_main 005F  

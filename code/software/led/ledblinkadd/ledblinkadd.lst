@@ -1,0 +1,656 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Apr 12 23:32:24 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_delay
+    43                           	FNROOT	_main
+    44                           	global	_PORTB
+    45                           psect	maintext,global,class=CODE,delta=2
+    46                           global __pmaintext
+    47  0777                     __pmaintext:
+    48  0006                     _PORTB	set	6
+    49                           	global	_PORTC
+    50  0007                     _PORTC	set	7
+    51                           	global	_RC0
+    52  0038                     _RC0	set	56
+    53                           	global	_RC1
+    54  0039                     _RC1	set	57
+    55                           	global	_RC2
+    56  003A                     _RC2	set	58
+    57                           	global	_RC3
+    58  003B                     _RC3	set	59
+    59                           	global	_TRISB
+    60  0086                     _TRISB	set	134
+    61                           	global	_TRISC
+    62  0087                     _TRISC	set	135
+    63                           	global	_ANSEL
+    64  0188                     _ANSEL	set	392
+    65                           	global	_ANSELH
+    66  0189                     _ANSELH	set	393
+    67                           	file	"ledblinkadd.as"
+    68                           	line	#
+    69                           psect cinit,class=CODE,delta=2
+    70                           global start_initialization
+    71  075F                     start_initialization:
+    72                           
+    73                           psect cinit,class=CODE,delta=2
+    74                           global end_of_initialization
+    75                           
+    76                           ;End of C runtime variable initialization code
+    77                           
+    78  075F                     end_of_initialization:
+    79  075F  0183               clrf status
+    80  0760  120A  118A  2F77   ljmp _main	;jump to C main() function
+    81                           psect	cstackCOMMON,class=COMMON,space=1
+    82                           global __pcstackCOMMON
+    83  0070                     __pcstackCOMMON:
+    84                           	global	?_delay
+    85  0070                     ?_delay:	; 0 bytes @ 0x0
+    86                           	global	?_main
+    87  0070                     ?_main:	; 0 bytes @ 0x0
+    88                           	global	delay@a
+    89  0070                     delay@a:	; 2 bytes @ 0x0
+    90  0070                     	ds	2
+    91                           	global	??_delay
+    92  0072                     ??_delay:	; 0 bytes @ 0x2
+    93                           	global	??_main
+    94  0072                     ??_main:	; 0 bytes @ 0x2
+    95  0072                     	ds	1
+    96                           	global	main@i
+    97  0073                     main@i:	; 2 bytes @ 0x3
+    98  0073                     	ds	2
+    99                           	global	main@count
+   100  0075                     main@count:	; 2 bytes @ 0x5
+   101  0075                     	ds	2
+   102 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+   103 ;;Auto spaces:   Size  Autos    Used
+   104 ;; COMMON          14      7       7
+   105 ;; BANK0           80      0       0
+   106 ;; BANK1           80      0       0
+   107 ;; BANK3           96      0       0
+   108 ;; BANK2           96      0       0
+   109                           
+   110 ;;
+   111 ;; Pointer list with targets:
+   112                           
+   113                           
+   114                           
+   115 ;;
+   116 ;; Critical Paths under _main in COMMON
+   117 ;;
+   118 ;;   _main->_delay
+   119 ;;
+   120 ;; Critical Paths under _main in BANK0
+   121 ;;
+   122 ;;   None.
+   123 ;;
+   124 ;; Critical Paths under _main in BANK1
+   125 ;;
+   126 ;;   None.
+   127 ;;
+   128 ;; Critical Paths under _main in BANK3
+   129 ;;
+   130 ;;   None.
+   131 ;;
+   132 ;; Critical Paths under _main in BANK2
+   133 ;;
+   134 ;;   None.
+   135                           
+   136 ;;
+   137 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   138 ;;
+   139                           
+   140 ;;
+   141 ;;Call Graph Tables:
+   142 ;;
+   143 ;; ---------------------------------------------------------------------------------
+   144 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   145 ;; ---------------------------------------------------------------------------------
+   146 ;; (0) _main                                                 5     5      0      45
+   147 ;;                                              2 COMMON     5     5      0
+   148 ;;                              _delay
+   149 ;; ---------------------------------------------------------------------------------
+   150 ;; (1) _delay                                                2     0      2      15
+   151 ;;                                              0 COMMON     2     0      2
+   152 ;; ---------------------------------------------------------------------------------
+   153 ;; Estimated maximum stack depth 1
+   154 ;; ---------------------------------------------------------------------------------
+   155                           
+   156 ;; Call Graph Graphs:
+   157                           
+   158 ;; _main (ROOT)
+   159 ;;   _delay
+   160 ;;
+   161                           
+   162 ;; Address spaces:
+   163                           
+   164 ;;Name               Size   Autos  Total    Cost      Usage
+   165 ;;BITCOMMON            E      0       0       0        0.0%
+   166 ;;EEDATA             100      0       0       0        0.0%
+   167 ;;NULL                 0      0       0       0        0.0%
+   168 ;;CODE                 0      0       0       0        0.0%
+   169 ;;COMMON               E      7       7       1       50.0%
+   170 ;;BITSFR0              0      0       0       1        0.0%
+   171 ;;SFR0                 0      0       0       1        0.0%
+   172 ;;BITSFR1              0      0       0       2        0.0%
+   173 ;;SFR1                 0      0       0       2        0.0%
+   174 ;;STACK                0      0       1       2        0.0%
+   175 ;;ABS                  0      0       0       3        0.0%
+   176 ;;BITBANK0            50      0       0       4        0.0%
+   177 ;;BITSFR3              0      0       0       4        0.0%
+   178 ;;SFR3                 0      0       0       4        0.0%
+   179 ;;BANK0               50      0       0       5        0.0%
+   180 ;;BITSFR2              0      0       0       5        0.0%
+   181 ;;SFR2                 0      0       0       5        0.0%
+   182 ;;BITBANK1            50      0       0       6        0.0%
+   183 ;;BANK1               50      0       0       7        0.0%
+   184 ;;BITBANK3            60      0       0       8        0.0%
+   185 ;;BANK3               60      0       0       9        0.0%
+   186 ;;BITBANK2            60      0       0      10        0.0%
+   187 ;;BANK2               60      0       0      11        0.0%
+   188 ;;DATA                 0      0       0      12        0.0%
+   189                           
+   190                           	global	_main
+   191                           psect	maintext
+   192                           
+   193 ;; *************** function _main *****************
+   194 ;; Defined at:
+   195 ;;		line 11 in file "D:\Embedded\pic\code\software\led\ledblinkadd\ledblinkadd.c"
+   196 ;; Parameters:    Size  Location     Type
+   197 ;;		None
+   198 ;; Auto vars:     Size  Location     Type
+   199 ;;  count           2    5[COMMON] int 
+   200 ;;  i               2    3[COMMON] int 
+   201 ;; Return value:  Size  Location     Type
+   202 ;;		None               void
+   203 ;; Registers used:
+   204 ;;		wreg, status,2, status,0, pclath, cstack
+   205 ;; Tracked objects:
+   206 ;;		On entry : 17F/0
+   207 ;;		On exit  : 0/0
+   208 ;;		Unchanged: 0/0
+   209 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   210 ;;      Params:         0       0       0       0       0
+   211 ;;      Locals:         4       0       0       0       0
+   212 ;;      Temps:          1       0       0       0       0
+   213 ;;      Totals:         5       0       0       0       0
+   214 ;;Total ram usage:        5 bytes
+   215 ;; Hardware stack levels required when called:    1
+   216 ;; This function calls:
+   217 ;;		_delay
+   218 ;; This function is called by:
+   219 ;;		Startup code after reset
+   220 ;; This function uses a non-reentrant model
+   221 ;;
+   222                           psect	maintext
+   223                           	file	"D:\Embedded\pic\code\software\led\ledblinkadd\ledblinkadd.c"
+   224                           	line	11
+   225                           	global	__size_of_main
+   226  0089                     	__size_of_main	equ	__end_of_main-_main
+   227                           	
+   228  0777                     _main:	
+   229                           	opt	stack 7
+   230                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   231                           	line	12
+   232                           	
+   233  0777                     l2192:	
+   234                           ;ledblinkadd.c: 12: int i,count=0;
+   235  0777  01F5               	clrf	(main@count)
+   236  0778  01F6               	clrf	(main@count+1)
+   237                           	line	13
+   238                           ;ledblinkadd.c: 13: PORTB=0X00;
+   239  0779  1283               	bcf	status, 5	;RP0=0, select bank0
+   240  077A  1303               	bcf	status, 6	;RP1=0, select bank0
+   241  077B  0186               	clrf	(6)	;volatile
+   242                           	line	14
+   243                           ;ledblinkadd.c: 14: TRISB=0X00;
+   244  077C  1683               	bsf	status, 5	;RP0=1, select bank1
+   245  077D  1303               	bcf	status, 6	;RP1=0, select bank1
+   246  077E  0186               	clrf	(134)^080h	;volatile
+   247                           	line	15
+   248                           ;ledblinkadd.c: 15: ANSEL=0X00;
+   249  077F  1683               	bsf	status, 5	;RP0=1, select bank3
+   250  0780  1703               	bsf	status, 6	;RP1=1, select bank3
+   251  0781  0188               	clrf	(392)^0180h	;volatile
+   252                           	line	16
+   253                           ;ledblinkadd.c: 16: ANSELH=0X00;
+   254  0782  0189               	clrf	(393)^0180h	;volatile
+   255                           	line	17
+   256                           ;ledblinkadd.c: 17: PORTC=0X00;
+   257  0783  1283               	bcf	status, 5	;RP0=0, select bank0
+   258  0784  1303               	bcf	status, 6	;RP1=0, select bank0
+   259  0785  0187               	clrf	(7)	;volatile
+   260                           	line	18
+   261                           	
+   262  0786                     l2194:	
+   263                           ;ledblinkadd.c: 18: TRISC=0X07;
+   264  0786  3007               	movlw	(07h)
+   265  0787  1683               	bsf	status, 5	;RP0=1, select bank1
+   266  0788  1303               	bcf	status, 6	;RP1=0, select bank1
+   267  0789  0087               	movwf	(135)^080h	;volatile
+   268  078A  2F8B               	goto	l2196
+   269                           	line	19
+   270                           ;ledblinkadd.c: 19: while(1)
+   271                           	
+   272  078B                     l1031:	
+   273                           	line	21
+   274                           	
+   275  078B                     l2196:	
+   276                           ;ledblinkadd.c: 20: {
+   277                           ;ledblinkadd.c: 21: if(RC0==1)
+   278  078B  1283               	bcf	status, 5	;RP0=0, select bank0
+   279  078C  1C07               	btfss	(56/8),(56)&7
+   280  078D  2F8F               	goto	u2151
+   281  078E  2F90               	goto	u2150
+   282  078F                     u2151:
+   283  078F  2F9C               	goto	l1032
+   284  0790                     u2150:
+   285                           	line	23
+   286                           	
+   287  0790                     l2198:	
+   288                           ;ledblinkadd.c: 22: {
+   289                           ;ledblinkadd.c: 23: count++;
+   290  0790  3001               	movlw	low(01h)
+   291  0791  07F5               	addwf	(main@count),f
+   292  0792  1803               	skipnc
+   293  0793  0AF6               	incf	(main@count+1),f
+   294  0794  3000               	movlw	high(01h)
+   295  0795  07F6               	addwf	(main@count+1),f
+   296                           	line	24
+   297                           ;ledblinkadd.c: 24: while(RC0==1);
+   298  0796  2F97               	goto	l1033
+   299                           	
+   300  0797                     l1034:	
+   301                           	
+   302  0797                     l1033:	
+   303  0797  1807               	btfsc	(56/8),(56)&7
+   304  0798  2F9A               	goto	u2161
+   305  0799  2F9B               	goto	u2160
+   306  079A                     u2161:
+   307  079A  2F97               	goto	l1033
+   308  079B                     u2160:
+   309  079B  2F9C               	goto	l1032
+   310                           	
+   311  079C                     l1035:	
+   312                           	line	25
+   313                           	
+   314  079C                     l1032:	
+   315                           	line	26
+   316                           ;ledblinkadd.c: 25: }
+   317                           ;ledblinkadd.c: 26: if(RC1==1)
+   318  079C  1C87               	btfss	(57/8),(57)&7
+   319  079D  2F9F               	goto	u2171
+   320  079E  2FA0               	goto	u2170
+   321  079F                     u2171:
+   322  079F  2FAC               	goto	l1036
+   323  07A0                     u2170:
+   324                           	line	28
+   325                           	
+   326  07A0                     l2200:	
+   327                           ;ledblinkadd.c: 27: {
+   328                           ;ledblinkadd.c: 28: count++;
+   329  07A0  3001               	movlw	low(01h)
+   330  07A1  07F5               	addwf	(main@count),f
+   331  07A2  1803               	skipnc
+   332  07A3  0AF6               	incf	(main@count+1),f
+   333  07A4  3000               	movlw	high(01h)
+   334  07A5  07F6               	addwf	(main@count+1),f
+   335                           	line	29
+   336                           ;ledblinkadd.c: 29: while(RC1==1);
+   337  07A6  2FA7               	goto	l1037
+   338                           	
+   339  07A7                     l1038:	
+   340                           	
+   341  07A7                     l1037:	
+   342  07A7  1887               	btfsc	(57/8),(57)&7
+   343  07A8  2FAA               	goto	u2181
+   344  07A9  2FAB               	goto	u2180
+   345  07AA                     u2181:
+   346  07AA  2FA7               	goto	l1037
+   347  07AB                     u2180:
+   348  07AB  2FAC               	goto	l1036
+   349                           	
+   350  07AC                     l1039:	
+   351                           	line	30
+   352                           	
+   353  07AC                     l1036:	
+   354                           	line	31
+   355                           ;ledblinkadd.c: 30: }
+   356                           ;ledblinkadd.c: 31: if(RC2==1)
+   357  07AC  1D07               	btfss	(58/8),(58)&7
+   358  07AD  2FAF               	goto	u2191
+   359  07AE  2FB0               	goto	u2190
+   360  07AF                     u2191:
+   361  07AF  2FEA               	goto	l1040
+   362  07B0                     u2190:
+   363                           	line	33
+   364                           	
+   365  07B0                     l2202:	
+   366                           ;ledblinkadd.c: 32: {
+   367                           ;ledblinkadd.c: 33: for(i=0;i<count;i++)
+   368  07B0  01F3               	clrf	(main@i)
+   369  07B1  01F4               	clrf	(main@i+1)
+   370  07B2  2FD3               	goto	l2214
+   371                           	line	34
+   372                           	
+   373  07B3                     l1042:	
+   374                           	line	35
+   375                           	
+   376  07B3                     l2204:	
+   377                           ;ledblinkadd.c: 34: {
+   378                           ;ledblinkadd.c: 35: PORTB=0X01;
+   379  07B3  3001               	movlw	(01h)
+   380  07B4  1283               	bcf	status, 5	;RP0=0, select bank0
+   381  07B5  1303               	bcf	status, 6	;RP1=0, select bank0
+   382  07B6  0086               	movwf	(6)	;volatile
+   383                           	line	36
+   384                           	
+   385  07B7                     l2206:	
+   386                           ;ledblinkadd.c: 36: delay(60000);
+   387  07B7  3060               	movlw	low(0EA60h)
+   388  07B8  00F0               	movwf	(?_delay)
+   389  07B9  30EA               	movlw	high(0EA60h)
+   390  07BA  00F1               	movwf	((?_delay))+1
+   391  07BB  120A  118A  2763   	fcall	_delay
+              120A  118A         
+   392                           	line	37
+   393                           	
+   394  07C0                     l2208:	
+   395                           ;ledblinkadd.c: 37: PORTB=0X00;
+   396  07C0  1283               	bcf	status, 5	;RP0=0, select bank0
+   397  07C1  1303               	bcf	status, 6	;RP1=0, select bank0
+   398  07C2  0186               	clrf	(6)	;volatile
+   399                           	line	38
+   400                           	
+   401  07C3                     l2210:	
+   402                           ;ledblinkadd.c: 38: delay(60000);
+   403  07C3  3060               	movlw	low(0EA60h)
+   404  07C4  00F0               	movwf	(?_delay)
+   405  07C5  30EA               	movlw	high(0EA60h)
+   406  07C6  00F1               	movwf	((?_delay))+1
+   407  07C7  120A  118A  2763   	fcall	_delay
+              120A  118A         
+   408                           	line	33
+   409                           	
+   410  07CC                     l2212:	
+   411  07CC  3001               	movlw	low(01h)
+   412  07CD  07F3               	addwf	(main@i),f
+   413  07CE  1803               	skipnc
+   414  07CF  0AF4               	incf	(main@i+1),f
+   415  07D0  3000               	movlw	high(01h)
+   416  07D1  07F4               	addwf	(main@i+1),f
+   417  07D2  2FD3               	goto	l2214
+   418                           	
+   419  07D3                     l1041:	
+   420                           	
+   421  07D3                     l2214:	
+   422  07D3  0874               	movf	(main@i+1),w
+   423  07D4  3A80               	xorlw	80h
+   424  07D5  00F2               	movwf	(??_main+0)+0
+   425  07D6  0876               	movf	(main@count+1),w
+   426  07D7  3A80               	xorlw	80h
+   427  07D8  0272               	subwf	(??_main+0)+0,w
+   428  07D9  1D03               	skipz
+   429  07DA  2FDD               	goto	u2205
+   430  07DB  0875               	movf	(main@count),w
+   431  07DC  0273               	subwf	(main@i),w
+   432  07DD                     u2205:
+   433                           
+   434  07DD  1C03               	skipc
+   435  07DE  2FE0               	goto	u2201
+   436  07DF  2FE1               	goto	u2200
+   437  07E0                     u2201:
+   438  07E0  2FB3               	goto	l2204
+   439  07E1                     u2200:
+   440  07E1  2FE3               	goto	l1044
+   441                           	
+   442  07E2                     l1043:	
+   443                           	line	40
+   444                           ;ledblinkadd.c: 40: }while(RC2==1);
+   445  07E2  2FE3               	goto	l1044
+   446                           	
+   447  07E3                     l1045:	
+   448                           	
+   449  07E3                     l1044:	
+   450  07E3  1283               	bcf	status, 5	;RP0=0, select bank0
+   451  07E4  1303               	bcf	status, 6	;RP1=0, select bank0
+   452  07E5  1907               	btfsc	(58/8),(58)&7
+   453  07E6  2FE8               	goto	u2211
+   454  07E7  2FE9               	goto	u2210
+   455  07E8                     u2211:
+   456  07E8  2FE3               	goto	l1044
+   457  07E9                     u2210:
+   458  07E9  2FEA               	goto	l1040
+   459                           	
+   460  07EA                     l1046:	
+   461                           	line	41
+   462                           	
+   463  07EA                     l1040:	
+   464                           	line	42
+   465                           ;ledblinkadd.c: 41: }
+   466                           ;ledblinkadd.c: 42: if(RC3==1)
+   467  07EA  1D87               	btfss	(59/8),(59)&7
+   468  07EB  2FED               	goto	u2221
+   469  07EC  2FEE               	goto	u2220
+   470  07ED                     u2221:
+   471  07ED  2F8B               	goto	l2196
+   472  07EE                     u2220:
+   473                           	line	44
+   474                           	
+   475  07EE                     l2216:	
+   476                           ;ledblinkadd.c: 43: {
+   477                           ;ledblinkadd.c: 44: count--;
+   478  07EE  30FF               	movlw	low(-1)
+   479  07EF  07F5               	addwf	(main@count),f
+   480  07F0  1803               	skipnc
+   481  07F1  0AF6               	incf	(main@count+1),f
+   482  07F2  30FF               	movlw	high(-1)
+   483  07F3  07F6               	addwf	(main@count+1),f
+   484                           	line	45
+   485                           ;ledblinkadd.c: 45: while(RC3==1);
+   486  07F4  2FF5               	goto	l1048
+   487                           	
+   488  07F5                     l1049:	
+   489                           	
+   490  07F5                     l1048:	
+   491  07F5  1987               	btfsc	(59/8),(59)&7
+   492  07F6  2FF8               	goto	u2231
+   493  07F7  2FF9               	goto	u2230
+   494  07F8                     u2231:
+   495  07F8  2FF5               	goto	l1048
+   496  07F9                     u2230:
+   497  07F9  2F8B               	goto	l2196
+   498                           	
+   499  07FA                     l1050:	
+   500  07FA  2F8B               	goto	l2196
+   501                           	line	46
+   502                           	
+   503  07FB                     l1047:	
+   504  07FB  2F8B               	goto	l2196
+   505                           	line	47
+   506                           	
+   507  07FC                     l1051:	
+   508                           	line	19
+   509  07FC  2F8B               	goto	l2196
+   510                           	
+   511  07FD                     l1052:	
+   512                           	line	48
+   513                           	
+   514  07FD                     l1053:	
+   515                           	global	start
+   516  07FD  120A  118A  2800   	ljmp	start
+   517                           	opt stack 0
+   518                           GLOBAL	__end_of_main
+   519  0800                     	__end_of_main:
+   520 ;; =============== function _main ends ============
+   521                           
+   522                           	signat	_main,88
+   523                           	global	_delay
+   524                           psect	text55,local,class=CODE,delta=2
+   525                           global __ptext55
+   526  0763                     __ptext55:
+   527                           
+   528 ;; *************** function _delay *****************
+   529 ;; Defined at:
+   530 ;;		line 7 in file "D:\Embedded\pic\code\software\led\ledblinkadd\ledblinkadd.c"
+   531 ;; Parameters:    Size  Location     Type
+   532 ;;  a               2    0[COMMON] unsigned int 
+   533 ;; Auto vars:     Size  Location     Type
+   534 ;;		None
+   535 ;; Return value:  Size  Location     Type
+   536 ;;		None               void
+   537 ;; Registers used:
+   538 ;;		wreg
+   539 ;; Tracked objects:
+   540 ;;		On entry : 0/0
+   541 ;;		On exit  : 0/0
+   542 ;;		Unchanged: 0/0
+   543 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   544 ;;      Params:         2       0       0       0       0
+   545 ;;      Locals:         0       0       0       0       0
+   546 ;;      Temps:          0       0       0       0       0
+   547 ;;      Totals:         2       0       0       0       0
+   548 ;;Total ram usage:        2 bytes
+   549 ;; Hardware stack levels used:    1
+   550 ;; This function calls:
+   551 ;;		Nothing
+   552 ;; This function is called by:
+   553 ;;		_main
+   554 ;; This function uses a non-reentrant model
+   555 ;;
+   556                           psect	text55
+   557                           	file	"D:\Embedded\pic\code\software\led\ledblinkadd\ledblinkadd.c"
+   558                           	line	7
+   559                           	global	__size_of_delay
+   560  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+   561                           	
+   562  0763                     _delay:	
+   563                           	opt	stack 7
+   564                           ; Regs used in _delay: [wreg]
+   565                           	line	8
+   566                           	
+   567  0763                     l1422:	
+   568                           ;ledblinkadd.c: 8: while(a--);
+   569  0763  2F65               	goto	l1424
+   570                           	
+   571  0764                     l1026:	
+   572  0764  2F65               	goto	l1424
+   573                           	
+   574  0765                     l1025:	
+   575                           	
+   576  0765                     l1424:	
+   577  0765  3001               	movlw	low(01h)
+   578  0766  02F0               	subwf	(delay@a),f
+   579  0767  3000               	movlw	high(01h)
+   580  0768  1C03               	skipc
+   581  0769  03F1               	decf	(delay@a+1),f
+   582  076A  02F1               	subwf	(delay@a+1),f
+   583  076B  30FF               	movlw	high(0FFFFh)
+   584  076C  0671               	xorwf	((delay@a+1)),w
+   585  076D  1D03               	skipz
+   586  076E  2F71               	goto	u15
+   587  076F  30FF               	movlw	low(0FFFFh)
+   588  0770  0670               	xorwf	((delay@a)),w
+   589  0771                     u15:
+   590                           
+   591  0771  1D03               	skipz
+   592  0772  2F74               	goto	u11
+   593  0773  2F75               	goto	u10
+   594  0774                     u11:
+   595  0774  2F65               	goto	l1424
+   596  0775                     u10:
+   597  0775  2F76               	goto	l1028
+   598                           	
+   599  0776                     l1027:	
+   600                           	line	9
+   601                           	
+   602  0776                     l1028:	
+   603  0776  0008               	return
+   604                           	opt stack 0
+   605                           GLOBAL	__end_of_delay
+   606  0777                     	__end_of_delay:
+   607 ;; =============== function _delay ends ============
+   608                           
+   609                           	signat	_delay,4216
+   610                           psect	text56,local,class=CODE,delta=2
+   611                           global __ptext56
+   612  0000                     __ptext56:
+   613                           	global	btemp
+   614  007E                     	btemp set 07Eh
+   615                           
+   616                           	DABS	1,126,2	;btemp
+   617                           	global	wtemp0
+   618  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Apr 12 23:32:24 2022
+
+                  u10 0775                    u11 0774                    u15 0771                   _RC0 0038  
+                 _RC1 0039                   _RC2 003A                   _RC3 003B                  l1031 078B  
+                l1040 07EA                  l1032 079C                  l1025 0765                  l1041 07D3  
+                l1033 0797                  l1026 0764                  l1050 07FA                  l1042 07B3  
+                l1034 0797                  l1027 0776                  l1051 07FC                  l1043 07E2  
+                l1035 079C                  l1028 0776                  l1052 07FD                  l1044 07E3  
+                l1036 07AC                  l1053 07FD                  l1045 07E3                  l1037 07A7  
+                l1046 07EA                  l1038 07A7                  l1047 07FB                  l1039 07AC  
+                l1048 07F5                  l2200 07A0                  l1049 07F5                  l2210 07C3  
+                l2202 07B0                  l2212 07CC                  l2204 07B3                  l1422 0763  
+                l2206 07B7                  l2214 07D3                  l1424 0765                  l2216 07EE  
+                l2208 07C0                  l2192 0777                  l2194 0786                  l2196 078B  
+                l2198 0790                  u2200 07E1                  u2201 07E0                  u2210 07E9  
+                u2211 07E8                  u2220 07EE                  u2221 07ED                  u2205 07DD  
+                u2230 07F9                  u2150 0790                  u2231 07F8                  u2151 078F  
+                u2160 079B                  u2161 079A                  u2170 07A0                  u2171 079F  
+                u2180 07AB                  u2181 07AA                  u2190 07B0                  u2191 07AF  
+                _main 0777                  btemp 007E                  start 0000                 ?_main 0070  
+               _ANSEL 0188                 _PORTB 0006                 _PORTC 0007                 _TRISB 0086  
+               _TRISC 0087                 _delay 0763                 main@i 0073                 status 0003  
+               wtemp0 007E          __end_of_main 0800                ??_main 0072                ?_delay 0070  
+              _ANSELH 0189                delay@a 0070        __pcstackCOMMON 0070         __end_of_delay 0777  
+             ??_delay 0072            __pmaintext 0777  end_of_initialization 075F   start_initialization 075F  
+      __size_of_delay 0014             main@count 0075              __ptext55 0763              __ptext56 0000  
+       __size_of_main 0089  

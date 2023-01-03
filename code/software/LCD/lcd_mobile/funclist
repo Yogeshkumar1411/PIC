@@ -1,0 +1,4 @@
+_delay: CODE, 1226 0 20
+_lcd_cmd: CODE, 1273 0 46
+_main: CODE, 1319 0 729
+Total: 795

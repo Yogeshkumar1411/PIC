@@ -1,0 +1,739 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Mon Jun 27 15:54:11 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_slave
+    43                           	FNCALL	_main,_master
+    44                           	FNROOT	_main
+    45                           	global	_seg
+    46                           psect	idataBANK0,class=CODE,space=0,delta=2
+    47                           global __pidataBANK0
+    48  0766                     __pidataBANK0:
+    49                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_fu
+                                 ll_duplex.c"
+    50                           	line	5
+    51                           
+    52                           ;initializer for _seg
+    53  0766  343F               	retlw	03Fh
+    54  0767  3406               	retlw	06h
+    55  0768  345B               	retlw	05Bh
+    56  0769  344F               	retlw	04Fh
+    57  076A  3466               	retlw	066h
+    58  076B  346D               	retlw	06Dh
+    59  076C  347D               	retlw	07Dh
+    60  076D  3407               	retlw	07h
+    61  076E  347F               	retlw	07Fh
+    62  076F  346F               	retlw	06Fh
+    63  0770  3400               	retlw	0
+    64  0771  3400               	retlw	0
+    65  0772  3400               	retlw	0
+    66  0773  3400               	retlw	0
+    67  0774  3400               	retlw	0
+    68  0775  3400               	retlw	0
+    69  0776  3400               	retlw	0
+    70  0777  3400               	retlw	0
+    71  0778  3400               	retlw	0
+    72  0779  3400               	retlw	0
+    73                           	global	_count
+    74                           	global	_display
+    75                           	global	_PORTA
+    76  0005                     _PORTA	set	5
+    77                           	global	_PORTC
+    78  0007                     _PORTC	set	7
+    79                           	global	_PORTD
+    80  0008                     _PORTD	set	8
+    81                           	global	_SSPBUF
+    82  0013                     _SSPBUF	set	19
+    83                           	global	_SSPCON
+    84  0014                     _SSPCON	set	20
+    85                           	global	_RA0
+    86  0028                     _RA0	set	40
+    87                           	global	_SSPIF
+    88  0063                     _SSPIF	set	99
+    89                           	global	_SSPSTAT
+    90  0094                     _SSPSTAT	set	148
+    91                           	global	_TRISA
+    92  0085                     _TRISA	set	133
+    93                           	global	_TRISC
+    94  0087                     _TRISC	set	135
+    95                           	global	_TRISD
+    96  0088                     _TRISD	set	136
+    97                           	global	_BF
+    98  04A0                     _BF	set	1184
+    99                           	global	_ANSEL
+   100  0188                     _ANSEL	set	392
+   101                           	global	_ANSELH
+   102  0189                     _ANSELH	set	393
+   103                           	file	"Slave_full_duplex.as"
+   104                           	line	#
+   105                           psect cinit,class=CODE,delta=2
+   106                           global start_initialization
+   107  077A                     start_initialization:
+   108                           
+   109                           psect	bssCOMMON,class=COMMON,space=1
+   110                           global __pbssCOMMON
+   111  0070                     __pbssCOMMON:
+   112  0070                     _count:
+   113  0070                            ds      2
+   114                           
+   115  0072                     _display:
+   116  0072                            ds      2
+   117                           
+   118                           psect	dataBANK0,class=BANK0,space=1
+   119                           global __pdataBANK0
+   120  0020                     __pdataBANK0:
+   121                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_fu
+                                 ll_duplex.c"
+   122  0020                     _seg:
+   123  0020                            ds      20
+   124                           
+   125                           ; Clear objects allocated to COMMON
+   126                           psect cinit,class=CODE,delta=2
+   127  077A  01F0               	clrf	((__pbssCOMMON)+0)&07Fh
+   128  077B  01F1               	clrf	((__pbssCOMMON)+1)&07Fh
+   129  077C  01F2               	clrf	((__pbssCOMMON)+2)&07Fh
+   130  077D  01F3               	clrf	((__pbssCOMMON)+3)&07Fh
+   131                           global btemp
+   132                           psect inittext,class=CODE,delta=2
+   133                           global init_fetch,btemp
+   134                           ;	Called with low address in FSR and high address in W
+   135  0755                     init_fetch:
+   136  0755  087E               	movf btemp,w
+   137  0756  008A               	movwf pclath
+   138  0757  087F               	movf btemp+1,w
+   139  0758  0082               	movwf pc
+   140                           global init_ram
+   141                           ;Called with:
+   142                           ;	high address of idata address in btemp 
+   143                           ;	low address of idata address in btemp+1 
+   144                           ;	low address of data in FSR
+   145                           ;	high address + 1 of data in btemp-1
+   146  0759                     init_ram:
+   147  0759  2755  120A  118A   	fcall init_fetch
+   148  075C  0080               	movwf indf,f
+   149  075D  0A84               	incf fsr,f
+   150  075E  0804               	movf fsr,w
+   151  075F  067D               	xorwf btemp-1,w
+   152  0760  1903               	btfsc status,2
+   153  0761  3400               	retlw 0
+   154  0762  0AFF               	incf btemp+1,f
+   155  0763  1903               	btfsc status,2
+   156  0764  0AFE               	incf btemp,f
+   157  0765  2F59               	goto init_ram
+   158                           ; Initialize objects allocated to BANK0
+   159                           psect cinit,class=CODE,delta=2
+   160                           global init_ram, __pidataBANK0
+   161  077E  1383               	bcf	status, 7	;select IRP bank0
+   162  077F  3034               	movlw low(__pdataBANK0+20)
+   163  0780  00FD               	movwf btemp-1,f
+   164  0781  3007               	movlw high(__pidataBANK0)
+   165  0782  00FE               	movwf btemp,f
+   166  0783  3066               	movlw low(__pidataBANK0)
+   167  0784  00FF               	movwf btemp+1,f
+   168  0785  3020               	movlw low(__pdataBANK0)
+   169  0786  0084               	movwf fsr,f
+   170  0787  120A  118A  2759   	fcall init_ram
+              120A  118A         
+   171                           psect cinit,class=CODE,delta=2
+   172                           global end_of_initialization
+   173                           
+   174                           ;End of C runtime variable initialization code
+   175                           
+   176  078C                     end_of_initialization:
+   177  078C  0183               clrf status
+   178  078D  120A  118A  2FA8   ljmp _main	;jump to C main() function
+   179                           psect	cstackCOMMON,class=COMMON,space=1
+   180                           global __pcstackCOMMON
+   181  0074                     __pcstackCOMMON:
+   182                           	global	?_slave
+   183  0074                     ?_slave:	; 0 bytes @ 0x0
+   184                           	global	??_slave
+   185  0074                     ??_slave:	; 0 bytes @ 0x0
+   186                           	global	?_master
+   187  0074                     ?_master:	; 0 bytes @ 0x0
+   188                           	global	?_main
+   189  0074                     ?_main:	; 0 bytes @ 0x0
+   190                           	global	master@num
+   191  0074                     master@num:	; 2 bytes @ 0x0
+   192  0074                     	ds	2
+   193                           	global	??_master
+   194  0076                     ??_master:	; 0 bytes @ 0x2
+   195                           	global	??_main
+   196  0076                     ??_main:	; 0 bytes @ 0x2
+   197 ;;Data sizes: Strings 0, constant 0, data 20, bss 4, persistent 0 stack 0
+   198 ;;Auto spaces:   Size  Autos    Used
+   199 ;; COMMON          14      2       6
+   200 ;; BANK0           80      0      20
+   201 ;; BANK1           80      0       0
+   202 ;; BANK3           96      0       0
+   203 ;; BANK2           96      0       0
+   204                           
+   205 ;;
+   206 ;; Pointer list with targets:
+   207                           
+   208                           
+   209                           
+   210 ;;
+   211 ;; Critical Paths under _main in COMMON
+   212 ;;
+   213 ;;   _main->_slave
+   214 ;;   _main->_master
+   215 ;;
+   216 ;; Critical Paths under _main in BANK0
+   217 ;;
+   218 ;;   None.
+   219 ;;
+   220 ;; Critical Paths under _main in BANK1
+   221 ;;
+   222 ;;   None.
+   223 ;;
+   224 ;; Critical Paths under _main in BANK3
+   225 ;;
+   226 ;;   None.
+   227 ;;
+   228 ;; Critical Paths under _main in BANK2
+   229 ;;
+   230 ;;   None.
+   231                           
+   232 ;;
+   233 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   234 ;;
+   235                           
+   236 ;;
+   237 ;;Call Graph Tables:
+   238 ;;
+   239 ;; ---------------------------------------------------------------------------------
+   240 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   241 ;; ---------------------------------------------------------------------------------
+   242 ;; (0) _main                                                 0     0      0      15
+   243 ;;                              _slave
+   244 ;;                             _master
+   245 ;; ---------------------------------------------------------------------------------
+   246 ;; (1) _master                                               2     0      2      15
+   247 ;;                                              0 COMMON     2     0      2
+   248 ;; ---------------------------------------------------------------------------------
+   249 ;; (1) _slave                                                2     2      0       0
+   250 ;;                                              0 COMMON     2     2      0
+   251 ;; ---------------------------------------------------------------------------------
+   252 ;; Estimated maximum stack depth 1
+   253 ;; ---------------------------------------------------------------------------------
+   254                           
+   255 ;; Call Graph Graphs:
+   256                           
+   257 ;; _main (ROOT)
+   258 ;;   _slave
+   259 ;;   _master
+   260 ;;
+   261                           
+   262 ;; Address spaces:
+   263                           
+   264 ;;Name               Size   Autos  Total    Cost      Usage
+   265 ;;BANK3               60      0       0       9        0.0%
+   266 ;;BITBANK3            60      0       0       8        0.0%
+   267 ;;SFR3                 0      0       0       4        0.0%
+   268 ;;BITSFR3              0      0       0       4        0.0%
+   269 ;;BANK2               60      0       0      11        0.0%
+   270 ;;BITBANK2            60      0       0      10        0.0%
+   271 ;;SFR2                 0      0       0       5        0.0%
+   272 ;;BITSFR2              0      0       0       5        0.0%
+   273 ;;SFR1                 0      0       0       2        0.0%
+   274 ;;BITSFR1              0      0       0       2        0.0%
+   275 ;;BANK1               50      0       0       7        0.0%
+   276 ;;BITBANK1            50      0       0       6        0.0%
+   277 ;;CODE                 0      0       0       0        0.0%
+   278 ;;DATA                 0      0      1B      12        0.0%
+   279 ;;ABS                  0      0      1A       3        0.0%
+   280 ;;NULL                 0      0       0       0        0.0%
+   281 ;;STACK                0      0       1       2        0.0%
+   282 ;;BANK0               50      0      14       5       25.0%
+   283 ;;BITBANK0            50      0       0       4        0.0%
+   284 ;;SFR0                 0      0       0       1        0.0%
+   285 ;;BITSFR0              0      0       0       1        0.0%
+   286 ;;COMMON               E      2       6       1       42.9%
+   287 ;;BITCOMMON            E      0       0       0        0.0%
+   288 ;;EEDATA             100      0       0       0        0.0%
+   289                           
+   290                           	global	_main
+   291                           psect	maintext,global,class=CODE,delta=2
+   292                           global __pmaintext
+   293  07A8                     __pmaintext:
+   294                           
+   295 ;; *************** function _main *****************
+   296 ;; Defined at:
+   297 ;;		line 26 in file "D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_full_duplex.c"
+   298 ;; Parameters:    Size  Location     Type
+   299 ;;		None
+   300 ;; Auto vars:     Size  Location     Type
+   301 ;;		None
+   302 ;; Return value:  Size  Location     Type
+   303 ;;		None               void
+   304 ;; Registers used:
+   305 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   306 ;; Tracked objects:
+   307 ;;		On entry : 17F/0
+   308 ;;		On exit  : 0/0
+   309 ;;		Unchanged: 0/0
+   310 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   311 ;;      Params:         0       0       0       0       0
+   312 ;;      Locals:         0       0       0       0       0
+   313 ;;      Temps:          0       0       0       0       0
+   314 ;;      Totals:         0       0       0       0       0
+   315 ;;Total ram usage:        0 bytes
+   316 ;; Hardware stack levels required when called:    1
+   317 ;; This function calls:
+   318 ;;		_slave
+   319 ;;		_master
+   320 ;; This function is called by:
+   321 ;;		Startup code after reset
+   322 ;; This function uses a non-reentrant model
+   323 ;;
+   324                           psect	maintext
+   325                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_fu
+                                 ll_duplex.c"
+   326                           	line	26
+   327                           	global	__size_of_main
+   328  0058                     	__size_of_main	equ	__end_of_main-_main
+   329                           	
+   330  07A8                     _main:	
+   331                           	opt	stack 7
+   332                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   333                           	line	27
+   334                           	
+   335  07A8                     l2194:	
+   336                           ;Slave_full_duplex.c: 27: TRISA=0X21;
+   337  07A8  3021               	movlw	(021h)
+   338  07A9  1683               	bsf	status, 5	;RP0=1, select bank1
+   339  07AA  1303               	bcf	status, 6	;RP1=0, select bank1
+   340  07AB  0085               	movwf	(133)^080h	;volatile
+   341                           	line	28
+   342                           	
+   343  07AC                     l2196:	
+   344                           ;Slave_full_duplex.c: 28: PORTA=0X00;
+   345  07AC  1283               	bcf	status, 5	;RP0=0, select bank0
+   346  07AD  1303               	bcf	status, 6	;RP1=0, select bank0
+   347  07AE  0185               	clrf	(5)	;volatile
+   348                           	line	29
+   349                           	
+   350  07AF                     l2198:	
+   351                           ;Slave_full_duplex.c: 29: TRISC=0X18;
+   352  07AF  3018               	movlw	(018h)
+   353  07B0  1683               	bsf	status, 5	;RP0=1, select bank1
+   354  07B1  1303               	bcf	status, 6	;RP1=0, select bank1
+   355  07B2  0087               	movwf	(135)^080h	;volatile
+   356                           	line	30
+   357                           ;Slave_full_duplex.c: 30: PORTC=0X00;
+   358  07B3  1283               	bcf	status, 5	;RP0=0, select bank0
+   359  07B4  1303               	bcf	status, 6	;RP1=0, select bank0
+   360  07B5  0187               	clrf	(7)	;volatile
+   361                           	line	31
+   362                           ;Slave_full_duplex.c: 31: TRISD=0X00;
+   363  07B6  1683               	bsf	status, 5	;RP0=1, select bank1
+   364  07B7  1303               	bcf	status, 6	;RP1=0, select bank1
+   365  07B8  0188               	clrf	(136)^080h	;volatile
+   366                           	line	32
+   367                           ;Slave_full_duplex.c: 32: PORTD=0X00;
+   368  07B9  1283               	bcf	status, 5	;RP0=0, select bank0
+   369  07BA  1303               	bcf	status, 6	;RP1=0, select bank0
+   370  07BB  0188               	clrf	(8)	;volatile
+   371                           	line	33
+   372                           ;Slave_full_duplex.c: 33: ANSEL=0X00;
+   373  07BC  1683               	bsf	status, 5	;RP0=1, select bank3
+   374  07BD  1703               	bsf	status, 6	;RP1=1, select bank3
+   375  07BE  0188               	clrf	(392)^0180h	;volatile
+   376                           	line	34
+   377                           ;Slave_full_duplex.c: 34: ANSELH=0X00;
+   378  07BF  0189               	clrf	(393)^0180h	;volatile
+   379                           	line	35
+   380                           	
+   381  07C0                     l2200:	
+   382                           ;Slave_full_duplex.c: 35: SSPCON=0X25;
+   383  07C0  3025               	movlw	(025h)
+   384  07C1  1283               	bcf	status, 5	;RP0=0, select bank0
+   385  07C2  1303               	bcf	status, 6	;RP1=0, select bank0
+   386  07C3  0094               	movwf	(20)	;volatile
+   387                           	line	36
+   388                           	
+   389  07C4                     l2202:	
+   390                           ;Slave_full_duplex.c: 36: SSPSTAT=0X00;
+   391  07C4  1683               	bsf	status, 5	;RP0=1, select bank1
+   392  07C5  1303               	bcf	status, 6	;RP1=0, select bank1
+   393  07C6  0194               	clrf	(148)^080h	;volatile
+   394  07C7  2FC8               	goto	l2204
+   395                           	line	37
+   396                           ;Slave_full_duplex.c: 37: while(1)
+   397                           	
+   398  07C8                     l1041:	
+   399                           	line	39
+   400                           	
+   401  07C8                     l2204:	
+   402                           ;Slave_full_duplex.c: 38: {
+   403                           ;Slave_full_duplex.c: 39: if(RA0==1)
+   404  07C8  1283               	bcf	status, 5	;RP0=0, select bank0
+   405  07C9  1303               	bcf	status, 6	;RP1=0, select bank0
+   406  07CA  1C05               	btfss	(40/8),(40)&7
+   407  07CB  2FCD               	goto	u2161
+   408  07CC  2FCE               	goto	u2160
+   409  07CD                     u2161:
+   410  07CD  2FDB               	goto	l2208
+   411  07CE                     u2160:
+   412                           	line	41
+   413                           	
+   414  07CE                     l2206:	
+   415                           ;Slave_full_duplex.c: 40: {
+   416                           ;Slave_full_duplex.c: 41: count++;
+   417  07CE  3001               	movlw	low(01h)
+   418  07CF  07F0               	addwf	(_count),f
+   419  07D0  1803               	skipnc
+   420  07D1  0AF1               	incf	(_count+1),f
+   421  07D2  3000               	movlw	high(01h)
+   422  07D3  07F1               	addwf	(_count+1),f
+   423                           	line	42
+   424                           ;Slave_full_duplex.c: 42: while(RA0==1);
+   425  07D4  2FD5               	goto	l1043
+   426                           	
+   427  07D5                     l1044:	
+   428                           	
+   429  07D5                     l1043:	
+   430  07D5  1805               	btfsc	(40/8),(40)&7
+   431  07D6  2FD8               	goto	u2171
+   432  07D7  2FD9               	goto	u2170
+   433  07D8                     u2171:
+   434  07D8  2FD5               	goto	l1043
+   435  07D9                     u2170:
+   436  07D9  2FDB               	goto	l2208
+   437                           	
+   438  07DA                     l1045:	
+   439  07DA  2FDB               	goto	l2208
+   440                           	line	43
+   441                           	
+   442  07DB                     l1042:	
+   443                           	line	44
+   444                           	
+   445  07DB                     l2208:	
+   446                           ;Slave_full_duplex.c: 43: }
+   447                           ;Slave_full_duplex.c: 44: if(count>=10)
+   448  07DB  0871               	movf	(_count+1),w
+   449  07DC  3A80               	xorlw	80h
+   450  07DD  00FF               	movwf	btemp+1
+   451  07DE  3080               	movlw	(high(0Ah))^80h
+   452  07DF  027F               	subwf	btemp+1,w
+   453  07E0  1D03               	skipz
+   454  07E1  2FE4               	goto	u2185
+   455  07E2  300A               	movlw	low(0Ah)
+   456  07E3  0270               	subwf	(_count),w
+   457  07E4                     u2185:
+   458                           
+   459  07E4  1C03               	skipc
+   460  07E5  2FE7               	goto	u2181
+   461  07E6  2FE8               	goto	u2180
+   462  07E7                     u2181:
+   463  07E7  2FEB               	goto	l2212
+   464  07E8                     u2180:
+   465                           	line	46
+   466                           	
+   467  07E8                     l2210:	
+   468                           ;Slave_full_duplex.c: 45: {
+   469                           ;Slave_full_duplex.c: 46: count=0;
+   470  07E8  01F0               	clrf	(_count)
+   471  07E9  01F1               	clrf	(_count+1)
+   472  07EA  2FEB               	goto	l2212
+   473                           	line	47
+   474                           	
+   475  07EB                     l1046:	
+   476                           	line	48
+   477                           	
+   478  07EB                     l2212:	
+   479                           ;Slave_full_duplex.c: 47: }
+   480                           ;Slave_full_duplex.c: 48: slave();
+   481  07EB  120A  118A  2790   	fcall	_slave
+              120A  118A         
+   482                           	line	49
+   483                           	
+   484  07F0                     l2214:	
+   485                           ;Slave_full_duplex.c: 49: master(count);
+   486  07F0  0871               	movf	(_count+1),w
+   487  07F1  01F5               	clrf	(?_master+1)
+   488  07F2  07F5               	addwf	(?_master+1)
+   489  07F3  0870               	movf	(_count),w
+   490  07F4  01F4               	clrf	(?_master)
+   491  07F5  07F4               	addwf	(?_master)
+   492                           
+   493  07F6  120A  118A  274A   	fcall	_master
+              120A  118A         
+   494  07FB  2FC8               	goto	l2204
+   495                           	line	50
+   496                           	
+   497  07FC                     l1047:	
+   498                           	line	37
+   499  07FC  2FC8               	goto	l2204
+   500                           	
+   501  07FD                     l1048:	
+   502                           	line	51
+   503                           	
+   504  07FD                     l1049:	
+   505                           	global	start
+   506  07FD  120A  118A  2800   	ljmp	start
+   507                           	opt stack 0
+   508                           GLOBAL	__end_of_main
+   509  0800                     	__end_of_main:
+   510 ;; =============== function _main ends ============
+   511                           
+   512                           	signat	_main,88
+   513                           	global	_master
+   514                           psect	text73,local,class=CODE,delta=2
+   515                           global __ptext73
+   516  074A                     __ptext73:
+   517                           
+   518 ;; *************** function _master *****************
+   519 ;; Defined at:
+   520 ;;		line 19 in file "D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_full_duplex.c"
+   521 ;; Parameters:    Size  Location     Type
+   522 ;;  num             2    0[COMMON] int 
+   523 ;; Auto vars:     Size  Location     Type
+   524 ;;		None
+   525 ;; Return value:  Size  Location     Type
+   526 ;;		None               void
+   527 ;; Registers used:
+   528 ;;		wreg
+   529 ;; Tracked objects:
+   530 ;;		On entry : 0/0
+   531 ;;		On exit  : 0/0
+   532 ;;		Unchanged: 0/0
+   533 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   534 ;;      Params:         2       0       0       0       0
+   535 ;;      Locals:         0       0       0       0       0
+   536 ;;      Temps:          0       0       0       0       0
+   537 ;;      Totals:         2       0       0       0       0
+   538 ;;Total ram usage:        2 bytes
+   539 ;; Hardware stack levels used:    1
+   540 ;; This function calls:
+   541 ;;		Nothing
+   542 ;; This function is called by:
+   543 ;;		_main
+   544 ;; This function uses a non-reentrant model
+   545 ;;
+   546                           psect	text73
+   547                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_fu
+                                 ll_duplex.c"
+   548                           	line	19
+   549                           	global	__size_of_master
+   550  000B                     	__size_of_master	equ	__end_of_master-_master
+   551                           	
+   552  074A                     _master:	
+   553                           	opt	stack 7
+   554                           ; Regs used in _master: [wreg]
+   555                           	line	20
+   556                           	
+   557  074A                     l1426:	
+   558                           ;Slave_full_duplex.c: 20: SSPBUF=num;
+   559  074A  0874               	movf	(master@num),w
+   560  074B  1283               	bcf	status, 5	;RP0=0, select bank0
+   561  074C  1303               	bcf	status, 6	;RP1=0, select bank0
+   562  074D  0093               	movwf	(19)	;volatile
+   563                           	line	21
+   564                           ;Slave_full_duplex.c: 21: while(SSPIF==0);
+   565  074E  2F4F               	goto	l1035
+   566                           	
+   567  074F                     l1036:	
+   568                           	
+   569  074F                     l1035:	
+   570  074F  1D8C               	btfss	(99/8),(99)&7
+   571  0750  2F52               	goto	u21
+   572  0751  2F53               	goto	u20
+   573  0752                     u21:
+   574  0752  2F4F               	goto	l1035
+   575  0753                     u20:
+   576                           	
+   577  0753                     l1037:	
+   578                           	line	22
+   579                           ;Slave_full_duplex.c: 22: SSPIF=0;
+   580  0753  118C               	bcf	(99/8),(99)&7
+   581                           	line	23
+   582                           	
+   583  0754                     l1038:	
+   584  0754  0008               	return
+   585                           	opt stack 0
+   586                           GLOBAL	__end_of_master
+   587  0755                     	__end_of_master:
+   588 ;; =============== function _master ends ============
+   589                           
+   590                           	signat	_master,4216
+   591                           	global	_slave
+   592                           psect	text74,local,class=CODE,delta=2
+   593                           global __ptext74
+   594  0790                     __ptext74:
+   595                           
+   596 ;; *************** function _slave *****************
+   597 ;; Defined at:
+   598 ;;		line 9 in file "D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_full_duplex.c"
+   599 ;; Parameters:    Size  Location     Type
+   600 ;;		None
+   601 ;; Auto vars:     Size  Location     Type
+   602 ;;		None
+   603 ;; Return value:  Size  Location     Type
+   604 ;;		None               void
+   605 ;; Registers used:
+   606 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   607 ;; Tracked objects:
+   608 ;;		On entry : 0/0
+   609 ;;		On exit  : 0/0
+   610 ;;		Unchanged: 0/0
+   611 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   612 ;;      Params:         0       0       0       0       0
+   613 ;;      Locals:         0       0       0       0       0
+   614 ;;      Temps:          2       0       0       0       0
+   615 ;;      Totals:         2       0       0       0       0
+   616 ;;Total ram usage:        2 bytes
+   617 ;; Hardware stack levels used:    1
+   618 ;; This function calls:
+   619 ;;		Nothing
+   620 ;; This function is called by:
+   621 ;;		_main
+   622 ;; This function uses a non-reentrant model
+   623 ;;
+   624                           psect	text74
+   625                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full duplex\Slave_full_duplex\Slave_fu
+                                 ll_duplex.c"
+   626                           	line	9
+   627                           	global	__size_of_slave
+   628  0018                     	__size_of_slave	equ	__end_of_slave-_slave
+   629                           	
+   630  0790                     _slave:	
+   631                           	opt	stack 7
+   632                           ; Regs used in _slave: [wreg-fsr0h+status,2+status,0]
+   633                           	line	10
+   634                           	
+   635  0790                     l1418:	
+   636                           ;Slave_full_duplex.c: 10: if(BF==1)
+   637  0790  1683               	bsf	status, 5	;RP0=1, select bank1
+   638  0791  1303               	bcf	status, 6	;RP1=0, select bank1
+   639  0792  1C14               	btfss	(1184/8)^080h,(1184)&7
+   640  0793  2F95               	goto	u11
+   641  0794  2F96               	goto	u10
+   642  0795                     u11:
+   643  0795  2FA7               	goto	l1032
+   644  0796                     u10:
+   645                           	line	12
+   646                           	
+   647  0796                     l1420:	
+   648                           ;Slave_full_duplex.c: 11: {
+   649                           ;Slave_full_duplex.c: 12: BF=0;
+   650  0796  1014               	bcf	(1184/8)^080h,(1184)&7
+   651                           	line	13
+   652                           	
+   653  0797                     l1422:	
+   654                           ;Slave_full_duplex.c: 13: display=SSPBUF;
+   655  0797  1283               	bcf	status, 5	;RP0=0, select bank0
+   656  0798  1303               	bcf	status, 6	;RP1=0, select bank0
+   657  0799  0813               	movf	(19),w	;volatile
+   658  079A  00F4               	movwf	(??_slave+0)+0
+   659  079B  01F5               	clrf	(??_slave+0)+0+1
+   660  079C  0874               	movf	0+(??_slave+0)+0,w
+   661  079D  00F2               	movwf	(_display)
+   662  079E  0875               	movf	1+(??_slave+0)+0,w
+   663  079F  00F3               	movwf	(_display+1)
+   664                           	line	14
+   665                           	
+   666  07A0                     l1424:	
+   667                           ;Slave_full_duplex.c: 14: PORTD=seg[display];
+   668  07A0  0872               	movf	(_display),w
+   669  07A1  3E20               	addlw	_seg&0ffh
+   670  07A2  0084               	movwf	fsr0
+   671  07A3  1383               	bcf	status, 7	;select IRP bank0
+   672  07A4  0800               	movf	indf,w
+   673  07A5  0088               	movwf	(8)	;volatile
+   674  07A6  2FA7               	goto	l1032
+   675                           	line	15
+   676                           	
+   677  07A7                     l1031:	
+   678                           	line	16
+   679                           	
+   680  07A7                     l1032:	
+   681  07A7  0008               	return
+   682                           	opt stack 0
+   683                           GLOBAL	__end_of_slave
+   684  07A8                     	__end_of_slave:
+   685 ;; =============== function _slave ends ============
+   686                           
+   687                           	signat	_slave,88
+   688                           psect	text75,local,class=CODE,delta=2
+   689                           global __ptext75
+   690  0000                     __ptext75:
+   691                           	global	btemp
+   692  007E                     	btemp set 07Eh
+   693                           
+   694                           	DABS	1,126,2	;btemp
+   695                           	global	wtemp0
+   696  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Mon Jun 27 15:54:11 2022
+
+                   pc 0002                    _BF 04A0                    u10 0796                    u11 0795  
+                  u20 0753                    u21 0752                    fsr 0004                   _RA0 0028  
+                 _seg 0020                   fsr0 0004                   indf 0000                  l1031 07A7  
+                l1032 07A7                  l1041 07C8                  l1042 07DB                  l1035 074F  
+                l1043 07D5                  l1036 074F                  l1044 07D5                  l1037 0753  
+                l1045 07DA                  l1038 0754                  l1046 07EB                  l1047 07FC  
+                l1048 07FD                  l2200 07C0                  l1049 07FD                  l2210 07E8  
+                l2202 07C4                  l1420 0796                  l2212 07EB                  l2204 07C8  
+                l1422 0797                  l2214 07F0                  l2206 07CE                  l1424 07A0  
+                l2208 07DB                  l1418 0790                  l1426 074A                  l2194 07A8  
+                l2196 07AC                  l2198 07AF                  u2160 07CE                  u2161 07CD  
+                u2170 07D9                  u2171 07D8                  u2180 07E8                  u2181 07E7  
+                u2185 07E4                  _main 07A8                  btemp 007E                  start 0000  
+               ?_main 0074                 _ANSEL 0188                 _PORTA 0005                 _PORTC 0007  
+               _PORTD 0008                 _TRISA 0085                 _TRISC 0087                 _TRISD 0088  
+               _SSPIF 0063                 _count 0070                 _slave 0790                 pclath 000A  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0076  
+              ?_slave 0074                _ANSELH 0189                _SSPCON 0014                _SSPBUF 0013  
+              _master 074A        __pcstackCOMMON 0074          __pidataBANK0 0766         __end_of_slave 07A8  
+             ??_slave 0074            __pmaintext 07A8               ?_master 0074               _SSPSTAT 0094  
+     __size_of_master 000B               _display 0072  end_of_initialization 078C               init_ram 0759  
+      __end_of_master 0755   start_initialization 077A           __pdataBANK0 0020              ??_master 0076  
+         __pbssCOMMON 0070        __size_of_slave 0018             init_fetch 0755             master@num 0074  
+            __ptext73 074A              __ptext74 0790              __ptext75 0000         __size_of_main 0058  

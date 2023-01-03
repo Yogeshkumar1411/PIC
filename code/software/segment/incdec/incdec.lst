@@ -1,0 +1,759 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Wed Apr 13 01:40:16 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_delay
+    43                           	FNROOT	_main
+    44                           	global	main@F1604
+    45                           psect	idataBANK0,class=CODE,space=0,delta=2
+    46                           global __pidataBANK0
+    47  0749                     __pidataBANK0:
+    48                           	file	"D:\Embedded\pic\code\software\segment\incdec\incdec.c"
+    49                           	line	11
+    50                           
+    51                           ;initializer for main@F1604
+    52  0749  343F               	retlw	03Fh
+    53  074A  3406               	retlw	06h
+    54  074B  345B               	retlw	05Bh
+    55  074C  344F               	retlw	04Fh
+    56  074D  3466               	retlw	066h
+    57  074E  346D               	retlw	06Dh
+    58  074F  347D               	retlw	07Dh
+    59  0750  3407               	retlw	07h
+    60  0751  347F               	retlw	07Fh
+    61  0752  346F               	retlw	06Fh
+    62  0753  3400               	retlw	0
+    63  0754  3400               	retlw	0
+    64  0755  3400               	retlw	0
+    65  0756  3400               	retlw	0
+    66  0757  3400               	retlw	0
+    67  0758  3400               	retlw	0
+    68  0759  3400               	retlw	0
+    69  075A  3400               	retlw	0
+    70  075B  3400               	retlw	0
+    71  075C  3400               	retlw	0
+    72                           	global	_PORTB
+    73  0006                     _PORTB	set	6
+    74                           	global	_PORTC
+    75  0007                     _PORTC	set	7
+    76                           	global	_RC0
+    77  0038                     _RC0	set	56
+    78                           	global	_RC1
+    79  0039                     _RC1	set	57
+    80                           	global	_TRISB
+    81  0086                     _TRISB	set	134
+    82                           	global	_TRISC
+    83  0087                     _TRISC	set	135
+    84                           	global	_ANSEL
+    85  0188                     _ANSEL	set	392
+    86                           	global	_ANSELH
+    87  0189                     _ANSELH	set	393
+    88                           	file	"incdec.as"
+    89                           	line	#
+    90                           psect cinit,class=CODE,delta=2
+    91                           global start_initialization
+    92  0723                     start_initialization:
+    93                           
+    94                           psect	dataBANK0,class=BANK0,space=1
+    95                           global __pdataBANK0
+    96  0038                     __pdataBANK0:
+    97                           	file	"D:\Embedded\pic\code\software\segment\incdec\incdec.c"
+    98  0038                     main@F1604:
+    99  0038                            ds      20
+   100                           
+   101                           global btemp
+   102                           psect inittext,class=CODE,delta=2
+   103                           global init_fetch,btemp
+   104                           ;	Called with low address in FSR and high address in W
+   105  0712                     init_fetch:
+   106  0712  087E               	movf btemp,w
+   107  0713  008A               	movwf pclath
+   108  0714  087F               	movf btemp+1,w
+   109  0715  0082               	movwf pc
+   110                           global init_ram
+   111                           ;Called with:
+   112                           ;	high address of idata address in btemp 
+   113                           ;	low address of idata address in btemp+1 
+   114                           ;	low address of data in FSR
+   115                           ;	high address + 1 of data in btemp-1
+   116  0716                     init_ram:
+   117  0716  2712  120A  118A   	fcall init_fetch
+   118  0719  0080               	movwf indf,f
+   119  071A  0A84               	incf fsr,f
+   120  071B  0804               	movf fsr,w
+   121  071C  067D               	xorwf btemp-1,w
+   122  071D  1903               	btfsc status,2
+   123  071E  3400               	retlw 0
+   124  071F  0AFF               	incf btemp+1,f
+   125  0720  1903               	btfsc status,2
+   126  0721  0AFE               	incf btemp,f
+   127  0722  2F16               	goto init_ram
+   128                           ; Initialize objects allocated to BANK0
+   129                           psect cinit,class=CODE,delta=2
+   130                           global init_ram, __pidataBANK0
+   131  0723  1383               	bcf	status, 7	;select IRP bank0
+   132  0724  304C               	movlw low(__pdataBANK0+20)
+   133  0725  00FD               	movwf btemp-1,f
+   134  0726  3007               	movlw high(__pidataBANK0)
+   135  0727  00FE               	movwf btemp,f
+   136  0728  3049               	movlw low(__pidataBANK0)
+   137  0729  00FF               	movwf btemp+1,f
+   138  072A  3038               	movlw low(__pdataBANK0)
+   139  072B  0084               	movwf fsr,f
+   140  072C  120A  118A  2716   	fcall init_ram
+              120A  118A         
+   141                           psect cinit,class=CODE,delta=2
+   142                           global end_of_initialization
+   143                           
+   144                           ;End of C runtime variable initialization code
+   145                           
+   146  0731                     end_of_initialization:
+   147  0731  0183               clrf status
+   148  0732  120A  118A  2F5D   ljmp _main	;jump to C main() function
+   149                           psect	cstackCOMMON,class=COMMON,space=1
+   150                           global __pcstackCOMMON
+   151  0070                     __pcstackCOMMON:
+   152                           	global	?_delay
+   153  0070                     ?_delay:	; 0 bytes @ 0x0
+   154                           	global	?_main
+   155  0070                     ?_main:	; 0 bytes @ 0x0
+   156                           	global	delay@a
+   157  0070                     delay@a:	; 2 bytes @ 0x0
+   158  0070                     	ds	2
+   159                           	global	??_delay
+   160  0072                     ??_delay:	; 0 bytes @ 0x2
+   161                           	global	??_main
+   162  0072                     ??_main:	; 0 bytes @ 0x2
+   163  0072                     	ds	4
+   164                           psect	cstackBANK0,class=BANK0,space=1
+   165                           global __pcstackBANK0
+   166  0020                     __pcstackBANK0:
+   167                           	global	main@seg
+   168  0020                     main@seg:	; 20 bytes @ 0x0
+   169  0020                     	ds	20
+   170                           	global	main@i
+   171  0034                     main@i:	; 2 bytes @ 0x14
+   172  0034                     	ds	2
+   173                           	global	main@j
+   174  0036                     main@j:	; 2 bytes @ 0x16
+   175  0036                     	ds	2
+   176 ;;Data sizes: Strings 0, constant 0, data 20, bss 0, persistent 0 stack 0
+   177 ;;Auto spaces:   Size  Autos    Used
+   178 ;; COMMON          14      6       6
+   179 ;; BANK0           80     24      44
+   180 ;; BANK1           80      0       0
+   181 ;; BANK3           96      0       0
+   182 ;; BANK2           96      0       0
+   183                           
+   184 ;;
+   185 ;; Pointer list with targets:
+   186                           
+   187                           
+   188                           
+   189 ;;
+   190 ;; Critical Paths under _main in COMMON
+   191 ;;
+   192 ;;   _main->_delay
+   193 ;;
+   194 ;; Critical Paths under _main in BANK0
+   195 ;;
+   196 ;;   None.
+   197 ;;
+   198 ;; Critical Paths under _main in BANK1
+   199 ;;
+   200 ;;   None.
+   201 ;;
+   202 ;; Critical Paths under _main in BANK3
+   203 ;;
+   204 ;;   None.
+   205 ;;
+   206 ;; Critical Paths under _main in BANK2
+   207 ;;
+   208 ;;   None.
+   209                           
+   210 ;;
+   211 ;;Main: autosize = 0, tempsize = 4, incstack = 0, save=0
+   212 ;;
+   213                           
+   214 ;;
+   215 ;;Call Graph Tables:
+   216 ;;
+   217 ;; ---------------------------------------------------------------------------------
+   218 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   219 ;; ---------------------------------------------------------------------------------
+   220 ;; (0) _main                                                28    28      0     205
+   221 ;;                                              2 COMMON     4     4      0
+   222 ;;                                              0 BANK0     24    24      0
+   223 ;;                              _delay
+   224 ;; ---------------------------------------------------------------------------------
+   225 ;; (1) _delay                                                2     0      2      22
+   226 ;;                                              0 COMMON     2     0      2
+   227 ;; ---------------------------------------------------------------------------------
+   228 ;; Estimated maximum stack depth 1
+   229 ;; ---------------------------------------------------------------------------------
+   230                           
+   231 ;; Call Graph Graphs:
+   232                           
+   233 ;; _main (ROOT)
+   234 ;;   _delay
+   235 ;;
+   236                           
+   237 ;; Address spaces:
+   238                           
+   239 ;;Name               Size   Autos  Total    Cost      Usage
+   240 ;;BANK3               60      0       0       9        0.0%
+   241 ;;BITBANK3            60      0       0       8        0.0%
+   242 ;;SFR3                 0      0       0       4        0.0%
+   243 ;;BITSFR3              0      0       0       4        0.0%
+   244 ;;BANK2               60      0       0      11        0.0%
+   245 ;;BITBANK2            60      0       0      10        0.0%
+   246 ;;SFR2                 0      0       0       5        0.0%
+   247 ;;BITSFR2              0      0       0       5        0.0%
+   248 ;;SFR1                 0      0       0       2        0.0%
+   249 ;;BITSFR1              0      0       0       2        0.0%
+   250 ;;BANK1               50      0       0       7        0.0%
+   251 ;;BITBANK1            50      0       0       6        0.0%
+   252 ;;CODE                 0      0       0       0        0.0%
+   253 ;;DATA                 0      0      33      12        0.0%
+   254 ;;ABS                  0      0      32       3        0.0%
+   255 ;;NULL                 0      0       0       0        0.0%
+   256 ;;STACK                0      0       1       2        0.0%
+   257 ;;BANK0               50     18      2C       5       55.0%
+   258 ;;BITBANK0            50      0       0       4        0.0%
+   259 ;;SFR0                 0      0       0       1        0.0%
+   260 ;;BITSFR0              0      0       0       1        0.0%
+   261 ;;COMMON               E      6       6       1       42.9%
+   262 ;;BITCOMMON            E      0       0       0        0.0%
+   263 ;;EEDATA             100      0       0       0        0.0%
+   264                           
+   265                           	global	_main
+   266                           psect	maintext,global,class=CODE,delta=2
+   267                           global __pmaintext
+   268  075D                     __pmaintext:
+   269                           
+   270 ;; *************** function _main *****************
+   271 ;; Defined at:
+   272 ;;		line 9 in file "D:\Embedded\pic\code\software\segment\incdec\incdec.c"
+   273 ;; Parameters:    Size  Location     Type
+   274 ;;		None
+   275 ;; Auto vars:     Size  Location     Type
+   276 ;;  seg            20    0[BANK0 ] unsigned char [20]
+   277 ;;  j               2   22[BANK0 ] int 
+   278 ;;  i               2   20[BANK0 ] int 
+   279 ;; Return value:  Size  Location     Type
+   280 ;;		None               void
+   281 ;; Registers used:
+   282 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   283 ;; Tracked objects:
+   284 ;;		On entry : 17F/0
+   285 ;;		On exit  : 0/0
+   286 ;;		Unchanged: 0/0
+   287 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   288 ;;      Params:         0       0       0       0       0
+   289 ;;      Locals:         0      24       0       0       0
+   290 ;;      Temps:          4       0       0       0       0
+   291 ;;      Totals:         4      24       0       0       0
+   292 ;;Total ram usage:       28 bytes
+   293 ;; Hardware stack levels required when called:    1
+   294 ;; This function calls:
+   295 ;;		_delay
+   296 ;; This function is called by:
+   297 ;;		Startup code after reset
+   298 ;; This function uses a non-reentrant model
+   299 ;;
+   300                           psect	maintext
+   301                           	file	"D:\Embedded\pic\code\software\segment\incdec\incdec.c"
+   302                           	line	9
+   303                           	global	__size_of_main
+   304  00A3                     	__size_of_main	equ	__end_of_main-_main
+   305                           	
+   306  075D                     _main:	
+   307                           	opt	stack 7
+   308                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   309                           	line	11
+   310                           	
+   311  075D                     l2235:	
+   312                           ;incdec.c: 10: int i,j;
+   313                           ;incdec.c: 11: char seg[20]={0X3F,0X06,0X5B,0X4F,0X66,0X6D,0X7D,0X07,0X7F,0X6F};
+   314  075D  3020               	movlw	(main@seg)&0ffh
+   315  075E  0084               	movwf	fsr0
+   316  075F  3038               	movlw	low(main@F1604)
+   317  0760  00F2               	movwf	(??_main+0)+0
+   318  0761  0804               	movf	fsr0,w
+   319  0762  00F3               	movwf	((??_main+0)+0+1)
+   320  0763  3014               	movlw	20
+   321  0764  00F4               	movwf	((??_main+0)+0+2)
+   322  0765                     u2250:
+   323  0765  0872               	movf	(??_main+0)+0,w
+   324  0766  0084               	movwf	fsr0
+   325  0767  1383               	bcf	status, 7	;select IRP bank0
+   326                           	
+   327  0768  0800               	movf	indf,w
+   328  0769  00F5               	movwf	((??_main+0)+0+3)
+   329  076A  0AF2               	incf	(??_main+0)+0,f
+   330  076B  0873               	movf	((??_main+0)+0+1),w
+   331  076C  0084               	movwf	fsr0
+   332                           	
+   333  076D  0875               	movf	((??_main+0)+0+3),w
+   334  076E  0080               	movwf	indf
+   335  076F  0AF3               	incf	((??_main+0)+0+1),f
+   336  0770  0BF4               	decfsz	((??_main+0)+0+2),f
+   337  0771  2F65               	goto	u2250
+   338                           	line	12
+   339                           	
+   340  0772                     l2237:	
+   341                           ;incdec.c: 12: PORTC=0X00;
+   342  0772  1283               	bcf	status, 5	;RP0=0, select bank0
+   343  0773  1303               	bcf	status, 6	;RP1=0, select bank0
+   344  0774  0187               	clrf	(7)	;volatile
+   345                           	line	13
+   346                           	
+   347  0775                     l2239:	
+   348                           ;incdec.c: 13: TRISC=0X03;
+   349  0775  3003               	movlw	(03h)
+   350  0776  1683               	bsf	status, 5	;RP0=1, select bank1
+   351  0777  1303               	bcf	status, 6	;RP1=0, select bank1
+   352  0778  0087               	movwf	(135)^080h	;volatile
+   353                           	line	14
+   354                           	
+   355  0779                     l2241:	
+   356                           ;incdec.c: 14: PORTB=0X00;
+   357  0779  1283               	bcf	status, 5	;RP0=0, select bank0
+   358  077A  1303               	bcf	status, 6	;RP1=0, select bank0
+   359  077B  0186               	clrf	(6)	;volatile
+   360                           	line	15
+   361                           	
+   362  077C                     l2243:	
+   363                           ;incdec.c: 15: TRISB=0X00;
+   364  077C  1683               	bsf	status, 5	;RP0=1, select bank1
+   365  077D  1303               	bcf	status, 6	;RP1=0, select bank1
+   366  077E  0186               	clrf	(134)^080h	;volatile
+   367                           	line	16
+   368                           	
+   369  077F                     l2245:	
+   370                           ;incdec.c: 16: ANSEL=0X00;
+   371  077F  1683               	bsf	status, 5	;RP0=1, select bank3
+   372  0780  1703               	bsf	status, 6	;RP1=1, select bank3
+   373  0781  0188               	clrf	(392)^0180h	;volatile
+   374                           	line	17
+   375                           	
+   376  0782                     l2247:	
+   377                           ;incdec.c: 17: ANSELH=0X00;
+   378  0782  0189               	clrf	(393)^0180h	;volatile
+   379  0783  2F84               	goto	l2249
+   380                           	line	18
+   381                           ;incdec.c: 18: while(1)
+   382                           	
+   383  0784                     l1033:	
+   384                           	line	20
+   385                           	
+   386  0784                     l2249:	
+   387                           ;incdec.c: 19: {
+   388                           ;incdec.c: 20: if(RC0==1)
+   389  0784  1283               	bcf	status, 5	;RP0=0, select bank0
+   390  0785  1303               	bcf	status, 6	;RP1=0, select bank0
+   391  0786  1C07               	btfss	(56/8),(56)&7
+   392  0787  2F89               	goto	u2261
+   393  0788  2F8A               	goto	u2260
+   394  0789                     u2261:
+   395  0789  2FCA               	goto	l1034
+   396  078A                     u2260:
+   397                           	line	22
+   398                           	
+   399  078A                     l2251:	
+   400                           ;incdec.c: 21: {
+   401                           ;incdec.c: 22: for(i=0;i<=9;i++)
+   402  078A  01B4               	clrf	(main@i)
+   403  078B  01B5               	clrf	(main@i+1)
+   404                           	
+   405  078C                     l2253:	
+   406  078C  0835               	movf	(main@i+1),w
+   407  078D  3A80               	xorlw	80h
+   408  078E  00FF               	movwf	btemp+1
+   409  078F  3080               	movlw	(high(0Ah))^80h
+   410  0790  027F               	subwf	btemp+1,w
+   411  0791  1D03               	skipz
+   412  0792  2F95               	goto	u2275
+   413  0793  300A               	movlw	low(0Ah)
+   414  0794  0234               	subwf	(main@i),w
+   415  0795                     u2275:
+   416                           
+   417  0795  1C03               	skipc
+   418  0796  2F98               	goto	u2271
+   419  0797  2F99               	goto	u2270
+   420  0798                     u2271:
+   421  0798  2F9B               	goto	l2257
+   422  0799                     u2270:
+   423  0799  2FC3               	goto	l1037
+   424                           	
+   425  079A                     l2255:	
+   426  079A  2FC3               	goto	l1037
+   427                           	line	23
+   428                           	
+   429  079B                     l1035:	
+   430                           	line	24
+   431                           	
+   432  079B                     l2257:	
+   433                           ;incdec.c: 23: {
+   434                           ;incdec.c: 24: PORTB=seg[i];
+   435  079B  1283               	bcf	status, 5	;RP0=0, select bank0
+   436  079C  1303               	bcf	status, 6	;RP1=0, select bank0
+   437  079D  0834               	movf	(main@i),w
+   438  079E  3E20               	addlw	main@seg&0ffh
+   439  079F  0084               	movwf	fsr0
+   440  07A0  1383               	bcf	status, 7	;select IRP bank0
+   441  07A1  0800               	movf	indf,w
+   442  07A2  0086               	movwf	(6)	;volatile
+   443                           	line	25
+   444                           	
+   445  07A3                     l2259:	
+   446                           ;incdec.c: 25: delay(20000);
+   447  07A3  3020               	movlw	low(04E20h)
+   448  07A4  00F0               	movwf	(?_delay)
+   449  07A5  304E               	movlw	high(04E20h)
+   450  07A6  00F1               	movwf	((?_delay))+1
+   451  07A7  120A  118A  2735   	fcall	_delay
+              120A  118A         
+   452                           	line	22
+   453                           	
+   454  07AC                     l2261:	
+   455  07AC  3001               	movlw	low(01h)
+   456  07AD  1283               	bcf	status, 5	;RP0=0, select bank0
+   457  07AE  1303               	bcf	status, 6	;RP1=0, select bank0
+   458  07AF  07B4               	addwf	(main@i),f
+   459  07B0  1803               	skipnc
+   460  07B1  0AB5               	incf	(main@i+1),f
+   461  07B2  3000               	movlw	high(01h)
+   462  07B3  07B5               	addwf	(main@i+1),f
+   463                           	
+   464  07B4                     l2263:	
+   465  07B4  0835               	movf	(main@i+1),w
+   466  07B5  3A80               	xorlw	80h
+   467  07B6  00FF               	movwf	btemp+1
+   468  07B7  3080               	movlw	(high(0Ah))^80h
+   469  07B8  027F               	subwf	btemp+1,w
+   470  07B9  1D03               	skipz
+   471  07BA  2FBD               	goto	u2285
+   472  07BB  300A               	movlw	low(0Ah)
+   473  07BC  0234               	subwf	(main@i),w
+   474  07BD                     u2285:
+   475                           
+   476  07BD  1C03               	skipc
+   477  07BE  2FC0               	goto	u2281
+   478  07BF  2FC1               	goto	u2280
+   479  07C0                     u2281:
+   480  07C0  2F9B               	goto	l2257
+   481  07C1                     u2280:
+   482  07C1  2FC3               	goto	l1037
+   483                           	
+   484  07C2                     l1036:	
+   485                           	line	27
+   486                           ;incdec.c: 26: }
+   487                           ;incdec.c: 27: while(RC0==1);
+   488  07C2  2FC3               	goto	l1037
+   489                           	
+   490  07C3                     l1038:	
+   491                           	
+   492  07C3                     l1037:	
+   493  07C3  1283               	bcf	status, 5	;RP0=0, select bank0
+   494  07C4  1303               	bcf	status, 6	;RP1=0, select bank0
+   495  07C5  1807               	btfsc	(56/8),(56)&7
+   496  07C6  2FC8               	goto	u2291
+   497  07C7  2FC9               	goto	u2290
+   498  07C8                     u2291:
+   499  07C8  2FC3               	goto	l1037
+   500  07C9                     u2290:
+   501  07C9  2FCA               	goto	l1034
+   502                           	
+   503  07CA                     l1039:	
+   504                           	line	28
+   505                           	
+   506  07CA                     l1034:	
+   507                           	line	29
+   508                           ;incdec.c: 28: }
+   509                           ;incdec.c: 29: if(RC1==1)
+   510  07CA  1C87               	btfss	(57/8),(57)&7
+   511  07CB  2FCD               	goto	u2301
+   512  07CC  2FCE               	goto	u2300
+   513  07CD                     u2301:
+   514  07CD  2F84               	goto	l2249
+   515  07CE                     u2300:
+   516                           	line	31
+   517                           	
+   518  07CE                     l2265:	
+   519                           ;incdec.c: 30: {
+   520                           ;incdec.c: 31: for(j=9;j>=0;j--)
+   521  07CE  3009               	movlw	low(09h)
+   522  07CF  00B6               	movwf	(main@j)
+   523  07D0  3000               	movlw	high(09h)
+   524  07D1  00B7               	movwf	((main@j))+1
+   525                           	
+   526  07D2                     l2267:	
+   527  07D2  1FB7               	btfss	(main@j+1),7
+   528  07D3  2FD5               	goto	u2311
+   529  07D4  2FD6               	goto	u2310
+   530  07D5                     u2311:
+   531  07D5  2FD8               	goto	l2271
+   532  07D6                     u2310:
+   533  07D6  2FF5               	goto	l1043
+   534                           	
+   535  07D7                     l2269:	
+   536  07D7  2FF5               	goto	l1043
+   537                           	line	32
+   538                           	
+   539  07D8                     l1041:	
+   540                           	line	33
+   541                           	
+   542  07D8                     l2271:	
+   543                           ;incdec.c: 32: {
+   544                           ;incdec.c: 33: PORTB=seg[j];
+   545  07D8  0836               	movf	(main@j),w
+   546  07D9  3E20               	addlw	main@seg&0ffh
+   547  07DA  0084               	movwf	fsr0
+   548  07DB  1383               	bcf	status, 7	;select IRP bank0
+   549  07DC  0800               	movf	indf,w
+   550  07DD  0086               	movwf	(6)	;volatile
+   551                           	line	34
+   552                           	
+   553  07DE                     l2273:	
+   554                           ;incdec.c: 34: delay(20000);
+   555  07DE  3020               	movlw	low(04E20h)
+   556  07DF  00F0               	movwf	(?_delay)
+   557  07E0  304E               	movlw	high(04E20h)
+   558  07E1  00F1               	movwf	((?_delay))+1
+   559  07E2  120A  118A  2735   	fcall	_delay
+              120A  118A         
+   560                           	line	31
+   561                           	
+   562  07E7                     l2275:	
+   563  07E7  30FF               	movlw	low(-1)
+   564  07E8  1283               	bcf	status, 5	;RP0=0, select bank0
+   565  07E9  1303               	bcf	status, 6	;RP1=0, select bank0
+   566  07EA  07B6               	addwf	(main@j),f
+   567  07EB  1803               	skipnc
+   568  07EC  0AB7               	incf	(main@j+1),f
+   569  07ED  30FF               	movlw	high(-1)
+   570  07EE  07B7               	addwf	(main@j+1),f
+   571                           	
+   572  07EF                     l2277:	
+   573  07EF  1FB7               	btfss	(main@j+1),7
+   574  07F0  2FF2               	goto	u2321
+   575  07F1  2FF3               	goto	u2320
+   576  07F2                     u2321:
+   577  07F2  2FD8               	goto	l2271
+   578  07F3                     u2320:
+   579  07F3  2FF5               	goto	l1043
+   580                           	
+   581  07F4                     l1042:	
+   582                           	line	36
+   583                           ;incdec.c: 35: }
+   584                           ;incdec.c: 36: while(RC1==1);
+   585  07F4  2FF5               	goto	l1043
+   586                           	
+   587  07F5                     l1044:	
+   588                           	
+   589  07F5                     l1043:	
+   590  07F5  1887               	btfsc	(57/8),(57)&7
+   591  07F6  2FF8               	goto	u2331
+   592  07F7  2FF9               	goto	u2330
+   593  07F8                     u2331:
+   594  07F8  2FF5               	goto	l1043
+   595  07F9                     u2330:
+   596  07F9  2F84               	goto	l2249
+   597                           	
+   598  07FA                     l1045:	
+   599  07FA  2F84               	goto	l2249
+   600                           	line	37
+   601                           	
+   602  07FB                     l1040:	
+   603  07FB  2F84               	goto	l2249
+   604                           	line	38
+   605                           	
+   606  07FC                     l1046:	
+   607                           	line	18
+   608  07FC  2F84               	goto	l2249
+   609                           	
+   610  07FD                     l1047:	
+   611                           	line	39
+   612                           	
+   613  07FD                     l1048:	
+   614                           	global	start
+   615  07FD  120A  118A  2800   	ljmp	start
+   616                           	opt stack 0
+   617                           GLOBAL	__end_of_main
+   618  0800                     	__end_of_main:
+   619 ;; =============== function _main ends ============
+   620                           
+   621                           	signat	_main,88
+   622                           	global	_delay
+   623                           psect	text73,local,class=CODE,delta=2
+   624                           global __ptext73
+   625  0735                     __ptext73:
+   626                           
+   627 ;; *************** function _delay *****************
+   628 ;; Defined at:
+   629 ;;		line 5 in file "D:\Embedded\pic\code\software\segment\incdec\incdec.c"
+   630 ;; Parameters:    Size  Location     Type
+   631 ;;  a               2    0[COMMON] unsigned int 
+   632 ;; Auto vars:     Size  Location     Type
+   633 ;;		None
+   634 ;; Return value:  Size  Location     Type
+   635 ;;		None               void
+   636 ;; Registers used:
+   637 ;;		wreg
+   638 ;; Tracked objects:
+   639 ;;		On entry : 0/0
+   640 ;;		On exit  : 0/0
+   641 ;;		Unchanged: 0/0
+   642 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   643 ;;      Params:         2       0       0       0       0
+   644 ;;      Locals:         0       0       0       0       0
+   645 ;;      Temps:          0       0       0       0       0
+   646 ;;      Totals:         2       0       0       0       0
+   647 ;;Total ram usage:        2 bytes
+   648 ;; Hardware stack levels used:    1
+   649 ;; This function calls:
+   650 ;;		Nothing
+   651 ;; This function is called by:
+   652 ;;		_main
+   653 ;; This function uses a non-reentrant model
+   654 ;;
+   655                           psect	text73
+   656                           	file	"D:\Embedded\pic\code\software\segment\incdec\incdec.c"
+   657                           	line	5
+   658                           	global	__size_of_delay
+   659  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+   660                           	
+   661  0735                     _delay:	
+   662                           	opt	stack 7
+   663                           ; Regs used in _delay: [wreg]
+   664                           	line	6
+   665                           	
+   666  0735                     l2231:	
+   667                           ;incdec.c: 6: while(a--);
+   668  0735  2F37               	goto	l2233
+   669                           	
+   670  0736                     l1026:	
+   671  0736  2F37               	goto	l2233
+   672                           	
+   673  0737                     l1025:	
+   674                           	
+   675  0737                     l2233:	
+   676  0737  3001               	movlw	low(01h)
+   677  0738  02F0               	subwf	(delay@a),f
+   678  0739  3000               	movlw	high(01h)
+   679  073A  1C03               	skipc
+   680  073B  03F1               	decf	(delay@a+1),f
+   681  073C  02F1               	subwf	(delay@a+1),f
+   682  073D  30FF               	movlw	high(0FFFFh)
+   683  073E  0671               	xorwf	((delay@a+1)),w
+   684  073F  1D03               	skipz
+   685  0740  2F43               	goto	u2245
+   686  0741  30FF               	movlw	low(0FFFFh)
+   687  0742  0670               	xorwf	((delay@a)),w
+   688  0743                     u2245:
+   689                           
+   690  0743  1D03               	skipz
+   691  0744  2F46               	goto	u2241
+   692  0745  2F47               	goto	u2240
+   693  0746                     u2241:
+   694  0746  2F37               	goto	l2233
+   695  0747                     u2240:
+   696  0747  2F48               	goto	l1028
+   697                           	
+   698  0748                     l1027:	
+   699                           	line	7
+   700                           	
+   701  0748                     l1028:	
+   702  0748  0008               	return
+   703                           	opt stack 0
+   704                           GLOBAL	__end_of_delay
+   705  0749                     	__end_of_delay:
+   706 ;; =============== function _delay ends ============
+   707                           
+   708                           	signat	_delay,4216
+   709                           psect	text74,local,class=CODE,delta=2
+   710                           global __ptext74
+   711  0000                     __ptext74:
+   712                           	global	btemp
+   713  007E                     	btemp set 07Eh
+   714                           
+   715                           	DABS	1,126,2	;btemp
+   716                           	global	wtemp0
+   717  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Wed Apr 13 01:40:16 2022
+
+                   pc 0002                    fsr 0004                   _RC0 0038                   _RC1 0039  
+                 fsr0 0004                   indf 0000                  l1040 07FB                  l1025 0737  
+                l1041 07D8                  l1033 0784                  l1026 0736                  l1042 07F4  
+                l1034 07CA                  l1027 0748                  l1043 07F5                  l1035 079B  
+                l1028 0748                  l1044 07F5                  l1036 07C2                  l1045 07FA  
+                l1037 07C3                  l1046 07FC                  l1038 07C3                  l1047 07FD  
+                l1039 07CA                  l1048 07FD                  l2231 0735                  l2233 0737  
+                l2241 0779                  l2251 078A                  l2243 077C                  l2235 075D  
+                l2261 07AC                  l2253 078C                  l2245 077F                  l2237 0772  
+                l2271 07D8                  l2263 07B4                  l2255 079A                  l2247 0782  
+                l2239 0775                  l2273 07DE                  l2265 07CE                  l2257 079B  
+                l2249 0784                  l2275 07E7                  l2267 07D2                  l2259 07A3  
+                l2277 07EF                  l2269 07D7                  u2300 07CE                  u2301 07CD  
+                u2310 07D6                  u2311 07D5                  u2240 0747                  u2320 07F3  
+                u2241 0746                  u2321 07F2                  u2330 07F9                  u2250 0765  
+                u2331 07F8                  u2260 078A                  u2245 0743                  u2261 0789  
+                u2270 0799                  u2271 0798                  u2280 07C1                  u2281 07C0  
+                u2290 07C9                  u2291 07C8                  u2275 0795                  u2285 07BD  
+                _main 075D                  btemp 007E                  start 0000                 ?_main 0070  
+               _ANSEL 0188                 _PORTB 0006                 _PORTC 0007                 _TRISB 0086  
+               _TRISC 0087                 _delay 0735                 main@i 0034                 main@j 0036  
+               pclath 000A                 status 0003                 wtemp0 007E          __end_of_main 0800  
+              ??_main 0072                ?_delay 0070                _ANSELH 0189                delay@a 0070  
+      __pcstackCOMMON 0070          __pidataBANK0 0749         __end_of_delay 0749               ??_delay 0072  
+          __pmaintext 075D               main@seg 0020  end_of_initialization 0731               init_ram 0716  
+ start_initialization 0723           __pdataBANK0 0038         __pcstackBANK0 0020        __size_of_delay 0014  
+           main@F1604 0038             init_fetch 0712              __ptext73 0735              __ptext74 0000  
+       __size_of_main 00A3  

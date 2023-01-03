@@ -1,0 +1,416 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Jun 28 14:27:55 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_master
+    43                           	FNROOT	_main
+    44                           	global	_PORTA
+    45                           psect	text60,local,class=CODE,delta=2
+    46                           global __ptext60
+    47  0000                     __ptext60:
+    48  0005                     _PORTA	set	5
+    49                           	global	_PORTC
+    50  0007                     _PORTC	set	7
+    51                           	global	_SSPBUF
+    52  0013                     _SSPBUF	set	19
+    53                           	global	_SSPCON
+    54  0014                     _SSPCON	set	20
+    55                           	global	_SSPIF
+    56  0063                     _SSPIF	set	99
+    57                           	global	_SSPSTAT
+    58  0094                     _SSPSTAT	set	148
+    59                           	global	_TRISA
+    60  0085                     _TRISA	set	133
+    61                           	global	_TRISC
+    62  0087                     _TRISC	set	135
+    63                           	global	_ANSEL
+    64  0188                     _ANSEL	set	392
+    65                           	global	_ANSELH
+    66  0189                     _ANSELH	set	393
+    67                           	file	"master.as"
+    68                           	line	#
+    69                           psect cinit,class=CODE,delta=2
+    70                           global start_initialization
+    71  07CB                     start_initialization:
+    72                           
+    73                           psect cinit,class=CODE,delta=2
+    74                           global end_of_initialization
+    75                           
+    76                           ;End of C runtime variable initialization code
+    77                           
+    78  07CB                     end_of_initialization:
+    79  07CB  0183               clrf status
+    80  07CC  120A  118A  2FDB   ljmp _main	;jump to C main() function
+    81                           psect	cstackCOMMON,class=COMMON,space=1
+    82                           global __pcstackCOMMON
+    83  0070                     __pcstackCOMMON:
+    84                           	global	?_master
+    85  0070                     ?_master:	; 0 bytes @ 0x0
+    86                           	global	??_master
+    87  0070                     ??_master:	; 0 bytes @ 0x0
+    88                           	global	?_main
+    89  0070                     ?_main:	; 0 bytes @ 0x0
+    90                           	global	master@data
+    91  0070                     master@data:	; 1 bytes @ 0x0
+    92  0070                     	ds	1
+    93                           	global	??_main
+    94  0071                     ??_main:	; 0 bytes @ 0x1
+    95 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+    96 ;;Auto spaces:   Size  Autos    Used
+    97 ;; COMMON          14      1       1
+    98 ;; BANK0           80      0       0
+    99 ;; BANK1           80      0       0
+   100 ;; BANK3           96      0       0
+   101 ;; BANK2           96      0       0
+   102                           
+   103 ;;
+   104 ;; Pointer list with targets:
+   105                           
+   106                           
+   107                           
+   108 ;;
+   109 ;; Critical Paths under _main in COMMON
+   110 ;;
+   111 ;;   _main->_master
+   112 ;;
+   113 ;; Critical Paths under _main in BANK0
+   114 ;;
+   115 ;;   None.
+   116 ;;
+   117 ;; Critical Paths under _main in BANK1
+   118 ;;
+   119 ;;   None.
+   120 ;;
+   121 ;; Critical Paths under _main in BANK3
+   122 ;;
+   123 ;;   None.
+   124 ;;
+   125 ;; Critical Paths under _main in BANK2
+   126 ;;
+   127 ;;   None.
+   128                           
+   129 ;;
+   130 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   131 ;;
+   132                           
+   133 ;;
+   134 ;;Call Graph Tables:
+   135 ;;
+   136 ;; ---------------------------------------------------------------------------------
+   137 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   138 ;; ---------------------------------------------------------------------------------
+   139 ;; (0) _main                                                 0     0      0      15
+   140 ;;                             _master
+   141 ;; ---------------------------------------------------------------------------------
+   142 ;; (1) _master                                               1     1      0      15
+   143 ;;                                              0 COMMON     1     1      0
+   144 ;; ---------------------------------------------------------------------------------
+   145 ;; Estimated maximum stack depth 1
+   146 ;; ---------------------------------------------------------------------------------
+   147                           
+   148 ;; Call Graph Graphs:
+   149                           
+   150 ;; _main (ROOT)
+   151 ;;   _master
+   152 ;;
+   153                           
+   154 ;; Address spaces:
+   155                           
+   156 ;;Name               Size   Autos  Total    Cost      Usage
+   157 ;;BITCOMMON            E      0       0       0        0.0%
+   158 ;;EEDATA             100      0       0       0        0.0%
+   159 ;;NULL                 0      0       0       0        0.0%
+   160 ;;CODE                 0      0       0       0        0.0%
+   161 ;;COMMON               E      1       1       1        7.1%
+   162 ;;BITSFR0              0      0       0       1        0.0%
+   163 ;;SFR0                 0      0       0       1        0.0%
+   164 ;;BITSFR1              0      0       0       2        0.0%
+   165 ;;SFR1                 0      0       0       2        0.0%
+   166 ;;STACK                0      0       1       2        0.0%
+   167 ;;ABS                  0      0       0       3        0.0%
+   168 ;;BITBANK0            50      0       0       4        0.0%
+   169 ;;BITSFR3              0      0       0       4        0.0%
+   170 ;;SFR3                 0      0       0       4        0.0%
+   171 ;;BANK0               50      0       0       5        0.0%
+   172 ;;BITSFR2              0      0       0       5        0.0%
+   173 ;;SFR2                 0      0       0       5        0.0%
+   174 ;;BITBANK1            50      0       0       6        0.0%
+   175 ;;BANK1               50      0       0       7        0.0%
+   176 ;;BITBANK3            60      0       0       8        0.0%
+   177 ;;BANK3               60      0       0       9        0.0%
+   178 ;;BITBANK2            60      0       0      10        0.0%
+   179 ;;BANK2               60      0       0      11        0.0%
+   180 ;;DATA                 0      0       0      12        0.0%
+   181                           
+   182                           	global	_main
+   183                           psect	maintext,global,class=CODE,delta=2
+   184                           global __pmaintext
+   185  07DB                     __pmaintext:
+   186                           
+   187 ;; *************** function _main *****************
+   188 ;; Defined at:
+   189 ;;		line 12 in file "D:\Embedded\pic\code\software\protocal\SPI\Basic-1_mas-1_slave\Master\master.c"
+   190 ;; Parameters:    Size  Location     Type
+   191 ;;		None
+   192 ;; Auto vars:     Size  Location     Type
+   193 ;;		None
+   194 ;; Return value:  Size  Location     Type
+   195 ;;		None               void
+   196 ;; Registers used:
+   197 ;;		wreg, status,2, status,0, pclath, cstack
+   198 ;; Tracked objects:
+   199 ;;		On entry : 17F/0
+   200 ;;		On exit  : 0/0
+   201 ;;		Unchanged: 0/0
+   202 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   203 ;;      Params:         0       0       0       0       0
+   204 ;;      Locals:         0       0       0       0       0
+   205 ;;      Temps:          0       0       0       0       0
+   206 ;;      Totals:         0       0       0       0       0
+   207 ;;Total ram usage:        0 bytes
+   208 ;; Hardware stack levels required when called:    1
+   209 ;; This function calls:
+   210 ;;		_master
+   211 ;; This function is called by:
+   212 ;;		Startup code after reset
+   213 ;; This function uses a non-reentrant model
+   214 ;;
+   215                           psect	maintext
+   216                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Basic-1_mas-1_slave\Master\master.c"
+   217                           	line	12
+   218                           	global	__size_of_main
+   219  0025                     	__size_of_main	equ	__end_of_main-_main
+   220                           	
+   221  07DB                     _main:	
+   222                           	opt	stack 7
+   223                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   224                           	line	13
+   225                           	
+   226  07DB                     l2171:	
+   227                           ;master.c: 13: PORTA=0X00;
+   228  07DB  1283               	bcf	status, 5	;RP0=0, select bank0
+   229  07DC  1303               	bcf	status, 6	;RP1=0, select bank0
+   230  07DD  0185               	clrf	(5)	;volatile
+   231                           	line	14
+   232                           ;master.c: 14: TRISA=0X00;
+   233  07DE  1683               	bsf	status, 5	;RP0=1, select bank1
+   234  07DF  1303               	bcf	status, 6	;RP1=0, select bank1
+   235  07E0  0185               	clrf	(133)^080h	;volatile
+   236                           	line	15
+   237                           ;master.c: 15: ANSEL=0X00;
+   238  07E1  1683               	bsf	status, 5	;RP0=1, select bank3
+   239  07E2  1703               	bsf	status, 6	;RP1=1, select bank3
+   240  07E3  0188               	clrf	(392)^0180h	;volatile
+   241                           	line	16
+   242                           ;master.c: 16: ANSELH=0X00;
+   243  07E4  0189               	clrf	(393)^0180h	;volatile
+   244                           	line	17
+   245                           ;master.c: 17: PORTC=0X00;
+   246  07E5  1283               	bcf	status, 5	;RP0=0, select bank0
+   247  07E6  1303               	bcf	status, 6	;RP1=0, select bank0
+   248  07E7  0187               	clrf	(7)	;volatile
+   249                           	line	18
+   250                           	
+   251  07E8                     l2173:	
+   252                           ;master.c: 18: TRISC=0X10;
+   253  07E8  3010               	movlw	(010h)
+   254  07E9  1683               	bsf	status, 5	;RP0=1, select bank1
+   255  07EA  1303               	bcf	status, 6	;RP1=0, select bank1
+   256  07EB  0087               	movwf	(135)^080h	;volatile
+   257                           	line	19
+   258                           	
+   259  07EC                     l2175:	
+   260                           ;master.c: 19: SSPCON=0X30;
+   261  07EC  3030               	movlw	(030h)
+   262  07ED  1283               	bcf	status, 5	;RP0=0, select bank0
+   263  07EE  1303               	bcf	status, 6	;RP1=0, select bank0
+   264  07EF  0094               	movwf	(20)	;volatile
+   265                           	line	20
+   266                           	
+   267  07F0                     l2177:	
+   268                           ;master.c: 20: SSPSTAT=0X80;
+   269  07F0  3080               	movlw	(080h)
+   270  07F1  1683               	bsf	status, 5	;RP0=1, select bank1
+   271  07F2  1303               	bcf	status, 6	;RP1=0, select bank1
+   272  07F3  0094               	movwf	(148)^080h	;volatile
+   273  07F4  2FF5               	goto	l2179
+   274                           	line	21
+   275                           ;master.c: 21: while(1)
+   276                           	
+   277  07F5                     l1031:	
+   278                           	line	23
+   279                           	
+   280  07F5                     l2179:	
+   281                           ;master.c: 22: {
+   282                           ;master.c: 23: master('V');
+   283  07F5  3056               	movlw	(056h)
+   284  07F6  120A  118A  27CF   	fcall	_master
+              120A  118A         
+   285  07FB  2FF5               	goto	l2179
+   286                           	line	24
+   287                           	
+   288  07FC                     l1032:	
+   289                           	line	21
+   290  07FC  2FF5               	goto	l2179
+   291                           	
+   292  07FD                     l1033:	
+   293                           	line	25
+   294                           	
+   295  07FD                     l1034:	
+   296                           	global	start
+   297  07FD  120A  118A  2800   	ljmp	start
+   298                           	opt stack 0
+   299                           GLOBAL	__end_of_main
+   300  0800                     	__end_of_main:
+   301 ;; =============== function _main ends ============
+   302                           
+   303                           	signat	_main,88
+   304                           	global	_master
+   305                           psect	text61,local,class=CODE,delta=2
+   306                           global __ptext61
+   307  07CF                     __ptext61:
+   308                           
+   309 ;; *************** function _master *****************
+   310 ;; Defined at:
+   311 ;;		line 6 in file "D:\Embedded\pic\code\software\protocal\SPI\Basic-1_mas-1_slave\Master\master.c"
+   312 ;; Parameters:    Size  Location     Type
+   313 ;;  data            1    wreg     unsigned char 
+   314 ;; Auto vars:     Size  Location     Type
+   315 ;;  data            1    0[COMMON] unsigned char 
+   316 ;; Return value:  Size  Location     Type
+   317 ;;		None               void
+   318 ;; Registers used:
+   319 ;;		wreg
+   320 ;; Tracked objects:
+   321 ;;		On entry : 0/0
+   322 ;;		On exit  : 0/0
+   323 ;;		Unchanged: 0/0
+   324 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   325 ;;      Params:         0       0       0       0       0
+   326 ;;      Locals:         1       0       0       0       0
+   327 ;;      Temps:          0       0       0       0       0
+   328 ;;      Totals:         1       0       0       0       0
+   329 ;;Total ram usage:        1 bytes
+   330 ;; Hardware stack levels used:    1
+   331 ;; This function calls:
+   332 ;;		Nothing
+   333 ;; This function is called by:
+   334 ;;		_main
+   335 ;; This function uses a non-reentrant model
+   336 ;;
+   337                           psect	text61
+   338                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Basic-1_mas-1_slave\Master\master.c"
+   339                           	line	6
+   340                           	global	__size_of_master
+   341  000C                     	__size_of_master	equ	__end_of_master-_master
+   342                           	
+   343  07CF                     _master:	
+   344                           	opt	stack 7
+   345                           ; Regs used in _master: [wreg]
+   346                           ;master@data stored from wreg
+   347  07CF  00F0               	movwf	(master@data)
+   348                           	line	7
+   349                           	
+   350  07D0                     l1403:	
+   351                           ;master.c: 7: SSPBUF=data;
+   352  07D0  0870               	movf	(master@data),w
+   353  07D1  1283               	bcf	status, 5	;RP0=0, select bank0
+   354  07D2  1303               	bcf	status, 6	;RP1=0, select bank0
+   355  07D3  0093               	movwf	(19)	;volatile
+   356                           	line	8
+   357                           ;master.c: 8: while(SSPIF==0);
+   358  07D4  2FD5               	goto	l1025
+   359                           	
+   360  07D5                     l1026:	
+   361                           	
+   362  07D5                     l1025:	
+   363  07D5  1D8C               	btfss	(99/8),(99)&7
+   364  07D6  2FD8               	goto	u11
+   365  07D7  2FD9               	goto	u10
+   366  07D8                     u11:
+   367  07D8  2FD5               	goto	l1025
+   368  07D9                     u10:
+   369                           	
+   370  07D9                     l1027:	
+   371                           	line	9
+   372                           ;master.c: 9: SSPIF=0;
+   373  07D9  118C               	bcf	(99/8),(99)&7
+   374                           	line	10
+   375                           	
+   376  07DA                     l1028:	
+   377  07DA  0008               	return
+   378                           	opt stack 0
+   379                           GLOBAL	__end_of_master
+   380  07DB                     	__end_of_master:
+   381 ;; =============== function _master ends ============
+   382                           
+   383                           	signat	_master,4216
+   384                           psect	text62,local,class=CODE,delta=2
+   385                           global __ptext62
+   386  0000                     __ptext62:
+   387                           	global	btemp
+   388  007E                     	btemp set 07Eh
+   389                           
+   390                           	DABS	1,126,2	;btemp
+   391                           	global	wtemp0
+   392  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Jun 28 14:27:55 2022
+
+                  u10 07D9                    u11 07D8                  l1031 07F5                  l1032 07FC  
+                l1025 07D5                  l1033 07FD                  l1026 07D5                  l1034 07FD  
+                l1027 07D9                  l1028 07DA                  l1403 07D0                  l2171 07DB  
+                l2173 07E8                  l2175 07EC                  l2177 07F0                  l2179 07F5  
+                _main 07DB                  btemp 007E                  start 0000                 ?_main 0070  
+               _ANSEL 0188                 _PORTA 0005                 _PORTC 0007                 _TRISA 0085  
+               _TRISC 0087                 _SSPIF 0063                 status 0003                 wtemp0 007E  
+        __end_of_main 0800                ??_main 0071                _ANSELH 0189                _SSPCON 0014  
+              _SSPBUF 0013                _master 07CF        __pcstackCOMMON 0070            __pmaintext 07DB  
+             ?_master 0070               _SSPSTAT 0094       __size_of_master 000C  end_of_initialization 07CB  
+      __end_of_master 07DB   start_initialization 07CB            master@data 0070              ??_master 0070  
+            __ptext60 0000              __ptext61 07CF              __ptext62 0000         __size_of_main 0025  

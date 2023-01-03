@@ -1,0 +1,10 @@
+_delay: CODE, 1659 0 20
+_i2c_start: CODE, 1632 0 9
+_lcd_cmd: CODE, 1755 0 46
+_i2c_restart: CODE, 1650 0 9
+_main: CODE, 1801 0 247
+_i2c_slave: CODE, 1711 0 44
+_i2c_stop: CODE, 1641 0 9
+_i2c_read: CODE, 1679 0 32
+_hold: CODE, 1623 0 9
+Total: 425

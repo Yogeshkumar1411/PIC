@@ -1,0 +1,29 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+DV	D:\Embedded\pic\code\software\car\car.c	9;"	v	line:9
+EN::RE2	D:\Embedded\pic\code\software\car\car.c	7;"	d	line:7	file:
+LCD::PORTD	D:\Embedded\pic\code\software\car\car.c	8;"	d	line:8	file:
+RS::RE0	D:\Embedded\pic\code\software\car\car.c	5;"	d	line:5	file:
+RW::RE1	D:\Embedded\pic\code\software\car\car.c	6;"	d	line:6	file:
+a	D:\Embedded\pic\code\software\car\car.c	26;"	l	line:26
+a	D:\Embedded\pic\code\software\car\car.c	47;"	l	line:47
+adc	D:\Embedded\pic\code\software\car\car.c	24;"	f	line:24
+b	D:\Embedded\pic\code\software\car\car.c	26;"	l	line:26
+b	D:\Embedded\pic\code\software\car\car.c	48;"	l	line:48
+c	D:\Embedded\pic\code\software\car\car.c	26;"	l	line:26
+d	D:\Embedded\pic\code\software\car\car.c	26;"	l	line:26
+delay	D:\Embedded\pic\code\software\car\car.c	10;"	f	line:10	signature:(unsigned int ms)
+e	D:\Embedded\pic\code\software\car\car.c	26;"	l	line:26
+f	D:\Embedded\pic\code\software\car\car.c	26;"	l	line:26
+high	D:\Embedded\pic\code\software\car\car.c	9;"	v	line:9
+i	D:\Embedded\pic\code\software\car\car.c	49;"	l	line:49
+lcd_cmd	D:\Embedded\pic\code\software\car\car.c	14;"	f	line:14	signature:(char a,char b,char c)
+low	D:\Embedded\pic\code\software\car\car.c	9;"	v	line:9
+main	D:\Embedded\pic\code\software\car\car.c	45;"	f	line:45
+out	D:\Embedded\pic\code\software\car\car.c	9;"	v	line:9

@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+TX	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	18;"	f	line:18	signature:(char *ptr)
+TX1	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	12;"	f	line:12	signature:(char data)
+TX2	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	6;"	f	line:6	signature:(int val)
+a	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+adc	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	22;"	f	line:22
+b	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+c	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+d	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+distance	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+e	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+f	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+high	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+limit	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	24;"	l	line:24
+low	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5
+main	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	41;"	f	line:41
+time	D:\Embedded\pic\code\software\ultrasonic\ultrasonic.c	5;"	v	line:5

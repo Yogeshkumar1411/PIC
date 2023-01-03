@@ -1,0 +1,531 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Mon Mar 28 04:21:32 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_timer
+    43                           	FNROOT	_main
+    44                           	global	_count
+    45                           	global	_PORTA
+    46                           psect	text60,local,class=CODE,delta=2
+    47                           global __ptext60
+    48  0000                     __ptext60:
+    49  0005                     _PORTA	set	5
+    50                           	global	_RA0
+    51  0028                     _RA0	set	40
+    52                           	global	_T0IF
+    53  005A                     _T0IF	set	90
+    54                           	global	_OPTION_REG
+    55  0081                     _OPTION_REG	set	129
+    56                           	global	_TRISA
+    57  0085                     _TRISA	set	133
+    58                           	global	_ANSEL
+    59  0188                     _ANSEL	set	392
+    60                           	global	_ANSELH
+    61  0189                     _ANSELH	set	393
+    62                           	file	"Timer0_basic_led.as"
+    63                           	line	#
+    64                           psect cinit,class=CODE,delta=2
+    65                           global start_initialization
+    66  0791                     start_initialization:
+    67                           
+    68                           psect	bssCOMMON,class=COMMON,space=1
+    69                           global __pbssCOMMON
+    70  0070                     __pbssCOMMON:
+    71  0070                     _count:
+    72  0070                            ds      2
+    73                           
+    74                           ; Clear objects allocated to COMMON
+    75                           psect cinit,class=CODE,delta=2
+    76  0791  01F0               	clrf	((__pbssCOMMON)+0)&07Fh
+    77  0792  01F1               	clrf	((__pbssCOMMON)+1)&07Fh
+    78                           psect cinit,class=CODE,delta=2
+    79                           global end_of_initialization
+    80                           
+    81                           ;End of C runtime variable initialization code
+    82                           
+    83  0793                     end_of_initialization:
+    84  0793  0183               clrf status
+    85  0794  120A  118A  2F97   ljmp _main	;jump to C main() function
+    86                           psect	cstackCOMMON,class=COMMON,space=1
+    87                           global __pcstackCOMMON
+    88  0000                     __pcstackCOMMON:
+    89                           	global	?_timer
+    90  0000                     ?_timer:	; 0 bytes @ 0x0
+    91                           	global	??_timer
+    92  0000                     ??_timer:	; 0 bytes @ 0x0
+    93                           	global	?_main
+    94  0000                     ?_main:	; 0 bytes @ 0x0
+    95                           	global	??_main
+    96  0000                     ??_main:	; 0 bytes @ 0x0
+    97 ;;Data sizes: Strings 0, constant 0, data 0, bss 2, persistent 0 stack 0
+    98 ;;Auto spaces:   Size  Autos    Used
+    99 ;; COMMON          14      0       2
+   100 ;; BANK0           80      0       0
+   101 ;; BANK1           80      0       0
+   102 ;; BANK3           96      0       0
+   103 ;; BANK2           96      0       0
+   104                           
+   105 ;;
+   106 ;; Pointer list with targets:
+   107                           
+   108                           
+   109                           
+   110 ;;
+   111 ;; Critical Paths under _main in COMMON
+   112 ;;
+   113 ;;   None.
+   114 ;;
+   115 ;; Critical Paths under _main in BANK0
+   116 ;;
+   117 ;;   None.
+   118 ;;
+   119 ;; Critical Paths under _main in BANK1
+   120 ;;
+   121 ;;   None.
+   122 ;;
+   123 ;; Critical Paths under _main in BANK3
+   124 ;;
+   125 ;;   None.
+   126 ;;
+   127 ;; Critical Paths under _main in BANK2
+   128 ;;
+   129 ;;   None.
+   130                           
+   131 ;;
+   132 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   133 ;;
+   134                           
+   135 ;;
+   136 ;;Call Graph Tables:
+   137 ;;
+   138 ;; ---------------------------------------------------------------------------------
+   139 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   140 ;; ---------------------------------------------------------------------------------
+   141 ;; (0) _main                                                 0     0      0       0
+   142 ;;                              _timer
+   143 ;; ---------------------------------------------------------------------------------
+   144 ;; (1) _timer                                                0     0      0       0
+   145 ;; ---------------------------------------------------------------------------------
+   146 ;; Estimated maximum stack depth 1
+   147 ;; ---------------------------------------------------------------------------------
+   148                           
+   149 ;; Call Graph Graphs:
+   150                           
+   151 ;; _main (ROOT)
+   152 ;;   _timer
+   153 ;;
+   154                           
+   155 ;; Address spaces:
+   156                           
+   157 ;;Name               Size   Autos  Total    Cost      Usage
+   158 ;;BITCOMMON            E      0       0       0        0.0%
+   159 ;;EEDATA             100      0       0       0        0.0%
+   160 ;;NULL                 0      0       0       0        0.0%
+   161 ;;CODE                 0      0       0       0        0.0%
+   162 ;;COMMON               E      0       2       1       14.3%
+   163 ;;BITSFR0              0      0       0       1        0.0%
+   164 ;;SFR0                 0      0       0       1        0.0%
+   165 ;;BITSFR1              0      0       0       2        0.0%
+   166 ;;SFR1                 0      0       0       2        0.0%
+   167 ;;STACK                0      0       1       2        0.0%
+   168 ;;ABS                  0      0       2       3        0.0%
+   169 ;;BITBANK0            50      0       0       4        0.0%
+   170 ;;BITSFR3              0      0       0       4        0.0%
+   171 ;;SFR3                 0      0       0       4        0.0%
+   172 ;;BANK0               50      0       0       5        0.0%
+   173 ;;BITSFR2              0      0       0       5        0.0%
+   174 ;;SFR2                 0      0       0       5        0.0%
+   175 ;;BITBANK1            50      0       0       6        0.0%
+   176 ;;BANK1               50      0       0       7        0.0%
+   177 ;;BITBANK3            60      0       0       8        0.0%
+   178 ;;BANK3               60      0       0       9        0.0%
+   179 ;;BITBANK2            60      0       0      10        0.0%
+   180 ;;BANK2               60      0       0      11        0.0%
+   181 ;;DATA                 0      0       3      12        0.0%
+   182                           
+   183                           	global	_main
+   184                           psect	maintext,global,class=CODE,delta=2
+   185                           global __pmaintext
+   186  0797                     __pmaintext:
+   187                           
+   188 ;; *************** function _main *****************
+   189 ;; Defined at:
+   190 ;;		line 30 in file "D:\Embedded\pic\code\software\Timer0\Timer0_basic_led.c"
+   191 ;; Parameters:    Size  Location     Type
+   192 ;;		None
+   193 ;; Auto vars:     Size  Location     Type
+   194 ;;		None
+   195 ;; Return value:  Size  Location     Type
+   196 ;;		None               void
+   197 ;; Registers used:
+   198 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   199 ;; Tracked objects:
+   200 ;;		On entry : 17F/0
+   201 ;;		On exit  : 0/0
+   202 ;;		Unchanged: 0/0
+   203 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   204 ;;      Params:         0       0       0       0       0
+   205 ;;      Locals:         0       0       0       0       0
+   206 ;;      Temps:          0       0       0       0       0
+   207 ;;      Totals:         0       0       0       0       0
+   208 ;;Total ram usage:        0 bytes
+   209 ;; Hardware stack levels required when called:    1
+   210 ;; This function calls:
+   211 ;;		_timer
+   212 ;; This function is called by:
+   213 ;;		Startup code after reset
+   214 ;; This function uses a non-reentrant model
+   215 ;;
+   216                           psect	maintext
+   217                           	file	"D:\Embedded\pic\code\software\Timer0\Timer0_basic_led.c"
+   218                           	line	30
+   219                           	global	__size_of_main
+   220  0019                     	__size_of_main	equ	__end_of_main-_main
+   221                           	
+   222  0797                     _main:	
+   223                           	opt	stack 7
+   224                           ; Regs used in _main: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   225                           	line	31
+   226                           	
+   227  0797                     l2194:	
+   228                           ;Timer0_basic_led.c: 31: PORTA=0X00;
+   229  0797  1283               	bcf	status, 5	;RP0=0, select bank0
+   230  0798  1303               	bcf	status, 6	;RP1=0, select bank0
+   231  0799  0185               	clrf	(5)	;volatile
+   232                           	line	32
+   233                           ;Timer0_basic_led.c: 32: TRISA=0X00;
+   234  079A  1683               	bsf	status, 5	;RP0=1, select bank1
+   235  079B  1303               	bcf	status, 6	;RP1=0, select bank1
+   236  079C  0185               	clrf	(133)^080h	;volatile
+   237                           	line	33
+   238                           ;Timer0_basic_led.c: 33: ANSEL=0X00;
+   239  079D  1683               	bsf	status, 5	;RP0=1, select bank3
+   240  079E  1703               	bsf	status, 6	;RP1=1, select bank3
+   241  079F  0188               	clrf	(392)^0180h	;volatile
+   242                           	line	34
+   243                           ;Timer0_basic_led.c: 34: ANSELH=0X00;
+   244  07A0  0189               	clrf	(393)^0180h	;volatile
+   245                           	line	35
+   246                           	
+   247  07A1                     l2196:	
+   248                           ;Timer0_basic_led.c: 35: OPTION_REG=0X07;
+   249  07A1  3007               	movlw	(07h)
+   250  07A2  1683               	bsf	status, 5	;RP0=1, select bank1
+   251  07A3  1303               	bcf	status, 6	;RP1=0, select bank1
+   252  07A4  0081               	movwf	(129)^080h	;volatile
+   253  07A5  2FA6               	goto	l2198
+   254                           	line	36
+   255                           ;Timer0_basic_led.c: 36: while(1)
+   256                           	
+   257  07A6                     l1034:	
+   258                           	line	38
+   259                           	
+   260  07A6                     l2198:	
+   261                           ;Timer0_basic_led.c: 37: {
+   262                           ;Timer0_basic_led.c: 38: timer();
+   263  07A6  120A  118A  27B0   	fcall	_timer
+              120A  118A         
+   264  07AB  2FA6               	goto	l2198
+   265                           	line	39
+   266                           	
+   267  07AC                     l1035:	
+   268                           	line	36
+   269  07AC  2FA6               	goto	l2198
+   270                           	
+   271  07AD                     l1036:	
+   272                           	line	40
+   273                           	
+   274  07AD                     l1037:	
+   275                           	global	start
+   276  07AD  120A  118A  2800   	ljmp	start
+   277                           	opt stack 0
+   278                           GLOBAL	__end_of_main
+   279  07B0                     	__end_of_main:
+   280 ;; =============== function _main ends ============
+   281                           
+   282                           	signat	_main,88
+   283                           	global	_timer
+   284                           psect	text61,local,class=CODE,delta=2
+   285                           global __ptext61
+   286  07B0                     __ptext61:
+   287                           
+   288 ;; *************** function _timer *****************
+   289 ;; Defined at:
+   290 ;;		line 7 in file "D:\Embedded\pic\code\software\Timer0\Timer0_basic_led.c"
+   291 ;; Parameters:    Size  Location     Type
+   292 ;;		None
+   293 ;; Auto vars:     Size  Location     Type
+   294 ;;		None
+   295 ;; Return value:  Size  Location     Type
+   296 ;;		None               void
+   297 ;; Registers used:
+   298 ;;		wreg, status,2, btemp+1
+   299 ;; Tracked objects:
+   300 ;;		On entry : 0/0
+   301 ;;		On exit  : 0/0
+   302 ;;		Unchanged: 0/0
+   303 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   304 ;;      Params:         0       0       0       0       0
+   305 ;;      Locals:         0       0       0       0       0
+   306 ;;      Temps:          0       0       0       0       0
+   307 ;;      Totals:         0       0       0       0       0
+   308 ;;Total ram usage:        0 bytes
+   309 ;; Hardware stack levels used:    1
+   310 ;; This function calls:
+   311 ;;		Nothing
+   312 ;; This function is called by:
+   313 ;;		_main
+   314 ;; This function uses a non-reentrant model
+   315 ;;
+   316                           psect	text61
+   317                           	file	"D:\Embedded\pic\code\software\Timer0\Timer0_basic_led.c"
+   318                           	line	7
+   319                           	global	__size_of_timer
+   320  0050                     	__size_of_timer	equ	__end_of_timer-_timer
+   321                           	
+   322  07B0                     _timer:	
+   323                           	opt	stack 7
+   324                           ; Regs used in _timer: [wreg+status,2+btemp+1]
+   325                           	line	8
+   326                           	
+   327  07B0                     l1406:	
+   328                           ;Timer0_basic_led.c: 8: if(T0IF==1)
+   329  07B0  1D0B               	btfss	(90/8),(90)&7
+   330  07B1  2FB3               	goto	u11
+   331  07B2  2FB4               	goto	u10
+   332  07B3                     u11:
+   333  07B3  2FBC               	goto	l1412
+   334  07B4                     u10:
+   335                           	line	10
+   336                           	
+   337  07B4                     l1408:	
+   338                           ;Timer0_basic_led.c: 9: {
+   339                           ;Timer0_basic_led.c: 10: count++;
+   340  07B4  3001               	movlw	low(01h)
+   341  07B5  07F0               	addwf	(_count),f
+   342  07B6  1803               	skipnc
+   343  07B7  0AF1               	incf	(_count+1),f
+   344  07B8  3000               	movlw	high(01h)
+   345  07B9  07F1               	addwf	(_count+1),f
+   346                           	line	11
+   347                           	
+   348  07BA                     l1410:	
+   349                           ;Timer0_basic_led.c: 11: T0IF=0;
+   350  07BA  110B               	bcf	(90/8),(90)&7
+   351  07BB  2FBC               	goto	l1412
+   352                           	line	12
+   353                           	
+   354  07BC                     l1027:	
+   355                           	line	13
+   356                           	
+   357  07BC                     l1412:	
+   358                           ;Timer0_basic_led.c: 12: }
+   359                           ;Timer0_basic_led.c: 13: if(count>=0&&count<7)
+   360  07BC  1BF1               	btfsc	(_count+1),7
+   361  07BD  2FBF               	goto	u21
+   362  07BE  2FC0               	goto	u20
+   363  07BF                     u21:
+   364  07BF  2FD1               	goto	l1418
+   365  07C0                     u20:
+   366                           	
+   367  07C0                     l1414:	
+   368  07C0  0871               	movf	(_count+1),w
+   369  07C1  3A80               	xorlw	80h
+   370  07C2  00FF               	movwf	btemp+1
+   371  07C3  3080               	movlw	(high(07h))^80h
+   372  07C4  027F               	subwf	btemp+1,w
+   373  07C5  1D03               	skipz
+   374  07C6  2FC9               	goto	u35
+   375  07C7  3007               	movlw	low(07h)
+   376  07C8  0270               	subwf	(_count),w
+   377  07C9                     u35:
+   378                           
+   379  07C9  1803               	skipnc
+   380  07CA  2FCC               	goto	u31
+   381  07CB  2FCD               	goto	u30
+   382  07CC                     u31:
+   383  07CC  2FD1               	goto	l1418
+   384  07CD                     u30:
+   385                           	line	15
+   386                           	
+   387  07CD                     l1416:	
+   388                           ;Timer0_basic_led.c: 14: {
+   389                           ;Timer0_basic_led.c: 15: RA0=1;
+   390  07CD  1283               	bcf	status, 5	;RP0=0, select bank0
+   391  07CE  1303               	bcf	status, 6	;RP1=0, select bank0
+   392  07CF  1405               	bsf	(40/8),(40)&7
+   393  07D0  2FD1               	goto	l1418
+   394                           	line	16
+   395                           	
+   396  07D1                     l1028:	
+   397                           	line	17
+   398                           	
+   399  07D1                     l1418:	
+   400                           ;Timer0_basic_led.c: 16: }
+   401                           ;Timer0_basic_led.c: 17: if(count>=7&&count<14)
+   402  07D1  0871               	movf	(_count+1),w
+   403  07D2  3A80               	xorlw	80h
+   404  07D3  00FF               	movwf	btemp+1
+   405  07D4  3080               	movlw	(high(07h))^80h
+   406  07D5  027F               	subwf	btemp+1,w
+   407  07D6  1D03               	skipz
+   408  07D7  2FDA               	goto	u45
+   409  07D8  3007               	movlw	low(07h)
+   410  07D9  0270               	subwf	(_count),w
+   411  07DA                     u45:
+   412                           
+   413  07DA  1C03               	skipc
+   414  07DB  2FDD               	goto	u41
+   415  07DC  2FDE               	goto	u40
+   416  07DD                     u41:
+   417  07DD  2FEF               	goto	l1424
+   418  07DE                     u40:
+   419                           	
+   420  07DE                     l1420:	
+   421  07DE  0871               	movf	(_count+1),w
+   422  07DF  3A80               	xorlw	80h
+   423  07E0  00FF               	movwf	btemp+1
+   424  07E1  3080               	movlw	(high(0Eh))^80h
+   425  07E2  027F               	subwf	btemp+1,w
+   426  07E3  1D03               	skipz
+   427  07E4  2FE7               	goto	u55
+   428  07E5  300E               	movlw	low(0Eh)
+   429  07E6  0270               	subwf	(_count),w
+   430  07E7                     u55:
+   431                           
+   432  07E7  1803               	skipnc
+   433  07E8  2FEA               	goto	u51
+   434  07E9  2FEB               	goto	u50
+   435  07EA                     u51:
+   436  07EA  2FEF               	goto	l1424
+   437  07EB                     u50:
+   438                           	line	19
+   439                           	
+   440  07EB                     l1422:	
+   441                           ;Timer0_basic_led.c: 18: {
+   442                           ;Timer0_basic_led.c: 19: RA0=0;
+   443  07EB  1283               	bcf	status, 5	;RP0=0, select bank0
+   444  07EC  1303               	bcf	status, 6	;RP1=0, select bank0
+   445  07ED  1005               	bcf	(40/8),(40)&7
+   446  07EE  2FEF               	goto	l1424
+   447                           	line	20
+   448                           	
+   449  07EF                     l1029:	
+   450                           	line	24
+   451                           	
+   452  07EF                     l1424:	
+   453                           ;Timer0_basic_led.c: 20: }
+   454                           ;Timer0_basic_led.c: 24: if(count>=14)
+   455  07EF  0871               	movf	(_count+1),w
+   456  07F0  3A80               	xorlw	80h
+   457  07F1  00FF               	movwf	btemp+1
+   458  07F2  3080               	movlw	(high(0Eh))^80h
+   459  07F3  027F               	subwf	btemp+1,w
+   460  07F4  1D03               	skipz
+   461  07F5  2FF8               	goto	u65
+   462  07F6  300E               	movlw	low(0Eh)
+   463  07F7  0270               	subwf	(_count),w
+   464  07F8                     u65:
+   465                           
+   466  07F8  1C03               	skipc
+   467  07F9  2FFB               	goto	u61
+   468  07FA  2FFC               	goto	u60
+   469  07FB                     u61:
+   470  07FB  2FFF               	goto	l1031
+   471  07FC                     u60:
+   472                           	line	26
+   473                           	
+   474  07FC                     l1426:	
+   475                           ;Timer0_basic_led.c: 25: {
+   476                           ;Timer0_basic_led.c: 26: count=0;
+   477  07FC  01F0               	clrf	(_count)
+   478  07FD  01F1               	clrf	(_count+1)
+   479  07FE  2FFF               	goto	l1031
+   480                           	line	27
+   481                           	
+   482  07FF                     l1030:	
+   483                           	line	28
+   484                           	
+   485  07FF                     l1031:	
+   486  07FF  0008               	return
+   487                           	opt stack 0
+   488                           GLOBAL	__end_of_timer
+   489  0800                     	__end_of_timer:
+   490 ;; =============== function _timer ends ============
+   491                           
+   492                           	signat	_timer,88
+   493                           psect	text62,local,class=CODE,delta=2
+   494                           global __ptext62
+   495  0000                     __ptext62:
+   496                           	global	btemp
+   497  007E                     	btemp set 07Eh
+   498                           
+   499                           	DABS	1,126,2	;btemp
+   500                           	global	wtemp0
+   501  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Mon Mar 28 04:21:32 2022
+
+                  u10 07B4                    u11 07B3                    u20 07C0                    u21 07BF  
+                  u30 07CD                    u31 07CC                    u40 07DE                    u41 07DD  
+                  u50 07EB                    u51 07EA                    u35 07C9                    u60 07FC  
+                  u61 07FB                    u45 07DA                    u55 07E7                    u65 07F8  
+                 _RA0 0028                  l1030 07FF                  l1031 07FF                  l1034 07A6  
+                l1027 07BC                  l1035 07AC                  l1028 07D1                  l1036 07AD  
+                l1029 07EF                  l1037 07AD                  l1410 07BA                  l1420 07DE  
+                l1412 07BC                  l1422 07EB                  l1414 07C0                  l1406 07B0  
+                l1424 07EF                  l1416 07CD                  l1408 07B4                  l1426 07FC  
+                l1418 07D1                  l2194 0797                  l2196 07A1                  l2198 07A6  
+                _T0IF 005A                  _main 0797                  btemp 007E                  start 0000  
+               ?_main 0000                 _ANSEL 0188                 _PORTA 0005                 _TRISA 0085  
+               _count 0070                 _timer 07B0                 status 0003                 wtemp0 007E  
+        __end_of_main 07B0                ??_main 0000                ?_timer 0000                _ANSELH 0189  
+      __pcstackCOMMON 0000         __end_of_timer 0800               ??_timer 0000            __pmaintext 0797  
+end_of_initialization 0793   start_initialization 0791           __pbssCOMMON 0070        __size_of_timer 0050  
+            __ptext60 0000              __ptext61 07B0              __ptext62 0000         __size_of_main 0019  
+          _OPTION_REG 0081  

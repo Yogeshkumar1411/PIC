@@ -1,0 +1,883 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Jun 14 23:25:02 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_master
+    43                           	FNCALL	_main,_slave
+    44                           	FNROOT	_main
+    45                           	global	_count
+    46                           	global	_z
+    47                           	global	_PORTA
+    48                           psect	text72,local,class=CODE,delta=2
+    49                           global __ptext72
+    50  0000                     __ptext72:
+    51  0005                     _PORTA	set	5
+    52                           	global	_PORTC
+    53  0007                     _PORTC	set	7
+    54                           	global	_PORTD
+    55  0008                     _PORTD	set	8
+    56                           	global	_SSPBUF
+    57  0013                     _SSPBUF	set	19
+    58                           	global	_SSPCON
+    59  0014                     _SSPCON	set	20
+    60                           	global	_RA0
+    61  0028                     _RA0	set	40
+    62                           	global	_RA1
+    63  0029                     _RA1	set	41
+    64                           	global	_RA2
+    65  002A                     _RA2	set	42
+    66                           	global	_RA3
+    67  002B                     _RA3	set	43
+    68                           	global	_RA4
+    69  002C                     _RA4	set	44
+    70                           	global	_RD0
+    71  0040                     _RD0	set	64
+    72                           	global	_RD1
+    73  0041                     _RD1	set	65
+    74                           	global	_RD2
+    75  0042                     _RD2	set	66
+    76                           	global	_RD3
+    77  0043                     _RD3	set	67
+    78                           	global	_RD4
+    79  0044                     _RD4	set	68
+    80                           	global	_SSPIF
+    81  0063                     _SSPIF	set	99
+    82                           	global	_SSPSTAT
+    83  0094                     _SSPSTAT	set	148
+    84                           	global	_TRISA
+    85  0085                     _TRISA	set	133
+    86                           	global	_TRISC
+    87  0087                     _TRISC	set	135
+    88                           	global	_TRISD
+    89  0088                     _TRISD	set	136
+    90                           	global	_BF
+    91  04A0                     _BF	set	1184
+    92                           	global	_ANSEL
+    93  0188                     _ANSEL	set	392
+    94                           	global	_ANSELH
+    95  0189                     _ANSELH	set	393
+    96                           	file	"Full_Duplex_With_LED_Master.as"
+    97                           	line	#
+    98                           psect cinit,class=CODE,delta=2
+    99                           global start_initialization
+   100  0737                     start_initialization:
+   101                           
+   102                           psect	bssCOMMON,class=COMMON,space=1
+   103                           global __pbssCOMMON
+   104  0070                     __pbssCOMMON:
+   105  0070                     _count:
+   106  0070                            ds      2
+   107                           
+   108  0072                     _z:
+   109  0072                            ds      2
+   110                           
+   111                           ; Clear objects allocated to COMMON
+   112                           psect cinit,class=CODE,delta=2
+   113  0737  01F0               	clrf	((__pbssCOMMON)+0)&07Fh
+   114  0738  01F1               	clrf	((__pbssCOMMON)+1)&07Fh
+   115  0739  01F2               	clrf	((__pbssCOMMON)+2)&07Fh
+   116  073A  01F3               	clrf	((__pbssCOMMON)+3)&07Fh
+   117                           psect cinit,class=CODE,delta=2
+   118                           global end_of_initialization
+   119                           
+   120                           ;End of C runtime variable initialization code
+   121                           
+   122  073B                     end_of_initialization:
+   123  073B  0183               clrf status
+   124  073C  120A  118A  2F9D   ljmp _main	;jump to C main() function
+   125                           psect	cstackCOMMON,class=COMMON,space=1
+   126                           global __pcstackCOMMON
+   127  0074                     __pcstackCOMMON:
+   128                           	global	?_master
+   129  0074                     ?_master:	; 0 bytes @ 0x0
+   130                           	global	?_slave
+   131  0074                     ?_slave:	; 0 bytes @ 0x0
+   132                           	global	??_slave
+   133  0074                     ??_slave:	; 0 bytes @ 0x0
+   134                           	global	?_main
+   135  0074                     ?_main:	; 0 bytes @ 0x0
+   136                           	global	master@num
+   137  0074                     master@num:	; 2 bytes @ 0x0
+   138  0074                     	ds	2
+   139                           	global	??_master
+   140  0076                     ??_master:	; 0 bytes @ 0x2
+   141                           	global	??_main
+   142  0076                     ??_main:	; 0 bytes @ 0x2
+   143 ;;Data sizes: Strings 0, constant 0, data 0, bss 4, persistent 0 stack 0
+   144 ;;Auto spaces:   Size  Autos    Used
+   145 ;; COMMON          14      2       6
+   146 ;; BANK0           80      0       0
+   147 ;; BANK1           80      0       0
+   148 ;; BANK3           96      0       0
+   149 ;; BANK2           96      0       0
+   150                           
+   151 ;;
+   152 ;; Pointer list with targets:
+   153                           
+   154                           
+   155                           
+   156 ;;
+   157 ;; Critical Paths under _main in COMMON
+   158 ;;
+   159 ;;   _main->_master
+   160 ;;   _main->_slave
+   161 ;;
+   162 ;; Critical Paths under _main in BANK0
+   163 ;;
+   164 ;;   None.
+   165 ;;
+   166 ;; Critical Paths under _main in BANK1
+   167 ;;
+   168 ;;   None.
+   169 ;;
+   170 ;; Critical Paths under _main in BANK3
+   171 ;;
+   172 ;;   None.
+   173 ;;
+   174 ;; Critical Paths under _main in BANK2
+   175 ;;
+   176 ;;   None.
+   177                           
+   178 ;;
+   179 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   180 ;;
+   181                           
+   182 ;;
+   183 ;;Call Graph Tables:
+   184 ;;
+   185 ;; ---------------------------------------------------------------------------------
+   186 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   187 ;; ---------------------------------------------------------------------------------
+   188 ;; (0) _main                                                 0     0      0      15
+   189 ;;                             _master
+   190 ;;                              _slave
+   191 ;; ---------------------------------------------------------------------------------
+   192 ;; (1) _slave                                                2     2      0       0
+   193 ;;                                              0 COMMON     2     2      0
+   194 ;; ---------------------------------------------------------------------------------
+   195 ;; (1) _master                                               2     0      2      15
+   196 ;;                                              0 COMMON     2     0      2
+   197 ;; ---------------------------------------------------------------------------------
+   198 ;; Estimated maximum stack depth 1
+   199 ;; ---------------------------------------------------------------------------------
+   200                           
+   201 ;; Call Graph Graphs:
+   202                           
+   203 ;; _main (ROOT)
+   204 ;;   _master
+   205 ;;   _slave
+   206 ;;
+   207                           
+   208 ;; Address spaces:
+   209                           
+   210 ;;Name               Size   Autos  Total    Cost      Usage
+   211 ;;BITCOMMON            E      0       0       0        0.0%
+   212 ;;EEDATA             100      0       0       0        0.0%
+   213 ;;NULL                 0      0       0       0        0.0%
+   214 ;;CODE                 0      0       0       0        0.0%
+   215 ;;COMMON               E      2       6       1       42.9%
+   216 ;;BITSFR0              0      0       0       1        0.0%
+   217 ;;SFR0                 0      0       0       1        0.0%
+   218 ;;BITSFR1              0      0       0       2        0.0%
+   219 ;;SFR1                 0      0       0       2        0.0%
+   220 ;;STACK                0      0       1       2        0.0%
+   221 ;;ABS                  0      0       6       3        0.0%
+   222 ;;BITBANK0            50      0       0       4        0.0%
+   223 ;;BITSFR3              0      0       0       4        0.0%
+   224 ;;SFR3                 0      0       0       4        0.0%
+   225 ;;BANK0               50      0       0       5        0.0%
+   226 ;;BITSFR2              0      0       0       5        0.0%
+   227 ;;SFR2                 0      0       0       5        0.0%
+   228 ;;BITBANK1            50      0       0       6        0.0%
+   229 ;;BANK1               50      0       0       7        0.0%
+   230 ;;BITBANK3            60      0       0       8        0.0%
+   231 ;;BANK3               60      0       0       9        0.0%
+   232 ;;BITBANK2            60      0       0      10        0.0%
+   233 ;;BANK2               60      0       0      11        0.0%
+   234 ;;DATA                 0      0       7      12        0.0%
+   235                           
+   236                           	global	_main
+   237                           psect	maintext,global,class=CODE,delta=2
+   238                           global __pmaintext
+   239  079D                     __pmaintext:
+   240                           
+   241 ;; *************** function _main *****************
+   242 ;; Defined at:
+   243 ;;		line 57 in file "D:\Embedded\pic\code\software\protocal\SPI\Full_Duplex_With_LED\Full_Duplex_With_LED_Master\Full_Du
+       plex_With_LED_Master.c"
+   244 ;; Parameters:    Size  Location     Type
+   245 ;;		None
+   246 ;; Auto vars:     Size  Location     Type
+   247 ;;		None
+   248 ;; Return value:  Size  Location     Type
+   249 ;;		None               void
+   250 ;; Registers used:
+   251 ;;		wreg, status,2, status,0, pclath, cstack
+   252 ;; Tracked objects:
+   253 ;;		On entry : 17F/0
+   254 ;;		On exit  : 0/0
+   255 ;;		Unchanged: 0/0
+   256 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   257 ;;      Params:         0       0       0       0       0
+   258 ;;      Locals:         0       0       0       0       0
+   259 ;;      Temps:          0       0       0       0       0
+   260 ;;      Totals:         0       0       0       0       0
+   261 ;;Total ram usage:        0 bytes
+   262 ;; Hardware stack levels required when called:    1
+   263 ;; This function calls:
+   264 ;;		_master
+   265 ;;		_slave
+   266 ;; This function is called by:
+   267 ;;		Startup code after reset
+   268 ;; This function uses a non-reentrant model
+   269 ;;
+   270                           psect	maintext
+   271                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full_Duplex_With_LED\Full_Duplex_With_
+                                 LED_Master\Full_Duplex_With_LED_Master.c"
+   272                           	line	57
+   273                           	global	__size_of_main
+   274  0063                     	__size_of_main	equ	__end_of_main-_main
+   275                           	
+   276  079D                     _main:	
+   277                           	opt	stack 7
+   278                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   279                           	line	58
+   280                           	
+   281  079D                     l2213:	
+   282                           ;Full_Duplex_With_LED_Master.c: 58: TRISC=0X10;
+   283  079D  3010               	movlw	(010h)
+   284  079E  1683               	bsf	status, 5	;RP0=1, select bank1
+   285  079F  1303               	bcf	status, 6	;RP1=0, select bank1
+   286  07A0  0087               	movwf	(135)^080h	;volatile
+   287                           	line	59
+   288                           	
+   289  07A1                     l2215:	
+   290                           ;Full_Duplex_With_LED_Master.c: 59: PORTC=0X00;
+   291  07A1  1283               	bcf	status, 5	;RP0=0, select bank0
+   292  07A2  1303               	bcf	status, 6	;RP1=0, select bank0
+   293  07A3  0187               	clrf	(7)	;volatile
+   294                           	line	60
+   295                           	
+   296  07A4                     l2217:	
+   297                           ;Full_Duplex_With_LED_Master.c: 60: TRISA=0X00;
+   298  07A4  1683               	bsf	status, 5	;RP0=1, select bank1
+   299  07A5  1303               	bcf	status, 6	;RP1=0, select bank1
+   300  07A6  0185               	clrf	(133)^080h	;volatile
+   301                           	line	61
+   302                           	
+   303  07A7                     l2219:	
+   304                           ;Full_Duplex_With_LED_Master.c: 61: PORTA=0X00;
+   305  07A7  1283               	bcf	status, 5	;RP0=0, select bank0
+   306  07A8  1303               	bcf	status, 6	;RP1=0, select bank0
+   307  07A9  0185               	clrf	(5)	;volatile
+   308                           	line	62
+   309                           	
+   310  07AA                     l2221:	
+   311                           ;Full_Duplex_With_LED_Master.c: 62: TRISD=0X00;
+   312  07AA  1683               	bsf	status, 5	;RP0=1, select bank1
+   313  07AB  1303               	bcf	status, 6	;RP1=0, select bank1
+   314  07AC  0188               	clrf	(136)^080h	;volatile
+   315                           	line	63
+   316                           	
+   317  07AD                     l2223:	
+   318                           ;Full_Duplex_With_LED_Master.c: 63: PORTD=0X00;
+   319  07AD  1283               	bcf	status, 5	;RP0=0, select bank0
+   320  07AE  1303               	bcf	status, 6	;RP1=0, select bank0
+   321  07AF  0188               	clrf	(8)	;volatile
+   322                           	line	64
+   323                           	
+   324  07B0                     l2225:	
+   325                           ;Full_Duplex_With_LED_Master.c: 64: ANSEL=0X00;
+   326  07B0  1683               	bsf	status, 5	;RP0=1, select bank3
+   327  07B1  1703               	bsf	status, 6	;RP1=1, select bank3
+   328  07B2  0188               	clrf	(392)^0180h	;volatile
+   329                           	line	65
+   330                           	
+   331  07B3                     l2227:	
+   332                           ;Full_Duplex_With_LED_Master.c: 65: ANSELH=0X00;
+   333  07B3  0189               	clrf	(393)^0180h	;volatile
+   334                           	line	66
+   335                           	
+   336  07B4                     l2229:	
+   337                           ;Full_Duplex_With_LED_Master.c: 66: SSPCON=0X20;
+   338  07B4  3020               	movlw	(020h)
+   339  07B5  1283               	bcf	status, 5	;RP0=0, select bank0
+   340  07B6  1303               	bcf	status, 6	;RP1=0, select bank0
+   341  07B7  0094               	movwf	(20)	;volatile
+   342                           	line	67
+   343                           ;Full_Duplex_With_LED_Master.c: 67: SSPSTAT=0X00;
+   344  07B8  1683               	bsf	status, 5	;RP0=1, select bank1
+   345  07B9  1303               	bcf	status, 6	;RP1=0, select bank1
+   346  07BA  0194               	clrf	(148)^080h	;volatile
+   347  07BB  2FBC               	goto	l2231
+   348                           	line	68
+   349                           ;Full_Duplex_With_LED_Master.c: 68: while(1)
+   350                           	
+   351  07BC                     l1044:	
+   352                           	line	70
+   353                           	
+   354  07BC                     l2231:	
+   355                           ;Full_Duplex_With_LED_Master.c: 69: {
+   356                           ;Full_Duplex_With_LED_Master.c: 70: if(RA0==1)
+   357  07BC  1283               	bcf	status, 5	;RP0=0, select bank0
+   358  07BD  1303               	bcf	status, 6	;RP1=0, select bank0
+   359  07BE  1C05               	btfss	(40/8),(40)&7
+   360  07BF  2FC1               	goto	u2211
+   361  07C0  2FC2               	goto	u2210
+   362  07C1                     u2211:
+   363  07C1  2FC7               	goto	l2235
+   364  07C2                     u2210:
+   365                           	line	72
+   366                           	
+   367  07C2                     l2233:	
+   368                           ;Full_Duplex_With_LED_Master.c: 71: {
+   369                           ;Full_Duplex_With_LED_Master.c: 72: count=1;
+   370  07C2  3001               	movlw	low(01h)
+   371  07C3  00F0               	movwf	(_count)
+   372  07C4  3000               	movlw	high(01h)
+   373  07C5  00F1               	movwf	((_count))+1
+   374  07C6  2FC7               	goto	l2235
+   375                           	line	73
+   376                           	
+   377  07C7                     l1045:	
+   378                           	line	74
+   379                           	
+   380  07C7                     l2235:	
+   381                           ;Full_Duplex_With_LED_Master.c: 73: }
+   382                           ;Full_Duplex_With_LED_Master.c: 74: if(RA1==1)
+   383  07C7  1C85               	btfss	(41/8),(41)&7
+   384  07C8  2FCA               	goto	u2221
+   385  07C9  2FCB               	goto	u2220
+   386  07CA                     u2221:
+   387  07CA  2FD0               	goto	l2239
+   388  07CB                     u2220:
+   389                           	line	76
+   390                           	
+   391  07CB                     l2237:	
+   392                           ;Full_Duplex_With_LED_Master.c: 75: {
+   393                           ;Full_Duplex_With_LED_Master.c: 76: count=2;
+   394  07CB  3002               	movlw	low(02h)
+   395  07CC  00F0               	movwf	(_count)
+   396  07CD  3000               	movlw	high(02h)
+   397  07CE  00F1               	movwf	((_count))+1
+   398  07CF  2FD0               	goto	l2239
+   399                           	line	77
+   400                           	
+   401  07D0                     l1046:	
+   402                           	line	78
+   403                           	
+   404  07D0                     l2239:	
+   405                           ;Full_Duplex_With_LED_Master.c: 77: }
+   406                           ;Full_Duplex_With_LED_Master.c: 78: if(RA2==1)
+   407  07D0  1D05               	btfss	(42/8),(42)&7
+   408  07D1  2FD3               	goto	u2231
+   409  07D2  2FD4               	goto	u2230
+   410  07D3                     u2231:
+   411  07D3  2FD9               	goto	l2243
+   412  07D4                     u2230:
+   413                           	line	80
+   414                           	
+   415  07D4                     l2241:	
+   416                           ;Full_Duplex_With_LED_Master.c: 79: {
+   417                           ;Full_Duplex_With_LED_Master.c: 80: count=3;
+   418  07D4  3003               	movlw	low(03h)
+   419  07D5  00F0               	movwf	(_count)
+   420  07D6  3000               	movlw	high(03h)
+   421  07D7  00F1               	movwf	((_count))+1
+   422  07D8  2FD9               	goto	l2243
+   423                           	line	81
+   424                           	
+   425  07D9                     l1047:	
+   426                           	line	82
+   427                           	
+   428  07D9                     l2243:	
+   429                           ;Full_Duplex_With_LED_Master.c: 81: }
+   430                           ;Full_Duplex_With_LED_Master.c: 82: if(RA3==1)
+   431  07D9  1D85               	btfss	(43/8),(43)&7
+   432  07DA  2FDC               	goto	u2241
+   433  07DB  2FDD               	goto	u2240
+   434  07DC                     u2241:
+   435  07DC  2FE2               	goto	l2247
+   436  07DD                     u2240:
+   437                           	line	84
+   438                           	
+   439  07DD                     l2245:	
+   440                           ;Full_Duplex_With_LED_Master.c: 83: {
+   441                           ;Full_Duplex_With_LED_Master.c: 84: count=4;
+   442  07DD  3004               	movlw	low(04h)
+   443  07DE  00F0               	movwf	(_count)
+   444  07DF  3000               	movlw	high(04h)
+   445  07E0  00F1               	movwf	((_count))+1
+   446  07E1  2FE2               	goto	l2247
+   447                           	line	85
+   448                           	
+   449  07E2                     l1048:	
+   450                           	line	86
+   451                           	
+   452  07E2                     l2247:	
+   453                           ;Full_Duplex_With_LED_Master.c: 85: }
+   454                           ;Full_Duplex_With_LED_Master.c: 86: if(RA4==1)
+   455  07E2  1E05               	btfss	(44/8),(44)&7
+   456  07E3  2FE5               	goto	u2251
+   457  07E4  2FE6               	goto	u2250
+   458  07E5                     u2251:
+   459  07E5  2FEB               	goto	l2251
+   460  07E6                     u2250:
+   461                           	line	88
+   462                           	
+   463  07E6                     l2249:	
+   464                           ;Full_Duplex_With_LED_Master.c: 87: {
+   465                           ;Full_Duplex_With_LED_Master.c: 88: count=5;
+   466  07E6  3005               	movlw	low(05h)
+   467  07E7  00F0               	movwf	(_count)
+   468  07E8  3000               	movlw	high(05h)
+   469  07E9  00F1               	movwf	((_count))+1
+   470  07EA  2FEB               	goto	l2251
+   471                           	line	89
+   472                           	
+   473  07EB                     l1049:	
+   474                           	line	90
+   475                           	
+   476  07EB                     l2251:	
+   477                           ;Full_Duplex_With_LED_Master.c: 89: }
+   478                           ;Full_Duplex_With_LED_Master.c: 90: master(count);
+   479  07EB  0871               	movf	(_count+1),w
+   480  07EC  01F5               	clrf	(?_master+1)
+   481  07ED  07F5               	addwf	(?_master+1)
+   482  07EE  0870               	movf	(_count),w
+   483  07EF  01F4               	clrf	(?_master)
+   484  07F0  07F4               	addwf	(?_master)
+   485                           
+   486  07F1  120A  118A  273F   	fcall	_master
+              120A  118A         
+   487                           	line	91
+   488                           	
+   489  07F6                     l2253:	
+   490                           ;Full_Duplex_With_LED_Master.c: 91: slave();
+   491  07F6  120A  118A  274A   	fcall	_slave
+              120A  118A         
+   492  07FB  2FBC               	goto	l2231
+   493                           	line	92
+   494                           	
+   495  07FC                     l1050:	
+   496                           	line	68
+   497  07FC  2FBC               	goto	l2231
+   498                           	
+   499  07FD                     l1051:	
+   500                           	line	93
+   501                           	
+   502  07FD                     l1052:	
+   503                           	global	start
+   504  07FD  120A  118A  2800   	ljmp	start
+   505                           	opt stack 0
+   506                           GLOBAL	__end_of_main
+   507  0800                     	__end_of_main:
+   508 ;; =============== function _main ends ============
+   509                           
+   510                           	signat	_main,88
+   511                           	global	_slave
+   512                           psect	text73,local,class=CODE,delta=2
+   513                           global __ptext73
+   514  074A                     __ptext73:
+   515                           
+   516 ;; *************** function _slave *****************
+   517 ;; Defined at:
+   518 ;;		line 20 in file "D:\Embedded\pic\code\software\protocal\SPI\Full_Duplex_With_LED\Full_Duplex_With_LED_Master\Full_Du
+       plex_With_LED_Master.c"
+   519 ;; Parameters:    Size  Location     Type
+   520 ;;		None
+   521 ;; Auto vars:     Size  Location     Type
+   522 ;;		None
+   523 ;; Return value:  Size  Location     Type
+   524 ;;		None               void
+   525 ;; Registers used:
+   526 ;;		wreg
+   527 ;; Tracked objects:
+   528 ;;		On entry : 0/0
+   529 ;;		On exit  : 0/0
+   530 ;;		Unchanged: 0/0
+   531 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   532 ;;      Params:         0       0       0       0       0
+   533 ;;      Locals:         0       0       0       0       0
+   534 ;;      Temps:          2       0       0       0       0
+   535 ;;      Totals:         2       0       0       0       0
+   536 ;;Total ram usage:        2 bytes
+   537 ;; Hardware stack levels used:    1
+   538 ;; This function calls:
+   539 ;;		Nothing
+   540 ;; This function is called by:
+   541 ;;		_main
+   542 ;; This function uses a non-reentrant model
+   543 ;;
+   544                           psect	text73
+   545                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full_Duplex_With_LED\Full_Duplex_With_
+                                 LED_Master\Full_Duplex_With_LED_Master.c"
+   546                           	line	20
+   547                           	global	__size_of_slave
+   548  0053                     	__size_of_slave	equ	__end_of_slave-_slave
+   549                           	
+   550  074A                     _slave:	
+   551                           	opt	stack 7
+   552                           ; Regs used in _slave: [wreg]
+   553                           	line	21
+   554                           	
+   555  074A                     l1423:	
+   556                           ;Full_Duplex_With_LED_Master.c: 21: if(BF==1)
+   557  074A  1683               	bsf	status, 5	;RP0=1, select bank1
+   558  074B  1303               	bcf	status, 6	;RP1=0, select bank1
+   559  074C  1C14               	btfss	(1184/8)^080h,(1184)&7
+   560  074D  2F4F               	goto	u21
+   561  074E  2F50               	goto	u20
+   562  074F                     u21:
+   563  074F  2F9C               	goto	l1041
+   564  0750                     u20:
+   565                           	line	23
+   566                           	
+   567  0750                     l1425:	
+   568                           ;Full_Duplex_With_LED_Master.c: 22: {
+   569                           ;Full_Duplex_With_LED_Master.c: 23: BF=0;
+   570  0750  1014               	bcf	(1184/8)^080h,(1184)&7
+   571                           	line	24
+   572                           	
+   573  0751                     l1427:	
+   574                           ;Full_Duplex_With_LED_Master.c: 24: z=SSPBUF;
+   575  0751  1283               	bcf	status, 5	;RP0=0, select bank0
+   576  0752  1303               	bcf	status, 6	;RP1=0, select bank0
+   577  0753  0813               	movf	(19),w	;volatile
+   578  0754  00F4               	movwf	(??_slave+0)+0
+   579  0755  01F5               	clrf	(??_slave+0)+0+1
+   580  0756  0874               	movf	0+(??_slave+0)+0,w
+   581  0757  00F2               	movwf	(_z)
+   582  0758  0875               	movf	1+(??_slave+0)+0,w
+   583  0759  00F3               	movwf	(_z+1)
+   584                           	line	25
+   585                           ;Full_Duplex_With_LED_Master.c: 25: if(z==1)
+   586  075A  3001               	movlw	01h
+   587  075B  0672               	xorwf	(_z),w
+   588  075C  0473               	iorwf	(_z+1),w
+   589  075D  1D03               	skipz
+   590  075E  2F60               	goto	u31
+   591  075F  2F61               	goto	u30
+   592  0760                     u31:
+   593  0760  2F67               	goto	l1431
+   594  0761                     u30:
+   595                           	line	27
+   596                           	
+   597  0761                     l1429:	
+   598                           ;Full_Duplex_With_LED_Master.c: 26: {
+   599                           ;Full_Duplex_With_LED_Master.c: 27: RD0=1;
+   600  0761  1408               	bsf	(64/8),(64)&7
+   601                           	line	28
+   602                           ;Full_Duplex_With_LED_Master.c: 28: RD1=RD2=RD3=RD4=0;
+   603  0762  1208               	bcf	(68/8),(68)&7
+   604  0763  1188               	bcf	(67/8),(67)&7
+   605  0764  1108               	bcf	(66/8),(66)&7
+   606  0765  1088               	bcf	(65/8),(65)&7
+   607  0766  2F67               	goto	l1431
+   608                           	line	29
+   609                           	
+   610  0767                     l1036:	
+   611                           	line	30
+   612                           	
+   613  0767                     l1431:	
+   614                           ;Full_Duplex_With_LED_Master.c: 29: }
+   615                           ;Full_Duplex_With_LED_Master.c: 30: if(z==2)
+   616  0767  3002               	movlw	02h
+   617  0768  0672               	xorwf	(_z),w
+   618  0769  0473               	iorwf	(_z+1),w
+   619  076A  1D03               	skipz
+   620  076B  2F6D               	goto	u41
+   621  076C  2F6E               	goto	u40
+   622  076D                     u41:
+   623  076D  2F74               	goto	l1435
+   624  076E                     u40:
+   625                           	line	32
+   626                           	
+   627  076E                     l1433:	
+   628                           ;Full_Duplex_With_LED_Master.c: 31: {
+   629                           ;Full_Duplex_With_LED_Master.c: 32: RD1=1;
+   630  076E  1488               	bsf	(65/8),(65)&7
+   631                           	line	33
+   632                           ;Full_Duplex_With_LED_Master.c: 33: RD0=RD2=RD3=RD4=0;
+   633  076F  1208               	bcf	(68/8),(68)&7
+   634  0770  1188               	bcf	(67/8),(67)&7
+   635  0771  1108               	bcf	(66/8),(66)&7
+   636  0772  1008               	bcf	(64/8),(64)&7
+   637  0773  2F74               	goto	l1435
+   638                           	line	34
+   639                           	
+   640  0774                     l1037:	
+   641                           	line	35
+   642                           	
+   643  0774                     l1435:	
+   644                           ;Full_Duplex_With_LED_Master.c: 34: }
+   645                           ;Full_Duplex_With_LED_Master.c: 35: if(z==3)
+   646  0774  3003               	movlw	03h
+   647  0775  0672               	xorwf	(_z),w
+   648  0776  0473               	iorwf	(_z+1),w
+   649  0777  1D03               	skipz
+   650  0778  2F7A               	goto	u51
+   651  0779  2F7B               	goto	u50
+   652  077A                     u51:
+   653  077A  2F81               	goto	l1439
+   654  077B                     u50:
+   655                           	line	37
+   656                           	
+   657  077B                     l1437:	
+   658                           ;Full_Duplex_With_LED_Master.c: 36: {
+   659                           ;Full_Duplex_With_LED_Master.c: 37: RD2=1;
+   660  077B  1508               	bsf	(66/8),(66)&7
+   661                           	line	38
+   662                           ;Full_Duplex_With_LED_Master.c: 38: RD1=RD0=RD3=RD4=0;
+   663  077C  1208               	bcf	(68/8),(68)&7
+   664  077D  1188               	bcf	(67/8),(67)&7
+   665  077E  1008               	bcf	(64/8),(64)&7
+   666  077F  1088               	bcf	(65/8),(65)&7
+   667  0780  2F81               	goto	l1439
+   668                           	line	39
+   669                           	
+   670  0781                     l1038:	
+   671                           	line	40
+   672                           	
+   673  0781                     l1439:	
+   674                           ;Full_Duplex_With_LED_Master.c: 39: }
+   675                           ;Full_Duplex_With_LED_Master.c: 40: if(z==4)
+   676  0781  3004               	movlw	04h
+   677  0782  0672               	xorwf	(_z),w
+   678  0783  0473               	iorwf	(_z+1),w
+   679  0784  1D03               	skipz
+   680  0785  2F87               	goto	u61
+   681  0786  2F88               	goto	u60
+   682  0787                     u61:
+   683  0787  2F8E               	goto	l1443
+   684  0788                     u60:
+   685                           	line	42
+   686                           	
+   687  0788                     l1441:	
+   688                           ;Full_Duplex_With_LED_Master.c: 41: {
+   689                           ;Full_Duplex_With_LED_Master.c: 42: RD3=1;
+   690  0788  1588               	bsf	(67/8),(67)&7
+   691                           	line	43
+   692                           ;Full_Duplex_With_LED_Master.c: 43: RD1=RD2=RD0=RD4=0;
+   693  0789  1208               	bcf	(68/8),(68)&7
+   694  078A  1008               	bcf	(64/8),(64)&7
+   695  078B  1108               	bcf	(66/8),(66)&7
+   696  078C  1088               	bcf	(65/8),(65)&7
+   697  078D  2F8E               	goto	l1443
+   698                           	line	44
+   699                           	
+   700  078E                     l1039:	
+   701                           	line	45
+   702                           	
+   703  078E                     l1443:	
+   704                           ;Full_Duplex_With_LED_Master.c: 44: }
+   705                           ;Full_Duplex_With_LED_Master.c: 45: if(z==5)
+   706  078E  3005               	movlw	05h
+   707  078F  0672               	xorwf	(_z),w
+   708  0790  0473               	iorwf	(_z+1),w
+   709  0791  1D03               	skipz
+   710  0792  2F94               	goto	u71
+   711  0793  2F95               	goto	u70
+   712  0794                     u71:
+   713  0794  2F9C               	goto	l1041
+   714  0795                     u70:
+   715                           	line	47
+   716                           	
+   717  0795                     l1445:	
+   718                           ;Full_Duplex_With_LED_Master.c: 46: {
+   719                           ;Full_Duplex_With_LED_Master.c: 47: RD4=1;
+   720  0795  1608               	bsf	(68/8),(68)&7
+   721                           	line	48
+   722                           ;Full_Duplex_With_LED_Master.c: 48: RD1=RD2=RD3=RD0=0;
+   723  0796  1008               	bcf	(64/8),(64)&7
+   724  0797  1188               	bcf	(67/8),(67)&7
+   725  0798  1108               	bcf	(66/8),(66)&7
+   726  0799  1088               	bcf	(65/8),(65)&7
+   727  079A  2F9C               	goto	l1041
+   728                           	line	49
+   729                           	
+   730  079B                     l1040:	
+   731  079B  2F9C               	goto	l1041
+   732                           	line	52
+   733                           	
+   734  079C                     l1035:	
+   735                           	line	53
+   736                           	
+   737  079C                     l1041:	
+   738  079C  0008               	return
+   739                           	opt stack 0
+   740                           GLOBAL	__end_of_slave
+   741  079D                     	__end_of_slave:
+   742 ;; =============== function _slave ends ============
+   743                           
+   744                           	signat	_slave,88
+   745                           	global	_master
+   746                           psect	text74,local,class=CODE,delta=2
+   747                           global __ptext74
+   748  073F                     __ptext74:
+   749                           
+   750 ;; *************** function _master *****************
+   751 ;; Defined at:
+   752 ;;		line 14 in file "D:\Embedded\pic\code\software\protocal\SPI\Full_Duplex_With_LED\Full_Duplex_With_LED_Master\Full_Du
+       plex_With_LED_Master.c"
+   753 ;; Parameters:    Size  Location     Type
+   754 ;;  num             2    0[COMMON] int 
+   755 ;; Auto vars:     Size  Location     Type
+   756 ;;		None
+   757 ;; Return value:  Size  Location     Type
+   758 ;;		None               void
+   759 ;; Registers used:
+   760 ;;		wreg
+   761 ;; Tracked objects:
+   762 ;;		On entry : 0/0
+   763 ;;		On exit  : 0/0
+   764 ;;		Unchanged: 0/0
+   765 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   766 ;;      Params:         2       0       0       0       0
+   767 ;;      Locals:         0       0       0       0       0
+   768 ;;      Temps:          0       0       0       0       0
+   769 ;;      Totals:         2       0       0       0       0
+   770 ;;Total ram usage:        2 bytes
+   771 ;; Hardware stack levels used:    1
+   772 ;; This function calls:
+   773 ;;		Nothing
+   774 ;; This function is called by:
+   775 ;;		_main
+   776 ;; This function uses a non-reentrant model
+   777 ;;
+   778                           psect	text74
+   779                           	file	"D:\Embedded\pic\code\software\protocal\SPI\Full_Duplex_With_LED\Full_Duplex_With_
+                                 LED_Master\Full_Duplex_With_LED_Master.c"
+   780                           	line	14
+   781                           	global	__size_of_master
+   782  000B                     	__size_of_master	equ	__end_of_master-_master
+   783                           	
+   784  073F                     _master:	
+   785                           	opt	stack 7
+   786                           ; Regs used in _master: [wreg]
+   787                           	line	15
+   788                           	
+   789  073F                     l1421:	
+   790                           ;Full_Duplex_With_LED_Master.c: 15: SSPBUF=num;
+   791  073F  0874               	movf	(master@num),w
+   792  0740  1283               	bcf	status, 5	;RP0=0, select bank0
+   793  0741  1303               	bcf	status, 6	;RP1=0, select bank0
+   794  0742  0093               	movwf	(19)	;volatile
+   795                           	line	16
+   796                           ;Full_Duplex_With_LED_Master.c: 16: while(SSPIF==0);
+   797  0743  2F44               	goto	l1029
+   798                           	
+   799  0744                     l1030:	
+   800                           	
+   801  0744                     l1029:	
+   802  0744  1D8C               	btfss	(99/8),(99)&7
+   803  0745  2F47               	goto	u11
+   804  0746  2F48               	goto	u10
+   805  0747                     u11:
+   806  0747  2F44               	goto	l1029
+   807  0748                     u10:
+   808                           	
+   809  0748                     l1031:	
+   810                           	line	17
+   811                           ;Full_Duplex_With_LED_Master.c: 17: SSPIF=0;
+   812  0748  118C               	bcf	(99/8),(99)&7
+   813                           	line	18
+   814                           	
+   815  0749                     l1032:	
+   816  0749  0008               	return
+   817                           	opt stack 0
+   818                           GLOBAL	__end_of_master
+   819  074A                     	__end_of_master:
+   820 ;; =============== function _master ends ============
+   821                           
+   822                           	signat	_master,4216
+   823                           psect	text75,local,class=CODE,delta=2
+   824                           global __ptext75
+   825  0000                     __ptext75:
+   826                           	global	btemp
+   827  007E                     	btemp set 07Eh
+   828                           
+   829                           	DABS	1,126,2	;btemp
+   830                           	global	wtemp0
+   831  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Jun 14 23:25:02 2022
+
+                   _z 0072                    _BF 04A0                    u10 0748                    u11 0747  
+                  u20 0750                    u21 074F                    u30 0761                    u31 0760  
+                  u40 076E                    u41 076D                    u50 077B                    u51 077A  
+                  u60 0788                    u61 0787                    u70 0795                    u71 0794  
+                 _RA0 0028                   _RA1 0029                   _RA2 002A                   _RA3 002B  
+                 _RA4 002C                   _RD0 0040                   _RD1 0041                   _RD2 0042  
+                 _RD3 0043                   _RD4 0044                  l1030 0744                  l1031 0748  
+                l1032 0749                  l1040 079B                  l1041 079C                  l1050 07FC  
+                l1035 079C                  l1051 07FD                  l1036 0767                  l1052 07FD  
+                l1044 07BC                  l1029 0744                  l1037 0774                  l1045 07C7  
+                l1038 0781                  l1046 07D0                  l1039 078E                  l1047 07D9  
+                l1048 07E2                  l1049 07EB                  l1421 073F                  l2221 07AA  
+                l2213 079D                  l1431 0767                  l1423 074A                  l2231 07BC  
+                l2223 07AD                  l2215 07A1                  l1441 0788                  l1433 076E  
+                l1425 0750                  l2241 07D4                  l2233 07C2                  l2225 07B0  
+                l2217 07A4                  l1443 078E                  l1435 0774                  l1427 0751  
+                l2251 07EB                  l2243 07D9                  l2235 07C7                  l2227 07B3  
+                l2219 07A7                  l1445 0795                  l1437 077B                  l1429 0761  
+                l2253 07F6                  l2245 07DD                  l2237 07CB                  l2229 07B4  
+                l1439 0781                  l2247 07E2                  l2239 07D0                  l2249 07E6  
+                u2210 07C2                  u2211 07C1                  u2220 07CB                  u2221 07CA  
+                u2230 07D4                  u2231 07D3                  u2240 07DD                  u2241 07DC  
+                u2250 07E6                  u2251 07E5                  _main 079D                  btemp 007E  
+                start 0000                 ?_main 0074                 _ANSEL 0188                 _PORTA 0005  
+               _PORTC 0007                 _PORTD 0008                 _TRISA 0085                 _TRISC 0087  
+               _TRISD 0088                 _SSPIF 0063                 _count 0070                 _slave 074A  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0076  
+              ?_slave 0074                _ANSELH 0189                _SSPCON 0014                _SSPBUF 0013  
+              _master 073F        __pcstackCOMMON 0074         __end_of_slave 079D               ??_slave 0074  
+          __pmaintext 079D               ?_master 0074               _SSPSTAT 0094       __size_of_master 000B  
+end_of_initialization 073B        __end_of_master 074A   start_initialization 0737              ??_master 0076  
+         __pbssCOMMON 0070        __size_of_slave 0053             master@num 0074              __ptext72 0000  
+            __ptext73 074A              __ptext74 073F              __ptext75 0000         __size_of_main 0063  

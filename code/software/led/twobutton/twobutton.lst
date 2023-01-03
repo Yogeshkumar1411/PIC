@@ -1,0 +1,614 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Sun May 15 20:28:23 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_delay
+    43                           	FNROOT	_main
+    44                           	global	_PORTA
+    45                           psect	maintext,global,class=CODE,delta=2
+    46                           global __pmaintext
+    47  078A                     __pmaintext:
+    48  0005                     _PORTA	set	5
+    49                           	global	_PORTC
+    50  0007                     _PORTC	set	7
+    51                           	global	_RC0
+    52  0038                     _RC0	set	56
+    53                           	global	_RC1
+    54  0039                     _RC1	set	57
+    55                           	global	_RC2
+    56  003A                     _RC2	set	58
+    57                           	global	_TRISA
+    58  0085                     _TRISA	set	133
+    59                           	global	_TRISC
+    60  0087                     _TRISC	set	135
+    61                           	global	_ANSEL
+    62  0188                     _ANSEL	set	392
+    63                           	global	_ANSELH
+    64  0189                     _ANSELH	set	393
+    65                           	file	"twobutton.as"
+    66                           	line	#
+    67                           psect cinit,class=CODE,delta=2
+    68                           global start_initialization
+    69  0772                     start_initialization:
+    70                           
+    71                           psect cinit,class=CODE,delta=2
+    72                           global end_of_initialization
+    73                           
+    74                           ;End of C runtime variable initialization code
+    75                           
+    76  0772                     end_of_initialization:
+    77  0772  0183               clrf status
+    78  0773  120A  118A  2F8A   ljmp _main	;jump to C main() function
+    79                           psect	cstackCOMMON,class=COMMON,space=1
+    80                           global __pcstackCOMMON
+    81  0070                     __pcstackCOMMON:
+    82                           	global	?_delay
+    83  0070                     ?_delay:	; 0 bytes @ 0x0
+    84                           	global	?_main
+    85  0070                     ?_main:	; 0 bytes @ 0x0
+    86                           	global	delay@a
+    87  0070                     delay@a:	; 2 bytes @ 0x0
+    88  0070                     	ds	2
+    89                           	global	??_delay
+    90  0072                     ??_delay:	; 0 bytes @ 0x2
+    91                           	global	??_main
+    92  0072                     ??_main:	; 0 bytes @ 0x2
+    93  0072                     	ds	1
+    94                           	global	main@i
+    95  0073                     main@i:	; 2 bytes @ 0x3
+    96  0073                     	ds	2
+    97                           	global	main@count
+    98  0075                     main@count:	; 2 bytes @ 0x5
+    99  0075                     	ds	2
+   100 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+   101 ;;Auto spaces:   Size  Autos    Used
+   102 ;; COMMON          14      7       7
+   103 ;; BANK0           80      0       0
+   104 ;; BANK1           80      0       0
+   105 ;; BANK3           96      0       0
+   106 ;; BANK2           96      0       0
+   107                           
+   108 ;;
+   109 ;; Pointer list with targets:
+   110                           
+   111                           
+   112                           
+   113 ;;
+   114 ;; Critical Paths under _main in COMMON
+   115 ;;
+   116 ;;   _main->_delay
+   117 ;;
+   118 ;; Critical Paths under _main in BANK0
+   119 ;;
+   120 ;;   None.
+   121 ;;
+   122 ;; Critical Paths under _main in BANK1
+   123 ;;
+   124 ;;   None.
+   125 ;;
+   126 ;; Critical Paths under _main in BANK3
+   127 ;;
+   128 ;;   None.
+   129 ;;
+   130 ;; Critical Paths under _main in BANK2
+   131 ;;
+   132 ;;   None.
+   133                           
+   134 ;;
+   135 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   136 ;;
+   137                           
+   138 ;;
+   139 ;;Call Graph Tables:
+   140 ;;
+   141 ;; ---------------------------------------------------------------------------------
+   142 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   143 ;; ---------------------------------------------------------------------------------
+   144 ;; (0) _main                                                 5     5      0      45
+   145 ;;                                              2 COMMON     5     5      0
+   146 ;;                              _delay
+   147 ;; ---------------------------------------------------------------------------------
+   148 ;; (1) _delay                                                2     0      2      15
+   149 ;;                                              0 COMMON     2     0      2
+   150 ;; ---------------------------------------------------------------------------------
+   151 ;; Estimated maximum stack depth 1
+   152 ;; ---------------------------------------------------------------------------------
+   153                           
+   154 ;; Call Graph Graphs:
+   155                           
+   156 ;; _main (ROOT)
+   157 ;;   _delay
+   158 ;;
+   159                           
+   160 ;; Address spaces:
+   161                           
+   162 ;;Name               Size   Autos  Total    Cost      Usage
+   163 ;;BITCOMMON            E      0       0       0        0.0%
+   164 ;;EEDATA             100      0       0       0        0.0%
+   165 ;;NULL                 0      0       0       0        0.0%
+   166 ;;CODE                 0      0       0       0        0.0%
+   167 ;;COMMON               E      7       7       1       50.0%
+   168 ;;BITSFR0              0      0       0       1        0.0%
+   169 ;;SFR0                 0      0       0       1        0.0%
+   170 ;;BITSFR1              0      0       0       2        0.0%
+   171 ;;SFR1                 0      0       0       2        0.0%
+   172 ;;STACK                0      0       1       2        0.0%
+   173 ;;ABS                  0      0       0       3        0.0%
+   174 ;;BITBANK0            50      0       0       4        0.0%
+   175 ;;BITSFR3              0      0       0       4        0.0%
+   176 ;;SFR3                 0      0       0       4        0.0%
+   177 ;;BANK0               50      0       0       5        0.0%
+   178 ;;BITSFR2              0      0       0       5        0.0%
+   179 ;;SFR2                 0      0       0       5        0.0%
+   180 ;;BITBANK1            50      0       0       6        0.0%
+   181 ;;BANK1               50      0       0       7        0.0%
+   182 ;;BITBANK3            60      0       0       8        0.0%
+   183 ;;BANK3               60      0       0       9        0.0%
+   184 ;;BITBANK2            60      0       0      10        0.0%
+   185 ;;BANK2               60      0       0      11        0.0%
+   186 ;;DATA                 0      0       0      12        0.0%
+   187                           
+   188                           	global	_main
+   189                           psect	maintext
+   190                           
+   191 ;; *************** function _main *****************
+   192 ;; Defined at:
+   193 ;;		line 10 in file "D:\Embedded\pic\code\software\led\twobutton\twobutton.c"
+   194 ;; Parameters:    Size  Location     Type
+   195 ;;		None
+   196 ;; Auto vars:     Size  Location     Type
+   197 ;;  count           2    5[COMMON] int 
+   198 ;;  i               2    3[COMMON] int 
+   199 ;; Return value:  Size  Location     Type
+   200 ;;		None               void
+   201 ;; Registers used:
+   202 ;;		wreg, status,2, status,0, pclath, cstack
+   203 ;; Tracked objects:
+   204 ;;		On entry : 17F/0
+   205 ;;		On exit  : 0/0
+   206 ;;		Unchanged: 0/0
+   207 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   208 ;;      Params:         0       0       0       0       0
+   209 ;;      Locals:         4       0       0       0       0
+   210 ;;      Temps:          1       0       0       0       0
+   211 ;;      Totals:         5       0       0       0       0
+   212 ;;Total ram usage:        5 bytes
+   213 ;; Hardware stack levels required when called:    1
+   214 ;; This function calls:
+   215 ;;		_delay
+   216 ;; This function is called by:
+   217 ;;		Startup code after reset
+   218 ;; This function uses a non-reentrant model
+   219 ;;
+   220                           psect	maintext
+   221                           	file	"D:\Embedded\pic\code\software\led\twobutton\twobutton.c"
+   222                           	line	10
+   223                           	global	__size_of_main
+   224  0076                     	__size_of_main	equ	__end_of_main-_main
+   225                           	
+   226  078A                     _main:	
+   227                           	opt	stack 7
+   228                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   229                           	line	11
+   230                           	
+   231  078A                     l2188:	
+   232                           ;twobutton.c: 11: int i,count=0;
+   233  078A  01F5               	clrf	(main@count)
+   234  078B  01F6               	clrf	(main@count+1)
+   235                           	line	12
+   236                           ;twobutton.c: 12: PORTA=0X00;
+   237  078C  1283               	bcf	status, 5	;RP0=0, select bank0
+   238  078D  1303               	bcf	status, 6	;RP1=0, select bank0
+   239  078E  0185               	clrf	(5)	;volatile
+   240                           	line	13
+   241                           ;twobutton.c: 13: TRISA=0X00;
+   242  078F  1683               	bsf	status, 5	;RP0=1, select bank1
+   243  0790  1303               	bcf	status, 6	;RP1=0, select bank1
+   244  0791  0185               	clrf	(133)^080h	;volatile
+   245                           	line	14
+   246                           ;twobutton.c: 14: PORTC=0X00;
+   247  0792  1283               	bcf	status, 5	;RP0=0, select bank0
+   248  0793  1303               	bcf	status, 6	;RP1=0, select bank0
+   249  0794  0187               	clrf	(7)	;volatile
+   250                           	line	15
+   251                           	
+   252  0795                     l2190:	
+   253                           ;twobutton.c: 15: TRISC=0X07;
+   254  0795  3007               	movlw	(07h)
+   255  0796  1683               	bsf	status, 5	;RP0=1, select bank1
+   256  0797  1303               	bcf	status, 6	;RP1=0, select bank1
+   257  0798  0087               	movwf	(135)^080h	;volatile
+   258                           	line	16
+   259                           	
+   260  0799                     l2192:	
+   261                           ;twobutton.c: 16: ANSEL=0X00;
+   262  0799  1683               	bsf	status, 5	;RP0=1, select bank3
+   263  079A  1703               	bsf	status, 6	;RP1=1, select bank3
+   264  079B  0188               	clrf	(392)^0180h	;volatile
+   265                           	line	17
+   266                           	
+   267  079C                     l2194:	
+   268                           ;twobutton.c: 17: ANSELH=0X00;
+   269  079C  0189               	clrf	(393)^0180h	;volatile
+   270  079D  2F9E               	goto	l2196
+   271                           	line	18
+   272                           ;twobutton.c: 18: while(1)
+   273                           	
+   274  079E                     l1031:	
+   275                           	line	20
+   276                           	
+   277  079E                     l2196:	
+   278                           ;twobutton.c: 19: {
+   279                           ;twobutton.c: 20: if(RC0==1)
+   280  079E  1283               	bcf	status, 5	;RP0=0, select bank0
+   281  079F  1303               	bcf	status, 6	;RP1=0, select bank0
+   282  07A0  1C07               	btfss	(56/8),(56)&7
+   283  07A1  2FA3               	goto	u2151
+   284  07A2  2FA4               	goto	u2150
+   285  07A3                     u2151:
+   286  07A3  2FB0               	goto	l1032
+   287  07A4                     u2150:
+   288                           	line	22
+   289                           	
+   290  07A4                     l2198:	
+   291                           ;twobutton.c: 21: {
+   292                           ;twobutton.c: 22: count++;
+   293  07A4  3001               	movlw	low(01h)
+   294  07A5  07F5               	addwf	(main@count),f
+   295  07A6  1803               	skipnc
+   296  07A7  0AF6               	incf	(main@count+1),f
+   297  07A8  3000               	movlw	high(01h)
+   298  07A9  07F6               	addwf	(main@count+1),f
+   299                           	line	23
+   300                           ;twobutton.c: 23: while(RC0==1);
+   301  07AA  2FAB               	goto	l1033
+   302                           	
+   303  07AB                     l1034:	
+   304                           	
+   305  07AB                     l1033:	
+   306  07AB  1807               	btfsc	(56/8),(56)&7
+   307  07AC  2FAE               	goto	u2161
+   308  07AD  2FAF               	goto	u2160
+   309  07AE                     u2161:
+   310  07AE  2FAB               	goto	l1033
+   311  07AF                     u2160:
+   312  07AF  2FB0               	goto	l1032
+   313                           	
+   314  07B0                     l1035:	
+   315                           	line	24
+   316                           	
+   317  07B0                     l1032:	
+   318                           	line	25
+   319                           ;twobutton.c: 24: }
+   320                           ;twobutton.c: 25: if(RC1==1)
+   321  07B0  1C87               	btfss	(57/8),(57)&7
+   322  07B1  2FB3               	goto	u2171
+   323  07B2  2FB4               	goto	u2170
+   324  07B3                     u2171:
+   325  07B3  2FEE               	goto	l1036
+   326  07B4                     u2170:
+   327                           	line	27
+   328                           	
+   329  07B4                     l2200:	
+   330                           ;twobutton.c: 26: {
+   331                           ;twobutton.c: 27: for(i=0;i<count;i++)
+   332  07B4  01F3               	clrf	(main@i)
+   333  07B5  01F4               	clrf	(main@i+1)
+   334  07B6  2FD7               	goto	l2212
+   335                           	line	28
+   336                           	
+   337  07B7                     l1038:	
+   338                           	line	29
+   339                           	
+   340  07B7                     l2202:	
+   341                           ;twobutton.c: 28: {
+   342                           ;twobutton.c: 29: PORTA=0XFF;
+   343  07B7  30FF               	movlw	(0FFh)
+   344  07B8  1283               	bcf	status, 5	;RP0=0, select bank0
+   345  07B9  1303               	bcf	status, 6	;RP1=0, select bank0
+   346  07BA  0085               	movwf	(5)	;volatile
+   347                           	line	30
+   348                           	
+   349  07BB                     l2204:	
+   350                           ;twobutton.c: 30: delay(65000);
+   351  07BB  30E8               	movlw	low(0FDE8h)
+   352  07BC  00F0               	movwf	(?_delay)
+   353  07BD  30FD               	movlw	high(0FDE8h)
+   354  07BE  00F1               	movwf	((?_delay))+1
+   355  07BF  120A  118A  2776   	fcall	_delay
+              120A  118A         
+   356                           	line	31
+   357                           	
+   358  07C4                     l2206:	
+   359                           ;twobutton.c: 31: PORTA=0X00;
+   360  07C4  1283               	bcf	status, 5	;RP0=0, select bank0
+   361  07C5  1303               	bcf	status, 6	;RP1=0, select bank0
+   362  07C6  0185               	clrf	(5)	;volatile
+   363                           	line	32
+   364                           	
+   365  07C7                     l2208:	
+   366                           ;twobutton.c: 32: delay(65000);
+   367  07C7  30E8               	movlw	low(0FDE8h)
+   368  07C8  00F0               	movwf	(?_delay)
+   369  07C9  30FD               	movlw	high(0FDE8h)
+   370  07CA  00F1               	movwf	((?_delay))+1
+   371  07CB  120A  118A  2776   	fcall	_delay
+              120A  118A         
+   372                           	line	27
+   373                           	
+   374  07D0                     l2210:	
+   375  07D0  3001               	movlw	low(01h)
+   376  07D1  07F3               	addwf	(main@i),f
+   377  07D2  1803               	skipnc
+   378  07D3  0AF4               	incf	(main@i+1),f
+   379  07D4  3000               	movlw	high(01h)
+   380  07D5  07F4               	addwf	(main@i+1),f
+   381  07D6  2FD7               	goto	l2212
+   382                           	
+   383  07D7                     l1037:	
+   384                           	
+   385  07D7                     l2212:	
+   386  07D7  0874               	movf	(main@i+1),w
+   387  07D8  3A80               	xorlw	80h
+   388  07D9  00F2               	movwf	(??_main+0)+0
+   389  07DA  0876               	movf	(main@count+1),w
+   390  07DB  3A80               	xorlw	80h
+   391  07DC  0272               	subwf	(??_main+0)+0,w
+   392  07DD  1D03               	skipz
+   393  07DE  2FE1               	goto	u2185
+   394  07DF  0875               	movf	(main@count),w
+   395  07E0  0273               	subwf	(main@i),w
+   396  07E1                     u2185:
+   397                           
+   398  07E1  1C03               	skipc
+   399  07E2  2FE4               	goto	u2181
+   400  07E3  2FE5               	goto	u2180
+   401  07E4                     u2181:
+   402  07E4  2FB7               	goto	l2202
+   403  07E5                     u2180:
+   404  07E5  2FE7               	goto	l1040
+   405                           	
+   406  07E6                     l1039:	
+   407                           	line	33
+   408                           ;twobutton.c: 33: }while(RC1==1);
+   409  07E6  2FE7               	goto	l1040
+   410                           	
+   411  07E7                     l1041:	
+   412                           	
+   413  07E7                     l1040:	
+   414  07E7  1283               	bcf	status, 5	;RP0=0, select bank0
+   415  07E8  1303               	bcf	status, 6	;RP1=0, select bank0
+   416  07E9  1887               	btfsc	(57/8),(57)&7
+   417  07EA  2FEC               	goto	u2191
+   418  07EB  2FED               	goto	u2190
+   419  07EC                     u2191:
+   420  07EC  2FE7               	goto	l1040
+   421  07ED                     u2190:
+   422  07ED  2FEE               	goto	l1036
+   423                           	
+   424  07EE                     l1042:	
+   425                           	line	34
+   426                           	
+   427  07EE                     l1036:	
+   428                           	line	35
+   429                           ;twobutton.c: 34: }
+   430                           ;twobutton.c: 35: if(RC2==1)
+   431  07EE  1D07               	btfss	(58/8),(58)&7
+   432  07EF  2FF1               	goto	u2201
+   433  07F0  2FF2               	goto	u2200
+   434  07F1                     u2201:
+   435  07F1  2F9E               	goto	l2196
+   436  07F2                     u2200:
+   437                           	line	37
+   438                           	
+   439  07F2                     l2214:	
+   440                           ;twobutton.c: 36: {
+   441                           ;twobutton.c: 37: count=0;
+   442  07F2  01F5               	clrf	(main@count)
+   443  07F3  01F6               	clrf	(main@count+1)
+   444                           	line	38
+   445                           ;twobutton.c: 38: while(RC2==1);
+   446  07F4  2FF5               	goto	l1044
+   447                           	
+   448  07F5                     l1045:	
+   449                           	
+   450  07F5                     l1044:	
+   451  07F5  1907               	btfsc	(58/8),(58)&7
+   452  07F6  2FF8               	goto	u2211
+   453  07F7  2FF9               	goto	u2210
+   454  07F8                     u2211:
+   455  07F8  2FF5               	goto	l1044
+   456  07F9                     u2210:
+   457  07F9  2F9E               	goto	l2196
+   458                           	
+   459  07FA                     l1046:	
+   460  07FA  2F9E               	goto	l2196
+   461                           	line	39
+   462                           	
+   463  07FB                     l1043:	
+   464  07FB  2F9E               	goto	l2196
+   465                           	line	40
+   466                           	
+   467  07FC                     l1047:	
+   468                           	line	18
+   469  07FC  2F9E               	goto	l2196
+   470                           	
+   471  07FD                     l1048:	
+   472                           	line	41
+   473                           	
+   474  07FD                     l1049:	
+   475                           	global	start
+   476  07FD  120A  118A  2800   	ljmp	start
+   477                           	opt stack 0
+   478                           GLOBAL	__end_of_main
+   479  0800                     	__end_of_main:
+   480 ;; =============== function _main ends ============
+   481                           
+   482                           	signat	_main,88
+   483                           	global	_delay
+   484                           psect	text55,local,class=CODE,delta=2
+   485                           global __ptext55
+   486  0776                     __ptext55:
+   487                           
+   488 ;; *************** function _delay *****************
+   489 ;; Defined at:
+   490 ;;		line 6 in file "D:\Embedded\pic\code\software\led\twobutton\twobutton.c"
+   491 ;; Parameters:    Size  Location     Type
+   492 ;;  a               2    0[COMMON] unsigned int 
+   493 ;; Auto vars:     Size  Location     Type
+   494 ;;		None
+   495 ;; Return value:  Size  Location     Type
+   496 ;;		None               void
+   497 ;; Registers used:
+   498 ;;		wreg
+   499 ;; Tracked objects:
+   500 ;;		On entry : 0/0
+   501 ;;		On exit  : 0/0
+   502 ;;		Unchanged: 0/0
+   503 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   504 ;;      Params:         2       0       0       0       0
+   505 ;;      Locals:         0       0       0       0       0
+   506 ;;      Temps:          0       0       0       0       0
+   507 ;;      Totals:         2       0       0       0       0
+   508 ;;Total ram usage:        2 bytes
+   509 ;; Hardware stack levels used:    1
+   510 ;; This function calls:
+   511 ;;		Nothing
+   512 ;; This function is called by:
+   513 ;;		_main
+   514 ;; This function uses a non-reentrant model
+   515 ;;
+   516                           psect	text55
+   517                           	file	"D:\Embedded\pic\code\software\led\twobutton\twobutton.c"
+   518                           	line	6
+   519                           	global	__size_of_delay
+   520  0014                     	__size_of_delay	equ	__end_of_delay-_delay
+   521                           	
+   522  0776                     _delay:	
+   523                           	opt	stack 7
+   524                           ; Regs used in _delay: [wreg]
+   525                           	line	7
+   526                           	
+   527  0776                     l1418:	
+   528                           ;twobutton.c: 7: while(a--);
+   529  0776  2F78               	goto	l1420
+   530                           	
+   531  0777                     l1026:	
+   532  0777  2F78               	goto	l1420
+   533                           	
+   534  0778                     l1025:	
+   535                           	
+   536  0778                     l1420:	
+   537  0778  3001               	movlw	low(01h)
+   538  0779  02F0               	subwf	(delay@a),f
+   539  077A  3000               	movlw	high(01h)
+   540  077B  1C03               	skipc
+   541  077C  03F1               	decf	(delay@a+1),f
+   542  077D  02F1               	subwf	(delay@a+1),f
+   543  077E  30FF               	movlw	high(0FFFFh)
+   544  077F  0671               	xorwf	((delay@a+1)),w
+   545  0780  1D03               	skipz
+   546  0781  2F84               	goto	u15
+   547  0782  30FF               	movlw	low(0FFFFh)
+   548  0783  0670               	xorwf	((delay@a)),w
+   549  0784                     u15:
+   550                           
+   551  0784  1D03               	skipz
+   552  0785  2F87               	goto	u11
+   553  0786  2F88               	goto	u10
+   554  0787                     u11:
+   555  0787  2F78               	goto	l1420
+   556  0788                     u10:
+   557  0788  2F89               	goto	l1028
+   558                           	
+   559  0789                     l1027:	
+   560                           	line	8
+   561                           	
+   562  0789                     l1028:	
+   563  0789  0008               	return
+   564                           	opt stack 0
+   565                           GLOBAL	__end_of_delay
+   566  078A                     	__end_of_delay:
+   567 ;; =============== function _delay ends ============
+   568                           
+   569                           	signat	_delay,4216
+   570                           psect	text56,local,class=CODE,delta=2
+   571                           global __ptext56
+   572  0000                     __ptext56:
+   573                           	global	btemp
+   574  007E                     	btemp set 07Eh
+   575                           
+   576                           	DABS	1,126,2	;btemp
+   577                           	global	wtemp0
+   578  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Sun May 15 20:28:23 2022
+
+                  u10 0788                    u11 0787                    u15 0784                   _RC0 0038  
+                 _RC1 0039                   _RC2 003A                  l1031 079E                  l1040 07E7  
+                l1032 07B0                  l1025 0778                  l1041 07E7                  l1033 07AB  
+                l1026 0777                  l1042 07EE                  l1034 07AB                  l1027 0789  
+                l1043 07FB                  l1035 07B0                  l1028 0789                  l1044 07F5  
+                l1036 07EE                  l1045 07F5                  l1037 07D7                  l1046 07FA  
+                l1038 07B7                  l1047 07FC                  l1039 07E6                  l1048 07FD  
+                l2200 07B4                  l1049 07FD                  l2210 07D0                  l2202 07B7  
+                l1420 0778                  l2204 07BB                  l2212 07D7                  l2214 07F2  
+                l2206 07C4                  l2208 07C7                  l1418 0776                  l2190 0795  
+                l2192 0799                  l2194 079C                  l2196 079E                  l2188 078A  
+                l2198 07A4                  u2200 07F2                  u2201 07F1                  u2210 07F9  
+                u2211 07F8                  u2150 07A4                  u2151 07A3                  u2160 07AF  
+                u2161 07AE                  u2170 07B4                  u2171 07B3                  u2180 07E5  
+                u2181 07E4                  u2190 07ED                  u2191 07EC                  u2185 07E1  
+                _main 078A                  btemp 007E                  start 0000                 ?_main 0070  
+               _ANSEL 0188                 _PORTA 0005                 _PORTC 0007                 _TRISA 0085  
+               _TRISC 0087                 _delay 0776                 main@i 0073                 status 0003  
+               wtemp0 007E          __end_of_main 0800                ??_main 0072                ?_delay 0070  
+              _ANSELH 0189                delay@a 0070        __pcstackCOMMON 0070         __end_of_delay 078A  
+             ??_delay 0072            __pmaintext 078A  end_of_initialization 0772   start_initialization 0772  
+      __size_of_delay 0014             main@count 0075              __ptext55 0776              __ptext56 0000  
+       __size_of_main 0076  

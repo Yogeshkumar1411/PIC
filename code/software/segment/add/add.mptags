@@ -1,0 +1,15 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+B1::RA0	D:\Embedded\pic\code\software\segment\add\add.c	2;"	d	line:2	file:
+B2::RA1	D:\Embedded\pic\code\software\segment\add\add.c	3;"	d	line:3	file:
+B3::RA2	D:\Embedded\pic\code\software\segment\add\add.c	4;"	d	line:4	file:
+B4::RA3	D:\Embedded\pic\code\software\segment\add\add.c	5;"	d	line:5	file:
+i	D:\Embedded\pic\code\software\segment\add\add.c	8;"	l	line:8
+main	D:\Embedded\pic\code\software\segment\add\add.c	6;"	f	line:6
+seg	D:\Embedded\pic\code\software\segment\add\add.c	9;"	l	line:9

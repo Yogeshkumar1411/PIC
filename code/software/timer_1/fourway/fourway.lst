@@ -1,0 +1,773 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Wed Mar 30 04:58:42 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_timer
+    43                           	FNROOT	_main
+    44                           	global	_count
+    45                           	global	_PORTC
+    46                           psect	text60,local,class=CODE,delta=2
+    47                           global __ptext60
+    48  0000                     __ptext60:
+    49  0007                     _PORTC	set	7
+    50                           	global	_PORTD
+    51  0008                     _PORTD	set	8
+    52                           	global	_T1CON
+    53  0010                     _T1CON	set	16
+    54                           	global	_TMR1IF
+    55  0060                     _TMR1IF	set	96
+    56                           	global	_TRISC
+    57  0087                     _TRISC	set	135
+    58                           	global	_TRISD
+    59  0088                     _TRISD	set	136
+    60                           	file	"fourway.as"
+    61                           	line	#
+    62                           psect cinit,class=CODE,delta=2
+    63                           global start_initialization
+    64  070C                     start_initialization:
+    65                           
+    66                           psect	bssCOMMON,class=COMMON,space=1
+    67                           global __pbssCOMMON
+    68  0070                     __pbssCOMMON:
+    69  0070                     _count:
+    70  0070                            ds      2
+    71                           
+    72                           ; Clear objects allocated to COMMON
+    73                           psect cinit,class=CODE,delta=2
+    74  070C  01F0               	clrf	((__pbssCOMMON)+0)&07Fh
+    75  070D  01F1               	clrf	((__pbssCOMMON)+1)&07Fh
+    76                           psect cinit,class=CODE,delta=2
+    77                           global end_of_initialization
+    78                           
+    79                           ;End of C runtime variable initialization code
+    80                           
+    81  070E                     end_of_initialization:
+    82  070E  0183               clrf status
+    83  070F  120A  118A  2F12   ljmp _main	;jump to C main() function
+    84                           psect	cstackCOMMON,class=COMMON,space=1
+    85                           global __pcstackCOMMON
+    86  0000                     __pcstackCOMMON:
+    87                           	global	?_timer
+    88  0000                     ?_timer:	; 0 bytes @ 0x0
+    89                           	global	??_timer
+    90  0000                     ??_timer:	; 0 bytes @ 0x0
+    91                           	global	?_main
+    92  0000                     ?_main:	; 0 bytes @ 0x0
+    93                           	global	??_main
+    94  0000                     ??_main:	; 0 bytes @ 0x0
+    95 ;;Data sizes: Strings 0, constant 0, data 0, bss 2, persistent 0 stack 0
+    96 ;;Auto spaces:   Size  Autos    Used
+    97 ;; COMMON          14      0       2
+    98 ;; BANK0           80      0       0
+    99 ;; BANK1           80      0       0
+   100 ;; BANK3           96      0       0
+   101 ;; BANK2           96      0       0
+   102                           
+   103 ;;
+   104 ;; Pointer list with targets:
+   105                           
+   106                           
+   107                           
+   108 ;;
+   109 ;; Critical Paths under _main in COMMON
+   110 ;;
+   111 ;;   None.
+   112 ;;
+   113 ;; Critical Paths under _main in BANK0
+   114 ;;
+   115 ;;   None.
+   116 ;;
+   117 ;; Critical Paths under _main in BANK1
+   118 ;;
+   119 ;;   None.
+   120 ;;
+   121 ;; Critical Paths under _main in BANK3
+   122 ;;
+   123 ;;   None.
+   124 ;;
+   125 ;; Critical Paths under _main in BANK2
+   126 ;;
+   127 ;;   None.
+   128                           
+   129 ;;
+   130 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   131 ;;
+   132                           
+   133 ;;
+   134 ;;Call Graph Tables:
+   135 ;;
+   136 ;; ---------------------------------------------------------------------------------
+   137 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   138 ;; ---------------------------------------------------------------------------------
+   139 ;; (0) _main                                                 0     0      0       0
+   140 ;;                              _timer
+   141 ;; ---------------------------------------------------------------------------------
+   142 ;; (1) _timer                                                0     0      0       0
+   143 ;; ---------------------------------------------------------------------------------
+   144 ;; Estimated maximum stack depth 1
+   145 ;; ---------------------------------------------------------------------------------
+   146                           
+   147 ;; Call Graph Graphs:
+   148                           
+   149 ;; _main (ROOT)
+   150 ;;   _timer
+   151 ;;
+   152                           
+   153 ;; Address spaces:
+   154                           
+   155 ;;Name               Size   Autos  Total    Cost      Usage
+   156 ;;BITCOMMON            E      0       0       0        0.0%
+   157 ;;EEDATA             100      0       0       0        0.0%
+   158 ;;NULL                 0      0       0       0        0.0%
+   159 ;;CODE                 0      0       0       0        0.0%
+   160 ;;COMMON               E      0       2       1       14.3%
+   161 ;;BITSFR0              0      0       0       1        0.0%
+   162 ;;SFR0                 0      0       0       1        0.0%
+   163 ;;BITSFR1              0      0       0       2        0.0%
+   164 ;;SFR1                 0      0       0       2        0.0%
+   165 ;;STACK                0      0       1       2        0.0%
+   166 ;;ABS                  0      0       2       3        0.0%
+   167 ;;BITBANK0            50      0       0       4        0.0%
+   168 ;;BITSFR3              0      0       0       4        0.0%
+   169 ;;SFR3                 0      0       0       4        0.0%
+   170 ;;BANK0               50      0       0       5        0.0%
+   171 ;;BITSFR2              0      0       0       5        0.0%
+   172 ;;SFR2                 0      0       0       5        0.0%
+   173 ;;BITBANK1            50      0       0       6        0.0%
+   174 ;;BANK1               50      0       0       7        0.0%
+   175 ;;BITBANK3            60      0       0       8        0.0%
+   176 ;;BANK3               60      0       0       9        0.0%
+   177 ;;BITBANK2            60      0       0      10        0.0%
+   178 ;;BANK2               60      0       0      11        0.0%
+   179 ;;DATA                 0      0       3      12        0.0%
+   180                           
+   181                           	global	_main
+   182                           psect	maintext,global,class=CODE,delta=2
+   183                           global __pmaintext
+   184  0712                     __pmaintext:
+   185                           
+   186 ;; *************** function _main *****************
+   187 ;; Defined at:
+   188 ;;		line 98 in file "D:\Embedded\pic\code\software\timer_1\fourway\fourway.c"
+   189 ;; Parameters:    Size  Location     Type
+   190 ;;		None
+   191 ;; Auto vars:     Size  Location     Type
+   192 ;;		None
+   193 ;; Return value:  Size  Location     Type
+   194 ;;		None               void
+   195 ;; Registers used:
+   196 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   197 ;; Tracked objects:
+   198 ;;		On entry : 17F/0
+   199 ;;		On exit  : 0/0
+   200 ;;		Unchanged: 0/0
+   201 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   202 ;;      Params:         0       0       0       0       0
+   203 ;;      Locals:         0       0       0       0       0
+   204 ;;      Temps:          0       0       0       0       0
+   205 ;;      Totals:         0       0       0       0       0
+   206 ;;Total ram usage:        0 bytes
+   207 ;; Hardware stack levels required when called:    1
+   208 ;; This function calls:
+   209 ;;		_timer
+   210 ;; This function is called by:
+   211 ;;		Startup code after reset
+   212 ;; This function uses a non-reentrant model
+   213 ;;
+   214                           psect	maintext
+   215                           	file	"D:\Embedded\pic\code\software\timer_1\fourway\fourway.c"
+   216                           	line	98
+   217                           	global	__size_of_main
+   218  001B                     	__size_of_main	equ	__end_of_main-_main
+   219                           	
+   220  0712                     _main:	
+   221                           	opt	stack 7
+   222                           ; Regs used in _main: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   223                           	line	99
+   224                           	
+   225  0712                     l2222:	
+   226                           ;fourway.c: 99: PORTC=0X00;
+   227  0712  1283               	bcf	status, 5	;RP0=0, select bank0
+   228  0713  1303               	bcf	status, 6	;RP1=0, select bank0
+   229  0714  0187               	clrf	(7)	;volatile
+   230                           	line	100
+   231                           ;fourway.c: 100: TRISC=0X00;
+   232  0715  1683               	bsf	status, 5	;RP0=1, select bank1
+   233  0716  1303               	bcf	status, 6	;RP1=0, select bank1
+   234  0717  0187               	clrf	(135)^080h	;volatile
+   235                           	line	101
+   236                           ;fourway.c: 101: PORTD=0X00;
+   237  0718  1283               	bcf	status, 5	;RP0=0, select bank0
+   238  0719  1303               	bcf	status, 6	;RP1=0, select bank0
+   239  071A  0188               	clrf	(8)	;volatile
+   240                           	line	102
+   241                           ;fourway.c: 102: TRISD=0X00;
+   242  071B  1683               	bsf	status, 5	;RP0=1, select bank1
+   243  071C  1303               	bcf	status, 6	;RP1=0, select bank1
+   244  071D  0188               	clrf	(136)^080h	;volatile
+   245                           	line	103
+   246                           	
+   247  071E                     l2224:	
+   248                           ;fourway.c: 103: T1CON=0X31;
+   249  071E  3031               	movlw	(031h)
+   250  071F  1283               	bcf	status, 5	;RP0=0, select bank0
+   251  0720  1303               	bcf	status, 6	;RP1=0, select bank0
+   252  0721  0090               	movwf	(16)	;volatile
+   253  0722  2F23               	goto	l2226
+   254                           	line	104
+   255                           ;fourway.c: 104: while(1)
+   256                           	
+   257  0723                     l1038:	
+   258                           	line	106
+   259                           	
+   260  0723                     l2226:	
+   261                           ;fourway.c: 105: {
+   262                           ;fourway.c: 106: timer();
+   263  0723  120A  118A  272D   	fcall	_timer
+              120A  118A         
+   264  0728  2F23               	goto	l2226
+   265                           	line	107
+   266                           	
+   267  0729                     l1039:	
+   268                           	line	104
+   269  0729  2F23               	goto	l2226
+   270                           	
+   271  072A                     l1040:	
+   272                           	line	108
+   273                           	
+   274  072A                     l1041:	
+   275                           	global	start
+   276  072A  120A  118A  2800   	ljmp	start
+   277                           	opt stack 0
+   278                           GLOBAL	__end_of_main
+   279  072D                     	__end_of_main:
+   280 ;; =============== function _main ends ============
+   281                           
+   282                           	signat	_main,88
+   283                           	global	_timer
+   284                           psect	text61,local,class=CODE,delta=2
+   285                           global __ptext61
+   286  072D                     __ptext61:
+   287                           
+   288 ;; *************** function _timer *****************
+   289 ;; Defined at:
+   290 ;;		line 7 in file "D:\Embedded\pic\code\software\timer_1\fourway\fourway.c"
+   291 ;; Parameters:    Size  Location     Type
+   292 ;;		None
+   293 ;; Auto vars:     Size  Location     Type
+   294 ;;		None
+   295 ;; Return value:  Size  Location     Type
+   296 ;;		None               void
+   297 ;; Registers used:
+   298 ;;		wreg, status,2, btemp+1
+   299 ;; Tracked objects:
+   300 ;;		On entry : 0/0
+   301 ;;		On exit  : 0/0
+   302 ;;		Unchanged: 0/0
+   303 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   304 ;;      Params:         0       0       0       0       0
+   305 ;;      Locals:         0       0       0       0       0
+   306 ;;      Temps:          0       0       0       0       0
+   307 ;;      Totals:         0       0       0       0       0
+   308 ;;Total ram usage:        0 bytes
+   309 ;; Hardware stack levels used:    1
+   310 ;; This function calls:
+   311 ;;		Nothing
+   312 ;; This function is called by:
+   313 ;;		_main
+   314 ;; This function uses a non-reentrant model
+   315 ;;
+   316                           psect	text61
+   317                           	file	"D:\Embedded\pic\code\software\timer_1\fourway\fourway.c"
+   318                           	line	7
+   319                           	global	__size_of_timer
+   320  00D3                     	__size_of_timer	equ	__end_of_timer-_timer
+   321                           	
+   322  072D                     _timer:	
+   323                           	opt	stack 7
+   324                           ; Regs used in _timer: [wreg+status,2+btemp+1]
+   325                           	line	8
+   326                           	
+   327  072D                     l1410:	
+   328                           ;fourway.c: 8: if(TMR1IF==1)
+   329  072D  1283               	bcf	status, 5	;RP0=0, select bank0
+   330  072E  1303               	bcf	status, 6	;RP1=0, select bank0
+   331  072F  1C0C               	btfss	(96/8),(96)&7
+   332  0730  2F32               	goto	u11
+   333  0731  2F33               	goto	u10
+   334  0732                     u11:
+   335  0732  2F3B               	goto	l1416
+   336  0733                     u10:
+   337                           	line	10
+   338                           	
+   339  0733                     l1412:	
+   340                           ;fourway.c: 9: {
+   341                           ;fourway.c: 10: count++;
+   342  0733  3001               	movlw	low(01h)
+   343  0734  07F0               	addwf	(_count),f
+   344  0735  1803               	skipnc
+   345  0736  0AF1               	incf	(_count+1),f
+   346  0737  3000               	movlw	high(01h)
+   347  0738  07F1               	addwf	(_count+1),f
+   348                           	line	11
+   349                           	
+   350  0739                     l1414:	
+   351                           ;fourway.c: 11: TMR1IF=0;
+   352  0739  100C               	bcf	(96/8),(96)&7
+   353  073A  2F3B               	goto	l1416
+   354                           	line	12
+   355                           	
+   356  073B                     l1027:	
+   357                           	line	15
+   358                           	
+   359  073B                     l1416:	
+   360                           ;fourway.c: 12: }
+   361                           ;fourway.c: 15: if(count>=0&&count<30)
+   362  073B  1BF1               	btfsc	(_count+1),7
+   363  073C  2F3E               	goto	u21
+   364  073D  2F3F               	goto	u20
+   365  073E                     u21:
+   366  073E  2F53               	goto	l1422
+   367  073F                     u20:
+   368                           	
+   369  073F                     l1418:	
+   370  073F  0871               	movf	(_count+1),w
+   371  0740  3A80               	xorlw	80h
+   372  0741  00FF               	movwf	btemp+1
+   373  0742  3080               	movlw	(high(01Eh))^80h
+   374  0743  027F               	subwf	btemp+1,w
+   375  0744  1D03               	skipz
+   376  0745  2F48               	goto	u35
+   377  0746  301E               	movlw	low(01Eh)
+   378  0747  0270               	subwf	(_count),w
+   379  0748                     u35:
+   380                           
+   381  0748  1803               	skipnc
+   382  0749  2F4B               	goto	u31
+   383  074A  2F4C               	goto	u30
+   384  074B                     u31:
+   385  074B  2F53               	goto	l1422
+   386  074C                     u30:
+   387                           	line	17
+   388                           	
+   389  074C                     l1420:	
+   390                           ;fourway.c: 16: {
+   391                           ;fourway.c: 17: PORTC=0X01;
+   392  074C  3001               	movlw	(01h)
+   393  074D  1283               	bcf	status, 5	;RP0=0, select bank0
+   394  074E  1303               	bcf	status, 6	;RP1=0, select bank0
+   395  074F  0087               	movwf	(7)	;volatile
+   396                           	line	18
+   397                           ;fourway.c: 18: PORTD=0X09;
+   398  0750  3009               	movlw	(09h)
+   399  0751  0088               	movwf	(8)	;volatile
+   400  0752  2F53               	goto	l1422
+   401                           	line	19
+   402                           	
+   403  0753                     l1028:	
+   404                           	line	20
+   405                           	
+   406  0753                     l1422:	
+   407                           ;fourway.c: 19: }
+   408                           ;fourway.c: 20: if(count>=20&&count<30)
+   409  0753  0871               	movf	(_count+1),w
+   410  0754  3A80               	xorlw	80h
+   411  0755  00FF               	movwf	btemp+1
+   412  0756  3080               	movlw	(high(014h))^80h
+   413  0757  027F               	subwf	btemp+1,w
+   414  0758  1D03               	skipz
+   415  0759  2F5C               	goto	u45
+   416  075A  3014               	movlw	low(014h)
+   417  075B  0270               	subwf	(_count),w
+   418  075C                     u45:
+   419                           
+   420  075C  1C03               	skipc
+   421  075D  2F5F               	goto	u41
+   422  075E  2F60               	goto	u40
+   423  075F                     u41:
+   424  075F  2F74               	goto	l1428
+   425  0760                     u40:
+   426                           	
+   427  0760                     l1424:	
+   428  0760  0871               	movf	(_count+1),w
+   429  0761  3A80               	xorlw	80h
+   430  0762  00FF               	movwf	btemp+1
+   431  0763  3080               	movlw	(high(01Eh))^80h
+   432  0764  027F               	subwf	btemp+1,w
+   433  0765  1D03               	skipz
+   434  0766  2F69               	goto	u55
+   435  0767  301E               	movlw	low(01Eh)
+   436  0768  0270               	subwf	(_count),w
+   437  0769                     u55:
+   438                           
+   439  0769  1803               	skipnc
+   440  076A  2F6C               	goto	u51
+   441  076B  2F6D               	goto	u50
+   442  076C                     u51:
+   443  076C  2F74               	goto	l1428
+   444  076D                     u50:
+   445                           	line	22
+   446                           	
+   447  076D                     l1426:	
+   448                           ;fourway.c: 21: {
+   449                           ;fourway.c: 22: PORTC=0X11;
+   450  076D  3011               	movlw	(011h)
+   451  076E  1283               	bcf	status, 5	;RP0=0, select bank0
+   452  076F  1303               	bcf	status, 6	;RP1=0, select bank0
+   453  0770  0087               	movwf	(7)	;volatile
+   454                           	line	23
+   455                           ;fourway.c: 23: PORTD=0X09;
+   456  0771  3009               	movlw	(09h)
+   457  0772  0088               	movwf	(8)	;volatile
+   458  0773  2F74               	goto	l1428
+   459                           	line	24
+   460                           	
+   461  0774                     l1029:	
+   462                           	line	25
+   463                           	
+   464  0774                     l1428:	
+   465                           ;fourway.c: 24: }
+   466                           ;fourway.c: 25: if(count>=0&&count<20)
+   467  0774  1BF1               	btfsc	(_count+1),7
+   468  0775  2F77               	goto	u61
+   469  0776  2F78               	goto	u60
+   470  0777                     u61:
+   471  0777  2F8C               	goto	l1434
+   472  0778                     u60:
+   473                           	
+   474  0778                     l1430:	
+   475  0778  0871               	movf	(_count+1),w
+   476  0779  3A80               	xorlw	80h
+   477  077A  00FF               	movwf	btemp+1
+   478  077B  3080               	movlw	(high(014h))^80h
+   479  077C  027F               	subwf	btemp+1,w
+   480  077D  1D03               	skipz
+   481  077E  2F81               	goto	u75
+   482  077F  3014               	movlw	low(014h)
+   483  0780  0270               	subwf	(_count),w
+   484  0781                     u75:
+   485                           
+   486  0781  1803               	skipnc
+   487  0782  2F84               	goto	u71
+   488  0783  2F85               	goto	u70
+   489  0784                     u71:
+   490  0784  2F8C               	goto	l1434
+   491  0785                     u70:
+   492                           	line	27
+   493                           	
+   494  0785                     l1432:	
+   495                           ;fourway.c: 26: {
+   496                           ;fourway.c: 27: PORTC=0X21;
+   497  0785  3021               	movlw	(021h)
+   498  0786  1283               	bcf	status, 5	;RP0=0, select bank0
+   499  0787  1303               	bcf	status, 6	;RP1=0, select bank0
+   500  0788  0087               	movwf	(7)	;volatile
+   501                           	line	28
+   502                           ;fourway.c: 28: PORTD=0X09;
+   503  0789  3009               	movlw	(09h)
+   504  078A  0088               	movwf	(8)	;volatile
+   505  078B  2F8C               	goto	l1434
+   506                           	line	29
+   507                           	
+   508  078C                     l1030:	
+   509                           	line	34
+   510                           	
+   511  078C                     l1434:	
+   512                           ;fourway.c: 29: }
+   513                           ;fourway.c: 34: if(count>=30&&count<60)
+   514  078C  0871               	movf	(_count+1),w
+   515  078D  3A80               	xorlw	80h
+   516  078E  00FF               	movwf	btemp+1
+   517  078F  3080               	movlw	(high(01Eh))^80h
+   518  0790  027F               	subwf	btemp+1,w
+   519  0791  1D03               	skipz
+   520  0792  2F95               	goto	u85
+   521  0793  301E               	movlw	low(01Eh)
+   522  0794  0270               	subwf	(_count),w
+   523  0795                     u85:
+   524                           
+   525  0795  1C03               	skipc
+   526  0796  2F98               	goto	u81
+   527  0797  2F99               	goto	u80
+   528  0798                     u81:
+   529  0798  2FAD               	goto	l1440
+   530  0799                     u80:
+   531                           	
+   532  0799                     l1436:	
+   533  0799  0871               	movf	(_count+1),w
+   534  079A  3A80               	xorlw	80h
+   535  079B  00FF               	movwf	btemp+1
+   536  079C  3080               	movlw	(high(03Ch))^80h
+   537  079D  027F               	subwf	btemp+1,w
+   538  079E  1D03               	skipz
+   539  079F  2FA2               	goto	u95
+   540  07A0  303C               	movlw	low(03Ch)
+   541  07A1  0270               	subwf	(_count),w
+   542  07A2                     u95:
+   543                           
+   544  07A2  1803               	skipnc
+   545  07A3  2FA5               	goto	u91
+   546  07A4  2FA6               	goto	u90
+   547  07A5                     u91:
+   548  07A5  2FAD               	goto	l1440
+   549  07A6                     u90:
+   550                           	line	36
+   551                           	
+   552  07A6                     l1438:	
+   553                           ;fourway.c: 35: {
+   554                           ;fourway.c: 36: PORTC=0X09;
+   555  07A6  3009               	movlw	(09h)
+   556  07A7  1283               	bcf	status, 5	;RP0=0, select bank0
+   557  07A8  1303               	bcf	status, 6	;RP1=0, select bank0
+   558  07A9  0087               	movwf	(7)	;volatile
+   559                           	line	37
+   560                           ;fourway.c: 37: PORTD=0X08;
+   561  07AA  3008               	movlw	(08h)
+   562  07AB  0088               	movwf	(8)	;volatile
+   563  07AC  2FAD               	goto	l1440
+   564                           	line	38
+   565                           	
+   566  07AD                     l1031:	
+   567                           	line	39
+   568                           	
+   569  07AD                     l1440:	
+   570                           ;fourway.c: 38: }
+   571                           ;fourway.c: 39: if(count>=50&&count<60)
+   572  07AD  0871               	movf	(_count+1),w
+   573  07AE  3A80               	xorlw	80h
+   574  07AF  00FF               	movwf	btemp+1
+   575  07B0  3080               	movlw	(high(032h))^80h
+   576  07B1  027F               	subwf	btemp+1,w
+   577  07B2  1D03               	skipz
+   578  07B3  2FB6               	goto	u105
+   579  07B4  3032               	movlw	low(032h)
+   580  07B5  0270               	subwf	(_count),w
+   581  07B6                     u105:
+   582                           
+   583  07B6  1C03               	skipc
+   584  07B7  2FB9               	goto	u101
+   585  07B8  2FBA               	goto	u100
+   586  07B9                     u101:
+   587  07B9  2FCE               	goto	l1446
+   588  07BA                     u100:
+   589                           	
+   590  07BA                     l1442:	
+   591  07BA  0871               	movf	(_count+1),w
+   592  07BB  3A80               	xorlw	80h
+   593  07BC  00FF               	movwf	btemp+1
+   594  07BD  3080               	movlw	(high(03Ch))^80h
+   595  07BE  027F               	subwf	btemp+1,w
+   596  07BF  1D03               	skipz
+   597  07C0  2FC3               	goto	u115
+   598  07C1  303C               	movlw	low(03Ch)
+   599  07C2  0270               	subwf	(_count),w
+   600  07C3                     u115:
+   601                           
+   602  07C3  1803               	skipnc
+   603  07C4  2FC6               	goto	u111
+   604  07C5  2FC7               	goto	u110
+   605  07C6                     u111:
+   606  07C6  2FCE               	goto	l1446
+   607  07C7                     u110:
+   608                           	line	41
+   609                           	
+   610  07C7                     l1444:	
+   611                           ;fourway.c: 40: {
+   612                           ;fourway.c: 41: PORTC=0X09;
+   613  07C7  3009               	movlw	(09h)
+   614  07C8  1283               	bcf	status, 5	;RP0=0, select bank0
+   615  07C9  1303               	bcf	status, 6	;RP1=0, select bank0
+   616  07CA  0087               	movwf	(7)	;volatile
+   617                           	line	42
+   618                           ;fourway.c: 42: PORTD=0X09;
+   619  07CB  3009               	movlw	(09h)
+   620  07CC  0088               	movwf	(8)	;volatile
+   621  07CD  2FCE               	goto	l1446
+   622                           	line	43
+   623                           	
+   624  07CE                     l1032:	
+   625                           	line	44
+   626                           	
+   627  07CE                     l1446:	
+   628                           ;fourway.c: 43: }
+   629                           ;fourway.c: 44: if(count>=30&&count<50)
+   630  07CE  0871               	movf	(_count+1),w
+   631  07CF  3A80               	xorlw	80h
+   632  07D0  00FF               	movwf	btemp+1
+   633  07D1  3080               	movlw	(high(01Eh))^80h
+   634  07D2  027F               	subwf	btemp+1,w
+   635  07D3  1D03               	skipz
+   636  07D4  2FD7               	goto	u125
+   637  07D5  301E               	movlw	low(01Eh)
+   638  07D6  0270               	subwf	(_count),w
+   639  07D7                     u125:
+   640                           
+   641  07D7  1C03               	skipc
+   642  07D8  2FDA               	goto	u121
+   643  07D9  2FDB               	goto	u120
+   644  07DA                     u121:
+   645  07DA  2FEF               	goto	l1452
+   646  07DB                     u120:
+   647                           	
+   648  07DB                     l1448:	
+   649  07DB  0871               	movf	(_count+1),w
+   650  07DC  3A80               	xorlw	80h
+   651  07DD  00FF               	movwf	btemp+1
+   652  07DE  3080               	movlw	(high(032h))^80h
+   653  07DF  027F               	subwf	btemp+1,w
+   654  07E0  1D03               	skipz
+   655  07E1  2FE4               	goto	u135
+   656  07E2  3032               	movlw	low(032h)
+   657  07E3  0270               	subwf	(_count),w
+   658  07E4                     u135:
+   659                           
+   660  07E4  1803               	skipnc
+   661  07E5  2FE7               	goto	u131
+   662  07E6  2FE8               	goto	u130
+   663  07E7                     u131:
+   664  07E7  2FEF               	goto	l1452
+   665  07E8                     u130:
+   666                           	line	46
+   667                           	
+   668  07E8                     l1450:	
+   669                           ;fourway.c: 45: {
+   670                           ;fourway.c: 46: PORTC=0X09;
+   671  07E8  3009               	movlw	(09h)
+   672  07E9  1283               	bcf	status, 5	;RP0=0, select bank0
+   673  07EA  1303               	bcf	status, 6	;RP1=0, select bank0
+   674  07EB  0087               	movwf	(7)	;volatile
+   675                           	line	47
+   676                           ;fourway.c: 47: PORTD=0X0F;
+   677  07EC  300F               	movlw	(0Fh)
+   678  07ED  0088               	movwf	(8)	;volatile
+   679  07EE  2FEF               	goto	l1452
+   680                           	line	48
+   681                           	
+   682  07EF                     l1033:	
+   683                           	line	91
+   684                           	
+   685  07EF                     l1452:	
+   686                           ;fourway.c: 48: }
+   687                           ;fourway.c: 91: if(count>=60)
+   688  07EF  0871               	movf	(_count+1),w
+   689  07F0  3A80               	xorlw	80h
+   690  07F1  00FF               	movwf	btemp+1
+   691  07F2  3080               	movlw	(high(03Ch))^80h
+   692  07F3  027F               	subwf	btemp+1,w
+   693  07F4  1D03               	skipz
+   694  07F5  2FF8               	goto	u145
+   695  07F6  303C               	movlw	low(03Ch)
+   696  07F7  0270               	subwf	(_count),w
+   697  07F8                     u145:
+   698                           
+   699  07F8  1C03               	skipc
+   700  07F9  2FFB               	goto	u141
+   701  07FA  2FFC               	goto	u140
+   702  07FB                     u141:
+   703  07FB  2FFF               	goto	l1035
+   704  07FC                     u140:
+   705                           	line	93
+   706                           	
+   707  07FC                     l1454:	
+   708                           ;fourway.c: 92: {
+   709                           ;fourway.c: 93: count=0;
+   710  07FC  01F0               	clrf	(_count)
+   711  07FD  01F1               	clrf	(_count+1)
+   712  07FE  2FFF               	goto	l1035
+   713                           	line	94
+   714                           	
+   715  07FF                     l1034:	
+   716                           	line	96
+   717                           	
+   718  07FF                     l1035:	
+   719  07FF  0008               	return
+   720                           	opt stack 0
+   721                           GLOBAL	__end_of_timer
+   722  0800                     	__end_of_timer:
+   723 ;; =============== function _timer ends ============
+   724                           
+   725                           	signat	_timer,88
+   726                           psect	text62,local,class=CODE,delta=2
+   727                           global __ptext62
+   728  0000                     __ptext62:
+   729                           	global	btemp
+   730  007E                     	btemp set 07Eh
+   731                           
+   732                           	DABS	1,126,2	;btemp
+   733                           	global	wtemp0
+   734  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Wed Mar 30 04:58:42 2022
+
+                  u10 0733                    u11 0732                    u20 073F                    u21 073E  
+                  u30 074C                    u31 074B                    u40 0760                    u41 075F  
+                  u50 076D                    u51 076C                    u35 0748                    u60 0778  
+                  u61 0777                    u45 075C                    u70 0785                    u71 0784  
+                  u55 0769                    u80 0799                    u81 0798                    u90 07A6  
+                  u91 07A5                    u75 0781                    u85 0795                    u95 07A2  
+                 u100 07BA                   u101 07B9                   u110 07C7                   u111 07C6  
+                 u120 07DB                   u121 07DA                   u105 07B6                   u130 07E8  
+                 u131 07E7                   u115 07C3                   u140 07FC                   u141 07FB  
+                 u125 07D7                   u135 07E4                   u145 07F8                  l1030 078C  
+                l1031 07AD                  l1032 07CE                  l1040 072A                  l1033 07EF  
+                l1041 072A                  l1034 07FF                  l1035 07FF                  l1027 073B  
+                l1028 0753                  l1029 0774                  l1038 0723                  l1039 0729  
+                l1410 072D                  l1420 074C                  l1412 0733                  l1430 0778  
+                l1422 0753                  l1414 0739                  l2222 0712                  l1440 07AD  
+                l1432 0785                  l1424 0760                  l1416 073B                  l2224 071E  
+                l1450 07E8                  l1442 07BA                  l1434 078C                  l1426 076D  
+                l1418 073F                  l2226 0723                  l1452 07EF                  l1444 07C7  
+                l1436 0799                  l1428 0774                  l1454 07FC                  l1446 07CE  
+                l1438 07A6                  l1448 07DB                  _main 0712                  btemp 007E  
+                start 0000                 ?_main 0000                 _T1CON 0010                 _PORTC 0007  
+               _PORTD 0008                 _TRISC 0087                 _TRISD 0088                 _count 0070  
+               _timer 072D                 status 0003                 wtemp0 007E          __end_of_main 072D  
+              ??_main 0000                ?_timer 0000                _TMR1IF 0060        __pcstackCOMMON 0000  
+       __end_of_timer 0800               ??_timer 0000            __pmaintext 0712  end_of_initialization 070E  
+ start_initialization 070C           __pbssCOMMON 0070        __size_of_timer 00D3              __ptext60 0000  
+            __ptext61 072D              __ptext62 0000         __size_of_main 001B  

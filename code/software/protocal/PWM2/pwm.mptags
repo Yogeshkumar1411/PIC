@@ -1,0 +1,16 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+DV	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	5;"	v	line:5
+adc	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	17;"	f	line:17
+delay	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	6;"	f	line:6	signature:(unsigned int ms)
+high	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	5;"	v	line:5
+low	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	5;"	v	line:5
+main	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	27;"	f	line:27
+motor	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	10;"	f	line:10	signature:(int samp)
+write	D:\Embedded\pic\code\software\protocal\PWM2\pwm.c	5;"	v	line:5

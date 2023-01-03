@@ -1,0 +1,72 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+DV	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	210;"	l	line:210
+Diesel_1::RB3	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	17;"	d	line:17	file:
+Diesel_2::RB4	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	18;"	d	line:18	file:
+EB_LED_on::RB0	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	15;"	d	line:15	file:
+EB_On::RA0	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	11;"	d	line:11	file:
+Final_value	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	230;"	l	line:230
+Gate_Siren	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	105;"	f	line:105	signature:(char read1[])
+Gen_LED_on::RB1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	16;"	d	line:16	file:
+Gen_a	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	21;"	v	line:21
+Gen_b	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	21;"	v	line:21
+Gen_c	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	21;"	v	line:21
+Gen_d	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	21;"	v	line:21
+Gen_e	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	21;"	v	line:21
+Gen_f	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	21;"	v	line:21
+Generator	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	25;"	v	line:25
+Generator_On::RA1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	12;"	d	line:12	file:
+Generator_run	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	116;"	f	line:116
+Heat_danger::RA4	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	13;"	d	line:13	file:
+I2C_Read	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	62;"	f	line:62	signature:(unsigned int i)
+I2C_Restart	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	57;"	f	line:57
+I2C_Slave	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	50;"	f	line:50	signature:(char data)
+I2C_Start	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	40;"	f	line:40
+I2C_Stop	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	45;"	f	line:45
+Pre_a1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	22;"	v	line:22
+Pre_b1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	22;"	v	line:22
+Pre_c1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	22;"	v	line:22
+Pre_d1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	22;"	v	line:22
+Pre_e1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	22;"	v	line:22
+Pre_f1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	22;"	v	line:22
+Reset::RB5	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	19;"	d	line:19	file:
+Shift_man_alarm::RC1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	14;"	d	line:14	file:
+adc	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	208;"	f	line:208
+conversion	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	88;"	f	line:88	signature:(char disp[])
+flag1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	27;"	v	line:27
+flag2	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	28;"	v	line:28
+flag_supply	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	29;"	v	line:29
+get::(a)#a	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	10;"	d	line:10	file:
+gsm	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	175;"	f	line:175	signature:(int cmd)
+high	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	23;"	v	line:23
+hold	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	35;"	f	line:35
+i	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	20;"	v	line:20
+j	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	211;"	l	line:211
+low	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	23;"	v	line:23
+main	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	261;"	f	line:261
+new	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	170;"	f	line:170
+read	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	20;"	v	line:20
+read1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	64;"	l	line:64
+retain	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	25;"	v	line:25
+sensorvalue	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	23;"	v	line:23
+stop	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	26;"	v	line:26
+store	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	25;"	v	line:25
+string	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	80;"	f	line:80	signature:(char *p)
+temp	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	33;"	v	line:33
+temp_a	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	24;"	v	line:24
+temp_b	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	24;"	v	line:24
+temp_c	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	24;"	v	line:24
+temp_d	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	24;"	v	line:24
+temp_e	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	24;"	v	line:24
+temp_f	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	24;"	v	line:24
+tran	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	163;"	f	line:163	signature:(char data2)
+trans	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	153;"	f	line:153	signature:(char *data1)
+u	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	212;"	l	line:212
+vari1	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	32;"	v	line:32
+variable	D:\Embedded\pic\code\Industrial_automation\industrial_automation.c	21;"	v	line:21

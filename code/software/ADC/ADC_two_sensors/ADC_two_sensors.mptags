@@ -1,0 +1,35 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+DV	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+DV1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+EN::RE2	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	7;"	d	line:7	file:
+H	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+H1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+L	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+L1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+LCD::PORTD	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	8;"	d	line:8	file:
+RS::RE0	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	5;"	d	line:5	file:
+RW::RE1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	6;"	d	line:6	file:
+a	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+a1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+adc	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	24;"	f	line:24
+adc1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	60;"	f	line:60
+b	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+b1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+c	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+c1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+d	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+d1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+delay	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	10;"	f	line:10	signature:(unsigned int ms)
+e	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+e1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+f	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+f1	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	9;"	v	line:9
+lcd_cmd	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	14;"	f	line:14	signature:(char a,char b,char c)
+main	D:\Embedded\pic\code\software\ADC\ADC_two_sensors\ADC_two_sensors.c	96;"	f	line:96

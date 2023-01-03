@@ -1,0 +1,17 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+EN::RE2	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	7;"	d	line:7	file:
+LCD::PORTB	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	8;"	d	line:8	file:
+RS::RE0	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	5;"	d	line:5	file:
+RW::RE1	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	6;"	d	line:6	file:
+address	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	34;"	f	line:34	signature:(char a)
+delay	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	9;"	f	line:9	signature:(unsigned int ms)
+display	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	43;"	f	line:43	signature:(char a)
+main	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	52;"	f	line:52
+pulse	D:\Embedded\pic\code\software\LCD\4-bit\4-bit-lcd.c	13;"	f	line:13

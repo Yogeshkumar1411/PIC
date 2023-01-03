@@ -1,0 +1,5 @@
+_delay: CODE, 1890 0 20
+_main: CODE, 1996 0 52
+_adc: CODE, 1949 0 47
+_motor: CODE, 1910 0 39
+Total: 158

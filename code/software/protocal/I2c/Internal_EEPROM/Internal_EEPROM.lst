@@ -1,0 +1,790 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Tue Jun 28 12:06:52 2022
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F887
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_eeprom_read
+    43                           	FNCALL	_main,_eeprom_write
+    44                           	FNROOT	_main
+    45                           	global	_seg
+    46                           psect	idataBANK0,class=CODE,space=0,delta=2
+    47                           global __pidataBANK0
+    48  0748                     __pidataBANK0:
+    49                           	file	"D:\Embedded\pic\code\software\protocal\I2c\Internal_EEPROM\Internal_EEPROM.c"
+    50                           	line	6
+    51                           
+    52                           ;initializer for _seg
+    53  0748  343F               	retlw	03Fh
+    54  0749  3406               	retlw	06h
+    55  074A  345B               	retlw	05Bh
+    56  074B  344F               	retlw	04Fh
+    57  074C  3466               	retlw	066h
+    58  074D  346D               	retlw	06Dh
+    59  074E  347D               	retlw	07Dh
+    60  074F  3407               	retlw	07h
+    61  0750  347F               	retlw	07Fh
+    62  0751  346F               	retlw	06Fh
+    63  0752  3400               	retlw	0
+    64  0753  3400               	retlw	0
+    65  0754  3400               	retlw	0
+    66  0755  3400               	retlw	0
+    67  0756  3400               	retlw	0
+    68  0757  3400               	retlw	0
+    69  0758  3400               	retlw	0
+    70  0759  3400               	retlw	0
+    71  075A  3400               	retlw	0
+    72  075B  3400               	retlw	0
+    73                           	global	_i
+    74                           psect	nvCOMMON,class=COMMON,space=1
+    75                           global __pnvCOMMON
+    76  0075                     __pnvCOMMON:
+    77  0075                     _i:
+    78  0075                            ds      2
+    79                           
+    80                           	global	_PORTC
+    81  0007                     _PORTC	set	7
+    82                           	global	_PORTD
+    83  0008                     _PORTD	set	8
+    84                           	global	_CARRY
+    85  0018                     _CARRY	set	24
+    86                           	global	_GIE
+    87  005F                     _GIE	set	95
+    88                           	global	_RC0
+    89  0038                     _RC0	set	56
+    90                           	global	_TRISC
+    91  0087                     _TRISC	set	135
+    92                           	global	_TRISD
+    93  0088                     _TRISD	set	136
+    94                           	global	_EEADR
+    95  010D                     _EEADR	set	269
+    96                           	global	_EEDATA
+    97  010C                     _EEDATA	set	268
+    98                           	global	_EECON1
+    99  018C                     _EECON1	set	396
+   100                           	global	_EECON2
+   101  018D                     _EECON2	set	397
+   102                           	global	_RD
+   103  0C60                     _RD	set	3168
+   104                           	global	_WR
+   105  0C61                     _WR	set	3169
+   106                           	global	_WREN
+   107  0C62                     _WREN	set	3170
+   108                           	file	"Internal_EEPROM.as"
+   109                           	line	#
+   110                           psect cinit,class=CODE,delta=2
+   111                           global start_initialization
+   112  0736                     start_initialization:
+   113                           
+   114                           psect	dataBANK0,class=BANK0,space=1
+   115                           global __pdataBANK0
+   116  0020                     __pdataBANK0:
+   117                           	file	"D:\Embedded\pic\code\software\protocal\I2c\Internal_EEPROM\Internal_EEPROM.c"
+   118  0020                     _seg:
+   119  0020                            ds      20
+   120                           
+   121                           global btemp
+   122                           psect inittext,class=CODE,delta=2
+   123                           global init_fetch,btemp
+   124                           ;	Called with low address in FSR and high address in W
+   125  0725                     init_fetch:
+   126  0725  087E               	movf btemp,w
+   127  0726  008A               	movwf pclath
+   128  0727  087F               	movf btemp+1,w
+   129  0728  0082               	movwf pc
+   130                           global init_ram
+   131                           ;Called with:
+   132                           ;	high address of idata address in btemp 
+   133                           ;	low address of idata address in btemp+1 
+   134                           ;	low address of data in FSR
+   135                           ;	high address + 1 of data in btemp-1
+   136  0729                     init_ram:
+   137  0729  2725  120A  118A   	fcall init_fetch
+   138  072C  0080               	movwf indf,f
+   139  072D  0A84               	incf fsr,f
+   140  072E  0804               	movf fsr,w
+   141  072F  067D               	xorwf btemp-1,w
+   142  0730  1903               	btfsc status,2
+   143  0731  3400               	retlw 0
+   144  0732  0AFF               	incf btemp+1,f
+   145  0733  1903               	btfsc status,2
+   146  0734  0AFE               	incf btemp,f
+   147  0735  2F29               	goto init_ram
+   148                           ; Initialize objects allocated to BANK0
+   149                           psect cinit,class=CODE,delta=2
+   150                           global init_ram, __pidataBANK0
+   151  0736  1383               	bcf	status, 7	;select IRP bank0
+   152  0737  3034               	movlw low(__pdataBANK0+20)
+   153  0738  00FD               	movwf btemp-1,f
+   154  0739  3007               	movlw high(__pidataBANK0)
+   155  073A  00FE               	movwf btemp,f
+   156  073B  3048               	movlw low(__pidataBANK0)
+   157  073C  00FF               	movwf btemp+1,f
+   158  073D  3020               	movlw low(__pdataBANK0)
+   159  073E  0084               	movwf fsr,f
+   160  073F  120A  118A  2729   	fcall init_ram
+              120A  118A         
+   161                           psect cinit,class=CODE,delta=2
+   162                           global end_of_initialization
+   163                           
+   164                           ;End of C runtime variable initialization code
+   165                           
+   166  0744                     end_of_initialization:
+   167  0744  0183               clrf status
+   168  0745  120A  118A  2FAC   ljmp _main	;jump to C main() function
+   169                           psect	cstackCOMMON,class=COMMON,space=1
+   170                           global __pcstackCOMMON
+   171  0070                     __pcstackCOMMON:
+   172                           	global	??_eeprom_read
+   173  0070                     ??_eeprom_read:	; 0 bytes @ 0x0
+   174                           	global	?_eeprom_write
+   175  0070                     ?_eeprom_write:	; 0 bytes @ 0x0
+   176                           	global	?_main
+   177  0070                     ?_main:	; 0 bytes @ 0x0
+   178                           	global	?_eeprom_read
+   179  0070                     ?_eeprom_read:	; 1 bytes @ 0x0
+   180                           	global	eeprom_write@value
+   181  0070                     eeprom_write@value:	; 1 bytes @ 0x0
+   182  0070                     	ds	1
+   183                           	global	??_eeprom_write
+   184  0071                     ??_eeprom_write:	; 0 bytes @ 0x1
+   185                           	global	eeprom_read@addr
+   186  0071                     eeprom_read@addr:	; 1 bytes @ 0x1
+   187  0071                     	ds	1
+   188                           	global	eeprom_write@addr
+   189  0072                     eeprom_write@addr:	; 1 bytes @ 0x2
+   190  0072                     	ds	1
+   191                           	global	??_main
+   192  0073                     ??_main:	; 0 bytes @ 0x3
+   193  0073                     	ds	2
+   194 ;;Data sizes: Strings 0, constant 0, data 20, bss 0, persistent 2 stack 0
+   195 ;;Auto spaces:   Size  Autos    Used
+   196 ;; COMMON          14      5       7
+   197 ;; BANK0           80      0      20
+   198 ;; BANK1           80      0       0
+   199 ;; BANK3           96      0       0
+   200 ;; BANK2           96      0       0
+   201                           
+   202 ;;
+   203 ;; Pointer list with targets:
+   204                           
+   205                           
+   206                           
+   207 ;;
+   208 ;; Critical Paths under _main in COMMON
+   209 ;;
+   210 ;;   _main->_eeprom_write
+   211 ;;
+   212 ;; Critical Paths under _main in BANK0
+   213 ;;
+   214 ;;   None.
+   215 ;;
+   216 ;; Critical Paths under _main in BANK1
+   217 ;;
+   218 ;;   None.
+   219 ;;
+   220 ;; Critical Paths under _main in BANK3
+   221 ;;
+   222 ;;   None.
+   223 ;;
+   224 ;; Critical Paths under _main in BANK2
+   225 ;;
+   226 ;;   None.
+   227                           
+   228 ;;
+   229 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   230 ;;
+   231                           
+   232 ;;
+   233 ;;Call Graph Tables:
+   234 ;;
+   235 ;; ---------------------------------------------------------------------------------
+   236 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   237 ;; ---------------------------------------------------------------------------------
+   238 ;; (0) _main                                                 2     2      0      45
+   239 ;;                                              3 COMMON     2     2      0
+   240 ;;                        _eeprom_read
+   241 ;;                       _eeprom_write
+   242 ;; ---------------------------------------------------------------------------------
+   243 ;; (1) _eeprom_write                                         3     2      1      30
+   244 ;;                                              0 COMMON     3     2      1
+   245 ;; ---------------------------------------------------------------------------------
+   246 ;; (1) _eeprom_read                                          2     2      0      15
+   247 ;;                                              0 COMMON     2     2      0
+   248 ;; ---------------------------------------------------------------------------------
+   249 ;; Estimated maximum stack depth 1
+   250 ;; ---------------------------------------------------------------------------------
+   251                           
+   252 ;; Call Graph Graphs:
+   253                           
+   254 ;; _main (ROOT)
+   255 ;;   _eeprom_read
+   256 ;;   _eeprom_write
+   257 ;;
+   258                           
+   259 ;; Address spaces:
+   260                           
+   261 ;;Name               Size   Autos  Total    Cost      Usage
+   262 ;;BANK3               60      0       0       9        0.0%
+   263 ;;BITBANK3            60      0       0       8        0.0%
+   264 ;;SFR3                 0      0       0       4        0.0%
+   265 ;;BITSFR3              0      0       0       4        0.0%
+   266 ;;BANK2               60      0       0      11        0.0%
+   267 ;;BITBANK2            60      0       0      10        0.0%
+   268 ;;SFR2                 0      0       0       5        0.0%
+   269 ;;BITSFR2              0      0       0       5        0.0%
+   270 ;;SFR1                 0      0       0       2        0.0%
+   271 ;;BITSFR1              0      0       0       2        0.0%
+   272 ;;BANK1               50      0       0       7        0.0%
+   273 ;;BITBANK1            50      0       0       6        0.0%
+   274 ;;CODE                 0      0       0       0        0.0%
+   275 ;;DATA                 0      0      1C      12        0.0%
+   276 ;;ABS                  0      0      1B       3        0.0%
+   277 ;;NULL                 0      0       0       0        0.0%
+   278 ;;STACK                0      0       1       2        0.0%
+   279 ;;BANK0               50      0      14       5       25.0%
+   280 ;;BITBANK0            50      0       0       4        0.0%
+   281 ;;SFR0                 0      0       0       1        0.0%
+   282 ;;BITSFR0              0      0       0       1        0.0%
+   283 ;;COMMON               E      5       7       1       50.0%
+   284 ;;BITCOMMON            E      0       0       0        0.0%
+   285 ;;EEDATA             100      0       0       0        0.0%
+   286                           
+   287                           	global	_main
+   288                           psect	maintext,global,class=CODE,delta=2
+   289                           global __pmaintext
+   290  07AC                     __pmaintext:
+   291                           
+   292 ;; *************** function _main *****************
+   293 ;; Defined at:
+   294 ;;		line 15 in file "D:\Embedded\pic\code\software\protocal\I2c\Internal_EEPROM\Internal_EEPROM.c"
+   295 ;; Parameters:    Size  Location     Type
+   296 ;;		None
+   297 ;; Auto vars:     Size  Location     Type
+   298 ;;		None
+   299 ;; Return value:  Size  Location     Type
+   300 ;;		None               void
+   301 ;; Registers used:
+   302 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   303 ;; Tracked objects:
+   304 ;;		On entry : 17F/0
+   305 ;;		On exit  : 0/0
+   306 ;;		Unchanged: 0/0
+   307 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   308 ;;      Params:         0       0       0       0       0
+   309 ;;      Locals:         0       0       0       0       0
+   310 ;;      Temps:          2       0       0       0       0
+   311 ;;      Totals:         2       0       0       0       0
+   312 ;;Total ram usage:        2 bytes
+   313 ;; Hardware stack levels required when called:    1
+   314 ;; This function calls:
+   315 ;;		_eeprom_read
+   316 ;;		_eeprom_write
+   317 ;; This function is called by:
+   318 ;;		Startup code after reset
+   319 ;; This function uses a non-reentrant model
+   320 ;;
+   321                           psect	maintext
+   322                           	file	"D:\Embedded\pic\code\software\protocal\I2c\Internal_EEPROM\Internal_EEPROM.c"
+   323                           	line	15
+   324                           	global	__size_of_main
+   325  0054                     	__size_of_main	equ	__end_of_main-_main
+   326                           	
+   327  07AC                     _main:	
+   328                           	opt	stack 7
+   329                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   330                           	line	17
+   331                           	
+   332  07AC                     l2251:	
+   333                           ;Internal_EEPROM.c: 17: TRISC=0X01;
+   334  07AC  3001               	movlw	(01h)
+   335  07AD  1683               	bsf	status, 5	;RP0=1, select bank1
+   336  07AE  1303               	bcf	status, 6	;RP1=0, select bank1
+   337  07AF  0087               	movwf	(135)^080h	;volatile
+   338                           	line	18
+   339                           	
+   340  07B0                     l2253:	
+   341                           ;Internal_EEPROM.c: 18: PORTC=0X00;
+   342  07B0  1283               	bcf	status, 5	;RP0=0, select bank0
+   343  07B1  1303               	bcf	status, 6	;RP1=0, select bank0
+   344  07B2  0187               	clrf	(7)	;volatile
+   345                           	line	19
+   346                           	
+   347  07B3                     l2255:	
+   348                           ;Internal_EEPROM.c: 19: TRISD=0X00;
+   349  07B3  1683               	bsf	status, 5	;RP0=1, select bank1
+   350  07B4  1303               	bcf	status, 6	;RP1=0, select bank1
+   351  07B5  0188               	clrf	(136)^080h	;volatile
+   352                           	line	20
+   353                           	
+   354  07B6                     l2257:	
+   355                           ;Internal_EEPROM.c: 20: PORTD=0X00;
+   356  07B6  1283               	bcf	status, 5	;RP0=0, select bank0
+   357  07B7  1303               	bcf	status, 6	;RP1=0, select bank0
+   358  07B8  0188               	clrf	(8)	;volatile
+   359                           	line	21
+   360                           	
+   361  07B9                     l2259:	
+   362                           ;Internal_EEPROM.c: 21: i=eeprom_read(0);
+   363  07B9  3000               	movlw	(0)
+   364  07BA  120A  118A  275C   	fcall	_eeprom_read
+              120A  118A         
+   365  07BF  00F3               	movwf	(??_main+0)+0
+   366  07C0  01F4               	clrf	(??_main+0)+0+1
+   367  07C1  0873               	movf	0+(??_main+0)+0,w
+   368  07C2  00F5               	movwf	(_i)
+   369  07C3  0874               	movf	1+(??_main+0)+0,w
+   370  07C4  00F6               	movwf	(_i+1)
+   371                           	line	22
+   372                           	
+   373  07C5                     l2261:	
+   374                           ;Internal_EEPROM.c: 22: PORTD=seg[i];
+   375  07C5  0875               	movf	(_i),w
+   376  07C6  3E20               	addlw	_seg&0ffh
+   377  07C7  0084               	movwf	fsr0
+   378  07C8  1383               	bcf	status, 7	;select IRP bank0
+   379  07C9  0800               	movf	indf,w
+   380  07CA  1283               	bcf	status, 5	;RP0=0, select bank0
+   381  07CB  1303               	bcf	status, 6	;RP1=0, select bank0
+   382  07CC  0088               	movwf	(8)	;volatile
+   383  07CD  2FCE               	goto	l2263
+   384                           	line	23
+   385                           ;Internal_EEPROM.c: 23: while(1)
+   386                           	
+   387  07CE                     l1039:	
+   388                           	line	26
+   389                           	
+   390  07CE                     l2263:	
+   391                           ;Internal_EEPROM.c: 24: {
+   392                           ;Internal_EEPROM.c: 26: if(RC0==1)
+   393  07CE  1283               	bcf	status, 5	;RP0=0, select bank0
+   394  07CF  1303               	bcf	status, 6	;RP1=0, select bank0
+   395  07D0  1C07               	btfss	(56/8),(56)&7
+   396  07D1  2FD3               	goto	u2191
+   397  07D2  2FD4               	goto	u2190
+   398  07D3                     u2191:
+   399  07D3  2FE1               	goto	l2267
+   400  07D4                     u2190:
+   401                           	line	28
+   402                           	
+   403  07D4                     l2265:	
+   404                           ;Internal_EEPROM.c: 27: {
+   405                           ;Internal_EEPROM.c: 28: i++;
+   406  07D4  3001               	movlw	low(01h)
+   407  07D5  07F5               	addwf	(_i),f
+   408  07D6  1803               	skipnc
+   409  07D7  0AF6               	incf	(_i+1),f
+   410  07D8  3000               	movlw	high(01h)
+   411  07D9  07F6               	addwf	(_i+1),f
+   412                           	line	29
+   413                           ;Internal_EEPROM.c: 29: while(RC0==1);
+   414  07DA  2FDB               	goto	l1041
+   415                           	
+   416  07DB                     l1042:	
+   417                           	
+   418  07DB                     l1041:	
+   419  07DB  1807               	btfsc	(56/8),(56)&7
+   420  07DC  2FDE               	goto	u2201
+   421  07DD  2FDF               	goto	u2200
+   422  07DE                     u2201:
+   423  07DE  2FDB               	goto	l1041
+   424  07DF                     u2200:
+   425  07DF  2FE1               	goto	l2267
+   426                           	
+   427  07E0                     l1043:	
+   428  07E0  2FE1               	goto	l2267
+   429                           	line	30
+   430                           	
+   431  07E1                     l1040:	
+   432                           	line	31
+   433                           	
+   434  07E1                     l2267:	
+   435                           ;Internal_EEPROM.c: 30: }
+   436                           ;Internal_EEPROM.c: 31: if(i>10)
+   437  07E1  0876               	movf	(_i+1),w
+   438  07E2  3A80               	xorlw	80h
+   439  07E3  00FF               	movwf	btemp+1
+   440  07E4  3080               	movlw	(high(0Bh))^80h
+   441  07E5  027F               	subwf	btemp+1,w
+   442  07E6  1D03               	skipz
+   443  07E7  2FEA               	goto	u2215
+   444  07E8  300B               	movlw	low(0Bh)
+   445  07E9  0275               	subwf	(_i),w
+   446  07EA                     u2215:
+   447                           
+   448  07EA  1C03               	skipc
+   449  07EB  2FED               	goto	u2211
+   450  07EC  2FEE               	goto	u2210
+   451  07ED                     u2211:
+   452  07ED  2FF1               	goto	l2271
+   453  07EE                     u2210:
+   454                           	line	33
+   455                           	
+   456  07EE                     l2269:	
+   457                           ;Internal_EEPROM.c: 32: {
+   458                           ;Internal_EEPROM.c: 33: i=0;
+   459  07EE  01F5               	clrf	(_i)
+   460  07EF  01F6               	clrf	(_i+1)
+   461  07F0  2FF1               	goto	l2271
+   462                           	line	34
+   463                           	
+   464  07F1                     l1044:	
+   465                           	line	36
+   466                           	
+   467  07F1                     l2271:	
+   468                           ;Internal_EEPROM.c: 34: }
+   469                           ;Internal_EEPROM.c: 36: eeprom_write(0,i);
+   470  07F1  0875               	movf	(_i),w
+   471  07F2  00F3               	movwf	(??_main+0)+0
+   472  07F3  0873               	movf	(??_main+0)+0,w
+   473  07F4  00F0               	movwf	(?_eeprom_write)
+   474  07F5  3000               	movlw	(0)
+   475  07F6  120A  118A  277B   	fcall	_eeprom_write
+              120A  118A         
+   476  07FB  2FCE               	goto	l2263
+   477                           	line	38
+   478                           	
+   479  07FC                     l1045:	
+   480                           	line	23
+   481  07FC  2FCE               	goto	l2263
+   482                           	
+   483  07FD                     l1046:	
+   484                           	line	39
+   485                           	
+   486  07FD                     l1047:	
+   487                           	global	start
+   488  07FD  120A  118A  2800   	ljmp	start
+   489                           	opt stack 0
+   490                           GLOBAL	__end_of_main
+   491  0800                     	__end_of_main:
+   492 ;; =============== function _main ends ============
+   493                           
+   494                           	signat	_main,88
+   495                           	global	_eeprom_write
+   496                           psect	text74,local,class=CODE,delta=2
+   497                           global __ptext74
+   498  077B                     __ptext74:
+   499                           
+   500 ;; *************** function _eeprom_write *****************
+   501 ;; Defined at:
+   502 ;;		line 8 in file "C:\Program Files\HI-TECH Software\PICC\9.81\sources\eewrite.c"
+   503 ;; Parameters:    Size  Location     Type
+   504 ;;  addr            1    wreg     unsigned char 
+   505 ;;  value           1    0[COMMON] unsigned char 
+   506 ;; Auto vars:     Size  Location     Type
+   507 ;;  addr            1    2[COMMON] unsigned char 
+   508 ;; Return value:  Size  Location     Type
+   509 ;;		None               void
+   510 ;; Registers used:
+   511 ;;		wreg, status,2, status,0
+   512 ;; Tracked objects:
+   513 ;;		On entry : 0/0
+   514 ;;		On exit  : 0/0
+   515 ;;		Unchanged: 0/0
+   516 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   517 ;;      Params:         1       0       0       0       0
+   518 ;;      Locals:         1       0       0       0       0
+   519 ;;      Temps:          1       0       0       0       0
+   520 ;;      Totals:         3       0       0       0       0
+   521 ;;Total ram usage:        3 bytes
+   522 ;; Hardware stack levels used:    1
+   523 ;; This function calls:
+   524 ;;		Nothing
+   525 ;; This function is called by:
+   526 ;;		_main
+   527 ;; This function uses a non-reentrant model
+   528 ;;
+   529                           psect	text74
+   530                           	file	"C:\Program Files\HI-TECH Software\PICC\9.81\sources\eewrite.c"
+   531                           	line	8
+   532                           	global	__size_of_eeprom_write
+   533  0031                     	__size_of_eeprom_write	equ	__end_of_eeprom_write-_eeprom_write
+   534                           	
+   535  077B                     _eeprom_write:	
+   536                           	opt	stack 7
+   537                           ; Regs used in _eeprom_write: [wreg+status,2+status,0]
+   538                           ;eeprom_write@addr stored from wreg
+   539  077B  00F2               	movwf	(eeprom_write@addr)
+   540                           	line	9
+   541                           	
+   542  077C                     l1081:	
+   543  077C  2F7D               	goto	l1082
+   544                           	
+   545  077D                     l1083:	
+   546                           	
+   547  077D                     l1082:	
+   548  077D  1683               	bsf	status, 5	;RP0=1, select bank3
+   549  077E  1703               	bsf	status, 6	;RP1=1, select bank3
+   550  077F  188C               	btfsc	(3169/8)^0180h,(3169)&7
+   551  0780  2F82               	goto	u31
+   552  0781  2F83               	goto	u30
+   553  0782                     u31:
+   554  0782  2F7D               	goto	l1082
+   555  0783                     u30:
+   556  0783  2F84               	goto	l1465
+   557                           	
+   558  0784                     l1084:	
+   559                           	
+   560  0784                     l1465:	
+   561  0784  0872               	movf	(eeprom_write@addr),w
+   562  0785  1283               	bcf	status, 5	;RP0=0, select bank2
+   563  0786  1703               	bsf	status, 6	;RP1=1, select bank2
+   564  0787  008D               	movwf	(269)^0100h	;volatile
+   565  0788  0870               	movf	(eeprom_write@value),w
+   566  0789  008C               	movwf	(268)^0100h	;volatile
+   567                           	
+   568  078A                     l1467:	
+   569  078A  303F               	movlw	(03Fh)
+   570  078B  00F1               	movwf	(??_eeprom_write+0)+0
+   571  078C  0871               	movf	(??_eeprom_write+0)+0,w
+   572  078D  1683               	bsf	status, 5	;RP0=1, select bank3
+   573  078E  1703               	bsf	status, 6	;RP1=1, select bank3
+   574  078F  058C               	andwf	(396)^0180h,f	;volatile
+   575                           	
+   576  0790                     l1469:	
+   577  0790  1283               	bcf	status, 5	;RP0=0, select bank0
+   578  0791  1303               	bcf	status, 6	;RP1=0, select bank0
+   579  0792  1003               	bcf	(24/8),(24)&7
+   580                           	
+   581  0793                     l1471:	
+   582  0793  1F8B               	btfss	(95/8),(95)&7
+   583  0794  2F96               	goto	u41
+   584  0795  2F97               	goto	u40
+   585  0796                     u41:
+   586  0796  2F98               	goto	l1085
+   587  0797                     u40:
+   588                           	
+   589  0797                     l1473:	
+   590  0797  1403               	bsf	(24/8),(24)&7
+   591                           	
+   592  0798                     l1085:	
+   593  0798  138B               	bcf	(95/8),(95)&7
+   594  0799  1683               	bsf	status, 5	;RP0=1, select bank3
+   595  079A  1703               	bsf	status, 6	;RP1=1, select bank3
+   596  079B  150C               	bsf	(3170/8)^0180h,(3170)&7
+   597                           	
+   598  079C                     l1475:	
+   599  079C  3055               	movlw	(055h)
+   600  079D  008D               	movwf	(397)^0180h	;volatile
+   601  079E  30AA               	movlw	(0AAh)
+   602  079F  008D               	movwf	(397)^0180h	;volatile
+   603                           	
+   604  07A0                     l1477:	
+   605  07A0  148C               	bsf	(3169/8)^0180h,(3169)&7
+   606                           	
+   607  07A1                     l1479:	
+   608  07A1  110C               	bcf	(3170/8)^0180h,(3170)&7
+   609                           	
+   610  07A2                     l1481:	
+   611  07A2  1283               	bcf	status, 5	;RP0=0, select bank0
+   612  07A3  1303               	bcf	status, 6	;RP1=0, select bank0
+   613  07A4  1C03               	btfss	(24/8),(24)&7
+   614  07A5  2FA7               	goto	u51
+   615  07A6  2FA8               	goto	u50
+   616  07A7                     u51:
+   617  07A7  2FAB               	goto	l1088
+   618  07A8                     u50:
+   619                           	
+   620  07A8                     l1483:	
+   621  07A8  178B               	bsf	(95/8),(95)&7
+   622  07A9  2FAB               	goto	l1088
+   623                           	
+   624  07AA                     l1086:	
+   625  07AA  2FAB               	goto	l1088
+   626                           	
+   627  07AB                     l1087:	
+   628                           	line	10
+   629                           	
+   630  07AB                     l1088:	
+   631  07AB  0008               	return
+   632                           	opt stack 0
+   633                           GLOBAL	__end_of_eeprom_write
+   634  07AC                     	__end_of_eeprom_write:
+   635 ;; =============== function _eeprom_write ends ============
+   636                           
+   637                           	signat	_eeprom_write,8312
+   638                           	global	_eeprom_read
+   639                           psect	text75,local,class=CODE,delta=2
+   640                           global __ptext75
+   641  075C                     __ptext75:
+   642                           
+   643 ;; *************** function _eeprom_read *****************
+   644 ;; Defined at:
+   645 ;;		line 8 in file "eeread.c"
+   646 ;; Parameters:    Size  Location     Type
+   647 ;;  addr            1    wreg     unsigned char 
+   648 ;; Auto vars:     Size  Location     Type
+   649 ;;  addr            1    1[COMMON] unsigned char 
+   650 ;; Return value:  Size  Location     Type
+   651 ;;                  1    wreg      unsigned char 
+   652 ;; Registers used:
+   653 ;;		wreg, status,2, status,0
+   654 ;; Tracked objects:
+   655 ;;		On entry : 0/0
+   656 ;;		On exit  : 0/0
+   657 ;;		Unchanged: 0/0
+   658 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   659 ;;      Params:         0       0       0       0       0
+   660 ;;      Locals:         1       0       0       0       0
+   661 ;;      Temps:          1       0       0       0       0
+   662 ;;      Totals:         2       0       0       0       0
+   663 ;;Total ram usage:        2 bytes
+   664 ;; Hardware stack levels used:    1
+   665 ;; This function calls:
+   666 ;;		Nothing
+   667 ;; This function is called by:
+   668 ;;		_main
+   669 ;; This function uses a non-reentrant model
+   670 ;;
+   671                           psect	text75
+   672                           	file	"C:\Program Files\HI-TECH Software\PICC\9.81\sources\eeread.c"
+   673                           	line	8
+   674                           	global	__size_of_eeprom_read
+   675  001F                     	__size_of_eeprom_read	equ	__end_of_eeprom_read-_eeprom_read
+   676                           	
+   677  075C                     _eeprom_read:	
+   678                           	opt	stack 7
+   679                           ; Regs used in _eeprom_read: [wreg+status,2+status,0]
+   680                           ;eeprom_read@addr stored from wreg
+   681                           	line	10
+   682  075C  00F1               	movwf	(eeprom_read@addr)
+   683                           	line	9
+   684                           	
+   685  075D                     l1060:	
+   686                           	line	10
+   687                           # 10 "C:\Program Files\HI-TECH Software\PICC\9.81\sources\eeread.c"
+   688  075D  0064               clrwdt ;#
+   689                           psect	text75
+   690                           	line	11
+   691  075E  1683               	bsf	status, 5	;RP0=1, select bank3
+   692  075F  1703               	bsf	status, 6	;RP1=1, select bank3
+   693  0760  188C               	btfsc	(3169/8)^0180h,(3169)&7
+   694  0761  2F63               	goto	u21
+   695  0762  2F64               	goto	u20
+   696  0763                     u21:
+   697  0763  2F5D               	goto	l1060
+   698  0764                     u20:
+   699  0764  2F65               	goto	l1461
+   700                           	
+   701  0765                     l1061:	
+   702                           	line	12
+   703                           	
+   704  0765                     l1461:	
+   705  0765  0871               	movf	(eeprom_read@addr),w
+   706  0766  1283               	bcf	status, 5	;RP0=0, select bank2
+   707  0767  1703               	bsf	status, 6	;RP1=1, select bank2
+   708  0768  008D               	movwf	(269)^0100h	;volatile
+   709  0769  303F               	movlw	(03Fh)
+   710  076A  00F0               	movwf	(??_eeprom_read+0)+0
+   711  076B  0870               	movf	(??_eeprom_read+0)+0,w
+   712  076C  1683               	bsf	status, 5	;RP0=1, select bank3
+   713  076D  1703               	bsf	status, 6	;RP1=1, select bank3
+   714  076E  058C               	andwf	(396)^0180h,f	;volatile
+   715  076F  140C               	bsf	(3168/8)^0180h,(3168)&7
+   716  0770  1003               	clrc
+   717  0771  180C               	btfsc	(3168/8)^0180h,(3168)&7
+   718  0772  1403               	setc
+   719  0773  3000               	movlw	0
+   720  0774  1803               	skipnc
+   721  0775  3001               	movlw	1
+   722                           
+   723  0776  1283               	bcf	status, 5	;RP0=0, select bank2
+   724  0777  1703               	bsf	status, 6	;RP1=1, select bank2
+   725  0778  080C               	movf	(268)^0100h,w	;volatile
+   726  0779  2F7A               	goto	l1062
+   727                           	
+   728  077A                     l1463:	
+   729                           	line	13
+   730                           	
+   731  077A                     l1062:	
+   732  077A  0008               	return
+   733                           	opt stack 0
+   734                           GLOBAL	__end_of_eeprom_read
+   735  077B                     	__end_of_eeprom_read:
+   736 ;; =============== function _eeprom_read ends ============
+   737                           
+   738                           	signat	_eeprom_read,4217
+   739                           psect	text76,local,class=CODE,delta=2
+   740                           global __ptext76
+   741  0000                     __ptext76:
+   742                           	global	btemp
+   743  007E                     	btemp set 07Eh
+   744                           
+   745                           	DABS	1,126,2	;btemp
+   746                           	global	wtemp0
+   747  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Tue Jun 28 12:06:52 2022
+
+                    _i 0075                      pc 0002                     _RD 0C60                     u20 0764  
+                   u21 0763                     u30 0783                     u31 0782                     u40 0797  
+                   u41 0796                     u50 07A8                     u51 07A7                     _WR 0C61  
+                   fsr 0004                    _GIE 005F                    _RC0 0038                    _seg 0020  
+                  fsr0 0004                    indf 0000                   l1040 07E1                   l1041 07DB  
+                 l1042 07DB                   l1043 07E0                   l1060 075D                   l1044 07F1  
+                 l1061 0765                   l1045 07FC                   l1062 077A                   l1046 07FD  
+                 l1047 07FD                   l1039 07CE                   l1081 077C                   l1082 077D  
+                 l1083 077D                   l1084 0784                   l1085 0798                   l1086 07AA  
+                 l1087 07AB                   l1088 07AB                   l2251 07AC                   l1461 0765  
+                 l2261 07C5                   l2253 07B0                   l1463 077A                   l1471 0793  
+                 l2271 07F1                   l2263 07CE                   l2255 07B3                   l1481 07A2  
+                 l1473 0797                   l1465 0784                   l2265 07D4                   l2257 07B6  
+                 l1483 07A8                   l1475 079C                   l1467 078A                   l2267 07E1  
+                 l2259 07B9                   l1477 07A0                   l1469 0790                   l2269 07EE  
+                 l1479 07A1                   u2200 07DF                   u2201 07DE                   u2210 07EE  
+                 u2211 07ED                   u2215 07EA                   u2190 07D4                   u2191 07D3  
+                 _WREN 0C62         ??_eeprom_write 0071                   _main 07AC                   btemp 007E  
+                 start 0000                  ?_main 0070                  _EEADR 010D                  _CARRY 0018  
+                _PORTC 0007                  _PORTD 0008                  _TRISC 0087                  _TRISD 0088  
+                pclath 000A                  status 0003                  wtemp0 007E           __end_of_main 0800  
+               ??_main 0073                 _EEDATA 010C                 _EECON1 018C                 _EECON2 018D  
+ __size_of_eeprom_read 001F   __end_of_eeprom_write 07AC        eeprom_read@addr 0071         __pcstackCOMMON 0070  
+         __pidataBANK0 0748      eeprom_write@value 0070             __pnvCOMMON 0075             __pmaintext 07AC  
+__size_of_eeprom_write 0031   end_of_initialization 0744                init_ram 0729           _eeprom_write 077B  
+        ??_eeprom_read 0070    start_initialization 0736    __end_of_eeprom_read 077B            __pdataBANK0 0020  
+     eeprom_write@addr 0072            _eeprom_read 075C              init_fetch 0725               __ptext74 077B  
+             __ptext75 075C               __ptext76 0000          __size_of_main 0054          ?_eeprom_write 0070  
+         ?_eeprom_read 0070  

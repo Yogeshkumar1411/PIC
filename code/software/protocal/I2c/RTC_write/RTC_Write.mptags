@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+I2C_Read	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	33;"	f	line:33	signature:(unsigned int i)
+I2C_Restart	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	28;"	f	line:28
+I2C_Slave	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	21;"	f	line:21	signature:(char data)
+I2C_Start	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	11;"	f	line:11
+I2C_Stop	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	16;"	f	line:16
+hold	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	6;"	f	line:6
+main	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	54;"	f	line:54
+read	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	35;"	l	line:35
+read	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	56;"	l	line:56
+string	D:\Embedded\pic\code\software\protocal\I2c\RTC_write\RTC_Write.c	47;"	f	line:47	signature:(char *p)
