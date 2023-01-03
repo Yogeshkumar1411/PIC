@@ -1,0 +1,236 @@
+/*Name: Yogesh
+Date: 03-07-2022
+Concept: Industrial automation - Main gate closing on time and siren alarm on time using RTC
+and calculating generator run time.  With that by using LDR to turn on the lights in the 
+industry
+*/
+#include<pic.h>
+#include"lcd.h"
+#define EB_On RA0
+#define Generator_On RA1
+#define For_limit RA2
+#define Rev_limit RA3
+#define Gate_motor_alert RC0
+#define Forward RC6
+#define Reverse RC7
+#define Shift_man_alarm RC1
+
+unsigned char i,read[6];   
+int  variable=0,a,b,c,d,e,f;
+int Generator=0,count=0,count1=0;
+char stop='m';
+void hold()
+{
+	while(SSPIF==0);
+	SSPIF=0;
+}
+void I2C_Start()
+{
+	SEN=1;
+	hold();
+}
+void I2C_Stop()
+{
+	PEN=1;
+	hold();
+}
+void I2C_Slave(char data)
+{
+	ACKSTAT=1;
+	SSPBUF=data;
+	while(ACKSTAT==1);
+	hold();
+}
+void I2C_Restart()
+{
+	RSEN=1;
+	hold();
+}
+unsigned char I2C_Read(unsigned int i)
+{
+	unsigned char read1;
+	if(i==2)
+	{
+		ACKDT=1;
+	}
+	else
+	{
+		ACKDT=0;
+	}
+	while(BF==0);
+	read1=SSPBUF;
+	SSPOV=0;
+	ACKEN=1;
+	BF=0;
+	return read1;
+}
+void string(char *p)
+{
+	while(*p)
+	{	
+		lcd_cmd(1,0,*p++);
+	}
+}
+/*void conversion(char disp[])
+{
+	lcd_cmd(0,0,0X80);
+	string("time  : ");
+	lcd_cmd(1,0,((disp[2]&0X30)>>4)+0X30);
+	lcd_cmd(1,0,(disp[2]&0X0F)+0X30);
+	lcd_cmd(1,0,':');
+
+	lcd_cmd(1,0,((disp[1]&0X70)>>4)+0X30);
+	lcd_cmd(1,0,(disp[1]&0X0F)+0X30);
+	lcd_cmd(1,0,':');
+
+	lcd_cmd(1,0,((disp[0]&0X70)>>4)+0X30);
+	lcd_cmd(1,0,(disp[0]&0X0F)+0X30);
+
+    	
+}*/
+void Gate_Siren(char read1[])
+{//Gate
+    if(read1[2]==0X11&&read1[1]==0X17&&read1[0]==0X00)
+    {
+		Gate_motor_alert=1;
+        Forward=1;
+        Reverse=0;		
+    }
+    if(read1[2]==0X07&&read1[1]==0X36&&read1[0]==0X00)
+    {
+		Gate_motor_alert=1;
+        Forward=0;
+        Reverse=1;		
+    }
+//Siren
+	if((read1[2]==0X10&&read1[1]==0X00&&read1[0]==0X00)||(read1[2]==0X01&&read1[1]==0X00&&read1[0]==0X00)||(read1[2]==0X05&&read1[1]==0X00&&read1[0]==0X00))
+    {
+		Shift_man_alarm=1;
+		delay(60000);delay(60000);delay(60000);delay(60000);delay(60000);
+		Shift_man_alarm=0;
+    }    
+	if(For_limit==1||Rev_limit==1)
+	{
+		Forward=0;
+		Reverse=0;
+		Gate_motor_alert=0;
+	}
+}
+void Generator_run()
+{		
+		if(EB_On==1)
+		{
+			Generator=0;
+		}	
+		if(Generator==1&&read[0]==stop)
+		{
+			
+			variable++;
+			delay(60000);delay(60000);delay(60000);delay(60000);delay(60000);delay(60000);
+		}
+		eeprom_write(0,variable);
+}
+void timer1(int timer_delay)
+{
+	while(0<timer_delay)
+	{
+		if(TMR1IF==1)
+		{
+			count++;
+			TMR1IF=0;
+		}
+		if(count1==2)
+		{
+			count=0;
+			timer_delay--;
+		}
+	}
+}
+void display(char disp[])
+{
+	//variable=eeprom_read(0);
+	//if(T0IF==1)	
+	//{	
+	lcd_cmd(0,0,0X80);
+	string("time  : ");
+	lcd_cmd(1,0,((disp[2]&0X30)>>4)+0X30);
+	lcd_cmd(1,0,(disp[2]&0X0F)+0X30);
+	lcd_cmd(1,0,':');
+
+	lcd_cmd(1,0,((disp[1]&0X70)>>4)+0X30);
+	lcd_cmd(1,0,(disp[1]&0X0F)+0X30);
+	lcd_cmd(1,0,':');
+
+	lcd_cmd(1,0,((disp[0]&0X70)>>4)+0X30);
+	lcd_cmd(1,0,(disp[0]&0X0F)+0X30);
+	timer1(2);
+
+
+
+		lcd_cmd(0,0,0XC0);
+		string("Gen.run:");
+		a=variable/1000;
+		b=variable%1000;
+		c=b/100;
+		d=b%100;
+		e=d/10;
+		f=d%10;
+		lcd_cmd(1,0,a+0X30);
+		lcd_cmd(1,0,c+0X30);
+		lcd_cmd(1,0,e+0X30);
+		lcd_cmd(1,0,f+0X30);
+		string(".min");		
+		timer1(2);
+	//T0IF=0;
+//}
+}
+void main()
+{
+	TRISC=0X18;
+	PORTC=0X00;
+    TRISA=0X0F;
+    PORTA=0X00;
+	TRISD=0X00;
+	PORTD=0X00;
+	TRISB=0X00;
+	PORTB=0X00;
+	TRISE=0X00;
+	PORTE=0X00;
+	ANSEL=0X00;
+	ANSELH=0X00;
+	SMP=1;
+	SSPCON=0X28;
+	GIE=1;
+	PEIE=1;
+	T0IE=1;
+	OPTION_REG=0X07;
+	T1CON=0X31;
+	lcd_cmd(0,0,0X38);
+	lcd_cmd(0,0,0X0E);
+	lcd_cmd(0,0,0X01);		
+	while(1)
+	{	
+    	if(Generator_On==1)
+    	{
+			stop=read[0];
+			delay(60000);delay(60000);delay(60000);delay(60000);delay(60000);delay(60000);		
+			Generator=1;
+			while(Generator_On==1);
+		}
+		I2C_Start();
+		I2C_Slave(0XD0);
+		I2C_Slave(0X00);
+		I2C_Restart();
+		I2C_Slave(0XD1);
+		for(i=0;i<3;i++)
+		{
+			RCEN=1;
+			read[i]=I2C_Read(i);
+		}
+		I2C_Stop();
+		display(read);
+		delay(1000);
+		Gate_Siren(read);
+		Generator_run();				          
+    }
+}

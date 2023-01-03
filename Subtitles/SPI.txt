@@ -1,0 +1,70 @@
+/*Name: Yogesh
+Date: 10-06-2022
+Concept: Serial_interrupt_SPI-master*/
+#include<pic.h>
+#include<string.h>
+void delay(unsigned int ms)
+{
+	while(ms--);
+}
+void master(char *p)
+{
+	while(*p)
+	{
+		SSPBUF=*p++;
+		while(SSPIF==0);
+		SSPIF=0;
+	}
+
+}
+void interrupt rc()
+{	
+	int i=0;
+	char name[];	
+char data[10];
+	while(i<10)
+	{
+		data[i]=RCREG;
+		while(RCIF==0);
+		RCIF=0;
+		i++;
+		if(data[i]==13)
+		{
+		break;
+		}
+	}
+strcpy(name,data);
+master(name);
+}
+void main()
+{
+int j;
+	TRISA=0X00;
+	PORTA=0X00;
+	TRISC=0X90;
+	PORTC=0X00;
+	TRISD=0X00;
+	PORTD=0X00;	
+	TRISE=0X00;
+	PORTE=0X00;
+	ANSEL=0X00;
+	ANSELH=0X00;
+	SSPCON=0X30;
+	SSPSTAT=0X80;
+	INTCON=0XC0;
+	PIE1=0X20;
+	TXSTA=0X26;
+	RCSTA=0X90;
+	SPBRG=25;
+	//PIR1=0X80;
+	while(1)
+	{
+		for(j=0;j<5;j++)
+		{
+		RC0=1;
+		delay(5000);
+		RC0=0;
+		delay(5000);
+		}
+	}
+}

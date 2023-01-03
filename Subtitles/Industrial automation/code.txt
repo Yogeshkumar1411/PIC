@@ -1,0 +1,130 @@
+/*
+ * File:   Industrial automation.c
+ * Author: Yogesh
+ *
+ * Created on 03 July 2022, 09:49
+ */
+
+
+#include <xc.h>
+#include"lcd.h"
+int i;
+char read[5];
+void hold()
+{
+	while(SSPIF==0);
+	SSPIF=0;
+}
+void i2cStart()
+{
+	SEN=1;
+	hold();
+}
+void i2cStop()
+{
+	PEN=1;
+	hold();
+}
+void i2cSlave(char data)
+{
+	ACKSTAT=1;
+	SSPBUF=data;
+	while(ACKSTAT==1);
+	hold();
+}
+void i2cRestart()
+{
+	RSEN=1;
+	hold();
+}
+void string(char *print)
+{
+    while(*print)
+    {
+        lcd_cmd(1,0,*print++);
+    }
+}
+unsigned char i2cRead(int value)
+{
+    unsigned char read1;
+    if(value==2)
+    {
+        ACKDT=1;
+    }
+    else
+    {
+        ACKDT=0;
+    }
+    while(BF==0);
+    read1=SSPBUF;
+    SSPOV=0;
+    ACKEN=1;
+    BF=0;
+    return read1;
+}
+void conversion(char time[])
+{
+  
+    lcd_cmd(1,0,((time[2]&0X30)>>4)+0X30);
+    lcd_cmd(1,0,(time[2]&0X0F)+0X30);
+    lcd_cmd(1,0,':');
+    
+    lcd_cmd(1,0,((time[1]&0X70)>>4)+0X30);
+    lcd_cmd(1,0,(time[1]&0X0F)+0X30);
+    lcd_cmd(1,0,':');
+    
+    lcd_cmd(1,0,((time[0]&0X70)>>4)+0X30);
+    lcd_cmd(1,0,(time[0]&0X0F)+0X30);
+}
+
+void main() 
+{
+    TRISA=0X03;
+    PORTA=0X00;
+    TRISC=0X08;
+    PORTC=0X00;
+    TRISD=0X00;
+    PORTD=0X00;
+    TRISE=0X00;
+    PORTE=0X00;
+    ANSEL=0X00;
+    ANSELH=0X00;
+    SMP=1;
+    SSPCON=0X28;
+    SSPADD=4;
+    lcd_cmd(0,0,0X38);
+    lcd_cmd(0,0,0X0E);
+    lcd_cmd(0,0,0X80);
+        //string("time: ");
+    if(RA1==1)
+        {
+            
+            i2cStart();
+            i2cSlave(0XD0);
+            i2cSlave(0X00);
+            i2cSlave(0X00);
+            i2cSlave(0X00);
+            i2cSlave(0X00);
+            i2cStop();
+            delay(1000);            
+        }
+    while(1)
+    {  
+        i2cStart();        
+        i2cSlave(0XD0);
+        i2cSlave(0X00);
+        i2cRestart();
+        i2cSlave(0XD1);
+        lcd_cmd(1,0,'A');
+        for(i=0;i<3;i++)
+        {
+            RCEN=1;
+            read[i]=i2cRead(i);
+        }
+        i2cStop();  
+ 
+        conversion(read);
+        delay(1000);
+    }
+    return;
+}
